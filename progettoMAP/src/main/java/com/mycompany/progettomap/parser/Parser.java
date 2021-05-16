@@ -7,33 +7,59 @@ package com.mycompany.progettomap.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashSet;
 
 /**
  *
  * @author mtubi
  */
 public class Parser {
-    public ParserOutput parse(String comandoUtente){
-        ParserOutput comando=null;
-        comandoUtente=comandoUtente.toLowerCase();
-        comandoUtente=comandoUtente.replaceAll("[.!£$%&/]+", "");//Pulizia del comando di caratteri di punteggiatura
-        String[] paroleComando=comandoUtente.split("\\s+|'");//Divido il comando in base agli spazi in modo da esaminare parola per parola
-        if(paroleComando.length>0){//controllo che dopo le varie pulizie la stringa non sia vuota
-            comando=esaminaParole(paroleComando);
+    private Set<String> paroleProibite;
+
+    public Parser() {
+        this.paroleProibite = new HashSet<>();
+        try {
+            BufferedReader prova = new BufferedReader(new FileReader("./risorse/articoli.txt"));
+            while (prova.ready()) {
+                this.paroleProibite.add(prova.readLine().trim().toLowerCase());
+            }
+            prova.close();
+        } catch (IOException e) {
+            System.out.println("Errore sui file");
+        }
+    }
+
+    public ParserOutput parse(String comandoUtente) {
+        ParserOutput comando = null;
+        comandoUtente = comandoUtente.toLowerCase();
+        comandoUtente = comandoUtente.replaceAll("[.!£$%&/]+", "");//Pulizia del comando di caratteri di punteggiatura
+        comandoUtente = comandoUtente.replaceAll("'", " ");//Elimino l'apostrofo e lo sotituisco con uno spazio per individuare l'articolo
+        List<String> paroleComando = pulisciStringa(comandoUtente);//Divido il comando in base agli spazi in modo da esaminare parola per parola
+        if (!paroleComando.isEmpty()) {//controllo che dopo le varie pulizie la stringa non sia vuota
+            stampaParole(paroleComando);
         }
         return comando;
     }
-    
-    public ParserOutput esaminaParole(String[] paroleComando){
-        ParserOutput comando=null;
-        List<String> articoli= new ArrayList();
-        for(int i=0; i<paroleComando.length;i++){
-            if(articoli.indexOf(paroleComando[i])==-1){
-                
-            }
-            i++;
+
+    public void stampaParole(List<String> paroleComando) {
+        for (String parola : paroleComando) {
+            System.out.println(parola);
         }
-        return comando;
+    }
+
+    public List<String> pulisciStringa(String comando) {
+        String[] appoggio = comando.split("\\s+");
+        List<String> paroleComando = new ArrayList();
+        for (int i = 0; i < appoggio.length; i++) {
+            if (!paroleProibite.contains(appoggio[i])) {
+                paroleComando.add(appoggio[i]);
+            }
+        }
+        return paroleComando;
     }
             
 }
