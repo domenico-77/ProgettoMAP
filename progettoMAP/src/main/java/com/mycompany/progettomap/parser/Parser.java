@@ -20,17 +20,8 @@ import java.util.HashSet;
 public class Parser {
     private Set<String> paroleProibite;
 
-    public Parser() {
-        this.paroleProibite = new HashSet<>();
-        try {
-            BufferedReader prova = new BufferedReader(new FileReader("./risorse/articoli.txt"));
-            while (prova.ready()) {
-                this.paroleProibite.add(prova.readLine().trim().toLowerCase());
-            }
-            prova.close();
-        } catch (IOException e) {
-            System.out.println("Errore sui file");
-        }
+    public Parser(Set<String> paroleProibite) {
+        this.paroleProibite = paroleProibite;
     }
 
     public ParserOutput parse(String comandoUtente) {
