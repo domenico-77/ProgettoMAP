@@ -49,7 +49,9 @@ public class OggettoContenitore extends Oggetto {
     }
     
     public void rimuoviOggetto(Oggetto o){
+        if(contieneOggetto(o)){
         this.listaOggetti.remove(o);
+        }
     }
     
     public boolean contenitoreVuoto(){
@@ -58,5 +60,9 @@ public class OggettoContenitore extends Oggetto {
             vuoto=this.listaOggetti.isEmpty();
         }
         return vuoto;
+    }
+    
+    public boolean contieneOggetto(Oggetto o){
+        return this.listaOggetti.contains(o);
     }
 }

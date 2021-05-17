@@ -14,18 +14,18 @@ import java.util.Set;
 public class Oggetto {
     private static int numOggetti;
     private final int id;
-    private String name;
+    private String nome;
     private Set<String> alias;
-    private String description;
+    private String descrizione;
     private boolean apribile=false;
     private boolean prendibile=false;
     private boolean aperto=false;
 
     public Oggetto(String name, Set<String> alias, String description, boolean apribile, boolean prendibile, boolean aperto) {
         this.id = numOggetti;
-        this.name = name;
+        this.nome = name;
         this.alias = alias;
-        this.description = description;
+        this.descrizione = description;
         this.apribile = apribile;
         this.prendibile = prendibile;
         this.aperto = aperto;
@@ -34,40 +34,40 @@ public class Oggetto {
 
     public Oggetto(String name) {
         this.id=numOggetti;
-        this.name = name;
+        this.nome = name;
         numOggetti++;
     }
 
     public Oggetto(String name, Set<String> alias) {
         this.id=numOggetti;
         numOggetti++;
-        this.name = name;
+        this.nome = name;
         this.alias = alias;
     }
 
     public Oggetto(String name, String description) {
         this.id=numOggetti;
         numOggetti++;
-        this.name = name;
-        this.description = description;
+        this.nome = name;
+        this.descrizione = description;
     }
 
     public Oggetto(int id, String name, String description) {
         this.id = id;
-        this.name = name;
-        this.description = description;
+        this.nome = name;
+        this.descrizione = description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String name) {
+        this.nome = name;
     }
 
     public void setAlias(Set<String> alias) {
         this.alias = alias;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescrizione(String description) {
+        this.descrizione = description;
     }
 
     public void setApribile(boolean apribile) {
@@ -86,16 +86,16 @@ public class Oggetto {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     public Set<String> getAlias() {
         return alias;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescrizione() {
+        return descrizione;
     }
 
     public boolean isApribile() {
