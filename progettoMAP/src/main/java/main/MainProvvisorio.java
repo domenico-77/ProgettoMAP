@@ -19,7 +19,6 @@ public class MainProvvisorio {
      */
     public static void main(String[] args) {
        Parser prova=new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
-       prova.parse("Sono la mamma e ho comprato la torta e i bicchieri per il tuo compleanno che festeggerai stasera");
     }
     
 }
