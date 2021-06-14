@@ -5,12 +5,58 @@
  */
 package com.mycompany.progettomap.parser;
 
+import tipi.Comando;
+import tipi.Oggetto;
+
 
 /**
  *
  * @author mtubi
  */
 public class ParserOutput {
+    private Comando comando;
+    private Oggetto oggetto;
+    private Oggetto oggettoInv;
+
+    public ParserOutput(Comando comando, Oggetto oggetto) {
+        this.comando = comando;
+        this.oggetto = oggetto;
+    }
+
+    public ParserOutput(Comando comando, Oggetto oggetto, Oggetto oggettoSec) {
+        this.comando = comando;
+        this.oggetto = oggetto;
+        this.oggettoInv = oggettoSec;
+    }
+
+    
+    public ParserOutput(Comando comando) {
+        this.comando = comando;
+    }
+
+    public Comando getComando() {
+        return comando;
+    }
+
+    public Oggetto getOggetto() {
+        return oggetto;
+    }
+
+    public Oggetto getOggettoSec() {
+        return oggettoInv;
+    }
+
+    public void setComando(Comando comando) {
+        this.comando = comando;
+    }
+
+    public void setOggetto(Oggetto oggetto) {
+        this.oggetto = oggetto;
+    }
+
+    public void setOggettoSec(Oggetto oggettoSec) {
+        this.oggettoInv = oggettoSec;
+    }
     
     }
 

@@ -5,6 +5,9 @@
  */
 package main;
 
+import com.mycompany.progettomap.parser.Parser;
+import tipi.Utilita;
+
 /**
  *
  * @author mtubi
@@ -15,7 +18,7 @@ public class MainProvvisorio {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
+       Parser prova=new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
     }
     
 }
