@@ -5,26 +5,30 @@
  */
 package tipi;
 
+import com.mycompany.progettomap.parser.ParserOutput;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author mtubi
  */
-public class Oggetto {
+public abstract class Oggetto {
     private static int numOggetti;
     private final int id;
     private String nome;
     private Set<String> alias;
+    private List<ParserOutput> listaMosse;
     private String descrizione;
     private boolean apribile=false;
     private boolean prendibile=false;
     private boolean aperto=false;
 
-    public Oggetto(String name, Set<String> alias, String description, boolean apribile, boolean prendibile, boolean aperto) {
+    public Oggetto(String nome, Set<String> alias, String description, boolean apribile, boolean prendibile, boolean aperto, List<ParserOutput> listaMosse) {
         this.id = numOggetti;
-        this.nome = name;
+        this.nome = nome;
         this.alias = alias;
+        this.listaMosse = listaMosse;
         this.descrizione = description;
         this.apribile = apribile;
         this.prendibile = prendibile;
@@ -32,36 +36,44 @@ public class Oggetto {
         numOggetti++;
     }
 
-    public Oggetto(String name) {
+    public Oggetto(String nome, List<ParserOutput> listaMosse) {
         this.id=numOggetti;
-        this.nome = name;
+        this.nome = nome;
+        this.listaMosse = listaMosse;
         numOggetti++;
     }
 
-    public Oggetto(String name, Set<String> alias) {
+    public Oggetto(String nome, Set<String> alias, List<ParserOutput> listaMosse) {
         this.id=numOggetti;
         numOggetti++;
-        this.nome = name;
+        this.nome = nome;
         this.alias = alias;
+        this.listaMosse = listaMosse;
     }
 
-    public Oggetto(String name, String description) {
+    public Oggetto(String nome, String description, List<ParserOutput> listaMosse) {
         this.id=numOggetti;
         numOggetti++;
-        this.nome = name;
+        this.nome = nome;
         this.descrizione = description;
+        this.listaMosse = listaMosse;
     }
 
-    public Oggetto(int id, String name, String description) {
+    public Oggetto(int id, String nome, String description, List<ParserOutput> listaMosse) {
         this.id = id;
-        this.nome = name;
+        this.nome = nome;
         this.descrizione = description;
+        this.listaMosse = listaMosse;
     }
 
     public void setNome(String name) {
         this.nome = name;
     }
 
+    public void setListaMosse(List<ParserOutput> listaMosse) {
+        this.listaMosse = listaMosse;
+    }
+    
     public void setAlias(Set<String> alias) {
         this.alias = alias;
     }
@@ -90,6 +102,10 @@ public class Oggetto {
         return nome;
     }
 
+    public List<ParserOutput> getListaMosse() {
+        return listaMosse;
+    }
+    
     public Set<String> getAlias() {
         return alias;
     }
@@ -133,5 +149,7 @@ public class Oggetto {
             return false;
         }
         return true;
-    }   
+    }  
+    
+    public abstract void usa();
 }

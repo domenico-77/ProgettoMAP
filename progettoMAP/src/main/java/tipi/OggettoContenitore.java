@@ -5,6 +5,7 @@
  */
 package tipi;
 
+import com.mycompany.progettomap.parser.ParserOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -16,24 +17,24 @@ import java.util.Set;
 public class OggettoContenitore extends Oggetto {
     private List<Oggetto> listaOggetti=new ArrayList();
     
-    public OggettoContenitore(String name, Set<String> alias, String description, boolean apribile, boolean prendibile, boolean aperto) {
-        super(name, alias, description, apribile, prendibile, aperto);
+    public OggettoContenitore(String nome, Set<String> alias, String descrizione, boolean apribile, boolean prendibile, boolean aperto, List<ParserOutput> listaMosse) {
+        super(nome, alias, descrizione, apribile, prendibile, aperto, listaMosse);
     }
 
-    public OggettoContenitore(String name) {
-        super(name);
+    public OggettoContenitore(String nome, List<ParserOutput> listaMosse) {
+        super(nome, listaMosse);
     }
 
-    public OggettoContenitore(String name, Set<String> alias) {
-        super(name, alias);
+    public OggettoContenitore(String nome, Set<String> alias, List<ParserOutput> listaMosse) {
+        super(nome, alias, listaMosse);
     }
 
-    public OggettoContenitore(String name, String description) {
-        super(name, description);
+    public OggettoContenitore(String nome, String descrizione, List<ParserOutput> listaMosse) {
+        super(nome, descrizione, listaMosse);
     }
 
-    public OggettoContenitore(int id, String name, String description) {
-        super(id, name, description);
+    public OggettoContenitore(int id, String nome, String descrizione, List<ParserOutput> listaMosse) {
+        super(id, nome, descrizione, listaMosse);
     }
 
     public List<Oggetto> getListaOggetti() {
@@ -64,5 +65,10 @@ public class OggettoContenitore extends Oggetto {
     
     public boolean contieneOggetto(Oggetto o){
         return this.listaOggetti.contains(o);
+    }
+
+    @Override
+    public void usa() {
+        
     }
 }
