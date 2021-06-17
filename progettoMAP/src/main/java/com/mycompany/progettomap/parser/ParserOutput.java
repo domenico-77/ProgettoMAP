@@ -6,7 +6,7 @@
 package com.mycompany.progettomap.parser;
 
 import tipi.Comando;
-import tipi.Oggetto;
+import oggetti.Oggetto;
 
 
 /**

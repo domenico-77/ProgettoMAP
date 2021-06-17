@@ -5,6 +5,7 @@
  */
 package tipi;
 
+import oggetti.Oggetto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Inventario {
     }
     
     
-    public void aggiungiOgetto(Oggetto o){
+    public void aggiungiOggetto(Oggetto o){
        this.inventario.add(o);
     }
     
@@ -46,5 +47,19 @@ public class Inventario {
         }
     }
     
+    public boolean contieneOggetto(Oggetto o){
+        return (inventario.contains(o));
+    }
     
+    public void usaOggetto(Oggetto o, Giocatore giocatore, Stanza stanza){
+        if(contieneOggetto(o)){
+            Oggetto oggetto = this.inventario.get(this.inventario.indexOf(o));
+            if(oggetto.getUsabilita() > 0){
+                oggetto.usa(giocatore, stanza);
+                if(oggetto.getUsabilita() == 0){
+                    this.inventario.remove(oggetto);
+                }
+            }
+        }
+    }
 }

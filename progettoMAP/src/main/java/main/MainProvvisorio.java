@@ -6,6 +6,14 @@
 package main;
 
 import com.mycompany.progettomap.parser.Parser;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import tipi.Comando;
+import tipi.Giocatore;
+import oggetti.Oggetto;
+import oggetti.OggettoContenitore;
 import tipi.Utilita;
 
 /**
