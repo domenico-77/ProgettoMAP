@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import tipi.Comando;
-import tipi.Oggetto;
+import oggetti.Oggetto;
 import tipi.Utilita;
 
 /**

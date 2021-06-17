@@ -5,6 +5,7 @@
  */
 package tipi;
 
+import oggetti.Oggetto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +45,10 @@ public class Inventario {
             System.out.println("Oggetto num"+(i)+" "+o.getNome()+": "+o.getDescrizione());
             i++;
         }
+    }
+    
+    public boolean contieneOggetto(Oggetto o){
+        return (inventario.contains(o));
     }
     
     

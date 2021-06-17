@@ -5,6 +5,7 @@
  */
 package tipi;
 
+import oggetti.Oggetto;
 import java.util.List;
 
 /**
@@ -18,16 +19,16 @@ public class Stanza {
     private Porta portaNord;
     private Porta portaSud;
     private Porta portaEst;
-    private Porta Nord;
+    private Porta portaOvest;
     private List<Oggetto> oggetiStanza;
 
-    public Stanza(int id, String descrizione, Porta portaNord, Porta portaSud, Porta portaEst, Porta Nord, List<Oggetto> oggetiStanza) {
+    public Stanza(int id, String descrizione, Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
         this.id = numStanze;
         this.descrizione = descrizione;
         this.portaNord = portaNord;
         this.portaSud = portaSud;
         this.portaEst = portaEst;
-        this.Nord = Nord;
+        this.portaOvest = portaOvest;
         this.oggetiStanza = oggetiStanza;
         numStanze++;
     }
@@ -56,8 +57,8 @@ public class Stanza {
         return portaEst;
     }
 
-    public Porta getNord() {
-        return Nord;
+    public Porta getPortaOvest() {
+        return portaOvest;
     }
 
     public List<Oggetto> getOggetiStanza() {
@@ -88,8 +89,8 @@ public class Stanza {
         this.portaEst = portaEst;
     }
 
-    public void setNord(Porta Nord) {
-        this.Nord = Nord;
+    public void setPortaOvest(Porta portsaOvest) {
+        this.portaOvest = portaOvest;
     }
 
     public void setOggetiStanza(List<Oggetto> oggetiStanza) {

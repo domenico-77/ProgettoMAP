@@ -5,6 +5,8 @@
  */
 package tipi;
 
+import oggetti.OggettoContenitore;
+import oggetti.Oggetto;
 import com.mycompany.progettomap.parser.ParserOutput;
 import java.util.List;
 
@@ -13,7 +15,9 @@ import java.util.List;
  * @author mtubi
  */
 public class Giocatore {
-    private int vita = 3;
+    private final static int VITA_INIZIO = 100;
+    private int vitaMax = VITA_INIZIO;
+    private int vitaCorrente = VITA_INIZIO;
     private Inventario inventario;
     private List<ParserOutput> listaMosse;
 
@@ -21,10 +25,18 @@ public class Giocatore {
         this.listaMosse = listaMosse;
     }
 
-    public int getVita() {
-        return vita;
+    public int getVitaCorrente() {
+        return vitaCorrente;
     }
 
+    public static int getVITA_INIZIO() {
+        return VITA_INIZIO;
+    }
+    
+     public int getVitaMax() {
+        return vitaMax;
+    }
+    
     public Inventario getInventario() {
         return inventario;
     }
@@ -33,8 +45,12 @@ public class Giocatore {
         return listaMosse;
     }
 
-    public void setVita(int vita) {
-        this.vita = vita;
+    public void setVitaCorrente(int vitaCorrente) {
+        this.vitaCorrente = vitaCorrente;
+    }
+
+    public void setVitaMax(int vitaMax) {
+        this.vitaMax = vitaMax;
     }
 
     public void setInventario(Inventario inventario) {
@@ -45,20 +61,26 @@ public class Giocatore {
         this.listaMosse = listaMosse;
     }
     
-    public void decrementaVita(){
-        if(vita<=3){
-           vita--;
+    public void decrementaVita(int danno){
+        if(danno >= this.vitaCorrente){
+            this.vitaCorrente = 0;
+        }
+        else{
+            this.vitaCorrente = this.vitaCorrente - danno;
         }
     }
     
-    public void incrementaVita(){
-        if(vita<3){
-            vita++;
+    public void incrementaVita(int cura){
+        if((this.vitaCorrente+cura) >= this.vitaMax){
+            this.vitaCorrente = this.vitaMax;
+        }
+        else{
+            this.vitaCorrente = this.vitaCorrente + cura;
         }
     }
     
     public boolean isDead(){
-        return (vita==0);
+        return (vitaCorrente==0);
     }
     
     public void aggiornaMosse(List<ParserOutput> nuoveMosse){
