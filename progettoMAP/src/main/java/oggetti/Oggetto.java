@@ -7,6 +7,7 @@ package oggetti;
 
 import com.mycompany.progettomap.parser.ParserOutput;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
@@ -17,8 +18,6 @@ import tipi.Stanza;
  * @author mtubi
  */
 public abstract class Oggetto {
-    private static int numOggetti;
-    protected final int id;
     protected String nome;
     protected Set<String> alias;
     protected List<Comando> listaMosse;
@@ -27,14 +26,12 @@ public abstract class Oggetto {
     protected int usabilita;
 
     public Oggetto(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, int usabilita) {
-        id = numOggetti;
         this.nome = nome;
         this.alias = alias;
         this.listaMosse = listaMosse;
         this.descrizione = descrizione;
         this.prendibile = prendibile;
         this.usabilita = usabilita;
-        numOggetti++;
     }
     
     
@@ -59,10 +56,6 @@ public abstract class Oggetto {
         this.prendibile = prendibile;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -83,10 +76,16 @@ public abstract class Oggetto {
         return prendibile;
     }
 
+    public int getUsabilita() {
+        return usabilita;
+    }
+    
+    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + this.id;
+        int hash = 5;
+        hash = 47 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
@@ -102,11 +101,22 @@ public abstract class Oggetto {
             return false;
         }
         final Oggetto other = (Oggetto) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
         return true;
-    }  
+    }
+
+   
     
     public abstract void usa(Giocatore giocatore, Stanza stanza);
+    
+    public void prendi(Giocatore giocatore){
+        if(this.prendibile){
+            giocatore.getInventario().aggiungiOggetto(this);
+        }
+        else{
+            System.out.println("Non puoi prendere questo oggetto");
+        }
+    }
 }

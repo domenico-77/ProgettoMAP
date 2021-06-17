@@ -17,7 +17,7 @@ import tipi.Stanza;
  */
 public class OggettoMaligno extends Oggetto{
     
-    private int danno;
+    private final int danno;
     
     public OggettoMaligno(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, int usabilita, int danno) {
         super(nome, alias, listaMosse, descrizione, prendibile, usabilita);

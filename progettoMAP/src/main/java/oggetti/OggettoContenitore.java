@@ -62,11 +62,18 @@ public class OggettoContenitore extends Oggetto {
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
+        Inventario inventario = giocatore.getInventario();
         if (this.aperto) {
             if (!this.contenitoreVuoto()) {
-                Inventario inventario = giocatore.getInventario();
-                for (Oggetto o : listaOggetti) {
-                    inventario.aggiungiOgetto(o);
+                for (int i =0; i < this.listaOggetti.size(); i++) {
+                    Oggetto o = this.listaOggetti.get(i);
+                    if(o instanceof OggettoMaligno){
+                        o.usa(giocatore, stanza);
+                        this.listaOggetti.remove(o);
+                    }
+                    else{
+                        inventario.aggiungiOggetto(o);
+                    }
                 }
                 giocatore.setInventario(inventario);
             }
@@ -75,7 +82,15 @@ public class OggettoContenitore extends Oggetto {
             }
         }
         else{
-            System.out.println("Il contenitore è chiuso");
+            Oggetto oggetto = new ChiaveOggettoContenitore("Chiave", null, null, "", true, 0);
+            if(inventario.contieneOggetto(oggetto)){
+                inventario.usaOggetto(oggetto, giocatore, stanza);
+                this.aperto = true;
+                this.usa(giocatore, stanza);
+            }
+            else{
+                System.out.println("Non hai una chiave per aprire questo oggetto, trova una chiave e poi torna qui");
+            }
         }
     }
 }

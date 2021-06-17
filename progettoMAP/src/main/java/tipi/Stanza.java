@@ -20,7 +20,7 @@ public class Stanza {
     private Porta portaSud;
     private Porta portaEst;
     private Porta portaOvest;
-    private List<Oggetto> oggetiStanza;
+    private List<Oggetto> oggettiStanza;
 
     public Stanza(int id, String descrizione, Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
         this.id = numStanze;
@@ -29,7 +29,7 @@ public class Stanza {
         this.portaSud = portaSud;
         this.portaEst = portaEst;
         this.portaOvest = portaOvest;
-        this.oggetiStanza = oggetiStanza;
+        this.oggettiStanza = oggetiStanza;
         numStanze++;
     }
 
@@ -62,7 +62,7 @@ public class Stanza {
     }
 
     public List<Oggetto> getOggetiStanza() {
-        return oggetiStanza;
+        return oggettiStanza;
     }
 
     public static void setNumStanze(int numStanze) {
@@ -94,7 +94,7 @@ public class Stanza {
     }
 
     public void setOggetiStanza(List<Oggetto> oggetiStanza) {
-        this.oggetiStanza = oggetiStanza;
+        this.oggettiStanza = oggetiStanza;
     }
 
     @Override
@@ -121,6 +121,18 @@ public class Stanza {
         }
         return true;
     }
+    /*
+    public void rimuoviOggetto(Oggetto o){
+        if(this.oggettiStanza.contains(o)){
+           this.oggettiStanza.remove(o);
+        }
+    }
     
-    
+    public void prendiOggetto(Oggetto o, Giocatore giocatore){
+        if(this.oggettiStanza.contains(o)){
+            giocatore.getInventario().aggiungiOgetto(this.oggettiStanza.get(this.oggettiStanza.indexOf(o)));
+            this.rimuoviOggetto(o);
+        }
+    }
+    */
 }

@@ -17,7 +17,6 @@ import tipi.Stanza;
  */
 public class Cibo extends Oggetto{
     private int rigenerazione;
-    private int usabilita;
 
     public Cibo(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, int rigenerazione, int usabilita) {
         super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
