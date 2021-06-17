@@ -10,7 +10,7 @@ import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
-import tipi.Materiale;
+import tipi.TipoPorta;
 import tipi.Porta;
 import tipi.Stanza;
 
@@ -19,9 +19,9 @@ import tipi.Stanza;
  * @author mtubi
  */
 public class ChiavePorta extends Oggetto{
-    private Materiale materiale;
+    private TipoPorta materiale;
 
-    public ChiavePorta(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, Materiale materiale, int usabilita) {
+    public ChiavePorta(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, TipoPorta materiale, int usabilita) {
         super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
         this.materiale = materiale;
     }

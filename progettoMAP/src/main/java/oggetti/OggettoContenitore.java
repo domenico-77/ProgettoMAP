@@ -12,7 +12,7 @@ import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
-import tipi.Materiale;
+import tipi.TipoPorta;
 import tipi.Stanza;
 
 /**
@@ -21,10 +21,10 @@ import tipi.Stanza;
  */
 public class OggettoContenitore extends Oggetto {
     private boolean aperto = false;
-    private Materiale materiale;
+    private TipoPorta materiale;
     private List<Oggetto> listaOggetti=new ArrayList();
 
-    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile,int usabilita, List<Oggetto> listaOggetti, Materiale materiale) {
+    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile,int usabilita, List<Oggetto> listaOggetti, TipoPorta materiale) {
         super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
         this.listaOggetti = listaOggetti;
         this.materiale = materiale;

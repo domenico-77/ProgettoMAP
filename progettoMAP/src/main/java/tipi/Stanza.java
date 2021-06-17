@@ -13,16 +13,19 @@ import java.util.List;
  * @author mtubi
  */
 public class Stanza {
-    private static int numStanze=0;
+
+    private static int numStanze = 0;
     private int id;
+    private boolean illuminata;
     private String descrizione;
+    private String nomeStanza;
     private Porta portaNord;
     private Porta portaSud;
     private Porta portaEst;
     private Porta portaOvest;
     private List<Oggetto> oggettiStanza;
 
-    public Stanza(int id, String descrizione, Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
+    public Stanza(String descrizione, Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
         this.id = numStanze;
         this.descrizione = descrizione;
         this.portaNord = portaNord;
@@ -97,6 +100,14 @@ public class Stanza {
         this.oggettiStanza = oggetiStanza;
     }
 
+    public boolean isIlluminata() {
+        return illuminata;
+    }
+
+    public void setIlluminata(boolean illuminata) {
+        this.illuminata = illuminata;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -121,6 +132,7 @@ public class Stanza {
         }
         return true;
     }
+
     /*
     public void rimuoviOggetto(Oggetto o){
         if(this.oggettiStanza.contains(o)){
@@ -134,5 +146,54 @@ public class Stanza {
             this.rimuoviOggetto(o);
         }
     }
-    */
+     */
+    public void DescriviStanza() {
+        System.out.println("Sei entrato nella " + this.nomeStanza);
+        if (!this.illuminata) {
+            System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa'");
+
+        } else {
+            System.out.print("Rin:' ");
+            if (this.portaNord != null) {
+                System.out.print("A nord " + this.portaNord.decsiriviPorta() + ",  ");
+            } else {
+                System.out.print("A nord non c'è niente,  ");
+            }
+            if (this.portaSud != null) {
+                System.out.print("a sud " + this.portaNord.decsiriviPorta() + ", ");
+            } else {
+                System.out.print("A sud non c'è niente,  ");
+
+            }
+            if (this.portaEst != null) {
+                System.out.print("a est " + this.portaEst.decsiriviPorta() + "e ");
+            } else {
+                System.out.print("A est non c'è niente, e ");
+
+            }
+            if (this.portaOvest != null) {
+                System.out.println("a ovest " + this.portaEst.decsiriviPorta() + ".");
+
+            } else {
+                System.out.println("A ovest non c'è niente.");
+
+            }
+           if(this.oggettiStanza.isEmpty()){
+               System.out.println("Non c'è niente di interessante in questa stanza.");
+           } else {
+               if(this.oggettiStanza.size() >= 2){
+                   System.out.print("Sono presenti diversi oggetti sparsi nella stanza:");
+                   int i= 1;
+                   for (Oggetto o: oggettiStanza){
+                        System.out.println(i + o.getNome());
+                        i++;
+                    }
+               }
+               else{
+                   System.out.print("E' prensente solo " + this.oggettiStanza.get(0).getNome());
+               }
+           }
+           System.out.println("'");
+        }
+    }
 }

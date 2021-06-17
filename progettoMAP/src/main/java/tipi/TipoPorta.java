@@ -9,9 +9,9 @@ package tipi;
  *
  * @author mtubi
  */
-public enum Materiale {
+public enum TipoPorta {
     oro,
     argento,
     normale,
-    bronzo
+    tunnel
 }
