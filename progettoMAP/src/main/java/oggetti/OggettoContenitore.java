@@ -23,13 +23,11 @@ public class OggettoContenitore extends Oggetto {
     private final static boolean PRENDIBILE = false;
     private final static int DURABILITA = -1;
     private boolean aperto = false;
-    private TipoPorta materiale;
     private List<Oggetto> listaOggetti=new ArrayList();
 
-    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, List<Oggetto> listaOggetti, TipoPorta materiale) {
+    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, List<Oggetto> listaOggetti) {
         super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
         this.listaOggetti = listaOggetti;
-        this.materiale = materiale;
     }
     
     public List<Oggetto> getListaOggetti() {

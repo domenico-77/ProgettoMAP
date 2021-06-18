@@ -15,10 +15,11 @@ public class Porta {
     boolean chiusa;
     boolean nascosta;
 
-    public Porta(TipoPorta tipo, Stanza stanza, boolean chiusa) {
+    public Porta(TipoPorta tipo, Stanza stanza, boolean chiusa, boolean nascosta) {
         this.tipo = tipo;
         this.stanza = stanza;
         this.chiusa=chiusa;
+        this.nascosta=nascosta;
     }
 
     public TipoPorta getTipo() {

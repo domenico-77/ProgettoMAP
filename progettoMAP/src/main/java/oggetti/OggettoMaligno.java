@@ -20,8 +20,8 @@ public class OggettoMaligno extends Oggetto{
     private final static int DURABILITA = 1;
     private final int danno;
     
-    public OggettoMaligno(String nome, Set<String> alias, List<Comando> listaMosse, boolean prendibile, int danno) {
-        super(nome, alias, listaMosse, prendibile, DURABILITA);
+    public OggettoMaligno(String nome, Set<String> alias, List<Comando> listaMosse, int danno) {
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
         this.danno = danno;
     }
 

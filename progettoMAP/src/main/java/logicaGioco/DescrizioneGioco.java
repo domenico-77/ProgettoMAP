@@ -19,6 +19,7 @@ import tipi.Inventario;
 import java.io.PrintStream;
 
 import java.util.ArrayList;
+import tipi.Giocatore;
 
 /**
  *
@@ -28,9 +29,10 @@ public abstract class DescrizioneGioco {
 
     private final List<Stanza> stanze = new ArrayList<>();
     private final  List<Comando> comandi = new ArrayList<>();
-    private final Inventario inventario = new Inventario();
+    private Giocatore giocatore;
     private Stanza stanzaCorrente;
 
+    
     public Stanza getStanzaCorrente() {
         return stanzaCorrente;
     }

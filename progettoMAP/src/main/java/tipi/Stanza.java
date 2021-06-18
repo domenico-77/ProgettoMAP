@@ -24,7 +24,9 @@ public class Stanza {
     private Porta portaOvest;
     private List<Oggetto> oggettiStanza;
 
-    public Stanza(Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
+    public Stanza(String nomeStanza,boolean illuminata,Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
+        this.nomeStanza = nomeStanza;
+        this.illuminata = illuminata;
         this.id = numStanze;
         this.portaNord = portaNord;
         this.portaSud = portaSud;
