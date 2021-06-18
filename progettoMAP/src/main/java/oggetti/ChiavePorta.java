@@ -19,10 +19,12 @@ import tipi.Stanza;
  * @author mtubi
  */
 public class ChiavePorta extends Oggetto{
+    private final static boolean PRENDIBILE = true;
+    private final static int DURABILITA = -1;
     private TipoPorta materiale;
 
-    public ChiavePorta(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, TipoPorta materiale, int usabilita) {
-        super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
+    public ChiavePorta(String nome, Set<String> alias, List<Comando> listaMosse, TipoPorta materiale) {
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
         this.materiale = materiale;
     }
     
@@ -52,6 +54,22 @@ public class ChiavePorta extends Oggetto{
             porta.getStanza().getPortaOvest().setChiusa(false);
         }
     }
+
+    @Override
+    public void descrizioneOggetto() {
+        System.out.print("Rin: ' E' una chiave ");
+        switch (this.materiale) {
+            case oro:
+                System.out.print("d'oro");
+                break;
+            case argento:
+                System.out.print("d'argento");
+                break;
+        }
+
+        System.out.println(", potrebbe servirici per aprire delle porte'");
+    }
+    
     
     
 }

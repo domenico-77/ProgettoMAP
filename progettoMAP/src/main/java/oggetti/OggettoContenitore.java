@@ -20,12 +20,14 @@ import tipi.Stanza;
  * @author mtubi
  */
 public class OggettoContenitore extends Oggetto {
+    private final static boolean PRENDIBILE = false;
+    private final static int DURABILITA = -1;
     private boolean aperto = false;
     private TipoPorta materiale;
     private List<Oggetto> listaOggetti=new ArrayList();
 
-    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile,int usabilita, List<Oggetto> listaOggetti, TipoPorta materiale) {
-        super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
+    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, List<Oggetto> listaOggetti, TipoPorta materiale) {
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
         this.listaOggetti = listaOggetti;
         this.materiale = materiale;
     }
@@ -73,24 +75,35 @@ public class OggettoContenitore extends Oggetto {
                     }
                     else{
                         inventario.aggiungiOggetto(o);
+                        this.listaOggetti.remove(o);
                     }
                 }
                 giocatore.setInventario(inventario);
             }
             else{
-                System.out.println("Non c'è nessun oggetto all'interno");
+                System.out.println("Rin: 'Non c'è nessun oggetto all'interno'");
             }
         }
         else{
-            Oggetto oggetto = new ChiaveOggettoContenitore("Chiave", null, null, "", true, 0);
+            Oggetto oggetto = new ChiaveOggettoContenitore("Chiave", null, null);
             if(inventario.contieneOggetto(oggetto)){
                 inventario.usaOggetto(oggetto, giocatore, stanza);
                 this.aperto = true;
                 this.usa(giocatore, stanza);
             }
             else{
-                System.out.println("Non hai una chiave per aprire questo oggetto, trova una chiave e poi torna qui");
+                System.out.println("Rin: 'Non abbiamo una chiave per aprire questo oggetto, sarebbe il caso di trovare prima una chiave'");
             }
+        }
+    }
+
+    @Override
+    public void descrizioneOggetto() {
+        if(this.listaOggetti.isEmpty()){
+        System.out.println("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
+        }
+        else{
+            System.out.println("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
         }
     }
 }

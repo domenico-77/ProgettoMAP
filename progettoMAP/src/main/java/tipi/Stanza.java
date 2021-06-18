@@ -17,7 +17,6 @@ public class Stanza {
     private static int numStanze = 0;
     private int id;
     private boolean illuminata;
-    private String descrizione;
     private String nomeStanza;
     private Porta portaNord;
     private Porta portaSud;
@@ -25,9 +24,8 @@ public class Stanza {
     private Porta portaOvest;
     private List<Oggetto> oggettiStanza;
 
-    public Stanza(String descrizione, Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
+    public Stanza(Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
         this.id = numStanze;
-        this.descrizione = descrizione;
         this.portaNord = portaNord;
         this.portaSud = portaSud;
         this.portaEst = portaEst;
@@ -42,10 +40,6 @@ public class Stanza {
 
     public int getId() {
         return id;
-    }
-
-    public String getDescrizione() {
-        return descrizione;
     }
 
     public Porta getPortaNord() {
@@ -74,10 +68,6 @@ public class Stanza {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
     }
 
     public void setPortaNord(Porta portaNord) {
@@ -148,12 +138,11 @@ public class Stanza {
     }
      */
     public void DescriviStanza() {
-        System.out.println("Sei entrato nella " + this.nomeStanza);
         if (!this.illuminata) {
             System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa'");
 
         } else {
-            System.out.print("Rin:' ");
+            System.out.print("Rin:' Sei entrato nella " + this.nomeStanza);
             if (this.portaNord != null) {
                 System.out.print("A nord " + this.portaNord.decsiriviPorta() + ",  ");
             } else {

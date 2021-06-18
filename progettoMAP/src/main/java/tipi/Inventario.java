@@ -39,11 +39,15 @@ public class Inventario {
        }
     }
     
-    public void visualizzaInventario(){
-        int i=1;
-        for(Oggetto o : inventario){
-            System.out.println("Oggetto num"+(i)+" "+o.getNome()+": "+o.getDescrizione());
-            i++;
+    public void visualizzaInventario() {
+        if (this.inventario.isEmpty()) {
+            System.out.println("Rin: 'Abbiamo le tasche vuote, potremmo trovare degli oggetti utili per la prigione");
+        } else {
+            System.out.println("Rin: 'Questi sono gli oggetti a disposizione:");
+            int i = 1;
+            for (Oggetto o : inventario) {
+                System.out.println(i + o.getNome());
+            }
         }
     }
     

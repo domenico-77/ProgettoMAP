@@ -21,15 +21,13 @@ public abstract class Oggetto {
     protected String nome;
     protected Set<String> alias;
     protected List<Comando> listaMosse;
-    protected String descrizione;
     protected boolean prendibile;
     protected int usabilita;
 
-    public Oggetto(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, int usabilita) {
+    public Oggetto(String nome, Set<String> alias, List<Comando> listaMosse, boolean prendibile, int usabilita) {
         this.nome = nome;
         this.alias = alias;
         this.listaMosse = listaMosse;
-        this.descrizione = descrizione;
         this.prendibile = prendibile;
         this.usabilita = usabilita;
     }
@@ -48,10 +46,6 @@ public abstract class Oggetto {
         this.alias = alias;
     }
 
-    public void setDescrizione(String description) {
-        this.descrizione = description;
-    }
-
     public void setPrendibile(boolean prendibile) {
         this.prendibile = prendibile;
     }
@@ -66,10 +60,6 @@ public abstract class Oggetto {
     
     public Set<String> getAlias() {
         return alias;
-    }
-
-    public String getDescrizione() {
-        return descrizione;
     }
 
     public boolean isPrendibile() {
@@ -119,4 +109,6 @@ public abstract class Oggetto {
             System.out.println("Non puoi prendere questo oggetto");
         }
     }
+    
+    public abstract void descrizioneOggetto();
 }

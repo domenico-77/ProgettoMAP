@@ -15,24 +15,28 @@ import tipi.Stanza;
  *
  * @author mtubi
  */
-public class ChiaveOggettoContenitore extends Oggetto {
+public class Candela extends Oggetto {
     private final static boolean PRENDIBILE = true;
-    private final static int DURABILITA = 1;
-    
-    public ChiaveOggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse) {
+    private final static int DURABILITA = 3;
+
+    public Candela(String nome, Set<String> alias, List<Comando> listaMosse) {
         super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
     }
 
-    
-
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
-       this.usabilita --;
+        if(!stanza.isIlluminata()){
+            stanza.setIlluminata(true);
+            this.usabilita--;
+        }
+        else{
+            System.out.println("Rin: 'La stanza è già illuminata non serve accendere una candela'");
+        }
     }
 
     @Override
     public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno'");
+        System.out.println("Rin: 'E' una candela, potrebbe servirci per illuminare luoghi buii'");
     }
     
 }

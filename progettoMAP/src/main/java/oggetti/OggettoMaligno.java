@@ -16,11 +16,12 @@ import tipi.Stanza;
  * @author mtubi
  */
 public class OggettoMaligno extends Oggetto{
-    
+    private final static boolean PRENDIBILE = false;
+    private final static int DURABILITA = 1;
     private final int danno;
     
-    public OggettoMaligno(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, int usabilita, int danno) {
-        super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
+    public OggettoMaligno(String nome, Set<String> alias, List<Comando> listaMosse, boolean prendibile, int danno) {
+        super(nome, alias, listaMosse, prendibile, DURABILITA);
         this.danno = danno;
     }
 
@@ -32,6 +33,11 @@ public class OggettoMaligno extends Oggetto{
         else{
             System.out.println("Non puoi usare questo oggetto");
         }
+    }
+
+    @Override
+    public void descrizioneOggetto() {
+        System.out.println("Rin: 'Potrebbe essere pericoloso, meglio stare alla larga'");
     }
     
 }
