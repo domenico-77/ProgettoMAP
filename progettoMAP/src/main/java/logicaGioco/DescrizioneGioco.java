@@ -27,10 +27,10 @@ import tipi.Giocatore;
  */
 public abstract class DescrizioneGioco {
 
-    private final List<Stanza> stanze = new ArrayList<>();
-    private final  List<Comando> comandi = new ArrayList<>();
-    private Giocatore giocatore;
-    private Stanza stanzaCorrente;
+    protected final List<Stanza> stanze = new ArrayList<>();
+    protected final  List<Comando> comandi = new ArrayList<>();
+    protected Giocatore giocatore;
+    protected Stanza stanzaCorrente;
 
     
     public Stanza getStanzaCorrente() {

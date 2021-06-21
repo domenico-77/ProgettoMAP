@@ -50,6 +50,11 @@ public abstract class Oggetto {
         this.prendibile = prendibile;
     }
 
+    public void setUsabilita(int usabilita) {
+        this.usabilita = usabilita;
+    }
+
+    
     public String getNome() {
         return nome;
     }

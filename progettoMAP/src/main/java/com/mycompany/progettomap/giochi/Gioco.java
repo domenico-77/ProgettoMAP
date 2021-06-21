@@ -17,6 +17,7 @@ import tipi.TipoComando;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import oggetti.Affilatore;
 import oggetti.Candela;
 import oggetti.ChiaveOggettoContenitore;
 import oggetti.ChiavePorta;
@@ -24,6 +25,7 @@ import oggetti.Cibo;
 import oggetti.Oggetto;
 import oggetti.OggettoContenitore;
 import oggetti.OggettoMaligno;
+import oggetti.Spada;
 import tipi.Porta;
 import tipi.TipoPorta;
 import tipi.Utilita;
@@ -100,7 +102,9 @@ public class Gioco extends DescrizioneGioco {
         Oggetto chiavePortaDorata = new ChiavePorta("chiave dorata",Utilita.generaSetAlias(),Utilita.generaListaComandi(),TipoPorta.oro);
         Oggetto chiavePortaArgentata = new ChiavePorta("chiave d'argento",Utilita.generaSetAlias(),Utilita.generaListaComandi(),TipoPorta.argento);
         Oggetto cibo = new Cibo("Pane",Utilita.generaSetAlias("Panino","Cibo"),Utilita.generaListaComandi(usare,raccogliere),30);
-        Oggetto oggettoContenitore = new OggettoContenitore("Scrigno",Utilita.generaSetAlias("tesoro","cofanetto","cassetta","scatola","astuccio","bauletto","portagioie","forziere","scrigno"),Utilita.generaListaComandi(aprire,chiudere,osservare,usare),Utilita.creaListaOggetti());
+        Oggetto spada = new Spada("Spada", Utilita.generaSetAlias("spada", "lama", "arma bianca", "daga", "katana", "ferro"), Utilita.generaListaComandi(raccogliere, usare, osservare));
+        Oggetto affilatore = new Affilatore("Affilatore", Utilita.generaSetAlias("affilatoio", "cote", "mola", "affilatrice"), Utilita.generaListaComandi(raccogliere, usare, osservare));
+        Oggetto oggettoContenitore;
         Oggetto oggettoMaligno = new OggettoMaligno("veleno",Utilita.generaSetAlias(),Utilita.generaListaComandi(),30);
 
         st1 = new Stanza("Cella di Madji", true, null, null, null, null, new ArrayList<>());
@@ -108,7 +112,69 @@ public class Gioco extends DescrizioneGioco {
         st2 = new Stanza("Corridoio",true,null,null,null,null,Utilita.creaListaOggetti(candela));
         st1.setPortaNord(new Porta(TipoPorta.normale,st2,false,false));
         st2.setPortaSud(new Porta(TipoPorta.normale,st1,false,false));
-
+        this.stanze.add(st1);
+        oggettoContenitore = new OggettoContenitore("Scrigno",Utilita.generaSetAlias("tesoro","cofanetto","cassetta","scatola","astuccio","bauletto","portagioie","forziere","scrigno"),Utilita.generaListaComandi(aprire,chiudere,osservare,usare),Utilita.creaListaOggetti(cibo, oggettoMaligno));
+        st3 = new Stanza("corridoio", false, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore));
+        st2.setPortaNord(new Porta(TipoPorta.normale, st3, false, false));
+        st3.setPortaSud(new Porta(TipoPorta.normale, st2, false, false));
+        this.stanze.add(st2);
+        st1 = new Stanza("Bagno", true, null, null, null, null, Utilita.creaListaOggetti(chiaveOggettoContenitore));
+        st3.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
+        st1.setPortaEst(new Porta(TipoPorta.normale, st3, false, false));
+        this.stanze.add(st1);
+        st2 = new Stanza("Corridoio", true, null, null, null, null, Utilita.creaListaOggetti(affilatore, cibo));
+        st3.setPortaNord(new Porta(TipoPorta.normale, st2, false, false));
+        st2.setPortaSud(new Porta(TipoPorta.normale, st3, false, false));
+        this.stanze.add(st3);
+        st1 = new Stanza ("Tesoreria", true, null, null, null, null, Utilita.creaListaOggetti(chiavePortaArgentata));
+        st2.setPortaEst(new Porta(TipoPorta.normale, st1, false, false));
+        st1.setPortaOvest(new Porta(TipoPorta.normale, st2, false, false));
+        this.stanze.add(st1);
+        st3 = new Stanza("Armeria", true, null, null, null, null, Utilita.creaListaOggetti(spada));
+        st2.setPortaNord(new Porta(TipoPorta.argento, st3, true, false));
+        st3.setPortaSud(new Porta(TipoPorta.argento, st2, true, false));
+        this.stanze.add(st2);
+        st1 = new Stanza("stanza sicurezza", true, null, null, null, null, Utilita.creaListaOggetti());
+        st3.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
+        st1.setPortaEst(new Porta(TipoPorta.normale, st3, false, false));
+        oggettoContenitore = new OggettoContenitore("Scrigno",Utilita.generaSetAlias("tesoro","cofanetto","cassetta","scatola","astuccio","bauletto","portagioie","forziere","scrigno"),Utilita.generaListaComandi(aprire,chiudere,osservare,usare),Utilita.creaListaOggetti(oggettoMaligno, chiaveOggettoContenitore, candela));
+        st2 = new Stanza("Cella 1", true, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore));
+        st1.setPortaOvest(new Porta(TipoPorta.argento, st2, true, false));
+        st2.setPortaEst(new Porta(TipoPorta.argento, st1, true, false));
+        this.stanze.add(st1);
+        st1 = new Stanza("cella 2", false, null, null, null, null, Utilita.creaListaOggetti(chiaveOggettoContenitore, chiaveOggettoContenitore));
+        st2.setPortaNord(new Porta(TipoPorta.oro, st1, true, false));
+        st1.setPortaSud(new Porta(TipoPorta.oro, st2, true, false));
+        this.stanze.add(st2);
+        st2 = new Stanza("cella 3", true, null, null, null, null, Utilita.creaListaOggetti(cibo));
+        st1.setPortaNord(new Porta(TipoPorta.oro, st2, true, false));
+        st2.setPortaSud(new Porta(TipoPorta.oro, st1, true, false));
+        this.stanze.add(st1);
+        st1 = new Stanza("stanza sicurezza", false, null, null, null, null, Utilita.creaListaOggetti(affilatore, cibo));
+        st1.setPortaOvest(new Porta(TipoPorta.normale, st2, false, false));
+        st2.setPortaEst(new Porta(TipoPorta.normale, st1, false, false));
+        this.stanze.add(st2);
+        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti());
+        st1.setPortaEst(new Porta(TipoPorta.oro, st2, true, false));
+        st2.setPortaOvest(new Porta(TipoPorta.oro, st1, true, false));
+        this.stanze.add(st1);
+        st1 = new Stanza("Corridoio", true, null, null, null, null, Utilita.creaListaOggetti(oggettoMaligno));
+        st3.setPortaNord(new Porta(TipoPorta.normale, st1, false, false));
+        st1.setPortaSud(new Porta(TipoPorta.normale, st3, false, false));
+        this.stanze.add(st3);
+        st2.setPortaSud(new Porta(TipoPorta.normale, st1, false, false));
+        st1.setPortaNord(new Porta(TipoPorta.normale, st2, false, false));
+        this.stanze.add(st1);
+        st3 = new Stanza("stanza guardie", true, null, null, null, null, Utilita.creaListaOggetti());
+        st2.setPortaNord(new Porta(TipoPorta.normale, st3, false, false));
+        st3.setPortaSud(new Porta(TipoPorta.normale, st2, false, false));
+        this.stanze.add(st2);
+        st1 = new Stanza("tesoreria", false, null, null, null, null, Utilita.creaListaOggetti(chiavePortaDorata));
+        st3.setPortaNord(new Porta(TipoPorta.argento, st1, true, true));
+        st1.setPortaSud(new Porta(TipoPorta.oro, st3, true, false));
+        this.stanze.add(st3);
+        st2 = 
+        
     }
 
     @Override
