@@ -27,12 +27,20 @@ public class ChiaveOggettoContenitore extends Oggetto {
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
-       this.usabilita --;
+        if(this.usabilita > 0){
+            this.usabilita --;
+            if(this.usabilita == 0){
+                System.out.println("Rin: 'L'oggetto "+this.nome+"ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+            }
+        }
+        else{
+            System.out.println("Non puoi usare questo oggetto");
+        }
     }
 
     @Override
     public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno'");
+        System.out.println("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno, puo' essre utilizzata solo per aprire un solo scrigno");
     }
     
 }

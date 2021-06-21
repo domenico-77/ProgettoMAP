@@ -49,10 +49,6 @@ public abstract class DescrizioneGioco {
         return comandi;
     }
 
-    public Inventario getInventory() {
-        return inventario;
-    }
-
     public abstract void inizializza() throws Exception;
 
     public abstract void nextMove(ParserOutput p, PrintStream out);

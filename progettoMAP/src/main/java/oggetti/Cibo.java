@@ -39,6 +39,9 @@ public class Cibo extends Oggetto{
         if(this.usabilita > 0){
             giocatore.incrementaVita(this.rigenerazione);
             this.usabilita --;
+            if(this.usabilita == 0){
+                System.out.println("Rin: 'L'oggetto "+this.nome+"ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+            }
         }
         else{
             System.out.println("Non puoi usare questo oggetto");
@@ -47,7 +50,7 @@ public class Cibo extends Oggetto{
 
     @Override
     public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' " + this.nome + "potrebbe servirci per curare le nostre ferite'");
+        System.out.println("Rin: 'E' " + this.nome + "potrebbe servirci per curare le nostre ferite, ha ancora "+this.usabilita+" di utlizzi");
     }
     
     

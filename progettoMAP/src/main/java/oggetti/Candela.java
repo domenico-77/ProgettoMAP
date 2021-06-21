@@ -28,6 +28,9 @@ public class Candela extends Oggetto {
         if(!stanza.isIlluminata()){
             stanza.setIlluminata(true);
             this.usabilita--;
+            if(this.usabilita == 0){
+                System.out.println("Rin: 'L'oggetto "+this.nome+"ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+            }
         }
         else{
             System.out.println("Rin: 'La stanza è già illuminata non serve accendere una candela'");
@@ -36,7 +39,7 @@ public class Candela extends Oggetto {
 
     @Override
     public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' una candela, potrebbe servirci per illuminare luoghi buii'");
+        System.out.println("Rin: 'E' una candela, potrebbe servirci per illuminare luoghi buii, ha ancora "+this.usabilita+" di utilizzi");
     }
     
 }

@@ -95,12 +95,12 @@ public class Gioco extends DescrizioneGioco {
         torna_indietro.setAlias(new String[]{"indietreggia", "torna"});
         //stanze
         Stanza st1, st2, st3;
-        Oggetto candela = new Candela("Candela", Utilita.generaSetAlias("Candelabro", "Cera", "Lume", "Fiaccola", "Torcia"), Utilita.generaListaComandi(raccogliere, usare, accendere, osservare));
+        Oggetto candela = new Candela("Candela", Utilita.generaSetAlias("Candelabro", "Cera", "Lume", "Fiaccola", "Torcia","candela"), Utilita.generaListaComandi(raccogliere, usare, accendere, osservare));
         Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("Grimaldello",Utilita.generaSetAlias("chiave scrigno"),Utilita.generaListaComandi(raccogliere,usare));
-        Oggetto chiavePortaDorata = new ChiavePorta("chiave",Utilita.generaSetAlias(),Utilita.generaListaComandi(),TipoPorta.oro);
-        Oggetto chiavePortaArgentata = new ChiavePorta("chiave",Utilita.generaSetAlias(),Utilita.generaListaComandi(),TipoPorta.argento);
+        Oggetto chiavePortaDorata = new ChiavePorta("chiave dorata",Utilita.generaSetAlias(),Utilita.generaListaComandi(),TipoPorta.oro);
+        Oggetto chiavePortaArgentata = new ChiavePorta("chiave d'argento",Utilita.generaSetAlias(),Utilita.generaListaComandi(),TipoPorta.argento);
         Oggetto cibo = new Cibo("Pane",Utilita.generaSetAlias("Panino","Cibo"),Utilita.generaListaComandi(usare,raccogliere),30);
-        Oggetto oggettoContenitore = new OggettoContenitore("Scrigno",Utilita.generaSetAlias("Armadio","Mobile"),Utilita.generaListaComandi(aprire,chiudere,osservare,usare),Utilita.creaListaOggetti());
+        Oggetto oggettoContenitore = new OggettoContenitore("Scrigno",Utilita.generaSetAlias("tesoro","cofanetto","cassetta","scatola","astuccio","bauletto","portagioie","forziere","scrigno"),Utilita.generaListaComandi(aprire,chiudere,osservare,usare),Utilita.creaListaOggetti());
         Oggetto oggettoMaligno = new OggettoMaligno("veleno",Utilita.generaSetAlias(),Utilita.generaListaComandi(),30);
 
         st1 = new Stanza("Cella di Madji", true, null, null, null, null, new ArrayList<>());
