@@ -54,7 +54,7 @@ public class Porta {
         this.nascosta = nascosta;
     }
     
-    public String decsiriviPorta(){
+    public String descriviPorta(){
         String descrizione = "";
         if(this.nascosta){
             descrizione = ("c'è un armadio un po' strano");
@@ -65,7 +65,7 @@ public class Porta {
                     descrizione = ("c'è una porta argento chiusa, servirà una chiave dello stesso tipo per aprirla");
                 }
                 else if(this.tipo == TipoPorta.oro){
-                    descrizione = ("c'è una porta oro chiusa, servirà una chiae dello stesso tipo per aprirla");
+                    descrizione = ("c'è una porta oro chiusa, servirà una chiave dello stesso tipo per aprirla");
                 }
                 else if(this.tipo == TipoPorta.normale){
                     descrizione = ("c'è una porta normale, non ci vuole niente ad aprirla");

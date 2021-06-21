@@ -146,24 +146,24 @@ public class Stanza {
         } else {
             System.out.print("Rin:' Sei entrato nella " + this.nomeStanza);
             if (this.portaNord != null) {
-                System.out.print("A nord " + this.portaNord.decsiriviPorta() + ",  ");
+                System.out.print("A nord " + this.portaNord.descriviPorta() + ",  ");
             } else {
                 System.out.print("A nord non c'è niente,  ");
             }
             if (this.portaSud != null) {
-                System.out.print("a sud " + this.portaNord.decsiriviPorta() + ", ");
+                System.out.print("a sud " + this.portaNord.descriviPorta() + ", ");
             } else {
                 System.out.print("A sud non c'è niente,  ");
 
             }
             if (this.portaEst != null) {
-                System.out.print("a est " + this.portaEst.decsiriviPorta() + "e ");
+                System.out.print("a est " + this.portaEst.descriviPorta() + "e ");
             } else {
                 System.out.print("A est non c'è niente, e ");
 
             }
             if (this.portaOvest != null) {
-                System.out.println("a ovest " + this.portaEst.decsiriviPorta() + ".");
+                System.out.println("a ovest " + this.portaEst.descriviPorta() + ".");
 
             } else {
                 System.out.println("A ovest non c'è niente.");

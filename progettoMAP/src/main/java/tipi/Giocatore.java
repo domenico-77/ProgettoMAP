@@ -19,7 +19,7 @@ public class Giocatore {
     private int vitaMax = VITA_INIZIO;
     private int vitaCorrente = VITA_INIZIO;
     private Inventario inventario;
-    private List<ParserOutput> listaMosse;
+    private static List<ParserOutput> listaMosse;
 
     public Giocatore(List<ParserOutput> listaMosse) {
         this.listaMosse = listaMosse;

@@ -32,6 +32,10 @@ public abstract class DescrizioneGioco {
     private Giocatore giocatore;
     private Stanza stanzaCorrente;
 
+    public Giocatore getGiocatore() {
+        return giocatore;
+    }
+
     
     public Stanza getStanzaCorrente() {
         return stanzaCorrente;
@@ -48,10 +52,9 @@ public abstract class DescrizioneGioco {
     public List<Comando> getComandi() {
         return comandi;
     }
+    
 
-    public Inventario getInventory() {
-        return inventario;
-    }
+   
 
     public abstract void inizializza() throws Exception;
 
