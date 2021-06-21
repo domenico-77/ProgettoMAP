@@ -171,10 +171,25 @@ public class Gioco extends DescrizioneGioco {
         this.stanze.add(st2);
         st1 = new Stanza("tesoreria", false, null, null, null, null, Utilita.creaListaOggetti(chiavePortaDorata));
         st3.setPortaNord(new Porta(TipoPorta.argento, st1, true, true));
-        st1.setPortaSud(new Porta(TipoPorta.oro, st3, true, false));
+        st1.setPortaSud(new Porta(TipoPorta.argento, st3, true, false));
         this.stanze.add(st3);
-        st2 = 
-        
+        st2 = new Stanza("secondo piano", true, null, null, null, null, Utilita.creaListaOggetti());
+        st1.setPortaEst(new Porta(TipoPorta.normale, st2, false, false));
+        st2.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
+        this.stanze.add(st1);
+        st3 = new Stanza("segreteria della prigione", true, null, null, null, null, Utilita.creaListaOggetti(spada, cibo));
+        st2.setPortaEst(new Porta(TipoPorta.normale, st3, false, false));
+        st3.setPortaOvest(new Porta(TipoPorta.normale, st2, false, false));
+        this.stanze.add(st2);
+        st1 = new Stanza("entrata della prigione", true, null, null, null, null, Utilita.creaListaOggetti());
+        st3.setPortaNord(new Porta(TipoPorta.normale, st1, false, false));
+        st1.setPortaSud(new Porta(TipoPorta.normale, st3, false, false));
+        this.stanze.add(st3);
+        st2 = new Stanza("giardino della prigione", true, null, null, null, null, Utilita.creaListaOggetti());
+        st1.setPortaNord(new Porta(TipoPorta.oro, st2, true, false));
+        st2.setPortaSud(new Porta(TipoPorta.oro, st1, true, true));
+        this.stanze.add(st2);
+        this.stanze.add(st1);
     }
 
     @Override
