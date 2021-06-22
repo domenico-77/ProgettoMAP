@@ -18,9 +18,10 @@ import tipi.Stanza;
 public class Candela extends Oggetto {
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = 3;
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.candela;
 
     public Candela(String nome, Set<String> alias, List<Comando> listaMosse) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
     }
 
     @Override
@@ -41,5 +42,18 @@ public class Candela extends Oggetto {
     public void descrizioneOggetto() {
         System.out.println("Rin: 'E' una candela, potrebbe servirci per illuminare luoghi buii, ha ancora "+this.usabilita+" di utilizzi");
     }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static int getDURABILITA() {
+        return DURABILITA;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
+    }
+    
     
 }

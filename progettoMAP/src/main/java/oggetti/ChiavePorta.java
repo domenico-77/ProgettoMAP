@@ -21,10 +21,11 @@ import tipi.Stanza;
 public class ChiavePorta extends Oggetto{
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = -1;
-    private TipoPorta materiale;
+    private final TipoPorta materiale;
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.chiavePorta;
 
     public ChiavePorta(String nome, Set<String> alias, List<Comando> listaMosse, TipoPorta materiale) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.materiale = materiale;
     }
     
@@ -68,6 +69,18 @@ public class ChiavePorta extends Oggetto{
         }
 
         System.out.println(", potrebbe servirici per aprire delle porte'");
+    }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static int getDURABILITA() {
+        return DURABILITA;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
     }
     
     

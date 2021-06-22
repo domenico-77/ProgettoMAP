@@ -144,40 +144,47 @@ public class Stanza {
             System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa'");
 
         } else {
-            System.out.print("Rin:' Sei entrato nella " + this.nomeStanza);
+            System.out.print("Rin:' Sei entrato nella " + this.nomeStanza+" ");
             if (this.portaNord != null) {
-                System.out.print("A nord " + this.portaNord.decsiriviPorta() + ",  ");
-            } else {
-                System.out.print("A nord non c'è niente,  ");
-            }
+                System.out.print("a nord " + this.portaNord.decsiriviPorta() + ",  ");
+                System.out.println("");
+            } 
             if (this.portaSud != null) {
-                System.out.print("a sud " + this.portaNord.decsiriviPorta() + ", ");
-            } else {
-                System.out.print("A sud non c'è niente,  ");
-
-            }
+                System.out.print("a sud " + this.portaSud.decsiriviPorta() + ", ");
+                System.out.println("");
+            } 
             if (this.portaEst != null) {
                 System.out.print("a est " + this.portaEst.decsiriviPorta() + "e ");
-            } else {
-                System.out.print("A est non c'è niente, e ");
-
-            }
+                System.out.println("");
+            } 
             if (this.portaOvest != null) {
                 System.out.println("a ovest " + this.portaEst.decsiriviPorta() + ".");
+                System.out.println("");
 
-            } else {
-                System.out.println("A ovest non c'è niente.");
+            } 
 
             }
            if(this.oggettiStanza.isEmpty()){
-               System.out.println("Non c'è niente di interessante in questa stanza.");
+               System.out.print("Non c'è niente di interessante in questa stanza.");
            } else {
                if(this.oggettiStanza.size() >= 2){
-                   System.out.print("Sono presenti diversi oggetti sparsi nella stanza:");
+                   System.out.print("Sono presenti diversi oggetti sparsi nella stanza: ");
                    int i= 1;
-                   for (Oggetto o: oggettiStanza){
-                        System.out.println(i + o.getNome());
+                   int size = this.oggettiStanza.size();
+                   for (Oggetto o: this.oggettiStanza){
+                       if(i != size-2){
+                        System.out.print(o.getNome()+", ");
                         i++;
+                       }
+                       else{
+                           if(i == size-1){
+                           System.out.print(o.getNome() + " e ");
+                           }
+                           else{
+                               System.out.print(o.getNome());
+                           }
+                       }
+                       
                     }
                }
                else{
@@ -187,4 +194,4 @@ public class Stanza {
            System.out.println("'");
         }
     }
-}
+

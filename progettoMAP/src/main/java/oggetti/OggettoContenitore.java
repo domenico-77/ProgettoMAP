@@ -24,11 +24,14 @@ public class OggettoContenitore extends Oggetto {
     private final static int DURABILITA = -1;
     private boolean aperto = false;
     private List<Oggetto> listaOggetti=new ArrayList();
-
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.oggettoContenitore;
+    
+    
     public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, List<Oggetto> listaOggetti) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.listaOggetti = listaOggetti;
     }
+    
     
     public List<Oggetto> getListaOggetti() {
         return listaOggetti;
@@ -83,15 +86,7 @@ public class OggettoContenitore extends Oggetto {
             }
         }
         else{
-            Oggetto oggetto = new ChiaveOggettoContenitore("Chiave", null, null);
-            if(inventario.contieneOggetto(oggetto)){
-                inventario.usaOggetto(oggetto, giocatore, stanza);
-                this.aperto = true;
-                this.usa(giocatore, stanza);
-            }
-            else{
-                System.out.println("Rin: 'Non abbiamo una chiave per aprire questo oggetto, sarebbe il caso di trovare prima una chiave'");
-            }
+            System.out.println("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");
         }
     }
 
@@ -104,4 +99,26 @@ public class OggettoContenitore extends Oggetto {
             System.out.println("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
         }
     }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static int getDURABILITA() {
+        return DURABILITA;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
+    }
+
+    public void setAperto(boolean aperto) {
+        this.aperto = aperto;
+    }
+
+    public boolean isAperto() {
+        return aperto;
+    }
+    
+    
 }

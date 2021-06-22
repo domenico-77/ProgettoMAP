@@ -15,7 +15,6 @@ import com.mycompany.progettomap.parser.ParserOutput;
 import java.util.List;
 import tipi.Stanza;
 import tipi.Comando;
-import tipi.Inventario;
 import java.io.PrintStream;
 
 import java.util.ArrayList;
@@ -49,7 +48,9 @@ public abstract class DescrizioneGioco {
         return comandi;
     }
 
-    public abstract void inizializza() throws Exception;
+    public abstract void inizializza();
 
     public abstract void nextMove(ParserOutput p, PrintStream out);
+    
+    public abstract void stampaStanze();
 }

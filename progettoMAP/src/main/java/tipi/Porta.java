@@ -57,25 +57,25 @@ public class Porta {
     public String decsiriviPorta(){
         String descrizione = "";
         if(this.nascosta){
-            descrizione = ("c'è un armadio un po' strano");
+            descrizione = (" c'è un armadio un po' strano");
         }
         else{
             if(this.chiusa){
                 if(this.tipo == TipoPorta.argento){
-                    descrizione = ("c'è una porta argento chiusa, servirà una chiave dello stesso tipo per aprirla");
+                    descrizione = (" c'è una porta d'argento chiusa, servirà una chiave dello stesso tipo per aprirla");
                 }
                 else if(this.tipo == TipoPorta.oro){
-                    descrizione = ("c'è una porta oro chiusa, servirà una chiae dello stesso tipo per aprirla");
+                    descrizione = (" c'è una porta di oro chiusa, servirà una chiae dello stesso tipo per aprirla");
                 }
                 else if(this.tipo == TipoPorta.normale){
-                    descrizione = ("c'è una porta normale, non ci vuole niente ad aprirla");
+                    descrizione = (" c'è una porta normale, non ci vuole niente ad aprirla");
                 }
                 else if(this.tipo == TipoPorta.tunnel){
-                    descrizione = ("c'è un tunnel, chissa dove porta");
+                    descrizione = (" c'è un tunnel, chissa dove porta");
                 }
             }
             else{
-                descrizione = ("la porta è già stata aperta");
+                descrizione = (" c'è uns porta già aperta");
             }
         }
         return descrizione;

@@ -19,10 +19,14 @@ public class Spada extends Oggetto {
     
     private final static int USABILITA = 3;
     private final static boolean PRENDIBILE = true;
-
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.spada;
+    
     public Spada(String nome, Set<String> alias, List<Comando> listaMosse) {
-        super(nome, alias, listaMosse, PRENDIBILE, USABILITA);
+        super(nome, alias, listaMosse, PRENDIBILE, USABILITA,TIPO_OGGETTO);
     }
+
+    
+    
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
@@ -48,5 +52,19 @@ public class Spada extends Oggetto {
             System.out.println("'");
         }
     }
+
+    public static int getUSABILITA() {
+        return USABILITA;
+    }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
+    }
+    
+    
     
 }

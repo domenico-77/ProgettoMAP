@@ -19,11 +19,14 @@ public class OggettoMaligno extends Oggetto{
     private final static boolean PRENDIBILE = false;
     private final static int DURABILITA = 1;
     private final int danno;
-    
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.oggettoMaligno;
     public OggettoMaligno(String nome, Set<String> alias, List<Comando> listaMosse, int danno) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA);
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.danno = danno;
     }
+
+  
+    
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
@@ -39,5 +42,19 @@ public class OggettoMaligno extends Oggetto{
     public void descrizioneOggetto() {
         System.out.println("Rin: 'Potrebbe essere pericoloso, meglio stare alla larga'");
     }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static int getDURABILITA() {
+        return DURABILITA;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
+    }
+    
+    
     
 }

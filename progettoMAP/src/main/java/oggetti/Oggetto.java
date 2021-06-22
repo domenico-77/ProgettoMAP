@@ -5,7 +5,6 @@
  */
 package oggetti;
 
-import com.mycompany.progettomap.parser.ParserOutput;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -23,13 +22,15 @@ public abstract class Oggetto {
     protected List<Comando> listaMosse;
     protected boolean prendibile;
     protected int usabilita;
+    protected TipoOggetto tipo;
 
-    public Oggetto(String nome, Set<String> alias, List<Comando> listaMosse, boolean prendibile, int usabilita) {
+    public Oggetto(String nome, Set<String> alias, List<Comando> listaMosse, boolean prendibile, int usabilita, TipoOggetto tipo) {
         this.nome = nome;
         this.alias = alias;
         this.listaMosse = listaMosse;
         this.prendibile = prendibile;
         this.usabilita = usabilita;
+        this.tipo = tipo;
     }
     
     
@@ -74,13 +75,11 @@ public abstract class Oggetto {
     public int getUsabilita() {
         return usabilita;
     }
-    
-    
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.nome);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.tipo);
         return hash;
     }
 
@@ -96,11 +95,15 @@ public abstract class Oggetto {
             return false;
         }
         final Oggetto other = (Oggetto) obj;
-        if (!Objects.equals(this.nome, other.nome)) {
+        if (this.tipo != other.tipo) {
             return false;
         }
         return true;
     }
+    
+    
+
+   
 
    
     

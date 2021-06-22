@@ -20,9 +20,10 @@ public class Affilatore extends Oggetto{
     private final static int USABILITA = 1;
     private final static int USABILITA_SPADA = 3;
     private final static boolean PRENDIBILE = true;
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.affilatore;
     
     public Affilatore(String nome, Set<String> alias, List<Comando> listaMosse) {
-        super(nome, alias, listaMosse, PRENDIBILE, USABILITA);
+        super(nome, alias, listaMosse, PRENDIBILE, USABILITA, TIPO_OGGETTO);
     }
 
     @Override
@@ -52,5 +53,22 @@ public class Affilatore extends Oggetto{
     public void descrizioneOggetto() {
         System.out.println("Rin: 'E' un affilatore per lame, puo' servire nel caso in cui la lama di una spada perde usabiita, puo' essre usata una sola volta'");
     }
+
+    public static int getUSABILITA() {
+        return USABILITA;
+    }
+
+    public static int getUSABILITA_SPADA() {
+        return USABILITA_SPADA;
+    }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
+    }
+    
     
 }
