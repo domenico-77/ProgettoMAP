@@ -125,13 +125,13 @@ public class Stanza {
         return true;
     }
 
-    /*
+
     public void rimuoviOggetto(Oggetto o){
         if(this.oggettiStanza.contains(o)){
            this.oggettiStanza.remove(o);
         }
     }
-    
+    /*
     public void prendiOggetto(Oggetto o, Giocatore giocatore){
         if(this.oggettiStanza.contains(o)){
             giocatore.getInventario().aggiungiOgetto(this.oggettiStanza.get(this.oggettiStanza.indexOf(o)));
@@ -146,19 +146,19 @@ public class Stanza {
         } else {
             System.out.print("Rin:' Sei entrato nella " + this.nomeStanza+" ");
             if (this.portaNord != null) {
-                System.out.print("a nord " + this.portaNord.decsiriviPorta() + ",  ");
+                System.out.print("a nord " + this.portaNord.descriviPorta() + ",  ");
                 System.out.println("");
             } 
             if (this.portaSud != null) {
-                System.out.print("a sud " + this.portaSud.decsiriviPorta() + ", ");
+                System.out.print("a sud " + this.portaSud.descriviPorta() + ", ");
                 System.out.println("");
             } 
             if (this.portaEst != null) {
-                System.out.print("a est " + this.portaEst.decsiriviPorta() + "e ");
+                System.out.print("a est " + this.portaEst.descriviPorta() + "e ");
                 System.out.println("");
             } 
             if (this.portaOvest != null) {
-                System.out.println("a ovest " + this.portaEst.decsiriviPorta() + ".");
+                System.out.println("a ovest " + this.portaEst.descriviPorta() + ".");
                 System.out.println("");
 
             } 

@@ -54,7 +54,7 @@ public class Porta {
         this.nascosta = nascosta; 
     }
     
-    public String decsiriviPorta(){
+    public String descriviPorta(){
         String descrizione = "";
         if(this.nascosta){
             descrizione = (" c'è un armadio un po' strano");
