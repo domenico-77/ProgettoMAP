@@ -51,7 +51,7 @@ public class Porta {
     }
 
     public void setNascosta(boolean nascosta) {
-        this.nascosta = nascosta;
+        this.nascosta = nascosta; 
     }
     
     public String decsiriviPorta(){
