@@ -409,13 +409,16 @@ public class Gioco extends DescrizioneGioco {
 
             } else if (p.getComando().getTipo() == TipoComando.usare) {
                 if (p.getOggetto() != null && p.getOggetto().getUsabilita() > 0) {
-
                     p.getOggetto().usa(this.getGiocatore(), this.getStanzaCorrente());
                 } else if (p.getOggetto().getUsabilita() <= 0) {
                     System.out.println("Non puoi usare questo oggetto");
                 } else if (p.getOggetto() == null) {
+                    if((p.getOggettoInv() != null)&&(this.giocatore.getInventario().contieneOggetto(p.getOggettoInv()))){
+                    p.getOggettoInv().usa(giocatore, stanzaCorrente);
+                }
+                } else if((p.getOggetto() == null) && (p.getOggettoInv() == null)){
+                    
                     System.out.println("Non ho capito quale oggetto vuoi usare");
-
                 }
 
             } else if (p.getComando().getTipo() == TipoComando.accendere) {
@@ -455,9 +458,9 @@ public class Gioco extends DescrizioneGioco {
                     oggettoContenitore.usa(this.giocatore, this.stanzaCorrente);
                 }
 
-            }else if (p.getComando().getTipo() == TipoComando.fine) {
+            /*else if (p.getComando().getTipo() == TipoComando.fine) {
                 System.out.println("Complimenti");
-                System.exit(0);
+                System.exit(0);*/
 
             } else if (p.getComando().getTipo() == TipoComando.torna_indietro) {
                 this.setStanzaCorrente(this.getPercorsoStanze().pop());

@@ -51,7 +51,7 @@ public class ParserOutput {
         return oggetto;
     }
 
-    public Oggetto getOggettoSec() {
+    public Oggetto getOggettoInv() {
         return oggettoInv;
     }
 

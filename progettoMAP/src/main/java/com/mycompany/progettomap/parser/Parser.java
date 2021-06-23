@@ -94,6 +94,7 @@ public class Parser {
                 }
 
             }
+            else comando = null;
         }
         return comando;
     }
