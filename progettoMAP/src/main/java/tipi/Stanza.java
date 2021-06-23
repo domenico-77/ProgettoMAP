@@ -125,7 +125,7 @@ public class Stanza {
         return true;
     }
 
-    /*
+    
     public void rimuoviOggetto(Oggetto o){
         if(this.oggettiStanza.contains(o)){
            this.oggettiStanza.remove(o);
@@ -134,11 +134,11 @@ public class Stanza {
     
     public void prendiOggetto(Oggetto o, Giocatore giocatore){
         if(this.oggettiStanza.contains(o)){
-            giocatore.getInventario().aggiungiOgetto(this.oggettiStanza.get(this.oggettiStanza.indexOf(o)));
+            giocatore.getInventario().aggiungiOggetto(this.oggettiStanza.get(this.oggettiStanza.indexOf(o)));
             this.rimuoviOggetto(o);
         }
     }
-     */
+     
     public void DescriviStanza() {
         if (!this.illuminata) {
             System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa'");

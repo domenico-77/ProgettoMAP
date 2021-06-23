@@ -25,12 +25,16 @@ public class Candela extends Oggetto {
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
+        if(this.usabilita > 0){
         if(!stanza.isIlluminata()){
             stanza.setIlluminata(true);
             this.usabilita--;
         }
         else{
             System.out.println("Rin: 'La stanza è già illuminata non serve accendere una candela'");
+        }
+    }else {
+            System.out.println("Rin : 'non abbiamo una candela per illuminare la stanza'");
         }
     }
 

@@ -19,6 +19,7 @@ import tipi.Inventario;
 import java.io.PrintStream;
 
 import java.util.ArrayList;
+import java.util.Stack;
 import tipi.Giocatore;
 
 /**
@@ -29,6 +30,7 @@ public abstract class DescrizioneGioco {
 
     private final List<Stanza> stanze = new ArrayList<>();
     private final  List<Comando> comandi = new ArrayList<>();
+    private final Stack <Stanza> percorsoStanze = new Stack <> ();
     private Giocatore giocatore;
     private Stanza stanzaCorrente;
 
@@ -51,6 +53,9 @@ public abstract class DescrizioneGioco {
 
     public List<Comando> getComandi() {
         return comandi;
+    }
+    public Stack<Stanza> getPercorsoStanze() {
+        return percorsoStanze;
     }
     
 

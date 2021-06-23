@@ -17,17 +17,12 @@ public enum TipoComando {
     ovest, 
     est, 
     aprire, 
-    chiudere, 
-    spingere, 
-    tirare, 
-    camminare_verso, 
+    chiudere,  
     raccogliere, 
     parlare_a, 
     dare, 
     usare,
     osservare,
-    guarda_a,
     accendere,
-    spegnere,
     torna_indietro
 }
