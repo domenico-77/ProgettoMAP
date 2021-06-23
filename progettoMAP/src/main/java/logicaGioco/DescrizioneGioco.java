@@ -13,7 +13,7 @@ package logicaGioco;
 
 import com.mycompany.progettomap.parser.ParserOutput;
 import java.util.List;
-import tipi.Stanza;
+import tipi.stanze.Stanza;
 import tipi.Comando;
 import java.io.PrintStream;
 

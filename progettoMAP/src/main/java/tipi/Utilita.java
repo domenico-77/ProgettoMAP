@@ -117,4 +117,14 @@ public class Utilita {
 
         return vuole;
     }
+    
+    public static boolean cercaParola(String nome, String[] alias){
+        boolean contiene = false;
+        for (String a : alias){
+            if(a.equals(nome)){
+                contiene = true;
+            }
+        }
+        return contiene;
+    }
 }

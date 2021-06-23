@@ -15,6 +15,8 @@ import java.util.HashSet;
 import tipi.Comando;
 import oggetti.Oggetto;
 import tipi.Utilita;
+import tipi.stanze.Porta;
+import tipi.stanze.Stanza;
 
 /**
  *
@@ -28,7 +30,7 @@ public class Parser {
         this.paroleProibite = paroleProibite;
     }
 
-    public ParserOutput parse(String comandoUtente, List<Comando> azioni, List<Oggetto> oggetti, List<Oggetto> inventario) {
+    public ParserOutput parse(String comandoUtente, List<Comando> azioni, List<Oggetto> oggetti, List<Oggetto> inventario, Stanza stanza) {
         ParserOutput comando= null;
         comandoUtente = comandoUtente.toLowerCase();
         comandoUtente = comandoUtente.replaceAll("[.!£$%&/]+", "");//Pulizia del comando di caratteri di punteggiatura
@@ -39,6 +41,7 @@ public class Parser {
             if(intAzione > -1){//Se l'utente non ha scritto un azione l'intero comando non è valido
                 int intOggetto = Utilita.cercaOggetto(paroleComando.get(1), oggetti);
                 int intOggettoInv = -1;//Inizializzo una variabile per l'ggetto dell'inventario
+                boolean portaB = false;
                 if(intOggetto == -1){//Se non è stato trovato l'oggetto nella seconda posizione, provo a cercarlo nella terza posizione e cerco un oggetto dell'inventario nella seconda
                     intOggetto = Utilita.cercaOggetto(paroleComando.get(2), oggetti);
                     intOggettoInv = Utilita.cercaOggetto(paroleComando.get(1), inventario);
@@ -48,6 +51,9 @@ public class Parser {
                 }
                 else{//Se abbiamo trovato un oggetto, provo a vedere se c'è anche un oggetto dell'inventario nella terza
                     intOggettoInv = Utilita.cercaOggetto(paroleComando.get(2), inventario);
+                }
+                if(intOggetto == -1 && intOggettoInv == -1){
+                    portaB = Utilita.cercaParola(paroleComando.get(1), Porta.getAlias());
                 }
                 if(intAzione > -1 && intOggetto > -1 && intOggettoInv >-1){
                     comando = (new ParserOutput(azioni.get(intAzione), oggetti.get(intOggetto), inventario.get(intOggettoInv)));

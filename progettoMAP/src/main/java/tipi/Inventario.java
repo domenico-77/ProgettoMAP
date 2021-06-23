@@ -5,6 +5,7 @@
  */
 package tipi;
 
+import tipi.stanze.Stanza;
 import oggetti.Oggetto;
 import java.util.ArrayList;
 import java.util.List;

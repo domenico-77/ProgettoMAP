@@ -12,7 +12,7 @@ package com.mycompany.progettomap.giochi;
 import logicaGioco.DescrizioneGioco;
 import com.mycompany.progettomap.parser.ParserOutput;
 import tipi.Comando;
-import tipi.Stanza;
+import tipi.stanze.Stanza;
 import tipi.TipoComando;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -25,8 +25,8 @@ import oggetti.Oggetto;
 import oggetti.OggettoContenitore;
 import oggetti.OggettoMaligno;
 import oggetti.Spada;
-import tipi.Porta;
-import tipi.TipoPorta;
+import tipi.stanze.Porta;
+import tipi.stanze.TipoPorta;
 import tipi.Utilita;
 
 /**
@@ -429,8 +429,26 @@ public class Gioco extends DescrizioneGioco {
                 }
 
             } else if (p.getComando().getTipo() == TipoComando.aprire) {
-                if(p.getOggetto() == porta) {
-                    
+                if(p.getPorta()!= null) {
+                    if(p.getPorta().isChiusa()){
+                        TipoPorta tipoPorta = p.getPorta().getTipo();
+                        switch(tipoPorta){
+                            case normale :
+                                p.getPorta().setChiusa(false);
+                                System.out.println("Rin: 'Hai aperto la porta'");
+                            break;
+                            
+                            case oro :
+                                System.out.println("Rin: 'Per aprire una porta di quel tipo dovremmo usare una chiave d'oro");
+                            break;
+                            
+                            case argento :
+                                System.out.println("Rin: 'Per aprire una porta di quel tipo dovremmo usare una chiave d'argento");
+                        }
+                    }
+                    else{
+                        System.out.println("Rin: 'La porta è già stata aperta'");
+                    }
                 } else if(p.getOggetto() == oggettoContenitore) {
                     oggettoContenitore.usa(this.giocatore, this.stanzaCorrente);
                 }

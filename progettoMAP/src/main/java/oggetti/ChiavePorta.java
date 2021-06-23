@@ -10,9 +10,9 @@ import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
-import tipi.TipoPorta;
-import tipi.Porta;
-import tipi.Stanza;
+import tipi.stanze.TipoPorta;
+import tipi.stanze.Porta;
+import tipi.stanze.Stanza;
 
 /**
  *
