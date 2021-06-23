@@ -7,13 +7,11 @@ package tipi;
 
 import oggetti.Oggetto;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -118,11 +116,15 @@ public class Utilita {
         return vuole;
     }
     
-    public static boolean cercaParola(String nome, String[] alias){
+    public static boolean cercaParola(String nome, String...alias){
         boolean contiene = false;
-        for (String a : alias){
-            if(a.equals(nome)){
+        for (int i = 0; i<alias.length; i++){
+            if(alias.equals(nome)){
                 contiene = true;
+                i=alias.length;
+            }
+            else{
+                i++;
             }
         }
         return contiene;

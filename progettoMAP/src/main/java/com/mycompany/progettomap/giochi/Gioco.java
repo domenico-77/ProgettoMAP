@@ -195,6 +195,8 @@ public class Gioco extends DescrizioneGioco {
         st2.setPortaSud(new Porta(TipoPorta.oro, st1, true, true));
         this.stanze.add(st2);
         this.stanze.add(st1);
+        
+        this.stanzaCorrente = this.stanze.get(0);
     }
 
     @Override
