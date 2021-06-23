@@ -10,17 +10,19 @@ package tipi;
  * @author mtubi
  */
 public class Porta {
-    Materiale tipo;
+    TipoPorta tipo;
     Stanza stanza;
     boolean chiusa;
+    boolean nascosta;
 
-    public Porta(Materiale tipo, Stanza stanza, boolean chiusa) {
+    public Porta(TipoPorta tipo, Stanza stanza, boolean chiusa, boolean nascosta) {
         this.tipo = tipo;
         this.stanza = stanza;
         this.chiusa=chiusa;
+        this.nascosta=nascosta;
     }
 
-    public Materiale getTipo() {
+    public TipoPorta getTipo() {
         return tipo;
     }
 
@@ -28,7 +30,7 @@ public class Porta {
         return stanza;
     }
 
-    public void setTipo(Materiale tipo) {
+    public void setTipo(TipoPorta tipo) {
         this.tipo = tipo;
     }
 
@@ -42,5 +44,40 @@ public class Porta {
 
     public boolean isChiusa() {
         return chiusa;
+    }
+
+    public boolean isNascosta() {
+        return nascosta;
+    }
+
+    public void setNascosta(boolean nascosta) {
+        this.nascosta = nascosta;
+    }
+    
+    public String decsiriviPorta(){
+        String descrizione = "";
+        if(this.nascosta){
+            descrizione = (" c'è un armadio un po' strano");
+        }
+        else{
+            if(this.chiusa){
+                if(this.tipo == TipoPorta.argento){
+                    descrizione = (" c'è una porta d'argento chiusa, servirà una chiave dello stesso tipo per aprirla");
+                }
+                else if(this.tipo == TipoPorta.oro){
+                    descrizione = (" c'è una porta di oro chiusa, servirà una chiae dello stesso tipo per aprirla");
+                }
+                else if(this.tipo == TipoPorta.normale){
+                    descrizione = (" c'è una porta normale, non ci vuole niente ad aprirla");
+                }
+                else if(this.tipo == TipoPorta.tunnel){
+                    descrizione = (" c'è un tunnel, chissa dove porta");
+                }
+            }
+            else{
+                descrizione = (" c'è uns porta già aperta");
+            }
+        }
+        return descrizione;
     }
 }

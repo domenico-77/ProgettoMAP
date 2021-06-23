@@ -12,7 +12,7 @@ import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
-import tipi.Materiale;
+import tipi.TipoPorta;
 import tipi.Stanza;
 
 /**
@@ -20,15 +20,18 @@ import tipi.Stanza;
  * @author mtubi
  */
 public class OggettoContenitore extends Oggetto {
+    private final static boolean PRENDIBILE = false;
+    private final static int DURABILITA = -1;
     private boolean aperto = false;
-    private Materiale materiale;
     private List<Oggetto> listaOggetti=new ArrayList();
-
-    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile,int usabilita, List<Oggetto> listaOggetti, Materiale materiale) {
-        super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.oggettoContenitore;
+    
+    
+    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, List<Oggetto> listaOggetti) {
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.listaOggetti = listaOggetti;
-        this.materiale = materiale;
     }
+    
     
     public List<Oggetto> getListaOggetti() {
         return listaOggetti;
@@ -73,24 +76,49 @@ public class OggettoContenitore extends Oggetto {
                     }
                     else{
                         inventario.aggiungiOggetto(o);
+                        this.listaOggetti.remove(o);
                     }
                 }
                 giocatore.setInventario(inventario);
             }
             else{
-                System.out.println("Non c'è nessun oggetto all'interno");
+                System.out.println("Rin: 'Non c'è nessun oggetto all'interno'");
             }
         }
         else{
-            Oggetto oggetto = new ChiaveOggettoContenitore("Chiave", null, null, "", true, 0);
-            if(inventario.contieneOggetto(oggetto)){
-                inventario.usaOggetto(oggetto, giocatore, stanza);
-                this.aperto = true;
-                this.usa(giocatore, stanza);
-            }
-            else{
-                System.out.println("Non hai una chiave per aprire questo oggetto, trova una chiave e poi torna qui");
-            }
+            System.out.println("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");
         }
     }
+
+    @Override
+    public void descrizioneOggetto() {
+        if(this.listaOggetti.isEmpty()){
+        System.out.println("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
+        }
+        else{
+            System.out.println("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
+        }
+    }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static int getDURABILITA() {
+        return DURABILITA;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
+    }
+
+    public void setAperto(boolean aperto) {
+        this.aperto = aperto;
+    }
+
+    public boolean isAperto() {
+        return aperto;
+    }
+    
+    
 }

@@ -10,7 +10,7 @@ import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
-import tipi.Materiale;
+import tipi.TipoPorta;
 import tipi.Porta;
 import tipi.Stanza;
 
@@ -19,10 +19,13 @@ import tipi.Stanza;
  * @author mtubi
  */
 public class ChiavePorta extends Oggetto{
-    private Materiale materiale;
+    private final static boolean PRENDIBILE = true;
+    private final static int DURABILITA = -1;
+    private final TipoPorta materiale;
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.chiavePorta;
 
-    public ChiavePorta(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, Materiale materiale, int usabilita) {
-        super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
+    public ChiavePorta(String nome, Set<String> alias, List<Comando> listaMosse, TipoPorta materiale) {
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.materiale = materiale;
     }
     
@@ -52,6 +55,34 @@ public class ChiavePorta extends Oggetto{
             porta.getStanza().getPortaOvest().setChiusa(false);
         }
     }
+
+    @Override
+    public void descrizioneOggetto() {
+        System.out.print("Rin: ' E' una chiave ");
+        switch (this.materiale) {
+            case oro:
+                System.out.print("d'oro");
+                break;
+            case argento:
+                System.out.print("d'argento");
+                break;
+        }
+
+        System.out.println(", potrebbe servirici per aprire delle porte'");
+    }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static int getDURABILITA() {
+        return DURABILITA;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
+    }
+    
     
     
 }

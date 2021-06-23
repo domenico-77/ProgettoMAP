@@ -16,10 +16,12 @@ import tipi.Stanza;
  * @author mtubi
  */
 public class Cibo extends Oggetto{
+    private final static boolean PRENDIBILE = true;
+    private final static int DURABILITA = 1;
     private int rigenerazione;
-
-    public Cibo(String nome, Set<String> alias, List<Comando> listaMosse, String descrizione, boolean prendibile, int rigenerazione, int usabilita) {
-        super(nome, alias, listaMosse, descrizione, prendibile, usabilita);
+    private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.cibo;
+    public Cibo(String nome, Set<String> alias, List<Comando> listaMosse, int rigenerazione) {
+        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.rigenerazione = rigenerazione;
     }
 
@@ -37,11 +39,33 @@ public class Cibo extends Oggetto{
         if(this.usabilita > 0){
             giocatore.incrementaVita(this.rigenerazione);
             this.usabilita --;
+            if(this.usabilita == 0){
+                System.out.println("Rin: 'L'oggetto "+this.nome+"ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+            }
         }
         else{
             System.out.println("Non puoi usare questo oggetto");
         }
     }
+
+    @Override
+    public void descrizioneOggetto() {
+        System.out.println("Rin: 'E' " + this.nome + "potrebbe servirci per curare le nostre ferite, ha ancora "+this.usabilita+" di utlizzi");
+    }
+
+    public static boolean isPRENDIBILE() {
+        return PRENDIBILE;
+    }
+
+    public static int getDURABILITA() {
+        return DURABILITA;
+    }
+
+    public static TipoOggetto getTIPO_OGGETTO() {
+        return TIPO_OGGETTO;
+    }
+    
+    
     
     
 }
