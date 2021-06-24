@@ -41,21 +41,11 @@ public class Parser {
             if (intAzione > -1) {//Se l'utente non ha scritto un azione l'intero comando non è valido
                 if (paroleComando.size() >= 2) {
                     int intOggetto = Utilita.cercaOggetto(paroleComando.get(1), oggetti);
+                    System.out.println("Oggetto 1" + intOggetto);
                     int intOggettoInv = -1;//Inizializzo una variabile per l'ggetto dell'inventario
                     if (intOggetto == -1) {//Se non è stato trovato l'oggetto nella seconda posizione, provo a cercarlo nella terza posizione e cerco un oggetto dell'inventario nella seconda
-                        if (paroleComando.size() >= 3) {
-                            intOggetto = Utilita.cercaOggetto(paroleComando.get(2), oggetti);
-                            intOggettoInv = Utilita.cercaOggetto(paroleComando.get(1), inventario);
-                            if (intOggettoInv == -1 && intOggetto == -1) {//Se non ho trovato l'oggetto nella terza posizione e non ho trovato un oggetto dell'inventario nella seconda, cerco l'oggetto dell'inventario nella terza
-                                intOggettoInv = Utilita.cercaOggetto(paroleComando.get(2), inventario);
-                            }
-                        }
-
-                    } else {//Se abbiamo trovato un oggetto, provo a vedere se c'è anche un oggetto dell'inventario nella terza
-                        if (paroleComando.size() >= 3) {
-                            intOggettoInv = Utilita.cercaOggetto(paroleComando.get(2), inventario);
-                        }
-                    }
+                        intOggettoInv = Utilita.cercaOggetto(paroleComando.get(1), inventario);
+                    } 
                     if (intAzione > -1 && intOggetto > -1 && intOggettoInv > -1) {
                         comando = (new ParserOutput(azioni.get(intAzione), oggetti.get(intOggetto), inventario.get(intOggettoInv)));
                     } else if (intAzione > -1 && intOggetto > -1 && intOggettoInv == -1) {

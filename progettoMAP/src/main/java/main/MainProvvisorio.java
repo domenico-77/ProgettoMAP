@@ -10,6 +10,7 @@ import com.mycompany.progettomap.parser.Parser;
 import com.mycompany.progettomap.parser.ParserOutput;
 import java.util.Scanner;
 import logicaGioco.DescrizioneGioco;
+import tipi.Comando;
 import tipi.TipoComando;
 import tipi.Utilita;
 
@@ -39,14 +40,21 @@ public class MainProvvisorio {
         System.out.println("* Adventure v. 0.2 - 2020-2021 *");
         System.out.println("================================");
         Scanner scanner = new Scanner(System.in);
+        /*
+        for(Comando c : gioco.getGiocatore().getListaMosse()){
+            
+        }
+*/
+        while(scanner.hasNextLine()){
             String command = scanner.nextLine();
-            ParserOutput p = parser.parse(command, gioco.getComandi(), gioco.getStanzaCorrente().getOggetiStanza(), gioco.getGiocatore().getInventario().getInventario(),gioco.getStanzaCorrente());
-            if (p.getComando() == null) {
-                System.out.println("ciao");
-            } else {
-                gioco.nextMove(p, System.out);
-                System.out.println();
-            }
+            ParserOutput p = parser.parse(command, gioco.getGiocatore().getListaMosse(), gioco.getStanzaCorrente().getOggetiStanza(), gioco.getGiocatore().getInventario().getInventario(), gioco.getStanzaCorrente());
+            
+          
+                if(p != null && p.getOggettoInv() == null){
+                    System.out.println("non riesco a riconoscere l'oggetto");
+                }
+            gioco.nextMove(p, System.out);
+        }
     }
     
      public static void main(String[] args) {

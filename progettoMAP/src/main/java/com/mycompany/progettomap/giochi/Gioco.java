@@ -35,57 +35,57 @@ import tipi.Utilita;
  */
 public class Gioco extends DescrizioneGioco {
     
-    private static final Oggetto candela = new Candela("Candela", Utilita.generaSetAlias("Candelabro", "Cera", "Lume", "Fiaccola", "Torcia"), Utilita.generaListaComandi());
-    private static final Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("Grimaldello", Utilita.generaSetAlias("chiave scrigno"), Utilita.generaListaComandi());
-    private static final Oggetto chiavePortaDorata = new ChiavePorta("chiave", Utilita.generaSetAlias(), Utilita.generaListaComandi(), TipoPorta.oro);
-    private static final Oggetto chiavePortaArgentata = new ChiavePorta("chiave", Utilita.generaSetAlias(), Utilita.generaListaComandi(), TipoPorta.argento);
-    private static final Oggetto cibo = new Cibo("Pane", Utilita.generaSetAlias("Panino", "Cibo"), Utilita.generaListaComandi(), 30);
-    private static final Oggetto oggettoContenitore = new OggettoContenitore("Scrigno", Utilita.generaSetAlias("Armadio", "Mobile"), Utilita.generaListaComandi(), Utilita.creaListaOggetti());
+    private static final Oggetto candela = new Candela("candela", Utilita.generaSetAlias("candelabro", "cera", "lume", "fiaccola", "torcia", "candela"), Utilita.generaListaComandi());
+    private static final Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("grimaldello", Utilita.generaSetAlias("chiave scrigno"), Utilita.generaListaComandi());
+    private static final Oggetto chiavePortaDorata = new ChiavePorta("chiave d'oro", Utilita.generaSetAlias("chiave", "chiave oro"), Utilita.generaListaComandi(), TipoPorta.oro);
+    private static final Oggetto chiavePortaArgentata = new ChiavePorta("chiave argento", Utilita.generaSetAlias("chiave", "chiave argento"), Utilita.generaListaComandi(), TipoPorta.argento);
+    private static final Oggetto cibo = new Cibo("Pane", Utilita.generaSetAlias("panino", "cibo", "pane"), Utilita.generaListaComandi(), 30);
+    private static final Oggetto oggettoContenitore = new OggettoContenitore("scrigno", Utilita.generaSetAlias("contenitore", "scrigno", "baule"), Utilita.generaListaComandi(), Utilita.creaListaOggetti());
     private static final Oggetto oggettoMaligno = new OggettoMaligno("veleno", Utilita.generaSetAlias(), Utilita.generaListaComandi(), 30);
 
     @Override
     public void inizializza() {
 
         //comandi
-        Comando nord = new Comando("nord", TipoComando.nord, Utilita.generaSetAlias("n", "su", "sopra", "sù"));
+        Comando nord = new Comando("nord", TipoComando.nord, Utilita.generaSetAlias("n", "su", "sopra", "sù","nord"));
 
         //aggiungere comando alla lista di comandi di descrizioneGioco?
-        Comando sud = new Comando("sud", TipoComando.sud, Utilita.generaSetAlias("s", "giu", "sotto", "giù"));
+        Comando sud = new Comando("sud", TipoComando.sud, Utilita.generaSetAlias("s", "giu", "sotto", "giù", "sud"));
 
-        Comando est = new Comando("est", TipoComando.est, Utilita.generaSetAlias("e", "destrra"));
+        Comando est = new Comando("est", TipoComando.est, Utilita.generaSetAlias("e", "destrra", "est"));
 
-        Comando ovest = new Comando("ovest", TipoComando.ovest, Utilita.generaSetAlias("o", "sinistra"));
+        Comando ovest = new Comando("ovest", TipoComando.ovest, Utilita.generaSetAlias("o", "sinistra", "ovest"));
 
-        Comando fine = new Comando("fine", TipoComando.fine, Utilita.generaSetAlias("end", "termina", "esci", "exit", "chiudi", "muori", "abbandona"));
+        Comando fine = new Comando("fine", TipoComando.fine, Utilita.generaSetAlias("end", "termina", "esci", "exit", "chiudi", "muori", "abbandona","fine"));
 
-        Comando inventario = new Comando("inventario", TipoComando.inventario, Utilita.generaSetAlias("zaino", "borsa", "i", "inv", "oggetti"));
+        Comando inventario = new Comando("inventario", TipoComando.inventario, Utilita.generaSetAlias("zaino", "borsa", "i", "inv", "oggetti","inventario"));
 
-        Comando aprire = new Comando("aprire", TipoComando.aprire, Utilita.generaSetAlias("apri", "open"));
+        Comando aprire = new Comando("aprire", TipoComando.aprire, Utilita.generaSetAlias("apri", "open","aprire"));
 
-        Comando chiudere = new Comando("chiudere", TipoComando.chiudere, Utilita.generaSetAlias("chiudi", "close"));
+        Comando chiudere = new Comando("chiudere", TipoComando.chiudere, Utilita.generaSetAlias("chiudi", "close","chiudere"));
 
-        Comando spingere = new Comando("spingere", TipoComando.spingere, Utilita.generaSetAlias("spingi", "premi", "push", "attiva"));
+        Comando spingere = new Comando("spingere", TipoComando.spingere, Utilita.generaSetAlias("spingi", "premi", "push", "attiva","spingere"));
 
-        Comando tirare = new Comando("tirare", TipoComando.tirare, Utilita.generaSetAlias("tirare", "pull"));
+        Comando tirare = new Comando("tirare", TipoComando.tirare, Utilita.generaSetAlias("tirare", "pull","tirare"));
 
-        Comando camminare_verso = new Comando("camminare_verso", TipoComando.camminare_verso, Utilita.generaSetAlias("vai a", "vai verso", "avvicinatia", "vai"));
+        Comando camminare_verso = new Comando("camminare_verso", TipoComando.camminare_verso, Utilita.generaSetAlias("vai a", "vai verso", "avvicinatia", "vai","camminare_verso"));
 
-        Comando raccogliere = new Comando("raccogliere", TipoComando.raccogliere, Utilita.generaSetAlias("raccogli", "afferra", "prendi", "afferrare", "prendere"));
+        Comando raccogliere = new Comando("raccogliere", TipoComando.raccogliere, Utilita.generaSetAlias("raccogli", "afferra", "prendi", "afferrare", "prendere","raccogliere"));
 
-        Comando parlare_a = new Comando("parlare_a", TipoComando.parlare_a, Utilita.generaSetAlias("parla", "parlagli", "parlale", "chiedi", "domanda", "interagisci"));
+        Comando parlare_a = new Comando("parlare_a", TipoComando.parlare_a, Utilita.generaSetAlias("parla", "parlagli", "parlale", "chiedi", "domanda", "interagisci","parlare_a"));
 
-        Comando dare = new Comando("dare", TipoComando.dare, Utilita.generaSetAlias("dai", "dagli", "dalle", "dona"));
+        Comando dare = new Comando("dare", TipoComando.dare, Utilita.generaSetAlias("dai", "dagli", "dalle", "dona","dare"));
 
-        Comando usare = new Comando("usare", TipoComando.usare, Utilita.generaSetAlias("usa", "utilizza", "utilizzare"));
+        Comando usare = new Comando("usare", TipoComando.usare, Utilita.generaSetAlias("usa", "utilizza", "utilizzare","usare"));
 
-        Comando osservare = new Comando("osservare", TipoComando.osservare, Utilita.generaSetAlias("osserva", "guarda", "guardare"));
+        Comando osservare = new Comando("osservare", TipoComando.osservare, Utilita.generaSetAlias("osserva", "guarda", "guardare", "Osservare","osservare"));
 
-        Comando accendere = new Comando("accendere", TipoComando.accendere, Utilita.generaSetAlias("accendi"));
+        Comando accendere = new Comando("accendere", TipoComando.accendere, Utilita.generaSetAlias("accendi","accendere"));
 
-        Comando spegnere = new Comando("spegnere", TipoComando.spegnere, Utilita.generaSetAlias("spegni"));
+        Comando spegnere = new Comando("spegnere", TipoComando.spegnere, Utilita.generaSetAlias("spegni","spegnere"));
 
-        Comando torna_indietro = new Comando("raccogliere", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna"));
-        torna_indietro.setAlias(new String[]{"indietreggia", "torna"});
+        Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna","tirna_indietro"));
+        
 
         //stanze
         Stanza st1, st2, st3;
@@ -94,7 +94,7 @@ public class Gioco extends DescrizioneGioco {
         Oggetto oggettoContenitore;
         Oggetto oggettoMaligno = new OggettoMaligno("del veleno", Utilita.generaSetAlias("veleno"), Utilita.generaListaComandi(), 30);
         //stanza 1
-        st1 = new Stanza("cella di Madji", true, null, null, null, null, new ArrayList<>());
+        st1 = new Stanza("cella di Manji", true, null, null, null, null, new ArrayList<>());
         //stanza 2
         st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(this.candela));
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false, false));
@@ -120,12 +120,12 @@ public class Gioco extends DescrizioneGioco {
         st1 = new Stanza("tesoreria", true, null, null, null, null, Utilita.creaListaOggetti(this.chiavePortaArgentata));
         st2.setPortaEst(new Porta(TipoPorta.normale, st1, false, false));
         st1.setPortaOvest(new Porta(TipoPorta.normale, st2, false, false));
-        this.stanze.add(st1);
         //stanza 7
         st3 = new Stanza("armeria", true, null, null, null, null, Utilita.creaListaOggetti(spada));
         st2.setPortaNord(new Porta(TipoPorta.argento, st3, true, false));
         st3.setPortaSud(new Porta(TipoPorta.argento, st2, true, false));
         this.stanze.add(st2);
+        this.stanze.add(st1);
         //stanza 8
         st1 = new Stanza("stanza sicurezza", true, null, null, null, null, Utilita.creaListaOggetti());
         st3.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
@@ -197,6 +197,9 @@ public class Gioco extends DescrizioneGioco {
         this.stanze.add(st1);
         
         this.stanzaCorrente = this.stanze.get(0);
+        
+        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere));
+        
     }
 
     @Override
@@ -204,7 +207,7 @@ public class Gioco extends DescrizioneGioco {
         boolean x;
         String s = "";
         
-        if (p.getComando() == null) {
+        if (p == null) {
             out.println("Rin : Non ho capito cosa devo fare! Prova a esprimerti meglio.");
 
         } else {
@@ -408,13 +411,11 @@ public class Gioco extends DescrizioneGioco {
                 }
 
             } else if (p.getComando().getTipo() == TipoComando.usare) {
-                if (p.getOggetto() != null && p.getOggetto().getUsabilita() > 0) {
+                if (p.getOggetto() != null) {
                     p.getOggetto().usa(this.getGiocatore(), this.getStanzaCorrente());
-                } else if (p.getOggetto().getUsabilita() <= 0) {
-                    System.out.println("Non puoi usare questo oggetto");
-                } else if (p.getOggetto() == null) {
+                }  else if (p.getOggetto() == null) {
                     if((p.getOggettoInv() != null)&&(this.giocatore.getInventario().contieneOggetto(p.getOggettoInv()))){
-                    p.getOggettoInv().usa(giocatore, stanzaCorrente);
+                    this.giocatore.getInventario().usaOggetto(p.getOggettoInv(), this.giocatore, this.stanzaCorrente);
                 }
                 } else if((p.getOggetto() == null) && (p.getOggettoInv() == null)){
                     

@@ -28,8 +28,7 @@ import tipi.Giocatore;
 public abstract class DescrizioneGioco {
 
     protected final List<Stanza> stanze = new ArrayList<>();
-    protected final  List<Comando> comandi = new ArrayList<>();
-    protected Giocatore giocatore;
+    protected Giocatore giocatore = new Giocatore(new ArrayList());
     protected Stanza stanzaCorrente;
     protected Stack<Stanza> PercorsoStanze = new Stack<>();
 
@@ -46,9 +45,6 @@ public abstract class DescrizioneGioco {
         return stanze;
     }
 
-    public List<Comando> getComandi() {
-        return comandi;
-    }
 
     public abstract void inizializza();
 

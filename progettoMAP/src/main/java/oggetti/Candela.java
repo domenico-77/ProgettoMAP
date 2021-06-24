@@ -29,6 +29,7 @@ public class Candela extends Oggetto {
         if(!stanza.isIlluminata()){
             stanza.setIlluminata(true);
             this.usabilita--;
+            System.out.println("Rin: 'Hai illuminato la stanza'");
             if(this.usabilita == 0){
                 System.out.println("Rin: 'L'oggetto "+this.nome+"ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
             }
