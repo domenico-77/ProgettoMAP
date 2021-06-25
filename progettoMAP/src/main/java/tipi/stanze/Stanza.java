@@ -145,7 +145,7 @@ public class Stanza {
             System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa'");
 
         } else {
-            System.out.print("Rin:' Sei entrato nella " + this.nomeStanza+" ");
+            System.out.print("Rin:' Sei entrato nella stanza : " + this.nomeStanza+", ");
             if (this.portaNord != null) {
                 System.out.print("a nord " + this.portaNord.descriviPorta() + ",  ");
                 System.out.println("");

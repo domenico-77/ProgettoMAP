@@ -84,7 +84,7 @@ public class Gioco extends DescrizioneGioco {
 
         Comando spegnere = new Comando("spegnere", TipoComando.spegnere, Utilita.generaSetAlias("spegni","spegnere"));
 
-        Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna","torna indietro"));
+        Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna","indietro"));
         
 
         //stanze
@@ -465,9 +465,12 @@ public class Gioco extends DescrizioneGioco {
                 System.out.println("Complimenti");
                 System.exit(0);*/
 
-            } else if (p.getComando().getTipo() == TipoComando.torna_indietro) {
+            } else if (p.getComando().getTipo() == TipoComando.torna_indietro && p.getOggettoInv() == null && p.getOggetto() == null && p.getPorta() == null) {
                 this.setStanzaCorrente(this.getPercorsoStanze().pop());
 
+            }
+            else {
+                System.out.println("Rin : Non ho capito cosa devo fare! Prova a esprimerti meglio.'");
             }
 
         }

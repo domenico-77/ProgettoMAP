@@ -79,7 +79,7 @@ public class Porta {
                 }
             }
             else{
-                descrizione = (" c'è uns porta già aperta");
+                descrizione = (" c'è una porta già aperta");
             }
         }
         return descrizione;

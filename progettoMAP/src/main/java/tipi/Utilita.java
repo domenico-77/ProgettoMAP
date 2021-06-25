@@ -118,13 +118,9 @@ public class Utilita {
     
     public static boolean cercaParola(String nome, String...alias){
         boolean contiene = false;
-        for (int i = 0; i<alias.length; i++){
-            if(alias.equals(nome)){
+        for (String a : alias){
+            if(nome.equals(a)){
                 contiene = true;
-                i=alias.length;
-            }
-            else{
-                i++;
             }
         }
         return contiene;
