@@ -68,7 +68,7 @@ public class Gioco extends DescrizioneGioco {
 
         Comando tirare = new Comando("tirare", TipoComando.tirare, Utilita.generaSetAlias("tirare", "pull","tirare"));
 
-        Comando camminare_verso = new Comando("camminare_verso", TipoComando.camminare_verso, Utilita.generaSetAlias("vai a", "vai verso", "avvicinatia", "vai","camminare_verso"));
+        Comando camminare_verso = new Comando("camminare_verso", TipoComando.camminare_verso, Utilita.generaSetAlias("vai","andare","andiamo","vado"));
 
         Comando raccogliere = new Comando("raccogliere", TipoComando.raccogliere, Utilita.generaSetAlias("raccogli", "afferra", "prendi", "afferrare", "prendere","raccogliere"));
 
@@ -78,13 +78,13 @@ public class Gioco extends DescrizioneGioco {
 
         Comando usare = new Comando("usare", TipoComando.usare, Utilita.generaSetAlias("usa", "utilizza", "utilizzare","usare"));
 
-        Comando osservare = new Comando("osservare", TipoComando.osservare, Utilita.generaSetAlias("osserva", "guarda", "guardare", "Osservare","osservare"));
+        Comando osservare = new Comando("osservare", TipoComando.osservare, Utilita.generaSetAlias("osserva", "guarda", "guardare","osservare"));
 
         Comando accendere = new Comando("accendere", TipoComando.accendere, Utilita.generaSetAlias("accendi","accendere"));
 
         Comando spegnere = new Comando("spegnere", TipoComando.spegnere, Utilita.generaSetAlias("spegni","spegnere"));
 
-        Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna","tirna_indietro"));
+        Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna","torna indietro"));
         
 
         //stanze
