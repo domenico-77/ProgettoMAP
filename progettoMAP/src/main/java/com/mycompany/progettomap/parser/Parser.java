@@ -41,7 +41,6 @@ public class Parser {
             if (intAzione > -1) {//Se l'utente non ha scritto un azione l'intero comando non è valido
                 if (paroleComando.size() >= 2) {
                     int intOggetto = Utilita.cercaOggetto(paroleComando.get(1), oggetti);
-                    System.out.println("Oggetto 1" + intOggetto);
                     int intOggettoInv = -1;//Inizializzo una variabile per l'ggetto dell'inventario
                     if (intOggetto == -1) {//Se non è stato trovato l'oggetto nella seconda posizione, provo a cercarlo nella terza posizione e cerco un oggetto dell'inventario nella seconda
                         intOggettoInv = Utilita.cercaOggetto(paroleComando.get(1), inventario);

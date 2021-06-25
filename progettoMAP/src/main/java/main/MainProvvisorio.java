@@ -50,9 +50,7 @@ public class MainProvvisorio {
             ParserOutput p = parser.parse(command, gioco.getGiocatore().getListaMosse(), gioco.getStanzaCorrente().getOggetiStanza(), gioco.getGiocatore().getInventario().getInventario(), gioco.getStanzaCorrente());
             
           
-                if(p != null && p.getOggettoInv() == null){
-                    System.out.println("non riesco a riconoscere l'oggetto");
-                }
+                
             gioco.nextMove(p, System.out);
         }
     }

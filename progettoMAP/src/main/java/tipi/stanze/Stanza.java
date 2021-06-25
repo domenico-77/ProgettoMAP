@@ -85,7 +85,7 @@ public class Stanza {
         this.portaEst = portaEst;
     }
 
-    public void setPortaOvest(Porta portsaOvest) {
+    public void setPortaOvest(Porta portaOvest) {
         this.portaOvest = portaOvest;
     }
 
@@ -159,7 +159,7 @@ public class Stanza {
                 System.out.println("");
             } 
             if (this.portaOvest != null) {
-                System.out.println("a ovest " + this.portaEst.descriviPorta() + ".");
+                System.out.println("a ovest " + this.portaOvest.descriviPorta() + ".");
                 System.out.println("");
 
             } 

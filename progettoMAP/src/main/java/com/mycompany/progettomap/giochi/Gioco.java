@@ -344,11 +344,11 @@ public class Gioco extends DescrizioneGioco {
                 }
             } //OVEST
             else if (p.getComando().getTipo() == TipoComando.ovest) {
-                if (this.getStanzaCorrente().getPortaEst() != null) {
-                    if ((this.getStanzaCorrente().getPortaEst().getTipo() == TipoPorta.normale) || (!this.getStanzaCorrente().getPortaEst().isChiusa())) {
+                if (this.getStanzaCorrente().getPortaOvest() != null) {
+                    if ((this.getStanzaCorrente().getPortaOvest().getTipo() == TipoPorta.normale) || (!this.getStanzaCorrente().getPortaOvest().isChiusa())) {
                         this.getPercorsoStanze().push(this.getStanzaCorrente());
-                        this.getStanzaCorrente().getPortaEst().setChiusa(false);
-                        this.setStanzaCorrente(this.getStanzaCorrente().getPortaEst().getStanza());
+                        this.getStanzaCorrente().getPortaOvest().setChiusa(false);
+                        this.setStanzaCorrente(this.getStanzaCorrente().getPortaOvest().getStanza());
 
                     } // controllo chiave argento 
                     else if ((this.getStanzaCorrente().getPortaOvest().getTipo() == TipoPorta.argento) && this.getStanzaCorrente().getPortaOvest().isChiusa()) {
@@ -403,11 +403,13 @@ public class Gioco extends DescrizioneGioco {
                     out.println("Non c'è niente da raccogliere qui.");
                 }
             } else if (p.getComando().getTipo() == TipoComando.osservare) {
-                if (p.getOggetto() == null) {
+                if (p.getOggetto() == null && p.getOggettoInv() == null) {
                     this.getStanzaCorrente().DescriviStanza();
 
-                } else if (p.getOggetto() != null) {
+                } else if (p.getOggetto() != null && p.getOggettoInv() == null) {
                     p.getOggetto().descrizioneOggetto();
+                } else if(p.getOggetto() == null && p.getOggettoInv() != null){
+                    p.getOggettoInv().descrizioneOggetto();
                 }
 
             } else if (p.getComando().getTipo() == TipoComando.usare) {
