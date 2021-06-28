@@ -32,6 +32,7 @@ public class OggettoMaligno extends Oggetto{
     public void usa(Giocatore giocatore, Stanza stanza) {
         if(this.usabilita > 0){
             giocatore.decrementaVita(this.danno);
+            System.out.println("Rin: 'Oh no un veleno ti ha inferto dei danni'");
         }
         else{
             System.out.println("Non puoi usare questo oggetto");

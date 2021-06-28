@@ -53,7 +53,7 @@ public class Parser {
                                 if (stanza.getPortaNord() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaNord());
                                 }
-                            } else if (Utilita.cercaParola(paroleComando.get(2), "sud", "s", "giu", "sotto", "giù")) {
+                            } else if (Utilita.cercaParola(paroleComando.get(2),"sud", "s", "giu", "sotto", "giù")) {
                                 if (stanza.getPortaSud() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaSud());
                                 }
@@ -61,7 +61,7 @@ public class Parser {
                                 if (stanza.getPortaEst() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaEst());
                                 }
-                            } else if (Utilita.cercaParola(paroleComando.get(1), "o", "sinistra", "ovest")) {
+                            } else if (Utilita.cercaParola(paroleComando.get(2), "o", "sinistra", "ovest")) {
                                 if (stanza.getPortaOvest() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaOvest());
                                 }
@@ -86,7 +86,7 @@ public class Parser {
                                 }
                             } else {
 
-                            comando = (new ParserOutput(azioni.get(intAzione)));
+                                comando = (new ParserOutput(azioni.get(intAzione)));
                             }
                         }
                     }
