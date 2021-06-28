@@ -27,6 +27,7 @@ public class Candela extends Oggetto {
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
         if(!stanza.isIlluminata()){
+            //fare il controllo se la candela è nell inventario
             stanza.setIlluminata(true);
             this.usabilita--;
             System.out.println("Rin: 'Hai illuminato la stanza'");

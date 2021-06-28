@@ -77,6 +77,8 @@ public class Gioco extends DescrizioneGioco {
         Comando dare = new Comando("dare", TipoComando.dare, Utilita.generaSetAlias("dai", "dagli", "dalle", "dona","dare"));
 
         Comando usare = new Comando("usare", TipoComando.usare, Utilita.generaSetAlias("usa", "utilizza", "utilizzare","usare"));
+        
+        Comando mangiare = new Comando ("mangiare", TipoComando.mangiare,Utilita.generaSetAlias("mangiare","mangia","mordi","assaggia","consuma"));
 
         Comando osservare = new Comando("osservare", TipoComando.osservare, Utilita.generaSetAlias("osserva", "guarda", "guardare","osservare"));
 
@@ -198,7 +200,7 @@ public class Gioco extends DescrizioneGioco {
         
         this.stanzaCorrente = this.stanze.get(0);
         
-        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere));
+        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare));
         
     }
 
@@ -221,12 +223,12 @@ public class Gioco extends DescrizioneGioco {
 
                     } // controllo chiave argento 
                     else if ((this.getStanzaCorrente().getPortaNord().getTipo() == TipoPorta.argento) && this.getStanzaCorrente().getPortaNord().isChiusa()) {
-                        out.print(" Rin : ");
+                        out.print(" Rin : '");
                         s = this.getStanzaCorrente().getPortaNord().descriviPorta();
-                        out.println(s);
+                        out.println(s+ ".");
 
                         if (this.getGiocatore().getInventario().contieneOggetto(this.chiavePortaArgentata)) {
-                            x = Utilita.chiediConferma("Fortunatamente ne abbiamo una, vuoi usarla ?", "Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta.", "Va bene vorrà dire che torneremo indietro");
+                            x = Utilita.chiediConferma("Fortunatamente ne abbiamo una, vuoi usarla ?'", "Rin : 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin : 'Va bene vorrà dire che l' apriremo in un altro momento'");
                             if (x) {
                                 this.getPercorsoStanze().push(this.getStanzaCorrente());
                                 this.getStanzaCorrente().getPortaNord().setChiusa(false);
@@ -252,7 +254,7 @@ public class Gioco extends DescrizioneGioco {
                         }
                     } //controllo tunnel
                 } else {
-                    out.println("Non possiamo andare verso nord poichè non c'è alcuna porta e non sappiamo oltrepassare i muri");
+                    out.println("Rin : 'Non possiamo andare verso nord poichè non c'è alcuna porta e non sappiamo oltrepassare i muri'");
                 }
                 //SUD
             } else if (p.getComando().getTipo() == TipoComando.sud) {
@@ -296,7 +298,7 @@ public class Gioco extends DescrizioneGioco {
                         }
                     } //controllo tunnel
                 } else {
-                    out.println("Non possiamo andare verso sud poichè non c'è alcuna porta e non sappiamo oltrepassare i muri");
+                    out.println("Rin : 'Non possiamo andare verso sud poichè non c'è alcuna porta e non sappiamo oltrepassare i muri'");
                 }
             } //EST
             else if (p.getComando().getTipo() == TipoComando.est) {
@@ -340,7 +342,7 @@ public class Gioco extends DescrizioneGioco {
                         }
                     } //controllo tunnel
                 } else {
-                    out.println("Non possiamo andare verso est poichè non c'è alcuna porta e non sappiamo oltrepassare i muri");
+                    out.println("Rin : 'Non possiamo andare verso est poichè non c'è alcuna porta e non sappiamo oltrepassare i muri'");
                 }
             } //OVEST
             else if (p.getComando().getTipo() == TipoComando.ovest) {
@@ -384,7 +386,7 @@ public class Gioco extends DescrizioneGioco {
                         }
                     } //controllo tunnel
                 } else {
-                    out.println("Non possiamo andare verso ovest poichè non c'è alcuna porta e non sappiamo oltrepassare i muri");
+                    out.println("Rin : 'Non possiamo andare verso ovest poichè non c'è alcuna porta e non sappiamo oltrepassare i muri'");
                 }
 
             } else if (p.getComando().getTipo() == TipoComando.inventario) {
@@ -424,16 +426,15 @@ public class Gioco extends DescrizioneGioco {
                     System.out.println("Non ho capito quale oggetto vuoi usare");
                 }
 
-            } else if (p.getComando().getTipo() == TipoComando.accendere) {
-                if (p.getOggetto() == candela) {
+            } else if (p.getComando().getTipo() == TipoComando.accendere ) {
+                if (p.getOggettoInv()== candela && p.getOggetto() == null) {
                     if (this.getGiocatore().getInventario().contieneOggetto(candela)) {
                         candela.usa(this.getGiocatore(), this.getStanzaCorrente());
                     }
 
-                } else if (p.getOggetto() != candela) {
+                } else {
                     System.out.println("Non posso usare quest'oggetto per illuminare la stanza");
-                } else if (p.getOggetto() == null) {
-                    System.out.println("Non ho capito cosa accendere");
+               
                 }
 
             } else if (p.getComando().getTipo() == TipoComando.aprire) {
@@ -468,6 +469,10 @@ public class Gioco extends DescrizioneGioco {
             } else if (p.getComando().getTipo() == TipoComando.torna_indietro && p.getOggettoInv() == null && p.getOggetto() == null && p.getPorta() == null) {
                 this.setStanzaCorrente(this.getPercorsoStanze().pop());
 
+            } else if(p.getComando().getTipo() == TipoComando.mangiare){
+                if(p.getOggettoInv() == cibo){
+                    cibo.usa(this.giocatore, this.stanzaCorrente);
+                }
             }
             else {
                 System.out.println("Rin : Non ho capito cosa devo fare! Prova a esprimerti meglio.'");

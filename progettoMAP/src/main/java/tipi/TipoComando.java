@@ -29,5 +29,6 @@ public enum TipoComando {
     guarda_a,
     accendere,
     spegnere,
-    torna_indietro
+    torna_indietro,
+    mangiare
 }
