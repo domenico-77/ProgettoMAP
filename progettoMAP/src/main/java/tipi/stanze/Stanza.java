@@ -147,15 +147,15 @@ public class Stanza {
         } else {
             System.out.println("Rin:' Sei entrato nella stanza : " + this.nomeStanza + " . ");
             if (this.portaNord != null) {
-                System.out.print("a nord " + this.portaNord.descriviPorta() + ",  ");
+                System.out.print("a nord " + this.portaNord.descriviPorta() + ";  ");
                 System.out.println("");
             }
             if (this.portaSud != null) {
-                System.out.print("a sud " + this.portaSud.descriviPorta() + ", ");
+                System.out.print("a sud " + this.portaSud.descriviPorta() + "; ");
                 System.out.println("");
             }
             if (this.portaEst != null) {
-                System.out.print("a est " + this.portaEst.descriviPorta() + "e ");
+                System.out.print("a est " + this.portaEst.descriviPorta() + "; ");
                 System.out.println("");
             }
             if (this.portaOvest != null) {
