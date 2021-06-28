@@ -45,6 +45,9 @@ public class ChiaveOggettoContenitore extends Oggetto {
                     System.out.println("Rin: 'E' già aperto'");
                 }
             }
+            else{
+                System.out.println("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire");
+            }
         }
         else{
             System.out.println("Non puoi usare questo oggetto");

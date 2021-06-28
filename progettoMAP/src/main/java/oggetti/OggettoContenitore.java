@@ -12,6 +12,7 @@ import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
+import tipi.Utilita;
 import tipi.stanze.TipoPorta;
 import tipi.stanze.Stanza;
 
@@ -20,19 +21,18 @@ import tipi.stanze.Stanza;
  * @author mtubi
  */
 public class OggettoContenitore extends Oggetto {
+
     private final static boolean PRENDIBILE = false;
     private final static int DURABILITA = -1;
     private boolean aperto = false;
-    private List<Oggetto> listaOggetti=new ArrayList();
+    private List<Oggetto> listaOggetti = new ArrayList();
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.oggettoContenitore;
-    
-    
+
     public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, List<Oggetto> listaOggetti) {
         super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.listaOggetti = listaOggetti;
     }
-    
-    
+
     public List<Oggetto> getListaOggetti() {
         return listaOggetti;
     }
@@ -40,64 +40,71 @@ public class OggettoContenitore extends Oggetto {
     public void setListaOggetti(List<Oggetto> listaOggetti) {
         this.listaOggetti = listaOggetti;
     }
-    
-    public void aggiungiOggetto(Oggetto o){
+
+    public void aggiungiOggetto(Oggetto o) {
         this.listaOggetti.add(o);
     }
-    
-    public void rimuoviOggetto(Oggetto o){
-        if(contieneOggetto(o)){
-        this.listaOggetti.remove(o);
+
+    public void rimuoviOggetto(Oggetto o) {
+        if (contieneOggetto(o)) {
+            this.listaOggetti.remove(o);
         }
     }
-    
-    public boolean contenitoreVuoto(){
-        boolean vuoto=false;
-        if(this.aperto){
-            vuoto=this.listaOggetti.isEmpty();
+
+    public boolean contenitoreVuoto() {
+        boolean vuoto = false;
+        if (this.aperto) {
+            vuoto = this.listaOggetti.isEmpty();
         }
         return vuoto;
     }
-    
-    public boolean contieneOggetto(Oggetto o){
+
+    public boolean contieneOggetto(Oggetto o) {
         return this.listaOggetti.contains(o);
     }
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
         Inventario inventario = giocatore.getInventario();
+        for(Oggetto o : this.listaOggetti){
+            System.out.println(o.nome);
+        }
         if (this.aperto) {
             if (!this.contenitoreVuoto()) {
-                for (int i =0; i < this.listaOggetti.size(); i++) {
-                    Oggetto o = this.listaOggetti.get(i);
-                    if(o instanceof OggettoMaligno){
+                for (Oggetto o : this.listaOggetti) {
+                    System.out.println(o.nome);
+                    if (o.nome.equals(new OggettoMaligno("veleno", Utilita.generaSetAlias(), Utilita.generaListaComandi(), 30))) {
+                        System.out.println("funziono");
                         o.usa(giocatore, stanza);
                         this.listaOggetti.remove(o);
-                    }
-                    else{
+                    } else {
                         inventario.aggiungiOggetto(o);
                         this.listaOggetti.remove(o);
+                        System.out.println("Rin: 'Hai raccolto " + o.getNome() + "'");
                     }
+                    System.out.println("ciao");
                 }
                 giocatore.setInventario(inventario);
-            }
-            else{
+            } else {
                 System.out.println("Rin: 'Non c'è nessun oggetto all'interno'");
             }
-        }
-        else{
+        } else {
             System.out.println("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");
         }
     }
 
     @Override
     public void descrizioneOggetto() {
-        if(this.listaOggetti.isEmpty()){
-        System.out.println("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
-        }
-        else{
-            System.out.println("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
-        }
+            if (this.aperto) {
+                if(this.listaOggetti.isEmpty()){
+                    System.out.println("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
+                }
+                else{
+                System.out.println("Rin: 'Lo scrigno è aperto, prendiamo quello che c'è dentro'");
+                }
+            } else {
+                System.out.println("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
+            }
     }
 
     public static boolean isPRENDIBILE() {
@@ -119,6 +126,5 @@ public class OggettoContenitore extends Oggetto {
     public boolean isAperto() {
         return aperto;
     }
-    
-    
+
 }

@@ -15,11 +15,13 @@ import tipi.stanze.Stanza;
  *
  * @author mtubi
  */
-public class Cibo extends Oggetto{
+public class Cibo extends Oggetto {
+
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = 1;
     private int rigenerazione;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.cibo;
+
     public Cibo(String nome, Set<String> alias, List<Comando> listaMosse, int rigenerazione) {
         super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.rigenerazione = rigenerazione;
@@ -33,24 +35,27 @@ public class Cibo extends Oggetto{
         this.rigenerazione = rigenerazione;
     }
 
-    
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
-        if(this.usabilita > 0){
-            giocatore.incrementaVita(this.rigenerazione);
-            this.usabilita --;
-            if(this.usabilita == 0){
-                System.out.println("Rin: 'L'oggetto "+this.nome+" ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+        if (this.usabilita > 0) {
+            if (giocatore.getVitaCorrente() != giocatore.getVitaMax()) {
+                giocatore.incrementaVita(this.rigenerazione);
+                this.usabilita--;
+                if (this.usabilita == 0) {
+                    System.out.println("Rin: 'L'oggetto " + this.nome + " ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+                }
             }
-        }
-        else{
+            else{
+                System.out.println("Rin: 'Sei al pieno delle tue forze, risparmia"+this.nome+"per comabattimenti futuri");
+            }
+        } else {
             System.out.println("Non puoi usare questo oggetto");
         }
     }
 
     @Override
     public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' " + this.nome + " potrebbe servirci per curare le nostre ferite, hai ancora "+this.usabilita+" utlizzi");
+        System.out.println("Rin: 'E' " + this.nome + " potrebbe servirci per curare le nostre ferite, hai ancora " + this.usabilita + " utlizzi");
     }
 
     public static boolean isPRENDIBILE() {
@@ -64,8 +69,5 @@ public class Cibo extends Oggetto{
     public static TipoOggetto getTIPO_OGGETTO() {
         return TIPO_OGGETTO;
     }
-    
-    
-    
-    
+
 }
