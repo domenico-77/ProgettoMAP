@@ -20,8 +20,8 @@ public class Candela extends Oggetto {
     private final static int DURABILITA = 3;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.candela;
 
-    public Candela(String nome, Set<String> alias, List<Comando> listaMosse) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
+    public Candela(String nome, Set<String> alias) {
+        super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
     }
 
     @Override

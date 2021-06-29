@@ -24,7 +24,7 @@ public abstract class Oggetto {
     protected int usabilita;
     protected TipoOggetto tipo;
 
-    public Oggetto(String nome, Set<String> alias, List<Comando> listaMosse, boolean prendibile, int usabilita, TipoOggetto tipo) {
+    public Oggetto(String nome, Set<String> alias, boolean prendibile, int usabilita, TipoOggetto tipo) {
         this.nome = nome;
         this.alias = alias;
         this.listaMosse = listaMosse;

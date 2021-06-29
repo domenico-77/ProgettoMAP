@@ -22,8 +22,8 @@ public class Cibo extends Oggetto {
     private int rigenerazione;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.cibo;
 
-    public Cibo(String nome, Set<String> alias, List<Comando> listaMosse, int rigenerazione) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
+    public Cibo(String nome, Set<String> alias, int rigenerazione) {
+        super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.rigenerazione = rigenerazione;
     }
 

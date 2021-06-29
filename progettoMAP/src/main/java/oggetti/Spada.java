@@ -21,8 +21,8 @@ public class Spada extends Oggetto {
     private final static boolean PRENDIBILE = true;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.spada;
     
-    public Spada(String nome, Set<String> alias, List<Comando> listaMosse) {
-        super(nome, alias, listaMosse, PRENDIBILE, USABILITA,TIPO_OGGETTO);
+    public Spada(String nome, Set<String> alias) {
+        super(nome, alias, PRENDIBILE, USABILITA,TIPO_OGGETTO);
     }
 
     

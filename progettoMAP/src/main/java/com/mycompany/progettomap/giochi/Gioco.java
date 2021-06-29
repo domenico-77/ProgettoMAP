@@ -35,13 +35,13 @@ import tipi.Utilita;
  */
 public class Gioco extends DescrizioneGioco {
 
-    private static final Oggetto candela = new Candela("candela", Utilita.generaSetAlias("candelabro", "cera", "lume", "fiaccola", "torcia", "candela"), Utilita.generaListaComandi());
-    private static final Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("grimaldello", Utilita.generaSetAlias("grimaldello"), Utilita.generaListaComandi());
-    private static final Oggetto chiavePortaDorata = new ChiavePorta("chiave d'oro", Utilita.generaSetAlias("chiave", "chiave oro"), Utilita.generaListaComandi(), TipoPorta.oro);
-    private static final Oggetto chiavePortaArgentata = new ChiavePorta("chiave argento", Utilita.generaSetAlias("chiave", "chiave argento"), Utilita.generaListaComandi(), TipoPorta.argento);
-    private static final Oggetto cibo = new Cibo("pane", Utilita.generaSetAlias("panino", "cibo", "pane"), Utilita.generaListaComandi(), 30);
-    private static final Oggetto oggettoContenitore = new OggettoContenitore("scrigno", Utilita.generaSetAlias("contenitore", "scrigno", "baule"), Utilita.generaListaComandi(), Utilita.creaListaOggetti());
-    private static final Oggetto oggettoMaligno = new OggettoMaligno("veleno", Utilita.generaSetAlias(), Utilita.generaListaComandi(), 30);
+    private static final Oggetto candela = new Candela("candela", Utilita.generaSetAlias("candelabro", "cera", "lume", "fiaccola", "torcia", "candela"));
+    private static final Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("grimaldello", Utilita.generaSetAlias("grimaldello"));
+    private static final Oggetto chiavePortaDorata = new ChiavePorta("chiave d'oro", Utilita.generaSetAlias("chiave", "chiave oro"), TipoPorta.oro);
+    private static final Oggetto chiavePortaArgentata = new ChiavePorta("chiave argento", Utilita.generaSetAlias("chiave", "chiave argento"), TipoPorta.argento);
+    private static final Oggetto cibo = new Cibo("pane", Utilita.generaSetAlias("panino", "cibo", "pane"), 30);
+    private static final Oggetto oggettoContenitore = new OggettoContenitore("scrigno", Utilita.generaSetAlias("contenitore", "scrigno", "baule"), Utilita.creaListaOggetti());
+    private static final Oggetto oggettoMaligno = new OggettoMaligno("veleno", Utilita.generaSetAlias(), 30);
 
     @Override
     public void inizializza() {
@@ -90,8 +90,8 @@ public class Gioco extends DescrizioneGioco {
 
         //stanze
         Stanza st1, st2, st3;
-        Oggetto spada = new Spada("la spada", Utilita.generaSetAlias("spada", "lama", "arma bianca", "daga", "katana", "ferro"), Utilita.generaListaComandi(raccogliere, usare, osservare));
-        Oggetto affilatore = new Affilatore("l'affilatore", Utilita.generaSetAlias("affilatoio", "cote", "mola", "affilatrice", "affilatore"), Utilita.generaListaComandi(raccogliere, usare, osservare));
+        Oggetto spada = new Spada("la spada", Utilita.generaSetAlias("spada", "lama", "arma bianca", "daga", "katana", "ferro"));
+        Oggetto affilatore = new Affilatore("l'affilatore", Utilita.generaSetAlias("affilatoio", "cote", "mola", "affilatrice", "affilatore"));
         Oggetto oggettoContenitore;
         //stanza 1
         st1 = new Stanza("cella di Manji", true, null, null, null, null, new ArrayList<>());
@@ -100,7 +100,7 @@ public class Gioco extends DescrizioneGioco {
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false, false));
         st2.setPortaSud(new Porta(TipoPorta.normale, st1, false, false));
         this.stanze.add(st1);
-        oggettoContenitore = new OggettoContenitore("uno scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.generaListaComandi(aprire, chiudere, osservare, usare), Utilita.creaListaOggetti(cibo, oggettoMaligno));
+        oggettoContenitore = new OggettoContenitore("uno scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(cibo, oggettoMaligno));
         //stanza 3
         st3 = new Stanza("corridoio", false, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore));
         st2.setPortaNord(new Porta(TipoPorta.normale, st3, false, false));
@@ -130,7 +130,7 @@ public class Gioco extends DescrizioneGioco {
         st1 = new Stanza("stanza sicurezza", true, null, null, null, null, Utilita.creaListaOggetti());
         st3.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
         st1.setPortaEst(new Porta(TipoPorta.normale, st3, false, false));
-        oggettoContenitore = new OggettoContenitore("lo scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.generaListaComandi(aprire, chiudere, osservare, usare), Utilita.creaListaOggetti(oggettoMaligno, chiaveOggettoContenitore, candela));
+        oggettoContenitore = new OggettoContenitore("lo scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(oggettoMaligno, chiaveOggettoContenitore, candela));
         //stanza 9
         st2 = new Stanza("cella 1", true, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore));
         st1.setPortaOvest(new Porta(TipoPorta.argento, st2, true, false));

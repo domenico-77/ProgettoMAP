@@ -28,8 +28,8 @@ public class OggettoContenitore extends Oggetto {
     private List<Oggetto> listaOggetti = new ArrayList();
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.oggettoContenitore;
 
-    public OggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse, List<Oggetto> listaOggetti) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
+    public OggettoContenitore(String nome, Set<String> alias, List<Oggetto> listaOggetti) {
+        super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.listaOggetti = listaOggetti;
     }
 
@@ -73,7 +73,7 @@ public class OggettoContenitore extends Oggetto {
             if (!this.contenitoreVuoto()) {
                 for (Oggetto o : this.listaOggetti) {
                     System.out.println(o.nome);
-                    if (o.nome.equals(new OggettoMaligno("veleno", Utilita.generaSetAlias(), Utilita.generaListaComandi(), 30))) {
+                    if (o.nome.equals(new OggettoMaligno("veleno", Utilita.generaSetAlias(), 30))) {
                         System.out.println("funziono");
                         o.usa(giocatore, stanza);
                         this.listaOggetti.remove(o);
