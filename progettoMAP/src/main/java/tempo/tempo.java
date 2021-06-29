@@ -23,46 +23,49 @@ public class tempo {
     static int ore = 0;
     static Timer timer;
 
-    TimerTask timerTask = new TimerTask() {
-        
+    public static void Time() {
 
-        @Override
-        public void run() {
-            if (secondi == MAX_SEC) {
-                if (minuti == MAX_MIN) {
-                    secondi = 0;
-                    minuti = 0;
-                    ore++;
-                } else {
-                    secondi = 0;
-                    minuti++;
+        TimerTask timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+                if(secondi == MAX_SEC){
+                    if(minuti == MAX_MIN){
+                        secondi = 0;
+                        minuti = 0;
+                        ore ++;
+                    }
+                    else{
+                        secondi = 0;
+                        minuti ++;
+                    }
                 }
-            } else {
-                secondi++;
-            }
-        }
-    };
-
-    //creazione thread che stampa i valori
-    Thread t = new Thread(() -> {
-        
-        
-        while (true) {
-            try {
-                Scanner scanner = new Scanner(new InputStreamReader(System.in));
-                String x = scanner.nextLine();
-                if ("tempo".equals(x)) {
-                    System.out.println("Tempo passato: " + ore + ":" + minuti + ":" + secondi);
+                else{
+                    secondi ++;
                 }
-                //qua
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
             }
-        }
-    });
+        };
 
-    timer  = new Timer("MyTimer");
+        //creazione thread che stampa i valori
+        Thread t = new Thread(() -> {
+            while (true) {
+                try {
+                    Scanner scanner = new Scanner(new InputStreamReader(System.in));
+                    String x= scanner.nextLine();
+                    if("tempo".equals(x)){
+                        System.out.println("Tempo passato: " + ore+":"+minuti+":"+secondi);
+                    }
+                    //qua
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
-    timer.scheduleAtFixedRate (timerTask, 10, 1000);//start timer
+        timer = new Timer("MyTimer");
+        timer.scheduleAtFixedRate(timerTask, 10, 1000);//start timer
+
+        t.start();//start thread
+    }
 }
