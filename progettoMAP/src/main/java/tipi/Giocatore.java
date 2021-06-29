@@ -18,10 +18,10 @@ public class Giocatore {
     private final static int VITA_INIZIO = 100;
     private int vitaMax = VITA_INIZIO;
     private int vitaCorrente = VITA_INIZIO;
-    private Inventario inventario;
-    private List<ParserOutput> listaMosse;
+    private Inventario inventario = new Inventario();
+    private List<Comando> listaMosse;
 
-    public Giocatore(List<ParserOutput> listaMosse) {
+    public Giocatore(List<Comando> listaMosse) {
         this.listaMosse = listaMosse;
     }
 
@@ -41,7 +41,7 @@ public class Giocatore {
         return inventario;
     }
 
-    public List<ParserOutput> getListaMosse() {
+    public List<Comando> getListaMosse() {
         return listaMosse;
     }
 
@@ -57,7 +57,7 @@ public class Giocatore {
         this.inventario = inventario;
     }
 
-    public void setListaMosse(List<ParserOutput> listaMosse) {
+    public void setListaMosse(List<Comando> listaMosse) {
         this.listaMosse = listaMosse;
     }
     
@@ -83,7 +83,7 @@ public class Giocatore {
         return (vitaCorrente==0);
     }
     
-    public void aggiornaMosse(List<ParserOutput> nuoveMosse){
+    public void aggiornaMosse(List<Comando> nuoveMosse){
         listaMosse.addAll(nuoveMosse);
     }
     

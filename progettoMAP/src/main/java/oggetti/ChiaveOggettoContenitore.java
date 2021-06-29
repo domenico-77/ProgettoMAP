@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
-import tipi.Stanza;
+import tipi.stanze.Stanza;
 
 /**
  *
@@ -19,8 +19,8 @@ public class ChiaveOggettoContenitore extends Oggetto {
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = 1;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.chiaveOggettoContenitore;
-    public ChiaveOggettoContenitore(String nome, Set<String> alias, List<Comando> listaMosse) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
+    public ChiaveOggettoContenitore(String nome, Set<String> alias) {
+        super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
     }
 
     
@@ -29,7 +29,7 @@ public class ChiaveOggettoContenitore extends Oggetto {
     public void usa(Giocatore giocatore, Stanza stanza) {
         if(this.usabilita > 0){
             List<Oggetto> l = stanza.getOggetiStanza();
-            Oggetto contenitore = new OggettoContenitore("Contenitore", null, null, null);
+            Oggetto contenitore = new OggettoContenitore("Contenitore", null, null);
             if(l.contains(contenitore)){
                 int i = l.indexOf(contenitore);
                 OggettoContenitore contenitoreO = (OggettoContenitore) l.get(i);
@@ -44,6 +44,9 @@ public class ChiaveOggettoContenitore extends Oggetto {
                 else{
                     System.out.println("Rin: 'E' già aperto'");
                 }
+            }
+            else{
+                System.out.println("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire");
             }
         }
         else{

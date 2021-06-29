@@ -10,9 +10,9 @@ import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
-import tipi.TipoPorta;
-import tipi.Porta;
-import tipi.Stanza;
+import tipi.stanze.TipoPorta;
+import tipi.stanze.Porta;
+import tipi.stanze.Stanza;
 
 /**
  *
@@ -24,8 +24,8 @@ public class ChiavePorta extends Oggetto{
     private final TipoPorta materiale;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.chiavePorta;
 
-    public ChiavePorta(String nome, Set<String> alias, List<Comando> listaMosse, TipoPorta materiale) {
-        super(nome, alias, listaMosse, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
+    public ChiavePorta(String nome, Set<String> alias, TipoPorta materiale) {
+        super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.materiale = materiale;
     }
     

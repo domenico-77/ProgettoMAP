@@ -13,11 +13,12 @@ package logicaGioco;
 
 import com.mycompany.progettomap.parser.ParserOutput;
 import java.util.List;
-import tipi.Stanza;
+import tipi.stanze.Stanza;
 import tipi.Comando;
 import java.io.PrintStream;
 
 import java.util.ArrayList;
+import java.util.Stack;
 import tipi.Giocatore;
 
 /**
@@ -27,9 +28,9 @@ import tipi.Giocatore;
 public abstract class DescrizioneGioco {
 
     protected final List<Stanza> stanze = new ArrayList<>();
-    protected final  List<Comando> comandi = new ArrayList<>();
-    protected Giocatore giocatore;
+    protected Giocatore giocatore = new Giocatore(new ArrayList());
     protected Stanza stanzaCorrente;
+    protected Stack<Stanza> PercorsoStanze = new Stack<>();
 
     
     public Stanza getStanzaCorrente() {
@@ -44,13 +45,29 @@ public abstract class DescrizioneGioco {
         return stanze;
     }
 
-    public List<Comando> getComandi() {
-        return comandi;
-    }
 
     public abstract void inizializza();
 
     public abstract void nextMove(ParserOutput p, PrintStream out);
     
     public abstract void stampaStanze();
+
+    public Stack<Stanza> getPercorsoStanze() {
+        return PercorsoStanze;
+    }
+
+    public void setPercorsoStanze(Stack<Stanza> PercorsoStanze) {
+        this.PercorsoStanze = PercorsoStanze;
+    }
+
+    public Giocatore getGiocatore() {
+        return giocatore;
+    }
+
+    public void setGiocatore(Giocatore giocatore) {
+        this.giocatore = giocatore;
+    }
+    
+    
+    
 }

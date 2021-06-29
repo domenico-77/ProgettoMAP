@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipi;
+package tipi.stanze;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,12 +17,13 @@ public class Porta {
     Stanza stanza;
     boolean chiusa;
     boolean nascosta;
+    private static final String[] alias = {"porta", "uscio", "portone", "entrata", "passaggio", "accesso", "ingresso"};
 
     public Porta(TipoPorta tipo, Stanza stanza, boolean chiusa, boolean nascosta) {
         this.tipo = tipo;
         this.stanza = stanza;
         this.chiusa=chiusa;
-        this.nascosta=nascosta;
+        this.nascosta = nascosta;
     }
 
     public TipoPorta getTipo() {
@@ -54,7 +58,7 @@ public class Porta {
         this.nascosta = nascosta; 
     }
     
-    public String decsiriviPorta(){
+    public String descriviPorta(){
         String descrizione = "";
         if(this.nascosta){
             descrizione = (" c'è un armadio un po' strano");
@@ -75,9 +79,15 @@ public class Porta {
                 }
             }
             else{
-                descrizione = (" c'è uns porta già aperta");
+                descrizione = (" c'è una porta già aperta");
             }
         }
         return descrizione;
     }
+
+    public static String[] getAlias() {
+        return alias;
+    }
+    
+    
 }

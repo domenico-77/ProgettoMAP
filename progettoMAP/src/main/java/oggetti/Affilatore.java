@@ -10,7 +10,7 @@ import java.util.Set;
 import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
-import tipi.Stanza;
+import tipi.stanze.Stanza;
 
 /**
  *
@@ -22,15 +22,15 @@ public class Affilatore extends Oggetto{
     private final static boolean PRENDIBILE = true;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.affilatore;
     
-    public Affilatore(String nome, Set<String> alias, List<Comando> listaMosse) {
-        super(nome, alias, listaMosse, PRENDIBILE, USABILITA, TIPO_OGGETTO);
+    public Affilatore(String nome, Set<String> alias) {
+        super(nome, alias, PRENDIBILE, USABILITA, TIPO_OGGETTO);
     }
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
         if(this.usabilita > 0){
             Inventario inventario = giocatore.getInventario();
-            Oggetto oggetto = new Spada("Spada", null, null);
+            Oggetto oggetto = new Spada("Spada", null);
             if(inventario.contieneOggetto(oggetto)){
                 List<Oggetto> l = inventario.getInventario();
                 int i = l.indexOf(oggetto);

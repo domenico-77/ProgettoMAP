@@ -7,6 +7,7 @@ package com.mycompany.progettomap.parser;
 
 import tipi.Comando;
 import oggetti.Oggetto;
+import tipi.stanze.Porta;
 
 
 /**
@@ -17,6 +18,7 @@ public class ParserOutput {
     private Comando comando;
     private Oggetto oggetto;
     private Oggetto oggettoInv;
+    private Porta porta;
 
     public ParserOutput(Comando comando, Oggetto oggetto) {
         this.comando = comando;
@@ -29,6 +31,13 @@ public class ParserOutput {
         this.oggettoInv = oggettoSec;
     }
 
+    public ParserOutput(Comando comando, Porta porta) {
+        this.comando = comando;
+        this.porta = porta;
+    }
+
+    
+    
     
     public ParserOutput(Comando comando) {
         this.comando = comando;
@@ -42,7 +51,7 @@ public class ParserOutput {
         return oggetto;
     }
 
-    public Oggetto getOggettoSec() {
+    public Oggetto getOggettoInv() {
         return oggettoInv;
     }
 
@@ -57,6 +66,12 @@ public class ParserOutput {
     public void setOggettoSec(Oggetto oggettoSec) {
         this.oggettoInv = oggettoSec;
     }
+
+    public Porta getPorta() {
+        return porta;
+    }
+    
+    
     
     }
 

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipi;
+package tipi.stanze;
 
+import tipi.stanze.Porta;
 import oggetti.Oggetto;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Stanza {
     private Porta portaOvest;
     private List<Oggetto> oggettiStanza;
 
-    public Stanza(String nomeStanza,boolean illuminata,Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
+    public Stanza(String nomeStanza, boolean illuminata, Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
         this.nomeStanza = nomeStanza;
         this.illuminata = illuminata;
         this.id = numStanze;
@@ -84,7 +85,7 @@ public class Stanza {
         this.portaEst = portaEst;
     }
 
-    public void setPortaOvest(Porta portsaOvest) {
+    public void setPortaOvest(Porta portaOvest) {
         this.portaOvest = portaOvest;
     }
 
@@ -125,13 +126,13 @@ public class Stanza {
         return true;
     }
 
-    /*
-    public void rimuoviOggetto(Oggetto o){
-        if(this.oggettiStanza.contains(o)){
-           this.oggettiStanza.remove(o);
+    public void rimuoviOggetto(Oggetto o) {
+        if (this.oggettiStanza.contains(o)) {
+            this.oggettiStanza.remove(o);
         }
     }
-    
+
+    /*
     public void prendiOggetto(Oggetto o, Giocatore giocatore){
         if(this.oggettiStanza.contains(o)){
             giocatore.getInventario().aggiungiOgetto(this.oggettiStanza.get(this.oggettiStanza.indexOf(o)));
@@ -144,54 +145,52 @@ public class Stanza {
             System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa'");
 
         } else {
-            System.out.print("Rin:' Sei entrato nella " + this.nomeStanza+" ");
+            System.out.println("Rin:' Sei entrato nella stanza : " + this.nomeStanza + " . ");
             if (this.portaNord != null) {
-                System.out.print("a nord " + this.portaNord.decsiriviPorta() + ",  ");
+                System.out.print("a nord " + this.portaNord.descriviPorta() + ";  ");
                 System.out.println("");
-            } 
+            }
             if (this.portaSud != null) {
-                System.out.print("a sud " + this.portaSud.decsiriviPorta() + ", ");
+                System.out.print("a sud " + this.portaSud.descriviPorta() + "; ");
                 System.out.println("");
-            } 
+            }
             if (this.portaEst != null) {
-                System.out.print("a est " + this.portaEst.decsiriviPorta() + "e ");
+                System.out.print("a est " + this.portaEst.descriviPorta() + "; ");
                 System.out.println("");
-            } 
+            }
             if (this.portaOvest != null) {
-                System.out.println("a ovest " + this.portaEst.decsiriviPorta() + ".");
+                System.out.println("a ovest " + this.portaOvest.descriviPorta() + ".");
                 System.out.println("");
-
-            } 
 
             }
-           if(this.oggettiStanza.isEmpty()){
-               System.out.print("Non c'è niente di interessante in questa stanza.");
-           } else {
-               if(this.oggettiStanza.size() >= 2){
-                   System.out.print("Sono presenti diversi oggetti sparsi nella stanza: ");
-                   int i= 1;
-                   int size = this.oggettiStanza.size();
-                   for (Oggetto o: this.oggettiStanza){
-                       if(i != size-2){
-                        System.out.print(o.getNome()+", ");
-                        i++;
-                       }
-                       else{
-                           if(i == size-1){
-                           System.out.print(o.getNome() + " e ");
-                           }
-                           else{
-                               System.out.print(o.getNome());
-                           }
-                       }
-                       
+
+            if (this.oggettiStanza.isEmpty()) {
+                System.out.print("Non c'è niente di interessante in questa stanza.");
+            } else {
+                if (this.oggettiStanza.size() >= 2) {
+                    System.out.print("Sono presenti diversi oggetti sparsi nella stanza: ");
+                    int i = 1;
+                    int size = this.oggettiStanza.size();
+                    for (Oggetto o : this.oggettiStanza) {
+                        if (i != size - 2) {
+                            System.out.print(o.getNome() + ", ");
+                            i++;
+                        } else {
+                            if (i == size - 1) {
+                                System.out.print(o.getNome() + " e ");
+                            } else {
+                                System.out.print(o.getNome());
+                            }
+                        }
+
                     }
-               }
-               else{
-                   System.out.print("E' prensente solo " + this.oggettiStanza.get(0).getNome());
-               }
-           }
-           System.out.println("'");
+                } else {
+                    System.out.print("E' prensente solo " + this.oggettiStanza.get(0).getNome());
+                }
+            }
+
+            System.out.println("'");
         }
     }
 
+}
