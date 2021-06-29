@@ -47,7 +47,8 @@ public class Inventario {
             System.out.println("Rin: 'Questi sono gli oggetti a disposizione:");
             int i = 1;
             for (Oggetto o : inventario) {
-                System.out.println(i +  o.getNome());
+                System.out.println(i + ". "+ o.getNome());
+                i++;
             }
         }
     }

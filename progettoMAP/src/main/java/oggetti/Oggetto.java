@@ -19,7 +19,6 @@ import tipi.stanze.Stanza;
 public abstract class Oggetto {
     protected String nome;
     protected Set<String> alias;
-    protected List<Comando> listaMosse;
     protected boolean prendibile;
     protected int usabilita;
     protected TipoOggetto tipo;
@@ -27,7 +26,6 @@ public abstract class Oggetto {
     public Oggetto(String nome, Set<String> alias, boolean prendibile, int usabilita, TipoOggetto tipo) {
         this.nome = nome;
         this.alias = alias;
-        this.listaMosse = listaMosse;
         this.prendibile = prendibile;
         this.usabilita = usabilita;
         this.tipo = tipo;
@@ -39,9 +37,6 @@ public abstract class Oggetto {
         this.nome = name;
     }
 
-    public void setListaMosse(List<Comando> listaMosse) {
-        this.listaMosse = listaMosse;
-    }
     
     public void setAlias(Set<String> alias) {
         this.alias = alias;
@@ -60,9 +55,6 @@ public abstract class Oggetto {
         return nome;
     }
 
-    public List<Comando> getListaMosse() {
-        return listaMosse;
-    }
     
     public Set<String> getAlias() {
         return alias;

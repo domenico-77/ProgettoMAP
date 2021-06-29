@@ -40,6 +40,7 @@ public class Cibo extends Oggetto {
         if (this.usabilita > 0) {
             if (giocatore.getVitaCorrente() != giocatore.getVitaMax()) {
                 giocatore.incrementaVita(this.rigenerazione);
+                System.out.println("Rin: 'Hai recuperato della vita'");
                 this.usabilita--;
                 if (this.usabilita == 0) {
                     System.out.println("Rin: 'L'oggetto " + this.nome + " ha finito i suoi utilizzi, non puoi usare più questo oggetto'");

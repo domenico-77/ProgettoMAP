@@ -66,24 +66,17 @@ public class OggettoContenitore extends Oggetto {
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
         Inventario inventario = giocatore.getInventario();
-        for(Oggetto o : this.listaOggetti){
-            System.out.println(o.nome);
-        }
         if (this.aperto) {
             if (!this.contenitoreVuoto()) {
-                for (Oggetto o : this.listaOggetti) {
-                    System.out.println(o.nome);
-                    if (o.nome.equals(new OggettoMaligno("veleno", Utilita.generaSetAlias(), 30))) {
-                        System.out.println("funziono");
-                        o.usa(giocatore, stanza);
-                        this.listaOggetti.remove(o);
-                    } else {
+                this.listaOggetti.forEach(o -> {
+                    if(o.prendibile){
+                        System.out.println("Rin: 'Hai raccolto "+o.nome+"'");
                         inventario.aggiungiOggetto(o);
-                        this.listaOggetti.remove(o);
-                        System.out.println("Rin: 'Hai raccolto " + o.getNome() + "'");
                     }
-                    System.out.println("ciao");
-                }
+                    else{
+                        o.usa(giocatore, stanza);
+                    }
+                });
                 giocatore.setInventario(inventario);
             } else {
                 System.out.println("Rin: 'Non c'è nessun oggetto all'interno'");

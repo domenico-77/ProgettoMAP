@@ -100,7 +100,7 @@ public class Gioco extends DescrizioneGioco {
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false, false));
         st2.setPortaSud(new Porta(TipoPorta.normale, st1, false, false));
         this.stanze.add(st1);
-        oggettoContenitore = new OggettoContenitore("uno scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(cibo, oggettoMaligno));
+        oggettoContenitore = new OggettoContenitore("uno scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(oggettoMaligno, cibo));
         //stanza 3
         st3 = new Stanza("corridoio", false, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore));
         st2.setPortaNord(new Porta(TipoPorta.normale, st3, false, false));
