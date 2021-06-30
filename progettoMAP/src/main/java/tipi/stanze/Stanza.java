@@ -8,6 +8,7 @@ package tipi.stanze;
 import tipi.stanze.Porta;
 import oggetti.Oggetto;
 import java.util.List;
+import npc.Npc;
 
 /**
  *
@@ -18,14 +19,15 @@ public class Stanza {
     private static int numStanze = 0;
     private int id;
     private boolean illuminata;
-    private String nomeStanza;
+    private final String nomeStanza;
     private Porta portaNord;
     private Porta portaSud;
     private Porta portaEst;
     private Porta portaOvest;
     private List<Oggetto> oggettiStanza;
+    private Npc npc;
 
-    public Stanza(String nomeStanza, boolean illuminata, Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza) {
+    public Stanza(String nomeStanza, boolean illuminata, Porta portaNord, Porta portaSud, Porta portaEst, Porta portaOvest, List<Oggetto> oggetiStanza, Npc npc) {
         this.nomeStanza = nomeStanza;
         this.illuminata = illuminata;
         this.id = numStanze;
@@ -34,6 +36,7 @@ public class Stanza {
         this.portaEst = portaEst;
         this.portaOvest = portaOvest;
         this.oggettiStanza = oggetiStanza;
+        this.npc = npc;
         numStanze++;
     }
 
@@ -101,6 +104,16 @@ public class Stanza {
         this.illuminata = illuminata;
     }
 
+    public Npc getNpc() {
+        return npc;
+    }
+
+    public void setNpc(Npc npc) {
+        this.npc = npc;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -142,7 +155,12 @@ public class Stanza {
      */
     public void DescriviStanza() {
         if (!this.illuminata) {
-            System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa'");
+            if(this.npc != null){
+            System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
+            }
+            else{
+                System.out.println("Rin:'Non riesco a vedere nulla e ci sono dei rumori sospetti potrebbe esserci qualcuno, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
+            }
 
         } else {
             System.out.println("Rin:' Sei entrato nella stanza : " + this.nomeStanza + " . ");
@@ -163,7 +181,6 @@ public class Stanza {
                 System.out.println("");
 
             }
-
             if (this.oggettiStanza.isEmpty()) {
                 System.out.print("Non c'è niente di interessante in questa stanza.");
             } else {
@@ -185,7 +202,21 @@ public class Stanza {
 
                     }
                 } else {
-                    System.out.print("E' prensente solo " + this.oggettiStanza.get(0).getNome());
+                    System.out.println("E' prensente solo " + this.oggettiStanza.get(0).getNome());
+                }
+            }
+            
+             if(this.npc != null){
+                if(this.npc.isVivo()){
+                    if(this.npc.isNeutrale()){
+                        System.out.println("Sembra esserci un prigioniero, potremmo provare a parlarci");
+                    }
+                    else{
+                        System.out.println("Oh no! C'e' una guardia, se non possosiamo affrontarlo ci conviene fare l'indispensabile in questa stanza e andarcene!");
+                    }
+                }
+                else{
+                    System.out.println("C'e' un cadavere in questa stanza, potrebbe avere qualcosa di utile");
                 }
             }
 

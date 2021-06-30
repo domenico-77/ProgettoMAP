@@ -17,6 +17,8 @@ import tipi.stanze.Stanza;
 import tipi.TipoComando;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import npc.PngIndovinello;
+import npc.PngScambio;
 import java.util.Scanner;
 import oggetti.Affilatore;
 import oggetti.Candela;
@@ -106,70 +108,70 @@ public class Gioco extends DescrizioneGioco {
         Oggetto affilatore = new Affilatore("l'affilatore", Utilita.generaSetAlias("affilatoio", "cote", "mola", "affilatrice", "affilatore"));
         Oggetto oggettoContenitore;
         //stanza 1
-        st1 = new Stanza("cella di Manji", true, null, null, null, null, new ArrayList<>());
+        st1 = new Stanza("cella di Manji", true, null, null, null, null, new ArrayList<>(), null);
         //stanza 2
-        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(this.candela));
+        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(this.candela), null);
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false, false));
         st2.setPortaSud(new Porta(TipoPorta.normale, st1, false, false));
         this.stanze.add(st1);
         oggettoContenitore = new OggettoContenitore("uno scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(oggettoMaligno, cibo));
         //stanza 3
-        st3 = new Stanza("corridoio", false, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore));
+        st3 = new Stanza("corridoio", false, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore), null);
         st2.setPortaNord(new Porta(TipoPorta.normale, st3, false, false));
         st3.setPortaSud(new Porta(TipoPorta.normale, st2, false, false));
         this.stanze.add(st2);
         //stanza 4
-        st1 = new Stanza("bagno", true, null, null, null, null, Utilita.creaListaOggetti(this.chiaveOggettoContenitore));
+        st1 = new Stanza("bagno", true, null, null, null, null, Utilita.creaListaOggetti(Gioco.chiaveOggettoContenitore), new PngScambio("Sanji", Gioco.cibo, Gioco.candela));
         st3.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
         st1.setPortaEst(new Porta(TipoPorta.normale, st3, false, false));
         this.stanze.add(st1);
         //stanza 5
-        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(affilatore, this.cibo));
+        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(affilatore, this.cibo), null);
         st3.setPortaNord(new Porta(TipoPorta.normale, st2, false, false));
         st2.setPortaSud(new Porta(TipoPorta.normale, st3, false, false));
         this.stanze.add(st3);
         //stanza 6
-        st1 = new Stanza("tesoreria", true, null, null, null, null, Utilita.creaListaOggetti(this.chiavePortaArgentata));
+        st1 = new Stanza("tesoreria", true, null, null, null, null, Utilita.creaListaOggetti(), new PngIndovinello("Alphonse", Gioco.chiavePortaArgentata,"Spesso racconto una storia, ma non chiedo alcun soldo. Ti intrattengo tutta la notte, ma ahime', non ti ricorderai di me. Cosa sono?", "un sogno", "un libro", "una musica", "a"));
         st2.setPortaEst(new Porta(TipoPorta.normale, st1, false, false));
         st1.setPortaOvest(new Porta(TipoPorta.normale, st2, false, false));
         //stanza 7
-        st3 = new Stanza("armeria", true, null, null, null, null, Utilita.creaListaOggetti(spada));
+        st3 = new Stanza("armeria", true, null, null, null, null, Utilita.creaListaOggetti(spada), null);
         st2.setPortaNord(new Porta(TipoPorta.argento, st3, true, false));
         st3.setPortaSud(new Porta(TipoPorta.argento, st2, true, false));
         this.stanze.add(st2);
         this.stanze.add(st1);
         //stanza 8
-        st1 = new Stanza("stanza sicurezza", true, null, null, null, null, Utilita.creaListaOggetti());
+        st1 = new Stanza("stanza sicurezza", true, null, null, null, null, Utilita.creaListaOggetti(), null);
         st3.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
         st1.setPortaEst(new Porta(TipoPorta.normale, st3, false, false));
         oggettoContenitore = new OggettoContenitore("lo scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(oggettoMaligno, chiaveOggettoContenitore, candela));
         //stanza 9
-        st2 = new Stanza("cella 1", true, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore));
+        st2 = new Stanza("cella 1", true, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore), new PngScambio("Killer bee", affilatore, Gioco.cibo));
         st1.setPortaOvest(new Porta(TipoPorta.argento, st2, true, false));
         st2.setPortaEst(new Porta(TipoPorta.argento, st1, true, false));
         this.stanze.add(st1);
         //stanza 10
-        st1 = new Stanza("cella 2", false, null, null, null, null, Utilita.creaListaOggetti(this.chiaveOggettoContenitore, this.chiaveOggettoContenitore));
+        st1 = new Stanza("cella 2", false, null, null, null, null, Utilita.creaListaOggetti(this.chiaveOggettoContenitore, this.chiaveOggettoContenitore), null);
         st2.setPortaNord(new Porta(TipoPorta.oro, st1, true, false));
         st1.setPortaSud(new Porta(TipoPorta.oro, st2, true, false));
         this.stanze.add(st2);
         //stanza 11
-        st2 = new Stanza("cella 3", true, null, null, null, null, Utilita.creaListaOggetti(this.cibo));
+        st2 = new Stanza("cella 3", true, null, null, null, null, Utilita.creaListaOggetti(this.cibo), new PngIndovinello("Roy Mustung", Gioco.chiaveOggettoContenitore, "Raramente mi toccano, ma spesso mi frenano. Se hai arguzia, mi userai bene, cosa sono?", "intelligenza", "la lingua", "una spada", "b"));
         st1.setPortaNord(new Porta(TipoPorta.oro, st2, true, false));
         st2.setPortaSud(new Porta(TipoPorta.oro, st1, true, false));
         this.stanze.add(st1);
         //stanza 12
-        st1 = new Stanza("stanza sicurezza", false, null, null, null, null, Utilita.creaListaOggetti(affilatore, this.cibo));
+        st1 = new Stanza("stanza sicurezza", false, null, null, null, null, Utilita.creaListaOggetti(affilatore, this.cibo), null);
         st1.setPortaOvest(new Porta(TipoPorta.normale, st2, false, false));
         st2.setPortaEst(new Porta(TipoPorta.normale, st1, false, false));
         this.stanze.add(st2);
         //stanza 13
-        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti());
+        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(), null);
         st1.setPortaEst(new Porta(TipoPorta.oro, st2, true, false));
         st2.setPortaOvest(new Porta(TipoPorta.oro, st1, true, false));
         this.stanze.add(st1);
         //stanza 14
-        st1 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(oggettoMaligno));
+        st1 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(oggettoMaligno), null);
         st3.setPortaNord(new Porta(TipoPorta.normale, st1, false, false));
         st1.setPortaSud(new Porta(TipoPorta.normale, st3, false, false));
         this.stanze.add(st3);
@@ -177,32 +179,32 @@ public class Gioco extends DescrizioneGioco {
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false, false));
         this.stanze.add(st1);
         //stanza 15
-        st3 = new Stanza("stanza guardie", true, null, null, null, null, Utilita.creaListaOggetti());
+        st3 = new Stanza("stanza guardie", true, null, null, null, null, Utilita.creaListaOggetti(), null);
         st2.setPortaNord(new Porta(TipoPorta.normale, st3, false, false));
         st3.setPortaSud(new Porta(TipoPorta.normale, st2, false, false));
         this.stanze.add(st2);
         //stanza 16
-        st1 = new Stanza("tesoreria", false, null, null, null, null, Utilita.creaListaOggetti(this.chiavePortaDorata));
+        st1 = new Stanza("tesoreria", false, null, null, null, null, Utilita.creaListaOggetti(this.chiavePortaDorata), new PngIndovinello("Kise", Gioco.chiavePortaDorata, "Ho mari senza acqua, ho coste senza sabbia, villaggi senza persone e montagne senza terra, cosa sono?", "un deserto", "la luna", "una mappa", "c"));
         st3.setPortaNord(new Porta(TipoPorta.argento, st1, true, true));
         st1.setPortaSud(new Porta(TipoPorta.argento, st3, true, false));
         this.stanze.add(st3);
         //stanza 17
-        st2 = new Stanza("secondo piano", true, null, null, null, null, Utilita.creaListaOggetti());
+        st2 = new Stanza("secondo piano", true, null, null, null, null, Utilita.creaListaOggetti(), null);
         st1.setPortaEst(new Porta(TipoPorta.normale, st2, false, false));
         st2.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
         this.stanze.add(st1);
         //stanza 18
-        st3 = new Stanza("segreteria della prigione", true, null, null, null, null, Utilita.creaListaOggetti(spada, this.cibo));
+        st3 = new Stanza("segreteria della prigione", true, null, null, null, null, Utilita.creaListaOggetti(spada, this.cibo), null);
         st2.setPortaEst(new Porta(TipoPorta.normale, st3, false, false));
         st3.setPortaOvest(new Porta(TipoPorta.normale, st2, false, false));
         this.stanze.add(st2);
         //stanza 19
-        st1 = new Stanza("entrata della prigione", true, null, null, null, null, Utilita.creaListaOggetti());
+        st1 = new Stanza("entrata della prigione", true, null, null, null, null, Utilita.creaListaOggetti(), null);
         st3.setPortaNord(new Porta(TipoPorta.normale, st1, false, false));
         st1.setPortaSud(new Porta(TipoPorta.normale, st3, false, false));
         this.stanze.add(st3);
         //stanza 20
-        st2 = new Stanza("giardino della prigione", true, null, null, null, null, Utilita.creaListaOggetti());
+        st2 = new Stanza("giardino della prigione", true, null, null, null, null, Utilita.creaListaOggetti(), null);
         st1.setPortaNord(new Porta(TipoPorta.oro, st2, true, false));
         st2.setPortaSud(new Porta(TipoPorta.oro, st1, true, true));
         this.stanze.add(st2);
