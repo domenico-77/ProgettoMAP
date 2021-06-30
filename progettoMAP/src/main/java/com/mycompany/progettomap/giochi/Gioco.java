@@ -107,7 +107,7 @@ public class Gioco extends DescrizioneGioco {
         st3.setPortaSud(new Porta(TipoPorta.normale, st2, false, false));
         this.stanze.add(st2);
         //stanza 4
-        st1 = new Stanza("bagno", true, null, null, null, null, Utilita.creaListaOggetti(this.chiaveOggettoContenitore));
+        st1 = new Stanza("bagno", true, null, null, null, null, Utilita.creaListaOggetti(Gioco.chiaveOggettoContenitore));
         st3.setPortaOvest(new Porta(TipoPorta.normale, st1, false, false));
         st1.setPortaEst(new Porta(TipoPorta.normale, st3, false, false));
         this.stanze.add(st1);
