@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 package main;
-import tempo.ThreadGioco;
-import tempo.tempo;
+import Threads.ThreadGioco;
+import Threads.ThreadTempo;
+import menu.Menu;
 /**
  *
  * @author domen
@@ -16,8 +17,8 @@ public class NewMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        tempo.Time();
-        ThreadGioco.Esegui();
+        Menu.MenuInizio();
     }
+    
     
 }
