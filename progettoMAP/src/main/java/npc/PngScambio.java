@@ -13,22 +13,20 @@ import tipi.Utilita;
  *
  * @author mtubi
  */
-public class PngRichiestaOggetto extends Npc {
+public class PngScambio extends Npc {
 
     private static final boolean NEUTRALE = true;
     private static final boolean ACCONTENTATO = false;
     private static final boolean SCONOSCIUTO = true;
 
     private boolean accontentato;
-    private String richiesta;
     private Oggetto oggettoRichiesto;
 
-    public PngRichiestaOggetto(String nome, boolean vivo, int vita, Oggetto oggetto, String richiesta, Oggetto oggettoRichiesto) {
-        super(nome, vivo, vita, oggetto, false);
-        this.richiesta = richiesta;
+    public PngScambio(String nome, Oggetto oggetto, Oggetto oggettoRichiesto) {
+        super(nome, oggetto, NEUTRALE);
         this.oggettoRichiesto = oggettoRichiesto;
-        this.accontentato = PngRichiestaOggetto.ACCONTENTATO;
-        this.sconosciuto = PngRichiestaOggetto.SCONOSCIUTO;
+        this.accontentato = PngScambio.ACCONTENTATO;
+        this.sconosciuto = PngScambio.SCONOSCIUTO;
     }
 
     @Override

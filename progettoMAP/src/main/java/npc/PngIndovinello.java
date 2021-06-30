@@ -30,8 +30,8 @@ public class PngIndovinello extends Npc {
     private boolean accontentato = false;
     private boolean sconosciuto = false;
 
-    public PngIndovinello(String nome, boolean vivo, int vita, Oggetto oggetto, String indovinello, String rispostaA, String rispostaB, String rispostaC, String rispostaEsatta) {
-        super(nome, vivo, vita, oggetto, NEUTRALE);
+    public PngIndovinello(String nome, Oggetto oggetto, String indovinello, String rispostaA, String rispostaB, String rispostaC, String rispostaEsatta) {
+        super(nome, oggetto, NEUTRALE);
         this.indovinello = indovinello;
         this.rispostaA = rispostaA;
         this.rispostaB = rispostaB;

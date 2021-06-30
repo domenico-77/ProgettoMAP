@@ -14,16 +14,14 @@ import tipi.Giocatore;
  */
 public abstract class Npc {
     protected String nome;
-    protected boolean vivo;
+    protected boolean vivo = true;
     protected boolean neutrale;
-    protected int vita;
     protected Oggetto oggetto;
     protected boolean sconosciuto;
+    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano"};
 
-    public Npc(String nome, boolean vivo, int vita, Oggetto oggetto, boolean neutrale) {
+    public Npc(String nome, Oggetto oggetto, boolean neutrale) {
         this.nome = nome;
-        this.vivo = vivo;
-        this.vita = vita;
         this.oggetto = oggetto;
         this.neutrale = neutrale;
     }
@@ -44,14 +42,6 @@ public abstract class Npc {
         this.vivo = vivo;
     }
 
-    public int getVita() {
-        return vita;
-    }
-
-    public void setVita(int vita) {
-        this.vita = vita;
-    }
-
     public Oggetto getOggetto() {
         return oggetto;
     }
@@ -66,6 +56,10 @@ public abstract class Npc {
 
     public void setNeutrale(boolean neutrale) {
         this.neutrale = neutrale;
+    }
+
+    public static String[] getAlias() {
+        return alias;
     }
     
     

@@ -8,6 +8,7 @@ package com.mycompany.progettomap.parser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import npc.Npc;
 import tipi.Comando;
 import oggetti.Oggetto;
 import tipi.Utilita;
@@ -68,7 +69,10 @@ public class Parser {
                             }
 
                         } else if (paroleComando.size() >= 2) {
-                            if (Utilita.cercaParola(paroleComando.get(1), "n", "nord", "sopra", "su", "sù")) {
+                            if(Utilita.cercaParola(paroleComando.get(1), Npc.getAlias()) && stanza.getNpc() != null){
+                                comando = new ParserOutput(azioni.get(intAzione), true);
+                            }
+                            else if (Utilita.cercaParola(paroleComando.get(1), "n", "nord", "sopra", "su", "sù")) {
                                 if (stanza.getPortaNord() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaNord());
                                 }
