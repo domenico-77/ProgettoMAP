@@ -9,6 +9,7 @@ package com.mycompany.progettomap.giochi;
  *
  * @author Acer
  */
+import com.mycompany.progettomap.parser.Parser;
 import logicaGioco.DescrizioneGioco;
 import com.mycompany.progettomap.parser.ParserOutput;
 import tipi.Comando;
@@ -18,6 +19,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import npc.PngIndovinello;
 import npc.PngScambio;
+import java.util.Scanner;
 import oggetti.Affilatore;
 import oggetti.Candela;
 import oggetti.ChiaveOggettoContenitore;
@@ -27,6 +29,7 @@ import oggetti.Oggetto;
 import oggetti.OggettoContenitore;
 import oggetti.OggettoMaligno;
 import oggetti.Spada;
+import tempo.tempo;
 import tipi.stanze.Porta;
 import tipi.stanze.TipoPorta;
 import tipi.Utilita;
@@ -44,6 +47,13 @@ public class Gioco extends DescrizioneGioco {
     private static final Oggetto cibo = new Cibo("pane", Utilita.generaSetAlias("panino", "cibo", "pane"), 30);
     private static final Oggetto oggettoContenitore = new OggettoContenitore("scrigno", Utilita.generaSetAlias("contenitore", "scrigno", "baule"), Utilita.creaListaOggetti());
     private static final Oggetto oggettoMaligno = new OggettoMaligno("veleno", Utilita.generaSetAlias(), 30);
+    private int secondi = 0;
+    private int minuti = 0;
+    private int ore = 0;
+    
+    static final int MAX_SEC = 60;
+    static final int MAX_MIN = 60;
+    
 
     @Override
     public void inizializza() {
@@ -89,6 +99,8 @@ public class Gioco extends DescrizioneGioco {
         Comando spegnere = new Comando("spegnere", TipoComando.spegnere, Utilita.generaSetAlias("spegni", "spegnere"));
 
         Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna", "indietro"));
+
+        Comando tempo = new Comando("tempo", TipoComando.tempo, Utilita.generaSetAlias("tempo", "time", "t"));
 
         //stanze
         Stanza st1, st2, st3;
@@ -200,7 +212,7 @@ public class Gioco extends DescrizioneGioco {
 
         this.stanzaCorrente = this.stanze.get(0);
 
-        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso));
+        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo));
 
     }
 
@@ -594,9 +606,32 @@ public class Gioco extends DescrizioneGioco {
                     System.out.println("Rin : 'La stanza è buia e potrebbe nascondere pericoli, ci conviene usare una candela per illuminarla o altrimenti tornare indietro...'");
 
                 }
+            } else if (p.getComando().getTipo() == TipoComando.tempo) {
+                calcolaTempo();
+                System.out.println("Tempo passato: " + ore + ":" + minuti + ":" + secondi);
             }
 
         }
+    }
+    
+    public void calcolaTempo() {
+        int tempoS = tempo.getSecondi();
+        int tempoM = tempo.getMinuti();
+        int tempoO = tempo.getOre();
+        if (this.secondi + tempoS >= MAX_SEC) {
+            this.secondi = (this.secondi + tempoS) - MAX_SEC;
+            this.minuti++;
+        } else {
+            this.secondi += tempoS;
+        }
+        if (this.minuti + tempoM >= MAX_MIN) {
+            this.minuti = (this.secondi + tempoM)- MAX_MIN;
+            ore++;
+        } else {
+            this.minuti += tempoM;
+        }
+        this.ore += tempoO;
+        tempo.reset();
     }
 
     @Override
@@ -604,5 +639,18 @@ public class Gioco extends DescrizioneGioco {
         for (Stanza s : this.stanze) {
             s.DescriviStanza();
         }
+    }
+
+    @Override
+    public void gioca() {
+        this.inizializza();
+        Parser parser = new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()) {
+            String command = scanner.nextLine();
+            ParserOutput p = parser.parse(command, this.giocatore.getListaMosse(), this.stanzaCorrente.getOggetiStanza(), this.giocatore.getInventario().getInventario(), stanzaCorrente);
+            this.nextMove(p, System.out);
+        }
+
     }
 }

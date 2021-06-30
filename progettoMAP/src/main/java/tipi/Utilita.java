@@ -17,11 +17,14 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
+
 /**
  *
  * @author mtubi
  */
+
 public class Utilita {
+    
 
     public static Set<String> caricaFileSet(String file) {
         Set<String> set = new HashSet<>();
@@ -115,14 +118,16 @@ public class Utilita {
 
         return vuole;
     }
-    
-    public static boolean cercaParola(String nome, String...alias){
+
+    public static boolean cercaParola(String nome, String... alias) {
         boolean contiene = false;
-        for (String a : alias){
-            if(nome.equals(a)){
+        for (String a : alias) {
+            if (nome.equals(a)) {
                 contiene = true;
             }
         }
         return contiene;
     }
+
+    
 }

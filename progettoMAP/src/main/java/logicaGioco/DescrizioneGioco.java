@@ -31,8 +31,8 @@ public abstract class DescrizioneGioco {
     protected Giocatore giocatore = new Giocatore(new ArrayList());
     protected Stanza stanzaCorrente;
     protected Stack<Stanza> PercorsoStanze = new Stack<>();
-
     
+   
     public Stanza getStanzaCorrente() {
         return stanzaCorrente;
     }
@@ -68,6 +68,6 @@ public abstract class DescrizioneGioco {
         this.giocatore = giocatore;
     }
     
-    
+    public abstract void gioca();
     
 }
