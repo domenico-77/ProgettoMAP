@@ -30,5 +30,6 @@ public enum TipoComando {
     accendere,
     spegnere,
     torna_indietro,
-    mangiare
+    mangiare,
+    tempo
 }
