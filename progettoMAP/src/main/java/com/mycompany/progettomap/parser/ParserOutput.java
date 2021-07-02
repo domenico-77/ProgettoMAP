@@ -80,6 +80,10 @@ public class ParserOutput {
     public Porta getPorta() {
         return porta;
     }
+
+    public boolean isNpc() {
+        return npc;
+    }
     
     
     

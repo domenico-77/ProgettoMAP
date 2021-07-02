@@ -111,6 +111,10 @@ public class Stanza {
     public void setNpc(Npc npc) {
         this.npc = npc;
     }
+
+    public String getNomeStanza() {
+        return nomeStanza;
+    }
     
     
 

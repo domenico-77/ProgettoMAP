@@ -11,6 +11,7 @@ import java.util.Set;
 import npc.Npc;
 import tipi.Comando;
 import oggetti.Oggetto;
+import tipi.TipoComando;
 import tipi.Utilita;
 import tipi.stanze.Porta;
 import tipi.stanze.Stanza;
@@ -73,21 +74,21 @@ public class Parser {
                                 comando = new ParserOutput(azioni.get(intAzione), true);
                             }
                             else if (Utilita.cercaParola(paroleComando.get(1), "n", "nord", "sopra", "su", "sù")) {
-                                if (stanza.getPortaNord() != null) {
-                                    comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaNord());
-                                }
+                                    if(azioni.get(intAzione).getTipo() == TipoComando.camminare_verso){
+                                        comando = new ParserOutput(azioni.get(Utilita.cercaAzioni("nord", azioni)));
+                                    }
                             } else if (Utilita.cercaParola(paroleComando.get(1), "sud", "s", "giu", "sotto", "giù")) {
-                                if (stanza.getPortaSud() != null) {
-                                    comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaSud());
-                                }
+                                if(azioni.get(intAzione).getTipo() == TipoComando.camminare_verso){
+                                        comando = new ParserOutput(azioni.get(Utilita.cercaAzioni("sud", azioni)));
+                                    }
                             } else if (Utilita.cercaParola(paroleComando.get(1), "e", "destrra", "est")) {
-                                if (stanza.getPortaEst() != null) {
-                                    comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaEst());
-                                }
+                               if(azioni.get(intAzione).getTipo() == TipoComando.camminare_verso){
+                                        comando = new ParserOutput(azioni.get(Utilita.cercaAzioni("est", azioni)));
+                                    }
                             } else if (Utilita.cercaParola(paroleComando.get(1), "o", "sinistra", "ovest")) {
-                                if (stanza.getPortaOvest() != null) {
-                                    comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaOvest());
-                                }
+                                if(azioni.get(intAzione).getTipo() == TipoComando.camminare_verso){
+                                        comando = new ParserOutput(azioni.get(Utilita.cercaAzioni("ovest", azioni)));
+                                    }
                             } else {
 
                                 comando = (new ParserOutput(azioni.get(intAzione)));

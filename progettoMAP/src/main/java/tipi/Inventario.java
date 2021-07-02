@@ -66,6 +66,8 @@ public class Inventario {
                     this.inventario.remove(oggetto);
                 }
             }
+        } else {
+            System.out.println("Rin :' Al momento non disponiamo dell'oggetto : "+o.getNome() + "'");
         }
     }
 }
