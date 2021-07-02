@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tempo;
+package Threads;
 
 /**
  *
  * @author domen
  */
-public class tempo {
+public class ThreadTempo {
 
     private static int minuti = 0;
     private static int ore = 0;
@@ -69,7 +69,7 @@ public class tempo {
     }
 
     public static void setAttivo(boolean attivo) {
-        tempo.attivo = attivo;
+        ThreadTempo.attivo = attivo;
     }
     
     

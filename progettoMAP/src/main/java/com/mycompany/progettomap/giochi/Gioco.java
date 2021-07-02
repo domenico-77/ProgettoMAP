@@ -29,7 +29,8 @@ import oggetti.Oggetto;
 import oggetti.OggettoContenitore;
 import oggetti.OggettoMaligno;
 import oggetti.Spada;
-import tempo.tempo;
+import Threads.ThreadTempo;
+import static menu.Help.stampaHelpPartita;
 import tipi.stanze.Porta;
 import tipi.stanze.TipoPorta;
 import tipi.Utilita;
@@ -101,6 +102,8 @@ public class Gioco extends DescrizioneGioco {
         Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna", "indietro"));
 
         Comando tempo = new Comando("tempo", TipoComando.tempo, Utilita.generaSetAlias("tempo", "time", "t"));
+        
+        Comando help = new Comando("help", TipoComando.help, Utilita.generaSetAlias("help","h","aiuto"));
 
         //stanze
         Stanza st1, st2, st3;
@@ -212,7 +215,7 @@ public class Gioco extends DescrizioneGioco {
 
         this.stanzaCorrente = this.stanze.get(0);
 
-        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo));
+        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo, help));
 
     }
 
@@ -608,16 +611,34 @@ public class Gioco extends DescrizioneGioco {
                 }
             } else if (p.getComando().getTipo() == TipoComando.tempo) {
                 calcolaTempo();
+                if(secondi<10 && minuti<10 && ore<10){
+                    System.out.println("Tempo passato: 0" + ore + ":0" + minuti + ":0" + secondi);
+                }else if(secondi>=10 && minuti<10 && ore<10){
+                    System.out.println("Tempo passato: 0" + ore + ":0" + minuti + ":" + secondi);
+                }else if(secondi<10 && minuti>=10 && ore<10){
+                    System.out.println("Tempo passato: 0" + ore + ":" + minuti + ":0" + secondi);
+                }else if(secondi<10 && minuti<10 && ore>=10){
+                    System.out.println("Tempo passato: 0" + ore + ":0" + minuti + ":" + secondi);
+                }else if(secondi>=10 && minuti>=10 && ore<10){
+                    System.out.println("Tempo passato: " + ore + ":" + minuti + ":0" + secondi);
+                }else if(secondi<10 && minuti>=10 && ore>=10){
+                    System.out.println("Tempo passato: 0" + ore + ":" + minuti + ":" + secondi);
+                }else if(secondi>=10 && minuti<10 && ore>=10){
+                    System.out.println("Tempo passato: " + ore + ":0" + minuti + ":" + secondi);
+                }else{
                 System.out.println("Tempo passato: " + ore + ":" + minuti + ":" + secondi);
+                }
+            }else if(p.getComando().getTipo() == TipoComando.help){
+                stampaHelpPartita();
             }
 
         }
     }
     
     public void calcolaTempo() {
-        int tempoS = tempo.getSecondi();
-        int tempoM = tempo.getMinuti();
-        int tempoO = tempo.getOre();
+        int tempoS = ThreadTempo.getSecondi();
+        int tempoM = ThreadTempo.getMinuti();
+        int tempoO = ThreadTempo.getOre();
         if (this.secondi + tempoS >= MAX_SEC) {
             this.secondi = (this.secondi + tempoS) - MAX_SEC;
             this.minuti++;
@@ -631,7 +652,7 @@ public class Gioco extends DescrizioneGioco {
             this.minuti += tempoM;
         }
         this.ore += tempoO;
-        tempo.reset();
+        ThreadTempo.reset();
     }
 
     @Override
