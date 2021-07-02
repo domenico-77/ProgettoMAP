@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Acer
  */
-
 package logicaGioco;
 
 import com.mycompany.progettomap.parser.ParserOutput;
@@ -18,6 +16,7 @@ import tipi.Comando;
 import java.io.PrintStream;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Stack;
 import tipi.Giocatore;
 
@@ -31,8 +30,47 @@ public abstract class DescrizioneGioco {
     protected Giocatore giocatore = new Giocatore(new ArrayList());
     protected Stanza stanzaCorrente;
     protected Stack<Stanza> PercorsoStanze = new Stack<>();
+    protected String nomeGiocatore;
+
+    public DescrizioneGioco(String nomeGiocatore) {
+        this.nomeGiocatore = nomeGiocatore;
+    }
+
+    public String getNomeGiocatore() {
+        return nomeGiocatore;
+    }
+
+    public void setNomeGiocatore(String nomeGiocatore) {
+        this.nomeGiocatore = nomeGiocatore;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.giocatore);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DescrizioneGioco other = (DescrizioneGioco) obj;
+        if (!Objects.equals(this.giocatore, other.giocatore)) {
+            return false;
+        }
+        return true;
+    }
     
-   
+    
+
     public Stanza getStanzaCorrente() {
         return stanzaCorrente;
     }
@@ -45,11 +83,10 @@ public abstract class DescrizioneGioco {
         return stanze;
     }
 
-
     public abstract void inizializza();
 
     public abstract void nextMove(ParserOutput p, PrintStream out);
-    
+
     public abstract void stampaStanze();
 
     public Stack<Stanza> getPercorsoStanze() {
@@ -67,7 +104,9 @@ public abstract class DescrizioneGioco {
     public void setGiocatore(Giocatore giocatore) {
         this.giocatore = giocatore;
     }
-    
+
     public abstract void gioca();
+
     
+
 }

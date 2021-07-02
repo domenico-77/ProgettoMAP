@@ -70,8 +70,15 @@ public class Menu {
                         Help.stampaHelpMenuGioco();
                         break;
                     case "inizia":
+                        
                         ThreadTempo.Time();
-                        DescrizioneGioco gioco = new Gioco();
+                        System.out.println("inserire il nome");
+                        if(scanner.hasNextLine()){
+                            answer = scanner.nextLine();
+                            answer.replaceAll(" +","");
+                        }
+                                                
+                        DescrizioneGioco gioco = new Gioco(answer);
                         gioco.gioca();
                         break;
                     case "continua":

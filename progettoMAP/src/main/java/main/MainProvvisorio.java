@@ -60,7 +60,8 @@ public class MainProvvisorio {
     }
 
     public static void main(String[] args) {
-        MainProvvisorio main = new MainProvvisorio(new Gioco());
+        String nome = "ciola";
+        MainProvvisorio main = new MainProvvisorio(new Gioco(nome));
         main.esegui();
     }
 

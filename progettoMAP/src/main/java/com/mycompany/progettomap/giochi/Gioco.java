@@ -54,6 +54,10 @@ public class Gioco extends DescrizioneGioco {
     
     static final int MAX_SEC = 60;
     static final int MAX_MIN = 60;
+
+    public Gioco(String nomeGiocatore) {
+        super(nomeGiocatore);
+    }
     
 
     @Override
