@@ -34,12 +34,12 @@ public class Help {
         System.out.println("+------------------ HELP ------------------+");
         System.out.println("In questa avventura potrai digitare diversi comandi per interagire con l'ambiente di gioco:");
         System.out.println("");
-        System.out.println("- 'osserva' per chiedere a Rin di descriverti la stanza, SEI UN CECO DI MERDA RICORDA!!! ");
-        System.out.println("- 'osserva' + il nome di un oggetto, per capire cos'è e a cosa serve ");
+        System.out.println("- 'osserva' per chiedere a Rin di descriverti la stanza");
+        System.out.println("- 'osserva' + il nome di un oggetto, per chiedere a Rin di descrivere l'oggetto ");
         System.out.println("");
         System.out.println("- nord, 'sud', 'est' e 'ovest' per spostarti da una stanza all'altra");
         System.out.println("N.B.");
-        System.out.println("Non sempre sarà possibile andare in qualsiasi direzione...attento alle porte chiuse...e sopratutto ai muri COGLIONE");
+        System.out.println("Non sempre sarà possibile andare in qualsiasi direzione...attento alle porte chiuse...e sopratutto ai muri!!!");
         System.out.println("");
         System.out.println("'prendi' + il nome dell'oggeto da raccogliere, per metterlo nel tuo inventario ");
         System.out.println("");
