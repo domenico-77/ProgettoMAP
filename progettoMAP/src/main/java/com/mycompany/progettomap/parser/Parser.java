@@ -43,6 +43,9 @@ public class Parser {
                     if (intOggetto == -1) {//Se non è stato trovato l'oggetto nella seconda posizione, provo a cercarlo nella terza posizione e cerco un oggetto dell'inventario nella seconda
                         intOggettoInv = Utilita.cercaOggetto(paroleComando.get(1), inventario);
                     }
+                    else if(intOggetto > -1 && paroleComando.size() >= 3){
+                        intOggettoInv = Utilita.cercaOggetto(paroleComando.get(2), inventario);
+                    }
                     if (intAzione > -1 && intOggetto > -1 && intOggettoInv > -1) {
                         comando = (new ParserOutput(azioni.get(intAzione), oggetti.get(intOggetto), inventario.get(intOggettoInv)));
                     } else if (intAzione > -1 && intOggetto > -1 && intOggettoInv == -1) {
@@ -68,6 +71,7 @@ public class Parser {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaOvest());
                                 }
                             }
+                            
 
                         } else if (paroleComando.size() >= 2) {
                             if(Utilita.cercaParola(paroleComando.get(1), Npc.getAlias()) && stanza.getNpc() != null){
