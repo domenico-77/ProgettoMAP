@@ -30,6 +30,8 @@ import oggetti.OggettoContenitore;
 import oggetti.OggettoMaligno;
 import oggetti.Spada;
 import Threads.ThreadTempo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static menu.Help.stampaHelpPartita;
 import tipi.stanze.Porta;
 import tipi.stanze.TipoPorta;
@@ -108,6 +110,8 @@ public class Gioco extends DescrizioneGioco {
         Comando tempo = new Comando("tempo", TipoComando.tempo, Utilita.generaSetAlias("tempo", "time", "t"));
         
         Comando help = new Comando("help", TipoComando.help, Utilita.generaSetAlias("help","h","aiuto"));
+        
+        Comando salva = new Comando("salva", TipoComando.salva, Utilita.generaSetAlias("salva", "salvataggio", "save", "s"));
 
         //stanze
         Stanza st1, st2, st3;
@@ -219,7 +223,7 @@ public class Gioco extends DescrizioneGioco {
 
         this.stanzaCorrente = this.stanze.get(0);
 
-        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo, help));
+        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo, help, salva));
 
     }
 
@@ -634,6 +638,12 @@ public class Gioco extends DescrizioneGioco {
                 }
             }else if(p.getComando().getTipo() == TipoComando.help){
                 stampaHelpPartita();
+            }else if(p.getComando().getTipo() == TipoComando.salva){
+                try {
+                    salvataggio.Serializzazione.scriviFile(this);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }
@@ -677,5 +687,16 @@ public class Gioco extends DescrizioneGioco {
             this.nextMove(p, System.out);
         }
 
+    }
+
+    @Override
+    public void continua() {
+         Parser parser = new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()) {
+            String command = scanner.nextLine();
+            ParserOutput p = parser.parse(command, this.giocatore.getListaMosse(), this.stanzaCorrente.getOggetiStanza(), this.giocatore.getInventario().getInventario(), stanzaCorrente);
+            this.nextMove(p, System.out);
+        }
     }
 }

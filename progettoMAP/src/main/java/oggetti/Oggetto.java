@@ -5,6 +5,7 @@
  */
 package oggetti;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -16,7 +17,7 @@ import tipi.stanze.Stanza;
  *
  * @author mtubi
  */
-public abstract class Oggetto {
+public abstract class Oggetto implements Serializable {
     protected String nome;
     protected Set<String> alias;
     protected boolean prendibile;

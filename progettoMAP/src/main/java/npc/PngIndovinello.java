@@ -5,6 +5,7 @@
  */
 package npc;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import oggetti.Oggetto;
 import tipi.Giocatore;
@@ -14,7 +15,7 @@ import tipi.Utilita;
  *
  * @author mtubi
  */
-public class PngIndovinello extends Npc {
+public class PngIndovinello extends Npc implements Serializable {
 
     private static final boolean NEUTRALE = true;
     private static final boolean SCONOSCIUTO = true;

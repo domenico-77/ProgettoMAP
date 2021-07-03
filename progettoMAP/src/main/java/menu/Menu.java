@@ -9,8 +9,10 @@ import Threads.ThreadGioco;
 import Threads.ThreadTempo;
 import com.mycompany.progettomap.giochi.Gioco;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Scanner;
 import logicaGioco.DescrizioneGioco;
+import salvataggio.Deserializzazione;
 import tipi.Utilita;
 
 /**
@@ -42,7 +44,7 @@ public class Menu {
                         isExiting = Utilita.chiediConferma("Si vuole davvero uscire?",
                                 "Alla prossima partita!", "Non si è usciti dal gioco.");
                         break;
-                  
+
                     default:
                         System.out.println("Comando inserito non valido.");
                         System.out.println("Per sapere quali comandi sono validi digitare help.");
@@ -58,6 +60,7 @@ public class Menu {
         boolean isExiting = false;
         String answer;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
+        DescrizioneGioco gioco;
         do {
             System.out.println("-------------------------------- Menu Di Gioco "
                     + "--------------------------------");
@@ -70,19 +73,18 @@ public class Menu {
                         Help.stampaHelpMenuGioco();
                         break;
                     case "inizia":
-                        
+
                         ThreadTempo.Time();
-                        System.out.println("inserire il nome");
-                        if(scanner.hasNextLine()){
-                            answer = scanner.nextLine();
-                            answer.replaceAll(" +","");
-                        }
-                                                
-                        DescrizioneGioco gioco = new Gioco(answer);
+                        gioco = Menu.creaPartita();
                         gioco.gioca();
                         break;
                     case "continua":
-                        System.out.println("da implementare");
+                        gioco = Deserializzazione.caricamento();
+                        if (gioco != null) {
+                            ThreadTempo.Time();
+                            gioco.continua();
+                        }
+
                         break;
 
                     case "indietro":
@@ -99,4 +101,28 @@ public class Menu {
 
         scanner.close();
     }
+
+    public static DescrizioneGioco creaPartita() {
+        List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        DescrizioneGioco partita;
+        boolean isExiting = false;
+        String answer = "";
+        Scanner scanner = new Scanner(new InputStreamReader(System.in));
+        do {
+            System.out.println("inserire il nome");
+            if (scanner.hasNextLine()) {
+                answer = scanner.nextLine();
+                answer = answer.replaceAll(" +", "");
+                for(DescrizioneGioco g : l){
+                    if(g.getNomeGiocatore().equals(answer)){
+                        isExiting = true;
+                        System.out.println("Esiste gia' una partita con questo nome, riprovare");
+                    }
+                }
+            }
+        } while (isExiting);
+        partita = new Gioco(answer);
+        return partita;
+    }
+
 }

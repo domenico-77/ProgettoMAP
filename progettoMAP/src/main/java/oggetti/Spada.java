@@ -5,6 +5,7 @@
  */
 package oggetti;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import tipi.Comando;
@@ -15,7 +16,7 @@ import tipi.stanze.Stanza;
  *
  * @author mtubi
  */
-public class Spada extends Oggetto {
+public class Spada extends Oggetto implements Serializable {
     
     private final static int USABILITA = 3;
     private final static boolean PRENDIBILE = true;

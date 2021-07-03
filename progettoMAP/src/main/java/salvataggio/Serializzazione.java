@@ -19,23 +19,25 @@ import logicaGioco.DescrizioneGioco;
  */
 public class Serializzazione {
     
-    public static List<DescrizioneGioco> creaLista(Gioco gioco){
-        List<DescrizioneGioco> l= new ArrayList<>();
-        l.add(gioco);
-        return l;
-    }
+   
     
-    public static void scriviLista(DescrizioneGioco partita) throws ClassNotFoundException{
+    public static void scriviFile(DescrizioneGioco partita) throws ClassNotFoundException{
         try {
             List<DescrizioneGioco> l = Deserializzazione.letturaFile();
             FileOutputStream fileOut = new FileOutputStream("./FileSalvataggio.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            DescrizioneGioco gioco = null;
             if(l.contains(partita)){
                 l.set(l.indexOf(partita), partita);
             }
-            else{
-                l.add(partita);
-            }
+            /*else{
+                for (DescrizioneGioco g : l) {
+                        if (g.getNomeGiocatore().equals(partita.getNomeGiocatore())) {
+                            gioco = g;
+                            
+                        }
+                    }
+            }*/
             out.writeObject(l);
             out.close();
             fileOut.close();

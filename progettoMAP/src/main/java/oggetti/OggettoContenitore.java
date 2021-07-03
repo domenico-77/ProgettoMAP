@@ -5,6 +5,7 @@
  */
 package oggetti;
 
+import java.io.Serializable;
 import oggetti.Oggetto;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import tipi.stanze.Stanza;
  *
  * @author mtubi
  */
-public class OggettoContenitore extends Oggetto {
+public class OggettoContenitore extends Oggetto implements Serializable {
 
     private final static boolean PRENDIBILE = false;
     private final static int DURABILITA = -1;

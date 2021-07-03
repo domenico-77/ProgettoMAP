@@ -5,6 +5,7 @@
  */
 package tipi;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
@@ -13,7 +14,7 @@ import java.util.Set;
  *
  * @author mtubi
  */
-public class Comando {
+public class Comando implements Serializable{
     private String nome;
     private TipoComando tipo;
     private Set<String> alias;

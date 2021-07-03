@@ -5,6 +5,7 @@
  */
 package npc;
 
+import java.io.Serializable;
 import oggetti.Oggetto;
 import tipi.Giocatore;
 
@@ -12,7 +13,7 @@ import tipi.Giocatore;
  *
  * @author mtubi
  */
-public abstract class Npc {
+public abstract class Npc implements Serializable{
     protected String nome;
     protected boolean vivo = true;
     protected boolean neutrale;

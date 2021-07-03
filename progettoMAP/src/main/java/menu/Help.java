@@ -44,6 +44,8 @@ public class Help {
         System.out.println("'prendi' + il nome dell'oggeto da raccogliere, per metterlo nel tuo inventario ");
         System.out.println("");
         System.out.println("Ci sono altri comandi tutti da scoprire, quando hai un oggetto pensa a cosa potresti farci");
+        System.out.println("");
+        System.out.println("Per salvare basterà digitare il comando 'salva'");
         System.out.println("+------------------ FINE HELP ------------------+");
     }
 }

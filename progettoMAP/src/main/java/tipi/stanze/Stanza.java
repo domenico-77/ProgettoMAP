@@ -5,6 +5,7 @@
  */
 package tipi.stanze;
 
+import java.io.Serializable;
 import tipi.stanze.Porta;
 import oggetti.Oggetto;
 import java.util.List;
@@ -14,7 +15,7 @@ import npc.Npc;
  *
  * @author mtubi
  */
-public class Stanza {
+public class Stanza implements Serializable{
 
     private static int numStanze = 0;
     private int id;

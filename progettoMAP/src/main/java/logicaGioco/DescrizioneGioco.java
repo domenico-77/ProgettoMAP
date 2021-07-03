@@ -14,6 +14,7 @@ import java.util.List;
 import tipi.stanze.Stanza;
 import tipi.Comando;
 import java.io.PrintStream;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -24,7 +25,7 @@ import tipi.Giocatore;
  *
  * @author Acer
  */
-public abstract class DescrizioneGioco {
+public abstract class DescrizioneGioco implements Serializable {
 
     protected final List<Stanza> stanze = new ArrayList<>();
     protected Giocatore giocatore = new Giocatore(new ArrayList());
@@ -107,6 +108,6 @@ public abstract class DescrizioneGioco {
 
     public abstract void gioca();
 
-    
+    public abstract void continua();
 
 }
