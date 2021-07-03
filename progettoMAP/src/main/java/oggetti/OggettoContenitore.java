@@ -23,7 +23,7 @@ import tipi.stanze.Stanza;
 public class OggettoContenitore extends Oggetto {
 
     private final static boolean PRENDIBILE = false;
-    private final static int DURABILITA = -1;
+    private final static int DURABILITA = 1;
     private boolean aperto = false;
     private List<Oggetto> listaOggetti = new ArrayList();
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.oggettoContenitore;
