@@ -24,6 +24,8 @@ public class ParserOutput {
     public ParserOutput(Comando comando, Oggetto oggetto) {
         this.comando = comando;
         this.oggetto = oggetto;
+        this.oggettoInv = null;
+        this.porta = null;
         this.npc = false;
     }
 
@@ -31,17 +33,23 @@ public class ParserOutput {
         this.comando = comando;
         this.oggetto = oggetto;
         this.oggettoInv = oggettoSec;
+        this.porta = null;
         this.npc = false;
     }
 
     public ParserOutput(Comando comando, Porta porta) {
         this.comando = comando;
         this.porta = porta;
+        this.oggetto = null;
+        this.oggettoInv = null;
         this.npc = false;
     }
 
     public ParserOutput(Comando comando, boolean npc) {
         this.comando = comando;
+        this.oggetto = null;
+        this.oggettoInv = null;
+        this.porta = null;
         this.npc = npc;
     }
 

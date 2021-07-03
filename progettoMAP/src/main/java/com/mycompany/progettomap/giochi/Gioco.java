@@ -251,14 +251,17 @@ public class Gioco extends DescrizioneGioco {
                     } else {
                         out.println("Rin: 'Non ho capito cosa fare, ripeti");
                     }
-                } else if (p.getOggetto() == Gioco.oggettoContenitore && p.getOggettoInv() == Gioco.chiaveOggettoContenitore && p.getPorta() == null && p.isNpc() == false) {
+                } else if (p.getOggetto().getTipo() != null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
+                    if (p.getOggetto().equals(Gioco.oggettoContenitore)) {
+                        this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(p.getOggetto())).usa(giocatore, stanzaCorrente);
+                    }
 
-                    this.giocatore.getInventario().usaOggetto(Gioco.chiaveOggettoContenitore, giocatore, stanzaCorrente);
-                    this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.oggettoContenitore)).usa(giocatore, stanzaCorrente);
-                } else if (p.getOggetto() == Gioco.oggettoContenitore && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
-                    this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(p.getOggetto())).usa(giocatore, stanzaCorrente);
-
-                } else if (p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
+                } else if (p.getOggetto() != null && p.getOggettoInv().getTipo() != null && p.getPorta() == null && p.isNpc() == false) {
+                    if (p.getOggetto().equals(Gioco.oggettoContenitore) && p.getOggettoInv().equals(Gioco.chiaveOggettoContenitore)) {
+                        this.giocatore.getInventario().usaOggetto(Gioco.chiaveOggettoContenitore, giocatore, stanzaCorrente);
+                        this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.oggettoContenitore)).usa(giocatore, stanzaCorrente);
+                    }
+                } else {
                     System.out.println("Rin : 'Non ho capito cosa vuoi aprire'");
                 }
             } else if (p.getComando().getTipo() == TipoComando.inventario) {
@@ -345,32 +348,75 @@ public class Gioco extends DescrizioneGioco {
                     } else {
                         System.out.println("Tempo passato: " + ore + ":" + minuti + ":" + secondi);
                     }
-                } else if (p.getComando().getTipo() == TipoComando.accendere) {
-                    if (p.getOggetto() == null && p.getPorta() == null && p.isNpc() == false) {
-                        if (p.getOggettoInv().getTipo() == TipoOggetto.candela) {
+                }
+
+            } else if (p.getComando().getTipo() == TipoComando.accendere) {
+                if (p.getOggetto() == null && p.getPorta() == null && p.isNpc() == false) {
+                    if (p.getOggettoInv() != null) {
+                        if (p.getOggettoInv().equals(Gioco.candela)) {
                             if (this.giocatore.getInventario().contieneOggetto(Gioco.candela)) {
                                 this.giocatore.getInventario().usaOggetto(Gioco.candela, giocatore, stanzaCorrente);
                             } else {
                                 out.println("Rin: 'Non hai una candela da accendere'");
                             }
-                        } else {
-                            if (this.giocatore.getInventario().contieneOggetto(Gioco.candela)) {
-                                if (Utilita.chiediConferma("Rin: 'Intendevi candela, vuoi accenderla?'", "Rin: 'Proviamo ad accenderla'", "Rin: 'Ricordati che non puoi accendere altri oggetti, che non siano candela'")) {
-                                    this.giocatore.getInventario().usaOggetto(Gioco.candela, giocatore, stanzaCorrente);
-                                }
-                            } else {
-                                out.println("Rin: 'Non puoi accendere niete, apparte una candela che non abbiamo'");
+                        } else if (this.giocatore.getInventario().contieneOggetto(Gioco.candela)) {
+                            if (Utilita.chiediConferma("Rin: 'Intendevi candela, vuoi accenderla?'", "Rin: 'Proviamo ad accenderla'", "Rin: 'Ricordati che non puoi accendere altri oggetti, che non siano candela'")) {
+                                this.giocatore.getInventario().usaOggetto(Gioco.candela, giocatore, stanzaCorrente);
                             }
+                        } else {
+                            out.println("Rin: 'Non puoi accendere niete, apparte una candela che non abbiamo'");
                         }
-
                     } else {
-                        out.println("Rin: 'non ho capito cosa fare'");
+                        if (this.giocatore.getInventario().contieneOggetto(Gioco.candela)) {
+                            if (Utilita.chiediConferma("Rin: 'Intendevi candela, vuoi accenderla?'", "Rin: 'Proviamo ad accenderla'", "Rin: 'Ricordati che non puoi accendere altri oggetti, che non siano candela'")) {
+                                this.giocatore.getInventario().usaOggetto(Gioco.candela, giocatore, stanzaCorrente);
+                            }
+                        } else {
+                            out.println("Rin: 'Non puoi accendere niete, apparte una candela che non abbiamo'");
+                        }
                     }
+
                 } else {
                     out.println("Rin: 'non ho capito cosa fare'");
                 }
-
-            } else {
+            }
+            else if(p.getComando().getTipo() == TipoComando.mangiare){
+                if(p.getOggettoInv() != null && p.getOggetto() == null && p.getPorta() == null && p.isNpc() == false){
+                    if(p.getOggettoInv().getTipo() == TipoOggetto.cibo){
+                        this.giocatore.getInventario().usaOggetto(p.getOggettoInv(), giocatore, stanzaCorrente);
+                    }
+                    else{
+                        if(this.giocatore.getInventario().contieneOggetto(Gioco.cibo)){
+                            if(Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?", "Rin: 'Va bene, mangiamolo'", "Rin: 'Ricordati che non puoi mangiare altri oggetti, che non sono cibo")){
+                                this.giocatore.getInventario().usaOggetto(Gioco.cibo, giocatore, stanzaCorrente);
+                            }
+                        }
+                        else{
+                            out.println("Rin: 'Non abbiamo niente da mangiare, moriremo di fame!!");
+                        }
+                    }
+                }
+                else if(p.getOggettoInv() == null && p.getOggetto() != null && p.getPorta() == null && p.isNpc() == false){
+                    if(p.getOggetto().getTipo() == TipoOggetto.cibo){
+                        this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.cibo)).usa(giocatore, stanzaCorrente);
+                    }
+                    else{
+                        if(this.stanzaCorrente.getOggetiStanza().contains(Gioco.cibo)){
+                            if(Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?", "Rin: 'Va bene, mangiamolo'", "Rin: 'Almeno raccogliamolo, non si butta mai il cibo")){
+                                this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.cibo)).usa(giocatore, stanzaCorrente);
+                            }
+                        }
+                        else{
+                            out.println("Rin: 'Non abbiamo niente da mangiare, moriremo di fame!!");
+                        }
+                    }
+                }
+                else{
+                    System.out.println("Rin: 'Non ho capito cosa mangiare'");
+                }
+            }
+            
+            else {
                 out.println("Rin: 'non ho capito cosa fare'");
             }
 
