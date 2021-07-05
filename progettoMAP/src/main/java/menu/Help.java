@@ -12,20 +12,20 @@ package menu;
 public class Help {
     
 
-    public static void stampaHelpMenuInizio() {
+    /*public static void stampaHelpMenuInizio() {
         System.out.println("");
         System.out.println("+------------------ HELP ------------------+");
         System.out.println("Digitare 'gioca' per iniziare una nuova partita o caricarne una già avviata");
         System.out.println("Digitare 'esci' se si vuole chiudetere il gioco");
         System.out.println("+------------------ FINE HELP ------------------+");
-    }
+    }*/
     
     public static void stampaHelpMenuGioco(){
         System.out.println("");
         System.out.println("+------------------ HELP ------------------+");
         System.out.println("Digitare 'inizia' per iniziare una nuova avventura");
         System.out.println("Digitare 'continua' per avviare una partita già iniziata");
-        System.out.println("Digitare 'indietro' per tornare al menù di inizio");
+        System.out.println("Digitare 'esci' per terminare l' applicazione");
         System.out.println("+------------------ FINE HELP ------------------+");
     }
     

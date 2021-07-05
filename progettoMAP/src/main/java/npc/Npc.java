@@ -22,7 +22,7 @@ public abstract class Npc implements Serializable{
     protected boolean neutrale;
     protected Oggetto oggetto;
     protected boolean sconosciuto = true;
-    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano", "prigioniero"};
+    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano", "prigioniero", "sconosciuto"};
 
     public Npc(String nome, Oggetto oggetto, boolean neutrale) {
         this.nome = nome;

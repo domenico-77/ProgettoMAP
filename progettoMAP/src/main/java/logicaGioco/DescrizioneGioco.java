@@ -28,10 +28,14 @@ import tipi.Giocatore;
 public abstract class DescrizioneGioco implements Serializable {
 
     protected final List<Stanza> stanze = new ArrayList<>();
+    protected static int numPartite;
+    protected int id;
     protected Giocatore giocatore = new Giocatore(new ArrayList());
     protected Stanza stanzaCorrente;
     protected Stack<Stanza> PercorsoStanze = new Stack<>();
     protected String nomeGiocatore;
+    protected boolean finita = false;
+    protected boolean sospesa = false;
 
     public DescrizioneGioco(String nomeGiocatore) {
         this.nomeGiocatore = nomeGiocatore;
@@ -45,6 +49,24 @@ public abstract class DescrizioneGioco implements Serializable {
         this.nomeGiocatore = nomeGiocatore;
     }
 
+    public boolean isFinita() {
+        return finita;
+    }
+
+    public void setFinita(boolean finita) {
+        this.finita = finita;
+    }
+
+    public boolean isSospesa() {
+        return sospesa;
+    }
+
+    public void setSospesa(boolean sospesa) {
+        this.sospesa = sospesa;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -109,5 +131,7 @@ public abstract class DescrizioneGioco implements Serializable {
     public abstract void gioca();
 
     public abstract void continua();
+    
+
 
 }

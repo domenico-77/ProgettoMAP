@@ -22,7 +22,7 @@ import tipi.Utilita;
  */
 public class Menu {
 
-    public static void MenuInizio() throws FileNotFoundException {
+    /*public static void MenuInizio() throws FileNotFoundException {
         boolean isExiting = false;
         String answer;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
@@ -32,15 +32,14 @@ public class Menu {
             System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
             if (scanner.hasNextLine()) {
                 answer = scanner.nextLine();
-                answer = answer.replaceAll(" +", "");
+                answer = answer.replaceAll("\\s+", "");
                 switch (answer.toLowerCase()) {
                     case "help":
                         Help.stampaHelpMenuInizio();
                         break;
                     case "gioca":
-                        menuDiGioco();
+                        Menu.menuDiGioco();
                         break;
-
                     case "esci":
                         isExiting = Utilita.chiediConferma("Si vuole davvero uscire?",
                                 "Alla prossima partita!", "Non si è usciti dal gioco.");
@@ -55,7 +54,7 @@ public class Menu {
         } while (!isExiting);
 
         scanner.close();
-    }
+    }*/
 
     public static void menuDiGioco() throws FileNotFoundException {
         boolean isExiting = false;
@@ -66,17 +65,18 @@ public class Menu {
             System.out.println("-------------------------------- Menu Di Gioco "
                     + "--------------------------------");
             System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
+
             if (scanner.hasNextLine()) {
                 answer = scanner.nextLine();
                 answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "help":
                         Help.stampaHelpMenuGioco();
+                        isExiting = false;
                         break;
                     case "inizia":
-
-                        ThreadTempo.Time();
                         gioco = Menu.creaPartita();
+                        ThreadTempo.Time();
                         gioco.gioca();
                         break;
                     case "continua":
@@ -91,8 +91,9 @@ public class Menu {
                         Deserializzazione.cancellaPartita();
                         break;
 
-                    case "indietro":
-                        MenuInizio();
+                    case "esci":
+                        isExiting = Utilita.chiediConferma("Si vuole davvero uscire?",
+                                "Alla prossima partita!", "Non si è usciti dal gioco.");
                         break;
 
                     default:
