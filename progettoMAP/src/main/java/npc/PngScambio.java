@@ -17,16 +17,14 @@ public class PngScambio extends Npc {
 
     private static final boolean NEUTRALE = true;
     private static final boolean ACCONTENTATO = false;
-    private static final boolean SCONOSCIUTO = true;
 
     private boolean accontentato;
-    private Oggetto oggettoRichiesto;
+    private final Oggetto oggettoRichiesto;
 
     public PngScambio(String nome, Oggetto oggetto, Oggetto oggettoRichiesto) {
         super(nome, oggetto, NEUTRALE);
         this.oggettoRichiesto = oggettoRichiesto;
         this.accontentato = PngScambio.ACCONTENTATO;
-        this.sconosciuto = PngScambio.SCONOSCIUTO;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class PngScambio extends Npc {
             if (this.oggetto != null) {
                 System.out.println(this.nome + ": 'Tieni questo è quello che posso darti, per aiutarti nella tua fuga'");
                 giocatore.getInventario().aggiungiOggetto(this.oggetto);
-                System.out.println("Hai ottenuto: " + this.nome);
+                System.out.println("Hai ottenuto: " + this.oggetto.getNome());
                 this.oggetto = null;
             } else {
                 System.out.println(this.nome + ": 'Ti ho gia' dato tutto cio' che era in mio possesso, cos'altro vuoi ahahahahah'");
@@ -66,7 +64,7 @@ public class PngScambio extends Npc {
                     this.interagisci(giocatore);
                 }
             } else {
-                System.out.println(this.nome + ": 'Se mi porti " + this.oggettoRichiesto + " in cambio ti daro' un altra cosa'");
+                System.out.println(this.nome + ": 'Se mi porti " + this.oggettoRichiesto.getNome() + " in cambio ti daro' un altra cosa'");
                 if (giocatore.getInventario().contieneOggetto(this.oggettoRichiesto)) {
                     if (Utilita.chiediConferma("Rin: 'Abbiamo questo oggetto, vuoi darglielo?'", "Rin: 'Ecco l'oggetto promesso, ora mantieni la tua promessa'", this.nome + ": 'Nel caso cambi idea io sono sempre qui'")) {
                         giocatore.getInventario().rimuoviOggetto(this.oggettoRichiesto);

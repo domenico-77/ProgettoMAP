@@ -68,6 +68,8 @@ public class Stanza implements Serializable{
     public List<Oggetto> getOggetiStanza() {
         return oggettiStanza;
     }
+    
+    
 
     public static void setNumStanze(int numStanze) {
         Stanza.numStanze = numStanze;
@@ -111,6 +113,10 @@ public class Stanza implements Serializable{
 
     public void setNpc(Npc npc) {
         this.npc = npc;
+    }
+
+    public String getNomeStanza() {
+        return nomeStanza;
     }
     
     

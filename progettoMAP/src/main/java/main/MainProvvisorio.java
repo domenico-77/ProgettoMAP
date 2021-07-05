@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.Timer;
 
 import logicaGioco.DescrizioneGioco;
+import npc.Npc;
 import tipi.Comando;
 import tipi.TipoComando;
 import tipi.Utilita;

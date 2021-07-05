@@ -93,6 +93,10 @@ public abstract class Oggetto implements Serializable {
         }
         return true;
     }
+
+    public TipoOggetto getTipo() {
+        return tipo;
+    }
     
     
 

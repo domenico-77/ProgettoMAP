@@ -6,6 +6,9 @@
 package npc;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import oggetti.Oggetto;
 import tipi.Giocatore;
 
@@ -18,8 +21,8 @@ public abstract class Npc implements Serializable{
     protected boolean vivo = true;
     protected boolean neutrale;
     protected Oggetto oggetto;
-    protected boolean sconosciuto;
-    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano"};
+    protected boolean sconosciuto = true;
+    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano", "prigioniero"};
 
     public Npc(String nome, Oggetto oggetto, boolean neutrale) {
         this.nome = nome;
@@ -63,7 +66,16 @@ public abstract class Npc implements Serializable{
         return alias;
     }
     
-    
+    public List<String> getAliasNome(){
+        List<String> aliasNome = new ArrayList();
+        for(String a : Npc.alias){
+            aliasNome.add(a);
+        }
+        if(!this.sconosciuto){
+            aliasNome.add(this.nome.toLowerCase());
+        }
+        return aliasNome;
+    }
     
     public abstract void interagisci(Giocatore giocatore);
 }

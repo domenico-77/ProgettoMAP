@@ -18,7 +18,8 @@ import tipi.stanze.Stanza;
  *
  * @author mtubi
  */
-public class ChiavePorta extends Oggetto{
+public class ChiavePorta extends Oggetto {
+
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = -1;
     private final TipoPorta materiale;
@@ -28,30 +29,37 @@ public class ChiavePorta extends Oggetto{
         super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
         this.materiale = materiale;
     }
-    
+
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
         Porta porta = stanza.getPortaNord();
-        if(porta.getTipo() == this.materiale){
+        if (porta.getTipo() == this.materiale) {
             porta.setChiusa(false);
+            System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
             porta.getStanza().getPortaSud().setChiusa(false);
         }
-        
+
         porta = stanza.getPortaSud();
-        if (porta.getTipo() == this.materiale){
+        if (porta.getTipo() == this.materiale) {
             porta.setChiusa(false);
+            System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
+
             porta.getStanza().getPortaNord().setChiusa(false);
         }
-        
+
         porta = stanza.getPortaOvest();
-        if(porta.getTipo() == this.materiale){
+        if (porta.getTipo() == this.materiale) {
             porta.setChiusa(false);
+            System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
+
             porta.getStanza().getPortaEst().setChiusa(false);
         }
-        
+
         porta = stanza.getPortaEst();
-        if(porta.getTipo() == this.materiale){
+        if (porta.getTipo() == this.materiale) {
             porta.setChiusa(false);
+            System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
+
             porta.getStanza().getPortaOvest().setChiusa(false);
         }
     }
@@ -82,7 +90,5 @@ public class ChiavePorta extends Oggetto{
     public static TipoOggetto getTIPO_OGGETTO() {
         return TIPO_OGGETTO;
     }
-    
-    
-    
+
 }

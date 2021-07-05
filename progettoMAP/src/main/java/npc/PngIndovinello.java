@@ -18,18 +18,16 @@ import tipi.Utilita;
 public class PngIndovinello extends Npc implements Serializable {
 
     private static final boolean NEUTRALE = true;
-    private static final boolean SCONOSCIUTO = true;
     private static final String RISPOSTA_A = "a";
     private static final String RISPOSTA_B = "b";
     private static final String RISPOSTA_C = "c";
 
-    private String indovinello;
-    private String rispostaA;
-    private String rispostaB;
-    private String rispostaC;
-    private String rispostaEsatta;
+    private final String indovinello;
+    private final String rispostaA;
+    private final String rispostaB;
+    private final String rispostaC;
+    private final String rispostaEsatta;
     private boolean accontentato = false;
-    private boolean sconosciuto = false;
 
     public PngIndovinello(String nome, Oggetto oggetto, String indovinello, String rispostaA, String rispostaB, String rispostaC, String rispostaEsatta) {
         super(nome, oggetto, NEUTRALE);
@@ -63,7 +61,7 @@ public class PngIndovinello extends Npc implements Serializable {
                 if (this.oggetto != null) {
                     System.out.println(this.nome + ": 'Tieni questo è quello che posso darti, per aiutarti nella tua fuga'");
                     giocatore.getInventario().aggiungiOggetto(this.oggetto);
-                    System.out.println("Hai ottenuto: " + this.nome);
+                    System.out.println("Hai ottenuto: " + this.oggetto.getNome());
                     this.oggetto = null;
                 } else {
                     System.out.println(this.nome + ": 'Ti ho gia' dato tutto cio' che era in mio possesso, cos'altro vuoi ahahahahah'");

@@ -38,7 +38,7 @@ public class Cibo extends Oggetto {
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
         if (this.usabilita > 0) {
-            if (giocatore.getVitaCorrente() != giocatore.getVitaMax()) {
+            if (giocatore.getVitaCorrente() < giocatore.getVitaMax()) {
                 giocatore.incrementaVita(this.rigenerazione);
                 System.out.println("Rin: 'Hai recuperato della vita'");
                 this.usabilita--;
@@ -47,10 +47,10 @@ public class Cibo extends Oggetto {
                 }
             }
             else{
-                System.out.println("Rin: 'Sei al pieno delle tue forze, risparmia"+this.nome+"per comabattimenti futuri");
+                System.out.println("Rin: 'Sei al pieno delle tue forze, risparmia "+this.nome+" per comabattimenti futuri");
             }
         } else {
-            System.out.println("Non puoi usare questo oggetto");
+            System.out.println("Rin : 'Non puoi usare questo oggetto poichè ha finito le usabilità'");
         }
     }
 
