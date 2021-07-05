@@ -78,7 +78,7 @@ public class Mob extends Npc{
                         if(this.distanza == 0){
                             System.out.println(this.nome + "'Prendi questo, MALEDETTO!!!'");
                             giocatore.decrementaVita(this.danno);
-                            this.distanza = Mob.DANNO;
+                            this.distanza = Mob.DISTANZA;
                             if(giocatore.getVitaCorrente() == 0){
                                 System.out.println(this.nome + "'La prossima volta attento a quello che fai, non puoi metterti contro l'inperatore'");
                             }

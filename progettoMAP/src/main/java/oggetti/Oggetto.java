@@ -92,6 +92,10 @@ public abstract class Oggetto {
         }
         return true;
     }
+
+    public TipoOggetto getTipo() {
+        return tipo;
+    }
     
     
 

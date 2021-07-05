@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.Timer;
 
 import logicaGioco.DescrizioneGioco;
+import npc.Npc;
 import tipi.Comando;
 import tipi.TipoComando;
 import tipi.Utilita;
@@ -53,7 +54,7 @@ public class MainProvvisorio {
          */
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-            ParserOutput p = parser.parse(command, gioco.getGiocatore().getListaMosse(), gioco.getStanzaCorrente().getOggetiStanza(), gioco.getGiocatore().getInventario().getInventario(), gioco.getStanzaCorrente());
+            ParserOutput p = parser.parse(command, gioco.getGiocatore().getListaMosse(), gioco.getStanzaCorrente().getOggetiStanza(), gioco.getGiocatore().getInventario().getInventario(), gioco.getStanzaCorrente(), Npc.getAlias());
 
             gioco.nextMove(p, System.out);
         }

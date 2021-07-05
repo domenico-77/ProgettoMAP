@@ -23,7 +23,7 @@ import tipi.stanze.Stanza;
 public class OggettoContenitore extends Oggetto {
 
     private final static boolean PRENDIBILE = false;
-    private final static int DURABILITA = -1;
+    private final static int DURABILITA = 1;
     private boolean aperto = false;
     private List<Oggetto> listaOggetti = new ArrayList();
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.oggettoContenitore;
@@ -69,11 +69,10 @@ public class OggettoContenitore extends Oggetto {
         if (this.aperto) {
             if (!this.contenitoreVuoto()) {
                 this.listaOggetti.forEach(o -> {
-                    if(o.prendibile){
-                        System.out.println("Rin: 'Hai raccolto "+o.nome+"'");
+                    if (o.prendibile) {
+                        System.out.println("Rin: 'Hai raccolto " + o.nome + "'");
                         inventario.aggiungiOggetto(o);
-                    }
-                    else{
+                    } else {
                         o.usa(giocatore, stanza);
                     }
                 });
@@ -82,22 +81,29 @@ public class OggettoContenitore extends Oggetto {
                 System.out.println("Rin: 'Non c'è nessun oggetto all'interno'");
             }
         } else {
-            System.out.println("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");
+            Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("Grimaldello", null);
+            if (giocatore.getInventario().contieneOggetto(chiaveOggettoContenitore)) {
+                if (Utilita.chiediConferma("Rin: 'Lo scrigno e' chiuso, abbiamo un grimaldello, vogliamo usarlo per aprire lo scrigno?'", "Rin: 'Perfetto, vediamo cosa c'e' dentro'", "Rin: 'Nel caso cambi idea, possiamo tornare piu' tardi'")) {
+                    giocatore.getInventario().usaOggetto(chiaveOggettoContenitore, giocatore, stanza);
+                    this.usa(giocatore, stanza);
+                }
+            } else {
+                System.out.println("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");
+            }
         }
     }
 
     @Override
     public void descrizioneOggetto() {
-            if (this.aperto) {
-                if(this.listaOggetti.isEmpty()){
-                    System.out.println("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
-                }
-                else{
-                System.out.println("Rin: 'Lo scrigno è aperto, prendiamo quello che c'è dentro'");
-                }
+        if (this.aperto) {
+            if (this.listaOggetti.isEmpty()) {
+                System.out.println("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
             } else {
-                System.out.println("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
+                System.out.println("Rin: 'Lo scrigno è aperto, prendiamo quello che c'è dentro'");
             }
+        } else {
+            System.out.println("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
+        }
     }
 
     public static boolean isPRENDIBILE() {
