@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import npc.PngIndovinello;
 import npc.PngScambio;
 import java.util.Scanner;
+import npc.Npc;
 import oggetti.Affilatore;
 import oggetti.Candela;
 import oggetti.ChiaveOggettoContenitore;
@@ -59,14 +60,14 @@ public class Gioco extends DescrizioneGioco {
     public void inizializza() {
 
         //comandi
-        Comando nord = new Comando("nord", TipoComando.nord, Utilita.generaSetAlias("n", "su", "sopra", "sù", "nord"));
+        Comando nord = new Comando("nord", TipoComando.nord, Utilita.generaSetAlias("su", "sopra", "sù", "nord"));
 
         //aggiungere comando alla lista di comandi di descrizioneGioco?
-        Comando sud = new Comando("sud", TipoComando.sud, Utilita.generaSetAlias("s", "giu", "sotto", "giù", "sud"));
+        Comando sud = new Comando("sud", TipoComando.sud, Utilita.generaSetAlias("giu", "sotto", "giù", "sud"));
 
-        Comando est = new Comando("est", TipoComando.est, Utilita.generaSetAlias("e", "destrra", "est"));
+        Comando est = new Comando("est", TipoComando.est, Utilita.generaSetAlias("destra", "est"));
 
-        Comando ovest = new Comando("ovest", TipoComando.ovest, Utilita.generaSetAlias("o", "sinistra", "ovest"));
+        Comando ovest = new Comando("ovest", TipoComando.ovest, Utilita.generaSetAlias("sinistra", "ovest"));
 
         Comando fine = new Comando("fine", TipoComando.fine, Utilita.generaSetAlias("end", "termina", "esci", "exit", "chiudi", "muori", "abbandona", "fine"));
 
@@ -101,6 +102,8 @@ public class Gioco extends DescrizioneGioco {
         Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna", "indietro"));
 
         Comando tempo = new Comando("tempo", TipoComando.tempo, Utilita.generaSetAlias("tempo", "time", "t"));
+        
+        Comando interagire = new Comando("interagisre", TipoComando.interagire, Utilita.generaSetAlias("parla", "comunica", "interagisci","parlare","comunicare","interagine"));
 
         //stanze
         Stanza st1, st2, st3;
@@ -212,7 +215,7 @@ public class Gioco extends DescrizioneGioco {
 
         this.stanzaCorrente = this.stanze.get(0);
 
-        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo));
+        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo, interagire));
 
     }
 
@@ -415,6 +418,16 @@ public class Gioco extends DescrizioneGioco {
                     System.out.println("Rin: 'Non ho capito cosa mangiare'");
                 }
             }
+            else if(p.getComando().getTipo() == TipoComando.interagire){
+                if(p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null){
+                    if(p.isNpc() == true && this.stanzaCorrente.getNpc() != null){
+                        this.stanzaCorrente.getNpc().interagisci(giocatore);
+                    }
+                }
+                else{
+                    out.println("Rin: 'non ho capito cosa devo fare'");
+                }
+            }
             
             else {
                 out.println("Rin: 'non ho capito cosa fare'");
@@ -459,7 +472,7 @@ public class Gioco extends DescrizioneGioco {
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-            ParserOutput p = parser.parse(command, this.giocatore.getListaMosse(), this.stanzaCorrente.getOggetiStanza(), this.giocatore.getInventario().getInventario(), stanzaCorrente);
+            ParserOutput p = parser.parse(command, this.giocatore.getListaMosse(), this.stanzaCorrente.getOggetiStanza(), this.giocatore.getInventario().getInventario(), stanzaCorrente, Npc.getAlias());
             this.nextMove(p, System.out);
         }
 

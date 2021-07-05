@@ -67,6 +67,8 @@ public class Stanza {
     public List<Oggetto> getOggetiStanza() {
         return oggettiStanza;
     }
+    
+    
 
     public static void setNumStanze(int numStanze) {
         Stanza.numStanze = numStanze;
