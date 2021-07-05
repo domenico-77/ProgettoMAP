@@ -8,6 +8,7 @@ package menu;
 import Threads.ThreadGioco;
 import Threads.ThreadTempo;
 import com.mycompany.progettomap.giochi.Gioco;
+import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +22,7 @@ import tipi.Utilita;
  */
 public class Menu {
 
-    public static void MenuInizio() {
+    public static void MenuInizio() throws FileNotFoundException {
         boolean isExiting = false;
         String answer;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
@@ -56,7 +57,7 @@ public class Menu {
         scanner.close();
     }
 
-    public static void menuDiGioco() {
+    public static void menuDiGioco() throws FileNotFoundException {
         boolean isExiting = false;
         String answer;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
@@ -84,7 +85,10 @@ public class Menu {
                             ThreadTempo.Time();
                             gioco.continua();
                         }
+                        break;
 
+                    case "cancella":
+                        Deserializzazione.cancellaPartita();
                         break;
 
                     case "indietro":
@@ -109,15 +113,21 @@ public class Menu {
         String answer = "";
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         do {
+            isExiting = false;
             System.out.println("inserire il nome");
             if (scanner.hasNextLine()) {
                 answer = scanner.nextLine();
-                answer = answer.replaceAll(" +", "");
-                for(DescrizioneGioco g : l){
-                    if(g.getNomeGiocatore().equals(answer)){
-                        isExiting = true;
-                        System.out.println("Esiste gia' una partita con questo nome, riprovare");
+                answer = answer.replaceAll("\\s+", "");
+                if (!answer.isEmpty()) {
+                    for (DescrizioneGioco g : l) {
+                        if (g.getNomeGiocatore().equals(answer)) {
+                            isExiting = true;
+                            System.out.println("Esiste gia' una partita con questo nome, riprovare");
+                        }
                     }
+                } else {
+                    isExiting = true;
+                    System.out.println("Nome inserito non valido");
                 }
             }
         } while (isExiting);

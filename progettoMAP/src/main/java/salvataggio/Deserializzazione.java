@@ -8,6 +8,7 @@ package salvataggio;
 import com.mycompany.progettomap.giochi.Gioco;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,9 +29,9 @@ public class Deserializzazione {
     public static List<DescrizioneGioco> letturaFile() {
         List<DescrizioneGioco> l = new ArrayList();
         try {
-            FileInputStream fileIn = new FileInputStream("./FileSalvataggio.ser");
+            FileInputStream fileIn = new FileInputStream("./risorse/FileSalvataggio.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            BufferedReader br = new BufferedReader(new FileReader("./FileSalvataggio.ser"));
+            BufferedReader br = new BufferedReader(new FileReader("./risorse/FileSalvataggio.ser"));
             if (br.readLine() != null) {
                 l = (List<DescrizioneGioco>) in.readObject();
             }
@@ -64,27 +65,27 @@ public class Deserializzazione {
                     }
                 } while (nome.isEmpty());
                 gioco = new Gioco(nome);
+                gioco.inizializza();
             }
 
         } else {
-            visualizzaPartite(l);
+            Deserializzazione.visualizzaPartite(l);
             Boolean risposta = false;
-            DescrizioneGioco prova;
             do {
                 nome = scanner.nextLine();
                 if (nome.isEmpty()) {
                     System.out.println("Nome inserito non valido, reinserirne un altro");
                     risposta = true;
                 } else {
-                    /*prova = new Gioco(nome);
-                        if(l.contains(prova)){
-                           gioco = l.get(l.indexOf(prova));
-                           risposta = false;*/
+                    int i = -1;
                     for (DescrizioneGioco g : l) {
                         if (g.getNomeGiocatore().equals(nome)) {
-                            gioco = g;
-                            
+                            i = l.indexOf(g);
                         }
+                    }
+                    if (i != -1) {
+                        gioco = l.get(i);
+                        risposta = false;
                     }
                     if (gioco == null) {
                         if (Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco")) {
@@ -109,4 +110,48 @@ public class Deserializzazione {
         });
     }
 
+    public static void cancellaPartita() throws FileNotFoundException {
+        List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        if (l.isEmpty()) {
+            System.out.println("Non ci sono partite salvate");
+        } else {
+            Scanner scanner = new Scanner(new InputStreamReader(System.in));
+            String nome;
+            Deserializzazione.visualizzaPartite(l);
+            boolean risposta = false;
+            do {
+                if (scanner.hasNextLine()) {
+                    nome = scanner.nextLine();
+                    if (nome.isEmpty()) {
+                        if (Utilita.chiediConferma("Nome inserito non valido, vuoi riprovare?", "inserisci il nome della partita che vuoi cancellare fra le partite elencate", "ritorno al menu di gioco")) {
+                            risposta = true;
+                        }
+                    } else {
+                        int i = -1;
+                        for (DescrizioneGioco g : l) {
+                            if (g.getNomeGiocatore().equals(nome)) {
+                                i = l.indexOf(g);
+                            }
+                        }
+                        if (i != -1) {
+                            if (Utilita.chiediConferma("Sei sicuro di voler cancellare la pertita " + l.get(i).getNomeGiocatore(), "Cancellazione effettuata", "Annullata la cancellazione della partita " + l.get(i).getNomeGiocatore())) {
+                                l.remove(i);
+                                Serializzazione.scriviFileLista(l);
+                            }
+                            risposta = false;
+                        }
+                        else{
+                            if(Utilita.chiediConferma("Partita non trovate, vuoi  riprovare?", "inserisci il nome della partita che vuoi cancellare fra le partite elencate", "ritorno al menu di gioco")){
+                                risposta = true;
+                            }
+                            else {
+                                risposta = false;
+                            }
+                        }
+                    }
+                }
+            } while (risposta);
+
+        }
+    }
 }

@@ -691,6 +691,7 @@ public class Gioco extends DescrizioneGioco {
 
     @Override
     public void continua() {
+        System.out.println("sono entrato");
          Parser parser = new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
