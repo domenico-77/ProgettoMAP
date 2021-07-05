@@ -5,6 +5,7 @@
  */
 package oggetti;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 import tipi.Comando;
@@ -15,7 +16,7 @@ import tipi.stanze.Stanza;
  *
  * @author mtubi
  */
-public class OggettoMaligno extends Oggetto{
+public class OggettoMaligno extends Oggetto implements Serializable{
     private final static boolean PRENDIBILE = false;
     private final static int DURABILITA = 1;
     private final int danno;

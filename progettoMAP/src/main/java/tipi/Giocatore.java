@@ -8,13 +8,14 @@ package tipi;
 import oggetti.OggettoContenitore;
 import oggetti.Oggetto;
 import com.mycompany.progettomap.parser.ParserOutput;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author mtubi
  */
-public class Giocatore {
+public class Giocatore implements Serializable{
     private final static int VITA_INIZIO = 100;
     private int vitaMax = VITA_INIZIO;
     private int vitaCorrente = VITA_INIZIO;

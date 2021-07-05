@@ -36,7 +36,7 @@ public class PngScambio extends Npc {
             } else {
                 nomeNpc = this.nome;
             }
-            if (Utilita.chiediConferma("Rin: '" + nomeNpc + " e' morto, vuoi controllare se aveva qualcosa di utile?'", "Rin: 'Va bene, controlliamo il suo corpo'", "Rin: 'Andiamocene prima che il suo corpo inizi a puzzare!'")) {
+            if (Utilita.chiediConferma("Rin: '" + nomeNpc + " e' morto, vuoi controllare il corpo? potrebbe avere qualcosa di utile!''", "Rin: 'Va bene, controlliamo il suo corpo'", "Rin: 'Andiamocene prima che il suo corpo inizi a puzzare!'")) {
                 if(this.oggetto != null){
                     System.out.println("Hai raccolto: " + this.oggetto.getNome());
                     giocatore.getInventario().aggiungiOggetto(this.oggetto);

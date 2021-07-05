@@ -5,6 +5,7 @@
  */
 package npc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,13 +16,13 @@ import tipi.Giocatore;
  *
  * @author mtubi
  */
-public abstract class Npc {
+public abstract class Npc implements Serializable{
     protected String nome;
     protected boolean vivo = true;
     protected boolean neutrale;
     protected Oggetto oggetto;
     protected boolean sconosciuto = true;
-    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano", "prigioniero"};
+    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano", "prigioniero", "sconosciuto"};
 
     public Npc(String nome, Oggetto oggetto, boolean neutrale) {
         this.nome = nome;

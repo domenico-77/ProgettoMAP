@@ -5,6 +5,7 @@
  */
 package npc;
 
+import java.io.Serializable;
 import java.util.Scanner;
 import oggetti.Oggetto;
 import tipi.Giocatore;
@@ -14,7 +15,7 @@ import tipi.Utilita;
  *
  * @author mtubi
  */
-public class PngIndovinello extends Npc {
+public class PngIndovinello extends Npc implements Serializable {
 
     private static final boolean NEUTRALE = true;
     private static final String RISPOSTA_A = "a";
@@ -46,7 +47,7 @@ public class PngIndovinello extends Npc {
             } else {
                 nomeNpc = this.nome;
             }
-            if (Utilita.chiediConferma("Rin: '" + nomeNpc + " e' morto, vuoi controllare se aveva qualcosa di utile?'", "Rin: 'Va bene, controlliamo il suo corpo'", "Rin: 'Andiamocene prima che il suo corpo inizi a puzzare!'")) {
+            if (Utilita.chiediConferma("Rin: '" + nomeNpc + " e' morto, vuoi controllare il corpo? potrebbe avere qualcosa di utile!'", "Rin: 'Va bene, controlliamo il suo corpo'", "Rin: 'Andiamocene prima che il suo corpo inizi a puzzare!'")) {
                 if (this.oggetto != null) {
                     System.out.println("Hai raccolto: " + this.oggetto.getNome());
                     giocatore.getInventario().aggiungiOggetto(this.oggetto);
@@ -67,7 +68,7 @@ public class PngIndovinello extends Npc {
                 }
             } else {
                 if (this.sconosciuto) {
-                    System.out.println("Sconosciuto: 'Ciao ho sentito parlare molto di te, se mi dai una mano ricambiero' il favore'");
+                    System.out.println("Sconosciuto: 'Ciao ho sentito parlare molto di te, se mi dai una mano ricambierò il favore'");
                     if (Utilita.chiediConferma("Rin: 'Vuoi sentire la proposta dello sconosciuto?'", "Rin: 'Vediamo cosa hai da offrire'", "Sconosciuto: 'Nel caso cambi idea io sono sempre qui'")) {
                         this.sconosciuto = false;
                         System.out.println(this.nome + ": 'Piacere il mio nome e' " + this.nome + "'");

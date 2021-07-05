@@ -54,14 +54,15 @@ public class MainProvvisorio {
          */
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine();
-            ParserOutput p = parser.parse(command, gioco.getGiocatore().getListaMosse(), gioco.getStanzaCorrente().getOggetiStanza(), gioco.getGiocatore().getInventario().getInventario(), gioco.getStanzaCorrente(), Npc.getAlias());
+            ParserOutput p = parser.parse(command, gioco.getGiocatore().getListaMosse(), gioco.getStanzaCorrente().getOggetiStanza(), gioco.getGiocatore().getInventario().getInventario(), gioco.getStanzaCorrente());
 
             gioco.nextMove(p, System.out);
         }
     }
 
     public static void main(String[] args) {
-        MainProvvisorio main = new MainProvvisorio(new Gioco());
+        String nome = "ciola";
+        MainProvvisorio main = new MainProvvisorio(new Gioco(nome));
         main.esegui();
     }
 

@@ -10,7 +10,7 @@ package tipi;
  * @author mtubi
  */
 public enum TipoComando {
-       fine, 
+    fine, 
     inventario, 
     nord, 
     sud, 
@@ -32,5 +32,8 @@ public enum TipoComando {
     torna_indietro,
     mangiare,
     tempo,
-    interagire
+    help,
+    salva,
+    interagire,
+    esci
 }

@@ -39,7 +39,7 @@ public class Mob extends Npc{
             } else {
                 nomeNpc = this.nome;
             }
-            if (Utilita.chiediConferma("Rin: '" + nomeNpc + " e' morto, vuoi controllare se aveva qualcosa di utile?'", "Rin: 'Va bene, controlliamo il suo corpo'", "Rin: 'Andiamocene prima che il suo corpo inizi a puzzare!'")) {
+            if (Utilita.chiediConferma("Rin: '" + nomeNpc + " e' morto, vuoi controllare il corpo? potrebbe avere qualcosa di utile!'", "Rin: 'Va bene, controlliamo il suo corpo'", "Rin: 'Andiamocene prima che il suo corpo inizi a puzzare!'")) {
                 if (this.oggetto != null) {
                     System.out.println("Hai raccolto: " + this.oggetto.getNome());
                     giocatore.getInventario().aggiungiOggetto(this.oggetto);
@@ -80,16 +80,16 @@ public class Mob extends Npc{
                             giocatore.decrementaVita(this.danno);
                             this.distanza = Mob.DISTANZA;
                             if(giocatore.getVitaCorrente() == 0){
-                                System.out.println(this.nome + "'La prossima volta attento a quello che fai, non puoi metterti contro l'inperatore'");
+                                System.out.println(this.nome + "'La prossima volta attento a quello che fai, non puoi metterti contro l'imperatore!'");
                             }
                             else{
-                                System.out.println("Rin : 'Oh no! Ti ha colpito, se non siamo in grado di combatterlo, sarebbe meglio scappare o uccidiamolo il prima possibile");
+                                System.out.println("Rin : 'Oh no! Ti ha colpito, non potremo resistere ancora per molto, dobbiamo sconfiggerlo il prima possibile altrimenti ci converrebbe scappare...finchè possiamo! ");
                             }
                         }
                         else{
                             this.distanza --;
                             System.out.println(this.nome + ": 'Sto arrivando'");
-                            System.out.println("Rin: 'Decidiamo il prima possibile cosa fare con lui, prima che ci faccia del male, ora e' distante " + this.distanza + "passi da noi'");
+                            System.out.println("Rin: 'Decidiamo in fretta cosa fare con lui, prima che ci faccia del male, ora e' distante " + this.distanza + "passi da noi'");
                         }
                     }
                 }

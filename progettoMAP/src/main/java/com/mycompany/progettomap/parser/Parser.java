@@ -28,7 +28,7 @@ public class Parser {
         this.paroleProibite = paroleProibite;
     }
 
-    public ParserOutput parse(String comandoUtente, List<Comando> azioni, List<Oggetto> oggetti, List<Oggetto> inventario, Stanza stanza, String[] aliasNpc) {
+    public ParserOutput parse(String comandoUtente, List<Comando> azioni, List<Oggetto> oggetti, List<Oggetto> inventario, Stanza stanza) {
         ParserOutput comando = null;
         comandoUtente = comandoUtente.toLowerCase();
         comandoUtente = comandoUtente.replaceAll("[.!£$%&/]+", "");//Pulizia del comando di caratteri di punteggiatura

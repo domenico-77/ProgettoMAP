@@ -17,11 +17,11 @@ import logicaGioco.DescrizioneGioco;
 public class ThreadGioco {
 
     public static void Esegui() {
-
+String nome = "ciola";
         Thread p = new Thread(() -> {
             while (true) {
                 try {
-                    DescrizioneGioco gioco = new Gioco();
+                    DescrizioneGioco gioco = new Gioco(nome);
                     gioco.gioca();
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {

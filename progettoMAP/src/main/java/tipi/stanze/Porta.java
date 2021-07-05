@@ -5,6 +5,7 @@
  */
 package tipi.stanze;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author mtubi
  */
-public class Porta {
+public class Porta implements Serializable{
     TipoPorta tipo;
     Stanza stanza;
     boolean chiusa;

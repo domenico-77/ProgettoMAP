@@ -5,6 +5,7 @@
  */
 package tipi;
 
+import java.io.Serializable;
 import tipi.stanze.Stanza;
 import oggetti.Oggetto;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author mtubi
  */
-public class Inventario {
+public class Inventario implements Serializable {
     List<Oggetto> inventario;
     public Inventario(){
         this.inventario= new ArrayList();

@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package main;
-import Threads.ThreadGioco;
-import Threads.ThreadTempo;
+import java.io.FileNotFoundException;
 import menu.Menu;
 /**
  *
@@ -16,8 +15,8 @@ public class NewMain {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        Menu.MenuInizio();
+    public static void main(String[] args) throws FileNotFoundException {
+        Menu.menuDiGioco();
     }
     
     
