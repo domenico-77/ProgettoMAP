@@ -45,6 +45,7 @@ public class MainProvvisorio {
         System.out.println("================================");
         System.out.println("* Adventure v. 0.2 - 2020-2021 *");
         System.out.println("================================");
+        System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
         Scanner scanner = new Scanner(System.in);
         /*
         for(Comando c : gioco.getGiocatore().getListaMosse()){

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tempo;
+package Threads;
 
 import com.mycompany.progettomap.giochi.Gioco;
 import java.io.InputStreamReader;

@@ -10,7 +10,7 @@ package tipi;
  * @author mtubi
  */
 public enum TipoComando {
-    fine, 
+       fine, 
     inventario, 
     nord, 
     sud, 
