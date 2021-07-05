@@ -31,7 +31,7 @@ import oggetti.OggettoContenitore;
 import oggetti.OggettoMaligno;
 import oggetti.Spada;
 import oggetti.TipoOggetto;
-import tempo.tempo;
+import Threads.ThreadTempo;
 import tipi.stanze.Porta;
 import tipi.stanze.TipoPorta;
 import tipi.Utilita;
@@ -439,9 +439,9 @@ public class Gioco extends DescrizioneGioco {
     }
 
     public void calcolaTempo() {
-        int tempoS = tempo.getSecondi();
-        int tempoM = tempo.getMinuti();
-        int tempoO = tempo.getOre();
+        int tempoS = ThreadTempo.getSecondi();
+        int tempoM = ThreadTempo.getMinuti();
+        int tempoO = ThreadTempo.getOre();
         if (this.secondi + tempoS >= MAX_SEC) {
             this.secondi = (this.secondi + tempoS) - MAX_SEC;
             this.minuti++;
@@ -455,7 +455,7 @@ public class Gioco extends DescrizioneGioco {
             this.minuti += tempoM;
         }
         this.ore += tempoO;
-        tempo.reset();
+        ThreadTempo.reset();
     }
 
     @Override
