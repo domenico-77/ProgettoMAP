@@ -20,6 +20,7 @@ public class Affilatore extends Oggetto{
     private final static int USABILITA = 1;
     private final static int USABILITA_SPADA = 3;
     private final static boolean PRENDIBILE = true;
+    private final static int PUNTEGGIO = 10;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.affilatore;
     
     public Affilatore(String nome, Set<String> alias) {
@@ -40,6 +41,7 @@ public class Affilatore extends Oggetto{
                 else{
                     l.get(i).setUsabilita(l.get(i).usabilita+1);
                     this.usabilita--;
+                    giocatore.incrementaPunteggio(Affilatore.PUNTEGGIO);
                     System.out.println("Rin: 'Ora che abbiamo affilato la spada, possiamo buttare l'affilatore'");
                 }
             }

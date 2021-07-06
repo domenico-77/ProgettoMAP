@@ -17,6 +17,8 @@ public class PngScambio extends Npc {
 
     private static final boolean NEUTRALE = true;
     private static final boolean ACCONTENTATO = false;
+    private static final int PUNTEGGIO_MORTO = 30;
+    private static final int PUNTEGGIO_ACCONTENTATO = 60;
 
     private boolean accontentato;
     private final Oggetto oggettoRichiesto;
@@ -40,6 +42,7 @@ public class PngScambio extends Npc {
                 if(this.oggetto != null){
                     System.out.println("Hai raccolto: " + this.oggetto.getNome());
                     giocatore.getInventario().aggiungiOggetto(this.oggetto);
+                    giocatore.incrementaPunteggio(PngScambio.PUNTEGGIO_MORTO);
                     this.oggetto = null;
                 }
                 else{
@@ -51,6 +54,7 @@ public class PngScambio extends Npc {
                 System.out.println(this.nome + ": 'Tieni questo è quello che posso darti, per aiutarti nella tua fuga'");
                 giocatore.getInventario().aggiungiOggetto(this.oggetto);
                 System.out.println("Hai ottenuto: " + this.oggetto.getNome());
+                giocatore.incrementaPunteggio(PngScambio.PUNTEGGIO_ACCONTENTATO);
                 this.oggetto = null;
             } else {
                 System.out.println(this.nome + ": 'Ti ho gia' dato tutto cio' che era in mio possesso, cos'altro vuoi ahahahahah'");

@@ -19,6 +19,7 @@ public class ChiaveOggettoContenitore extends Oggetto {
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = 1;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.chiaveOggettoContenitore;
+    private final static int PUNTEGGIO = 50;
     public ChiaveOggettoContenitore(String nome, Set<String> alias) {
         super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
     }
@@ -35,6 +36,7 @@ public class ChiaveOggettoContenitore extends Oggetto {
                 OggettoContenitore contenitoreO = (OggettoContenitore) l.get(i);
                 if(!contenitoreO.isAperto()){
                     contenitoreO.setAperto(true);
+                    giocatore.incrementaPunteggio(ChiaveOggettoContenitore.PUNTEGGIO);
                     this.usabilita--;
                     contenitore = contenitoreO;
                     l.set(i, contenitore);

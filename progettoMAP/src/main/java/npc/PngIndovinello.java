@@ -21,6 +21,8 @@ public class PngIndovinello extends Npc implements Serializable {
     private static final String RISPOSTA_A = "a";
     private static final String RISPOSTA_B = "b";
     private static final String RISPOSTA_C = "c";
+    private static final int PUNTEGGIO_MORTO = 50;
+    private static final int PUNTEGGIO_ACCONTENTATO = 100;
 
     private final String indovinello;
     private final String rispostaA;
@@ -51,6 +53,7 @@ public class PngIndovinello extends Npc implements Serializable {
                 if (this.oggetto != null) {
                     System.out.println("Hai raccolto: " + this.oggetto.getNome());
                     giocatore.getInventario().aggiungiOggetto(this.oggetto);
+                    giocatore.incrementaPunteggio(PngIndovinello.PUNTEGGIO_MORTO);
                     this.oggetto = null;
                 } else {
                     System.out.println("Rin: 'Il cadavere non ha niente di interessante, possiamo andare'");
@@ -61,6 +64,7 @@ public class PngIndovinello extends Npc implements Serializable {
                 if (this.oggetto != null) {
                     System.out.println(this.nome + ": 'Tieni questo è quello che posso darti, per aiutarti nella tua fuga'");
                     giocatore.getInventario().aggiungiOggetto(this.oggetto);
+                    giocatore.incrementaPunteggio(PngIndovinello.PUNTEGGIO_ACCONTENTATO);
                     System.out.println("Hai ottenuto: " + this.oggetto.getNome());
                     this.oggetto = null;
                 } else {
