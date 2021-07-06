@@ -50,6 +50,10 @@ public abstract class Npc implements Serializable{
         return oggetto;
     }
 
+    public boolean isSconosciuto() {
+        return sconosciuto;
+    }
+
     public void setOggetto(Oggetto oggetto) {
         this.oggetto = oggetto;
     }

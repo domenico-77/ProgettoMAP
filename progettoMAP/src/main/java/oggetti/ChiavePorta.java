@@ -5,11 +5,8 @@
  */
 package oggetti;
 
-import java.util.List;
 import java.util.Set;
-import tipi.Comando;
 import tipi.Giocatore;
-import tipi.Inventario;
 import tipi.stanze.TipoPorta;
 import tipi.stanze.Porta;
 import tipi.stanze.Stanza;
@@ -21,7 +18,8 @@ import tipi.stanze.Stanza;
 public class ChiavePorta extends Oggetto {
 
     private final static boolean PRENDIBILE = true;
-    private final static int DURABILITA = -1;
+    private final static int DURABILITA = 1;
+    private final static int PUNTEGGIO = 35;
     private final TipoPorta materiale;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.chiavePorta;
 
@@ -34,6 +32,7 @@ public class ChiavePorta extends Oggetto {
     public void usa(Giocatore giocatore, Stanza stanza) {
         Porta porta = stanza.getPortaNord();
         if (porta.getTipo() == this.materiale) {
+            giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
             porta.setChiusa(false);
             System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
             porta.getStanza().getPortaSud().setChiusa(false);
@@ -42,6 +41,7 @@ public class ChiavePorta extends Oggetto {
         porta = stanza.getPortaSud();
         if (porta.getTipo() == this.materiale) {
             porta.setChiusa(false);
+            giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
             System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
 
             porta.getStanza().getPortaNord().setChiusa(false);
@@ -50,6 +50,7 @@ public class ChiavePorta extends Oggetto {
         porta = stanza.getPortaOvest();
         if (porta.getTipo() == this.materiale) {
             porta.setChiusa(false);
+            giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
             System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
 
             porta.getStanza().getPortaEst().setChiusa(false);
@@ -58,6 +59,7 @@ public class ChiavePorta extends Oggetto {
         porta = stanza.getPortaEst();
         if (porta.getTipo() == this.materiale) {
             porta.setChiusa(false);
+            giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
             System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
 
             porta.getStanza().getPortaOvest().setChiusa(false);

@@ -19,6 +19,7 @@ public class Candela extends Oggetto {
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = 3;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.candela;
+    private final static int PUNTEGGIO = 20;
 
     public Candela(String nome, Set<String> alias) {
         super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
@@ -29,6 +30,7 @@ public class Candela extends Oggetto {
         if(!stanza.isIlluminata()){
             //fare il controllo se la candela è nell inventario
             stanza.setIlluminata(true);
+            giocatore.incrementaPunteggio(Candela.PUNTEGGIO);
             this.usabilita--;
             System.out.println("Rin: 'Hai illuminato la stanza'");
             if(this.usabilita == 0){

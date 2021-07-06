@@ -21,6 +21,7 @@ public class Giocatore implements Serializable{
     private int vitaCorrente = VITA_INIZIO;
     private Inventario inventario = new Inventario();
     private List<Comando> listaMosse;
+    private int punteggio = 0;
 
     public Giocatore(List<Comando> listaMosse) {
         this.listaMosse = listaMosse;
@@ -61,7 +62,14 @@ public class Giocatore implements Serializable{
     public void setListaMosse(List<Comando> listaMosse) {
         this.listaMosse = listaMosse;
     }
+
+    public int getPunteggio() {
+        return punteggio;
+    }
     
+    public void incrementaPunteggio(int xp){
+        this.punteggio += xp;
+    }
     public void decrementaVita(int danno){
         if(danno >= this.vitaCorrente){
             this.vitaCorrente = 0;

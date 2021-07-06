@@ -19,6 +19,7 @@ public class Cibo extends Oggetto {
 
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = 1;
+    private final static int PUNTEGGIO = 10;
     private int rigenerazione;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.cibo;
 
@@ -40,6 +41,7 @@ public class Cibo extends Oggetto {
         if (this.usabilita > 0) {
             if (giocatore.getVitaCorrente() < giocatore.getVitaMax()) {
                 giocatore.incrementaVita(this.rigenerazione);
+                giocatore.incrementaPunteggio(Cibo.PUNTEGGIO);
                 System.out.println("Rin: 'Hai recuperato della vita'");
                 this.usabilita--;
                 if (this.usabilita == 0) {

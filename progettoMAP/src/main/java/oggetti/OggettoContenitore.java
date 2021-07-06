@@ -25,6 +25,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
 
     private final static boolean PRENDIBILE = false;
     private final static int DURABILITA = 1;
+    private final static int PUNTEGGIO = 60;
     private boolean aperto = false;
     private List<Oggetto> listaOggetti = new ArrayList();
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.oggettoContenitore;
@@ -78,6 +79,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
                     }
                 });
                 giocatore.setInventario(inventario);
+                giocatore.incrementaPunteggio(OggettoContenitore.PUNTEGGIO);
             } else {
                 System.out.println("Rin: 'Non c'è nessun oggetto all'interno'");
             }
