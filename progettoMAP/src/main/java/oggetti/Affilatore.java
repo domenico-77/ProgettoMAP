@@ -45,6 +45,9 @@ public class Affilatore extends Oggetto{
                     System.out.println("Rin: 'Ora che abbiamo affilato la spada, possiamo buttare l'affilatore'");
                 }
             }
+            else{
+                System.out.println("Rin: 'Non abbiamo una spada da affilare, dobbiamo prima trovarla");
+            }
         }
         else{
             System.out.println("Non puoi usare questo oggetto");

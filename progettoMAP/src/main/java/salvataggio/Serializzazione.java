@@ -43,8 +43,10 @@ public class Serializzazione {
             }
             if (i == -1) {
                 l.add(partita);
+                //salvataggio del database
             } else {
                 l.set(i, partita);
+                //aggiornamento nel database
             }
             out.writeObject(l);
             out.close();

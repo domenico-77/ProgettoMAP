@@ -10,6 +10,7 @@
 package logicaGioco;
 
 import com.mycompany.progettomap.parser.ParserOutput;
+import java.io.FileNotFoundException;
 import java.util.List;
 import tipi.stanze.Stanza;
 import tipi.Comando;
@@ -128,9 +129,9 @@ public abstract class DescrizioneGioco implements Serializable {
         this.giocatore = giocatore;
     }
 
-    public abstract void gioca();
+    public abstract void gioca()throws FileNotFoundException;
 
-    public abstract void continua();
+    public abstract void continua() throws FileNotFoundException;
     
 
 

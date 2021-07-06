@@ -139,12 +139,10 @@ public class Deserializzazione {
                                 Serializzazione.scriviFileLista(l);
                             }
                             risposta = false;
-                        }
-                        else{
-                            if(Utilita.chiediConferma("Partita non trovate, vuoi  riprovare?", "inserisci il nome della partita che vuoi cancellare fra le partite elencate", "ritorno al menu di gioco")){
+                        } else {
+                            if (Utilita.chiediConferma("Partita non trovate, vuoi  riprovare?", "inserisci il nome della partita che vuoi cancellare fra le partite elencate", "ritorno al menu di gioco")) {
                                 risposta = true;
-                            }
-                            else {
+                            } else {
                                 risposta = false;
                             }
                         }
@@ -152,6 +150,26 @@ public class Deserializzazione {
                 }
             } while (risposta);
 
+        }
+    }
+
+    public static void cancellaPartitaFinita(DescrizioneGioco partitaFinita) throws FileNotFoundException{
+        List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        if (!l.isEmpty()) {
+            int i = -1;
+            for (DescrizioneGioco g : l) {
+                if (g.getNomeGiocatore().equals(partitaFinita.getNomeGiocatore())) {
+                    i = l.indexOf(g);
+                }
+            }
+            if(i != -1){
+                l.remove(i);
+                Serializzazione.scriviFileLista(l);
+                //aggiornamento database
+            }
+            else{
+                //salvataggio nel database
+            }
         }
     }
 }
