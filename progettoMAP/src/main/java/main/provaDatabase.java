@@ -19,20 +19,9 @@ public class provaDatabase {
     public static void main(String[] args) {
         // TODO code application logic here
         Db db = Db.getDb();
-        /*db.Inserisci("anna", 0, false, true);
-       
-        
         db.Visualizza();
-        /*db.aggiorna(1, "max", 50, true, true);
-        db.aggiorna(2, "mario", 40, true, true);
-        db.Cancella(2, "mario");
-        db.Visualizza();
-        db.Cancella(3, "anna");
-        db.Inserisci("mino", 0, false, true);
-        db.Visualizza();*/
-        db.Visualizza();
-        int i = db.Inserisci("anna", 0, true, true);
-        System.out.println(i);
+       /* int i = db.Inserisci("anna", 0, true, true);
+        System.out.println(i);*/
         db.Visualizza();
 
     }

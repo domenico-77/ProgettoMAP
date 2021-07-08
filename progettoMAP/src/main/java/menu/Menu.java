@@ -22,40 +22,6 @@ import tipi.Utilita;
  */
 public class Menu {
 
-    /*public static void MenuInizio() throws FileNotFoundException {
-        boolean isExiting = false;
-        String answer;
-        Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        do {
-            System.out.println("-------------------------------- Menu Principale "
-                    + "--------------------------------");
-            System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
-            if (scanner.hasNextLine()) {
-                answer = scanner.nextLine();
-                answer = answer.replaceAll("\\s+", "");
-                switch (answer.toLowerCase()) {
-                    case "help":
-                        Help.stampaHelpMenuInizio();
-                        break;
-                    case "gioca":
-                        Menu.menuDiGioco();
-                        break;
-                    case "esci":
-                        isExiting = Utilita.chiediConferma("Si vuole davvero uscire?",
-                                "Alla prossima partita!", "Non si è usciti dal gioco.");
-                        break;
-
-                    default:
-                        System.out.println("Comando inserito non valido.");
-                        System.out.println("Per sapere quali comandi sono validi digitare help.");
-                        break;
-                }
-            }
-        } while (!isExiting);
-
-        scanner.close();
-    }*/
-
     public static void menuDiGioco() throws FileNotFoundException {
         boolean isExiting = false;
         String answer;
