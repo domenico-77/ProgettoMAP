@@ -5,6 +5,7 @@
  */
 package salvataggio;
 
+import DataBase.Db;
 import com.mycompany.progettomap.giochi.Gioco;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -52,6 +53,7 @@ public class Deserializzazione {
     }
 
     public static DescrizioneGioco caricamento() {
+        Db db = Db.getDb();
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         DescrizioneGioco gioco = null;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
@@ -65,8 +67,9 @@ public class Deserializzazione {
                         System.out.println("Nome inserito non valido, reinserirne un altro");
                     }
                 } while (nome.isEmpty());
-                gioco = new Gioco(nome);
+                gioco = new Gioco(nome, db.Inserisci(nome, 0, false, true));
                 gioco.inizializza();
+                db.chiudiConnessione();
             }
 
         } else {
