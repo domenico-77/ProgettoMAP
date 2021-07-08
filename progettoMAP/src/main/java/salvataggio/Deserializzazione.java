@@ -43,7 +43,8 @@ public class Deserializzazione {
             return null;
 
         } catch (IOException e) {
-            System.err.println("Caught IOException: " + e.getMessage());
+            List<DescrizioneGioco> l2 = new ArrayList();
+           
 
         }
 

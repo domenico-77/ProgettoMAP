@@ -21,6 +21,7 @@ public class ThreadTempo {
     public static void Time() {
         
         Thread t = new Thread(() -> {
+            attivo = true;
             while (attivo) {
                 try {
                     if (secondi == MAX_SEC) {
