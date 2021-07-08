@@ -22,7 +22,7 @@ public abstract class Npc implements Serializable{
     protected boolean neutrale;
     protected Oggetto oggetto;
     protected boolean sconosciuto = true;
-    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano", "prigioniero", "sconosciuto"};
+    protected final static String[] alias = {"personaggio", "uomo", "persona", "tizio", "umano"};
 
     public Npc(String nome, Oggetto oggetto, boolean neutrale) {
         this.nome = nome;
@@ -70,16 +70,7 @@ public abstract class Npc implements Serializable{
         return alias;
     }
     
-    public List<String> getAliasNome(){
-        List<String> aliasNome = new ArrayList();
-        for(String a : Npc.alias){
-            aliasNome.add(a);
-        }
-        if(!this.sconosciuto){
-            aliasNome.add(this.nome.toLowerCase());
-        }
-        return aliasNome;
-    }
+    public abstract List<String> getAliasNome();
     
     public abstract void interagisci(Giocatore giocatore);
 }

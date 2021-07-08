@@ -6,6 +6,8 @@
 package npc;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import oggetti.Oggetto;
 import tipi.Giocatore;
@@ -23,6 +25,7 @@ public class PngIndovinello extends Npc implements Serializable {
     private static final String RISPOSTA_C = "c";
     private static final int PUNTEGGIO_MORTO = 50;
     private static final int PUNTEGGIO_ACCONTENTATO = 100;
+    private static final String[] ALIAS_INDOVINELLO = {"prigioniero","cantastorie","giullare","cantabanco"};
 
     private final String indovinello;
     private final String rispostaA;
@@ -141,6 +144,24 @@ public class PngIndovinello extends Npc implements Serializable {
                 }
             }
         }
+    }
+
+    @Override
+    public List<String> getAliasNome() {
+         List<String> aliasNome = new ArrayList();
+        for(String a : Npc.alias){
+            aliasNome.add(a);
+        }
+        for(String a : PngIndovinello.ALIAS_INDOVINELLO){
+            aliasNome.add(a);
+        }
+        if(!this.sconosciuto){
+            aliasNome.add(this.nome.toLowerCase());
+        }
+        else{
+            aliasNome.add("prigioniero");
+        }
+        return aliasNome;
     }
 
 }

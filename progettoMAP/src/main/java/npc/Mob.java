@@ -5,6 +5,8 @@
  */
 package npc;
 
+import java.util.ArrayList;
+import java.util.List;
 import oggetti.Oggetto;
 import tipi.Giocatore;
 import tipi.Utilita;
@@ -18,6 +20,9 @@ public class Mob extends Npc{
     private final static int DANNO = 50;
     private final static int DISTANZA = 3;
     private final static boolean NEUTRALE = false;
+    private final static String[] ALIAS_MOB = {"soldato","nemico","guardia","avversario"};
+    
+    
     private boolean corrotto = false;
     private boolean corrompibile;
     private int vita = VITA_MAX;
@@ -95,6 +100,25 @@ public class Mob extends Npc{
                 }
             }
         }
+    }
+
+    @Override
+    public List<String> getAliasNome() {
+         List<String> aliasNome = new ArrayList();
+        for(String a : Npc.alias){
+            aliasNome.add(a);
+        }
+        
+         for(String a : Mob.ALIAS_MOB){
+            aliasNome.add(a);
+        }
+        if(!this.sconosciuto){
+            aliasNome.add(this.nome.toLowerCase());
+        }
+        else{
+            aliasNome.add("prigioniero");
+        }
+        return aliasNome;
     }
     
 }

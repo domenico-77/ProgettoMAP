@@ -36,6 +36,7 @@ import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static menu.Help.stampaHelpPartita;
+import npc.Mob;
 import salvataggio.Deserializzazione;
 import tipi.Giocatore;
 import tipi.stanze.Porta;
@@ -133,7 +134,7 @@ public class Gioco extends DescrizioneGioco {
         //stanza 1
         st1 = new Stanza("cella di Manji", true, null, null, null, null, new ArrayList<>(), null);
         //stanza 2
-        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(Gioco.CANDELA), null);
+        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(Gioco.CANDELA), new Mob("Max", Gioco.CIBO, false));
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false));
         st2.setPortaSud(new Porta(TipoPorta.normale, st1, false));
         this.stanze.add(st1);
@@ -427,8 +428,8 @@ public class Gioco extends DescrizioneGioco {
                             out.println("Rin: 'Non abbiamo del cibo, moriremo di fame !?'");
                         }
                     }
-                } else if(p.getOggettoInv() == null && p.getPorta() == null && p.isNpc()){
-                    if(p.getOggetto() != null){
+                } else if (p.getOggettoInv() == null && p.getPorta() == null && p.isNpc()) {
+                    if (p.getOggetto() != null) {
                         if (p.getOggetto().equals(Gioco.CIBO)) {
                             if (this.stanzaCorrente.getOggetiStanza().contains(Gioco.CIBO)) {
                                 this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.CIBO));
@@ -443,14 +444,23 @@ public class Gioco extends DescrizioneGioco {
                             out.println("Rin: 'Non puoi mangiare niente'");
                         }
                     }
-                }
-                else {
+                } else {
                     System.out.println("Rin: 'Non ho capito cosa mangiare'");
                 }
             } else if (p.getComando().getTipo() == TipoComando.interagire) {
                 if (p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null) {
                     if (p.isNpc() == true && this.stanzaCorrente.getNpc() != null) {
-                        this.stanzaCorrente.getNpc().interagisci(giocatore);
+                        if (this.stanzaCorrente.getNpc().isNeutrale()) {
+                            this.stanzaCorrente.getNpc().interagisci(giocatore);
+                        } else {
+                            if(this.stanzaCorrente.getNpc().isVivo()){
+                                this.stanzaCorrente.getNpc().interagisci(giocatore);
+                            }
+                            else{
+                            System.out.println("Rin: 'Lasciamolo stare, se non si accorge di noi e' meglio'");
+                            }
+                            
+                        }
                     }
                 } else {
                     out.println("Rin: 'non ho capito con chi vuoi parlare'");
@@ -538,7 +548,6 @@ public class Gioco extends DescrizioneGioco {
             System.out.println("Rin: 'Non ho capito cosa devo fare, prova a esprimerti meglio'");
         }
     }
-        
 
     public void calcolaTempo() {
         int tempoS = ThreadTempo.getSecondi();
@@ -601,6 +610,16 @@ public class Gioco extends DescrizioneGioco {
                 String command = scanner.nextLine();
                 ParserOutput p = parser.parse(command, this.giocatore.getListaMosse(), this.stanzaCorrente.getOggetiStanza(), this.giocatore.getInventario().getInventario(), stanzaCorrente);
                 this.nextMove(p, System.out);
+                if (this.stanzaCorrente.isIlluminata()) {
+                    if (this.stanzaCorrente.getNpc() != null) {
+                        Npc mob = this.stanzaCorrente.getNpc();
+                        if (!mob.isNeutrale()) {
+                            if (mob.isVivo()) {
+                                mob.interagisci(giocatore);
+                            }
+                        }
+                    }
+                }
             }
         }
         if (this.finita) {
