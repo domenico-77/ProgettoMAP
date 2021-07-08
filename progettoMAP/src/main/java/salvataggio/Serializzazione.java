@@ -5,6 +5,7 @@
  */
 package salvataggio;
 
+import DataBase.Db;
 import com.mycompany.progettomap.giochi.Gioco;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -36,6 +37,7 @@ public class Serializzazione {
                 l.add(partita);              
             }*/
             int i = -1;
+            Db db = Db.getDb();
             for (DescrizioneGioco g : l) {
                 if (g.getNomeGiocatore().equals(partita.getNomeGiocatore())) {
                     i = l.indexOf(g);
@@ -43,9 +45,13 @@ public class Serializzazione {
             }
             if (i == -1) {
                 l.add(partita);
+                
             } else {
                 l.set(i, partita);
+                
             }
+            db.aggiorna(partita.getId(), partita.getNomeGiocatore(), partita.getGiocatore().getPunteggio(), partita.isFinita(),(partita.getGiocatore().getVitaCorrente() > 0));
+            db.chiudiConnessione();
             out.writeObject(l);
             out.close();
             fileOut.close();

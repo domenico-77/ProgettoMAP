@@ -12,7 +12,6 @@ import DataBase.Db;
  * @author Acer
  */
 public class provaDatabase {
-    
 
     /**
      * @param args the command line arguments
@@ -31,10 +30,11 @@ public class provaDatabase {
         db.Cancella(3, "anna");
         db.Inserisci("mino", 0, false, true);
         db.Visualizza();*/
-        db.Inserisci("io", 10, true, true);
-                db.Visualizza();
+        db.Visualizza();
+        int i = db.Inserisci("anna", 0, true, true);
+        System.out.println(i);
+        db.Visualizza();
 
-       
     }
-    
+
 }

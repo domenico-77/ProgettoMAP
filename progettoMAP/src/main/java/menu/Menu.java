@@ -5,7 +5,7 @@
  */
 package menu;
 
-import Threads.ThreadGioco;
+import DataBase.Db;
 import Threads.ThreadTempo;
 import com.mycompany.progettomap.giochi.Gioco;
 import java.io.FileNotFoundException;
@@ -86,6 +86,11 @@ public class Menu {
                             gioco.continua();
                         }
                         break;
+                        
+                    case "database" : 
+                        Db db = Db.getDb();
+                        db.Visualizza();
+                        db.chiudiConnessione();
 
                     case "cancella":
                         Deserializzazione.cancellaPartita();
@@ -109,6 +114,7 @@ public class Menu {
 
     public static DescrizioneGioco creaPartita() {
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        Db db = Db.getDb();
         DescrizioneGioco partita;
         boolean isExiting = false;
         String answer = "";
@@ -132,7 +138,9 @@ public class Menu {
                 }
             }
         } while (isExiting);
-        partita = new Gioco(answer);
+        partita = new Gioco(answer,db.Inserisci(answer, 0, false, true));
+        db.chiudiConnessione();
+
         return partita;
     }
 

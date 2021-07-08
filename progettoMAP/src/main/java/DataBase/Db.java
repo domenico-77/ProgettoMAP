@@ -44,7 +44,9 @@ public class Db {
         return Db.db;
     }
 
-    public void Inserisci(String nome, int punteggio, boolean giocoTerminato, boolean vivo) {
+    public int Inserisci(String nome, int punteggio, boolean giocoTerminato, boolean vivo) {
+        int id = 0;
+
         try {
             Date date = new Date();
             java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -56,11 +58,17 @@ public class Db {
             pstm.setBoolean(5, vivo);
             pstm.executeUpdate();
             pstm.close();
+            Statement stm = this.connessione.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT MAX(id) FROM Dati");
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
 
         } catch (SQLException ex) {
             System.err.println(ex.getSQLState() + ": " + ex.getMessage());
 
         }
+        return id;
 
     }
 
@@ -93,7 +101,7 @@ public class Db {
             } else {
 
                 System.out.println("IDPARTITA        NOMEGIOCATORE        DATASALVATAGGIO        PUNTEGGIO       GIOCOTERMINATO       VIVO    ");
-                do  {
+                do {
                     System.out.println("   " + rs.getInt(1) + "                 " + rs.getString(2) + "               " + rs.getDate(3) + "               " + rs.getInt(4) + "               " + rs.getBoolean(5) + "                  " + rs.getBoolean(6));
                 } while (rs.next());
             }
@@ -106,7 +114,7 @@ public class Db {
         }
     }
 
-    public void ChiudiConnessione() {
+    public void chiudiConnessione() {
         try {
             this.connessione.close();
             Db.db = null;
