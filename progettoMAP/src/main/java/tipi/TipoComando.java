@@ -36,5 +36,7 @@ public enum TipoComando {
     salva,
     interagire,
     esci,
-    affilare
+    affilare,
+    salute,
+    uccidere
 }

@@ -30,39 +30,46 @@ public class ChiavePorta extends Oggetto {
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
-        Porta porta = stanza.getPortaNord();
-        if (porta.getTipo() == this.materiale) {
-            giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-            porta.setChiusa(false);
-            System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
-            porta.getStanza().getPortaSud().setChiusa(false);
+        Porta porta;
+        if (stanza.getPortaNord() != null) {
+            porta = stanza.getPortaNord();
+            if (porta.getTipo() == this.materiale) {
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                porta.setChiusa(false);
+                System.out.println("Rin : 'hai aperto la porta " + porta.getTipo() + "'");
+                porta.getStanza().getPortaSud().setChiusa(false);
+            }
+        }
+        if (stanza.getPortaSud() != null) {
+            porta = stanza.getPortaSud();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                System.out.println("Rin : 'hai aperto la porta " + porta.getTipo() + "'");
+
+                porta.getStanza().getPortaNord().setChiusa(false);
+            }
         }
 
-        porta = stanza.getPortaSud();
-        if (porta.getTipo() == this.materiale) {
-            porta.setChiusa(false);
-            giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-            System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
+        if (stanza.getPortaOvest() != null) {
+            porta = stanza.getPortaOvest();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                System.out.println("Rin : 'hai aperto la porta " + porta.getTipo() + "'");
 
-            porta.getStanza().getPortaNord().setChiusa(false);
+                porta.getStanza().getPortaEst().setChiusa(false);
+            }
         }
+        if (stanza.getPortaEst() != null) {
+            porta = stanza.getPortaEst();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                System.out.println("Rin : 'hai aperto la porta " + porta.getTipo() + "'");
 
-        porta = stanza.getPortaOvest();
-        if (porta.getTipo() == this.materiale) {
-            porta.setChiusa(false);
-            giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-            System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
-
-            porta.getStanza().getPortaEst().setChiusa(false);
-        }
-
-        porta = stanza.getPortaEst();
-        if (porta.getTipo() == this.materiale) {
-            porta.setChiusa(false);
-            giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-            System.out.println("Rin : 'hai aperto la porta "+ porta.getTipo() +"'");
-
-            porta.getStanza().getPortaOvest().setChiusa(false);
+                porta.getStanza().getPortaOvest().setChiusa(false);
+            }
         }
     }
 

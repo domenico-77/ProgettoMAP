@@ -37,6 +37,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static menu.Help.stampaHelpPartita;
 import salvataggio.Deserializzazione;
+import tipi.Giocatore;
 import tipi.stanze.Porta;
 import tipi.stanze.TipoPorta;
 import tipi.Utilita;
@@ -49,12 +50,12 @@ public class Gioco extends DescrizioneGioco {
 
     private static final Oggetto CANDELA = new Candela("la candela", Utilita.generaSetAlias("candelabro", "cera", "lume", "fiaccola", "torcia", "candela"));
     private static final Oggetto CHIAVE_OGGETTO_CONTENITORE = new ChiaveOggettoContenitore("grimaldello", Utilita.generaSetAlias("grimaldello"));
-    private static final Oggetto TOTEM = new ChiavePorta("il totem", Utilita.generaSetAlias("totem", "statuetta","artefatto"), TipoPorta.oro);
+    private static final Oggetto TOTEM = new ChiavePorta("il totem", Utilita.generaSetAlias("totem", "statuetta", "artefatto"), TipoPorta.oro);
     private static final Oggetto CHIAVE = new ChiavePorta("la chiave", Utilita.generaSetAlias("chiave"), TipoPorta.argento);
     private static final Oggetto CIBO = new Cibo("il pane", Utilita.generaSetAlias("panino", "cibo", "pane"), 30);
     private static final Oggetto OGGETTO_CONTENITORE = new OggettoContenitore("lo scrigno", Utilita.generaSetAlias("contenitore", "scrigno", "baule"), Utilita.creaListaOggetti());
     private static final Oggetto OGGETTO_MALIGNO = new OggettoMaligno("del veleno", Utilita.generaSetAlias(), 30);
-    private static final Oggetto SPADA = new Spada("la spada", Utilita.generaSetAlias("la spada", "lama", "arma bianca", "daga", "katana", "ferro"));
+    private static final Oggetto SPADA = new Spada("la spada", Utilita.generaSetAlias("spada", "lama", "arma bianca", "daga", "katana", "ferro"));
     private static final Oggetto AFFILATORE = new Affilatore("l'affilatore", Utilita.generaSetAlias("affilatoio", "cote", "mola", "affilatrice", "affilatore"));
     static final int MAX_SEC = 60;
     static final int MAX_MIN = 60;
@@ -117,8 +118,14 @@ public class Gioco extends DescrizioneGioco {
         Comando help = new Comando("help", TipoComando.help, Utilita.generaSetAlias("help", "h", "aiuto"));
 
         Comando salva = new Comando("salva", TipoComando.salva, Utilita.generaSetAlias("salva", "salvataggio", "save", "s"));
+
         Comando interagire = new Comando("interagisre", TipoComando.interagire, Utilita.generaSetAlias("parla", "comunica", "interagisci", "parlare", "comunicare", "interagine"));
+
         Comando affila = new Comando("affilare", TipoComando.affilare, Utilita.generaSetAlias("affila", "affilare", "affinare", "aguzzare"));
+
+        Comando salute = new Comando("salute", TipoComando.salute, Utilita.generaSetAlias("salute", "vita", "energia", "vitalita"));
+
+        Comando uccidere = new Comando("uccidere", TipoComando.uccidere, Utilita.generaSetAlias("uccidere", "uccidi", "assassina", "assassinare", "accoltella", "ammazza", "accoltellare", "ammazzare", "colpisci", "colpire"));
 
         //stanze
         Stanza st1, st2, st3;
@@ -228,7 +235,7 @@ public class Gioco extends DescrizioneGioco {
 
         this.stanzaCorrente = this.stanze.get(0);
 
-        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo, interagire, salva, fine));
+        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo, interagire, salva, fine, salute, uccidere));
     }
 
     @Override
@@ -267,8 +274,8 @@ public class Gioco extends DescrizioneGioco {
                     } else {
                         out.println("Rin: 'Non ho capito cosa fare, ripeti");
                     }
-                } else if (p.getOggetto().getTipo() != null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
-                    if (p.getOggetto().equals(Gioco.OGGETTO_CONTENITORE)) {
+                } else if (p.getOggetto() != null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
+                    if (p.getOggetto().getTipo() == TipoOggetto.oggettoContenitore) {
                         this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(p.getOggetto())).usa(giocatore, stanzaCorrente);
                     }
 
@@ -380,7 +387,7 @@ public class Gioco extends DescrizioneGioco {
                                 this.giocatore.getInventario().usaOggetto(Gioco.CANDELA, giocatore, stanzaCorrente);
                             }
                         } else {
-                            out.println("Rin: 'Non puoi accendere niete, apparte una candela che non abbiamo'");
+                            out.println("Rin: 'Non puoi accendere niente, apparte una candela che non abbiamo'");
                         }
                     } else {
                         if (this.giocatore.getInventario().contieneOggetto(Gioco.CANDELA)) {
@@ -396,31 +403,48 @@ public class Gioco extends DescrizioneGioco {
                     out.println("Rin: 'non ho capito cosa fare'");
                 }
             } else if (p.getComando().getTipo() == TipoComando.mangiare) {
-                if (p.getOggettoInv() != null && p.getOggetto() == null && p.getPorta() == null && p.isNpc() == false) {
-                    if (p.getOggettoInv().getTipo() == TipoOggetto.cibo) {
-                        this.giocatore.getInventario().usaOggetto(p.getOggettoInv(), giocatore, stanzaCorrente);
-                    } else {
-                        if (this.giocatore.getInventario().contieneOggetto(Gioco.CIBO)) {
-                            if (Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?", "Rin: 'Va bene, mangiamolo'", "Rin: 'Ricordati che non puoi mangiare altri oggetti, che non sono cibo")) {
+                if (p.getOggetto() == null && p.getPorta() == null && p.isNpc() == false) {
+                    if (p.getOggettoInv() != null) {
+                        if (p.getOggettoInv().equals(Gioco.CIBO)) {
+                            if (this.giocatore.getInventario().contieneOggetto(Gioco.CIBO)) {
+                                this.giocatore.getInventario().usaOggetto(Gioco.CIBO, giocatore, stanzaCorrente);
+                            } else {
+                                out.println("Rin: 'Non abbiamo del cibo, moriremo di fame !?'");
+                            }
+                        } else if (this.giocatore.getInventario().contieneOggetto(Gioco.CIBO)) {
+                            if (Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?'", "Rin: 'Mangiare fa sempre bene'", "Rin: 'Ricordati che non puoi mangiare oggetti che non sono cibo'")) {
                                 this.giocatore.getInventario().usaOggetto(Gioco.CIBO, giocatore, stanzaCorrente);
                             }
                         } else {
-                            out.println("Rin: 'Non abbiamo niente da mangiare, moriremo di fame!!");
+                            out.println("Rin: 'Non puoi mangiare niente'");
                         }
-                    }
-                } else if (p.getOggettoInv() == null && p.getOggetto() != null && p.getPorta() == null && p.isNpc() == false) {
-                    if (p.getOggetto().getTipo() == TipoOggetto.cibo) {
-                        this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.CIBO)).usa(giocatore, stanzaCorrente);
                     } else {
-                        if (this.stanzaCorrente.getOggetiStanza().contains(Gioco.CIBO)) {
-                            if (Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?", "Rin: 'Va bene, mangiamolo'", "Rin: 'Almeno raccogliamolo, non si butta mai il cibo")) {
-                                this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.CIBO)).usa(giocatore, stanzaCorrente);
+                        if (this.giocatore.getInventario().contieneOggetto(Gioco.CIBO)) {
+                            if (Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?'", "Rin: 'Mangiare fa sempre bene'", "Rin: 'Ricordati che non puoi mangiare oggetti che non sono cibo'")) {
+                                this.giocatore.getInventario().usaOggetto(Gioco.CIBO, giocatore, stanzaCorrente);
                             }
                         } else {
-                            out.println("Rin: 'Non abbiamo niente da mangiare, moriremo di fame!!");
+                            out.println("Rin: 'Non abbiamo del cibo, moriremo di fame !?'");
                         }
                     }
-                } else {
+                } else if(p.getOggettoInv() == null && p.getPorta() == null && p.isNpc()){
+                    if(p.getOggetto() != null){
+                        if (p.getOggetto().equals(Gioco.CIBO)) {
+                            if (this.stanzaCorrente.getOggetiStanza().contains(Gioco.CIBO)) {
+                                this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.CIBO));
+                            } else {
+                                out.println("Rin: 'Non abbiamo del cibo, moriremo di fame !?'");
+                            }
+                        } else if (this.stanzaCorrente.getOggetiStanza().contains(Gioco.CIBO)) {
+                            if (Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?'", "Rin: 'Mangiare fa sempre bene'", "Rin: 'Ricordati che non puoi mangiare oggetti che non sono cibo'")) {
+                                this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.CIBO));
+                            }
+                        } else {
+                            out.println("Rin: 'Non puoi mangiare niente'");
+                        }
+                    }
+                }
+                else {
                     System.out.println("Rin: 'Non ho capito cosa mangiare'");
                 }
             } else if (p.getComando().getTipo() == TipoComando.interagire) {
@@ -483,6 +507,29 @@ public class Gioco extends DescrizioneGioco {
                     System.out.println("Rin: 'Non ho capito cosa vuoi affilare");
                 }
 
+            } else if (p.getComando().getTipo() == TipoComando.salute) {
+                if (p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
+                    System.out.print("Rin: 'La tua salute e' : " + this.giocatore.getVitaCorrente() + " punti salute");
+                    if (this.giocatore.getVitaCorrente() < Giocatore.getVITA_INIZIO()) {
+                        System.out.println(", ti conviene trovare qualcosa da mangiare per rigenerare un po' di salute'");
+                    } else {
+                        System.out.println("'");
+                    }
+                }
+            } else if (p.getComando().getTipo() == TipoComando.uccidere) {
+                if (p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null) {
+                    if (p.isNpc()) {
+                        if (this.getGiocatore().getInventario().contieneOggetto(Gioco.SPADA)) {
+                            this.giocatore.getInventario().usaOggetto(Gioco.SPADA, giocatore, stanzaCorrente);
+                        } else {
+                            System.out.println("Rin: non abbiamo una spada per poterlo uccidere'");
+                        }
+                    } else {
+                        System.out.println("Rin: 'Non ho capito chi vuoi uccidere'");
+                    }
+                } else {
+                    System.out.println("Rin: 'Non puoi uccidere delle cose'");
+                }
             } else {
                 out.println("Rin: 'non ho capito cosa fare'");
             }
@@ -491,6 +538,7 @@ public class Gioco extends DescrizioneGioco {
             System.out.println("Rin: 'Non ho capito cosa devo fare, prova a esprimerti meglio'");
         }
     }
+        
 
     public void calcolaTempo() {
         int tempoS = ThreadTempo.getSecondi();
@@ -520,7 +568,7 @@ public class Gioco extends DescrizioneGioco {
     }
 
     @Override
-    public void gioca() throws FileNotFoundException{
+    public void gioca() throws FileNotFoundException {
         this.inizializza();
         Parser parser = new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
         Scanner scanner = new Scanner(System.in);
@@ -532,7 +580,7 @@ public class Gioco extends DescrizioneGioco {
                 + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare ad ucciderlo.\n"
                 + "Manji uccise più di 100 sottoposti, ma in una battaglia venne sconfitto e catturato." + "\n"
                 + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva continuamente torturato. " + "\n"
-                + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare le due abilità da samurai.\n"
+                + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare le sue abilità da samurai.\n"
                 + "La sua cella confinava con la cella di una ragazza di nome Rin, lei era una donna alle servitù del padrone." + "\n"
                 + "I soldati spesso lasciavano la cella di Rin aperta " + "\n"
                 + "in quanto credevano che essendo una donna non fosse capace di creare problemi in quanto non in grado di combattere. \n"
@@ -666,9 +714,9 @@ public class Gioco extends DescrizioneGioco {
             Deserializzazione.cancellaPartitaFinita(this);
         }
     }
-    
-    public void controllaFine(){
-        if(this.stanzaCorrente.getNomeStanza().equals("giardino della prigione")){
+
+    public void controllaFine() {
+        if (this.stanzaCorrente.getNomeStanza().equals("giardino della prigione")) {
             this.finita = true;
             System.out.println("Rin: 'Manji siamo fuori, siamo fuori! Dai andiamocene prima che le vedette ci scoprano'");
         }

@@ -69,15 +69,16 @@ public class OggettoContenitore extends Oggetto implements Serializable {
     public void usa(Giocatore giocatore, Stanza stanza) {
         Inventario inventario = giocatore.getInventario();
         if (this.aperto) {
-            if (!this.contenitoreVuoto()) {
-                this.listaOggetti.forEach(o -> {
+            if (this.listaOggetti != null) {
+                for(Oggetto o : this.listaOggetti) {
                     if (o.prendibile) {
                         System.out.println("Rin: 'Hai raccolto " + o.nome + "'");
                         inventario.aggiungiOggetto(o);
                     } else {
                         o.usa(giocatore, stanza);
                     }
-                });
+                }
+                this.listaOggetti = null;
                 giocatore.setInventario(inventario);
                 giocatore.incrementaPunteggio(OggettoContenitore.PUNTEGGIO);
             } else {
