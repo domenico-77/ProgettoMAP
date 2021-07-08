@@ -26,15 +26,6 @@ public class Serializzazione {
             FileOutputStream fileOut = new FileOutputStream("./risorse/FileSalvataggio.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             DescrizioneGioco gioco = null;
-
-            /* if(l.contains(partita)){
-                for(DescrizioneGioco g : l){
-                    l.set(l.indexOf(l) ,partita);
-                }
-            }
-            else{
-                l.add(partita);              
-            }*/
             int i = -1;
             for (DescrizioneGioco g : l) {
                 if (g.getNomeGiocatore().equals(partita.getNomeGiocatore())) {
