@@ -45,7 +45,6 @@ public class Deserializzazione {
 
         } catch (IOException e) {
             List<DescrizioneGioco> l2 = new ArrayList();
-           
 
         }
 
@@ -54,19 +53,26 @@ public class Deserializzazione {
 
     public static DescrizioneGioco caricamento() {
         Db db = Db.getDb();
+        boolean esci = false;
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         DescrizioneGioco gioco = null;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        String nome;
+        String nome = "";
         if (l.isEmpty()) {
             if (Utilita.chiediConferma("Non ci sono partite già avviate, vuoi iniziarne una nuova?", "Inserisci il nome", "Ritorna al menù di gioco")) {
 
                 do {
-                    nome = scanner.nextLine();
-                    if (nome.isEmpty()) {
-                        System.out.println("Nome inserito non valido, reinserirne un altro");
+                    if (scanner.hasNextLine()) {
+                        nome = scanner.nextLine();
+                        if (nome.isEmpty()) {
+                            System.out.println("Nome inserito non valido, reinserirne un altro");
+                            esci = true;
+                        }
+                        else{
+                            esci = false;
+                        }
                     }
-                } while (nome.isEmpty());
+                } while (esci);
                 gioco = new Gioco(nome, db.Inserisci(nome, 0, false, true));
                 gioco.inizializza();
                 db.chiudiConnessione();
@@ -92,12 +98,7 @@ public class Deserializzazione {
                         risposta = false;
                     }
                     if (gioco == null) {
-                        if (Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco")) {
-                            risposta = true;
-
-                        } else {
-                            risposta = false;
-                        }
+                       risposta = Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco");
                     }
 
                 }
@@ -143,12 +144,10 @@ public class Deserializzazione {
                                 Serializzazione.scriviFileLista(l);
                             }
                             risposta = false;
-                        }
-                        else{
-                            if(Utilita.chiediConferma("Partita non trovate, vuoi  riprovare?", "inserisci il nome della partita che vuoi cancellare fra le partite elencate", "ritorno al menu di gioco")){
+                        } else {
+                            if (Utilita.chiediConferma("Partita non trovate, vuoi  riprovare?", "inserisci il nome della partita che vuoi cancellare fra le partite elencate", "ritorno al menu di gioco")) {
                                 risposta = true;
-                            }
-                            else {
+                            } else {
                                 risposta = false;
                             }
                         }

@@ -52,11 +52,12 @@ public class Menu {
                             gioco.continua();
                         }
                         break;
-                        
-                    case "database" : 
+
+                    case "database":
                         Db db = Db.getDb();
                         db.Visualizza();
                         db.chiudiConnessione();
+                        break;
 
                     case "cancella":
                         Deserializzazione.cancellaPartita();
@@ -104,7 +105,7 @@ public class Menu {
                 }
             }
         } while (isExiting);
-        partita = new Gioco(answer,db.Inserisci(answer, 0, false, true));
+        partita = new Gioco(answer, db.Inserisci(answer, 0, false, true));
         db.chiudiConnessione();
 
         return partita;
