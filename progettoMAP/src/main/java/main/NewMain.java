@@ -14,6 +14,7 @@ public class NewMain {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException {
         Menu.menuDiGioco();

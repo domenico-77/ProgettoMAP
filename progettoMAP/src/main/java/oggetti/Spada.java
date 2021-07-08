@@ -62,6 +62,7 @@ public class Spada extends Oggetto implements Serializable {
     public void descrizioneOggetto() {
         System.out.print("Rin: 'E' " + this.nome + " ci servira' nel caso in cui incontriamo dei soldati, puoi usarla per " + this.usabilita + " volte");
         if (this.usabilita < 3) {
+            System.out.println("");
             System.out.println(", sarebbe il caso di trovare un affilatore, per aumentare l'usabilita prima che si rompa'");
         } else {
             System.out.println("'");

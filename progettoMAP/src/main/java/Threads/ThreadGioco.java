@@ -22,7 +22,7 @@ String nome = "ciola";
             while (true) {
                 try {
                     DescrizioneGioco gioco = new Gioco(nome);
-                    gioco.gioca();
+                    gioco.iniziaPartita();
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();

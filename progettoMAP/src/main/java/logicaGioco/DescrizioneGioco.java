@@ -129,7 +129,7 @@ public abstract class DescrizioneGioco implements Serializable {
         this.giocatore = giocatore;
     }
 
-    public abstract void gioca()throws FileNotFoundException;
+    public abstract void iniziaPartita()throws FileNotFoundException;
 
     public abstract void continua() throws FileNotFoundException;
     

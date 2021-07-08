@@ -25,6 +25,7 @@ public class Help {
         System.out.println("+------------------ HELP ------------------+");
         System.out.println("Digitare 'inizia' per iniziare una nuova avventura");
         System.out.println("Digitare 'continua' per avviare una partita già iniziata");
+        System.out.println("Digitare 'database' per visualizzare la classifica di gioco");
         System.out.println("Digitare 'esci' per terminare l' applicazione");
         System.out.println("+------------------ FINE HELP ------------------+");
     }

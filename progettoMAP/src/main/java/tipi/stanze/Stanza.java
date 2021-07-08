@@ -9,13 +9,14 @@ import java.io.Serializable;
 import tipi.stanze.Porta;
 import oggetti.Oggetto;
 import java.util.List;
+import npc.Mob;
 import npc.Npc;
 
 /**
  *
  * @author mtubi
  */
-public class Stanza implements Serializable{
+public class Stanza implements Serializable {
 
     private static int numStanze = 0;
     private int id;
@@ -68,8 +69,6 @@ public class Stanza implements Serializable{
     public List<Oggetto> getOggetiStanza() {
         return oggettiStanza;
     }
-    
-    
 
     public static void setNumStanze(int numStanze) {
         Stanza.numStanze = numStanze;
@@ -118,8 +117,6 @@ public class Stanza implements Serializable{
     public String getNomeStanza() {
         return nomeStanza;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -162,31 +159,25 @@ public class Stanza implements Serializable{
      */
     public void DescriviStanza() {
         if (!this.illuminata) {
-            if(this.npc != null){
-            System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
-            }
-            else{
+            if (this.npc != null) {
+                System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
+            } else {
                 System.out.println("Rin:'Non riesco a vedere nulla e ci sono dei rumori sospetti potrebbe esserci qualcuno, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
             }
 
         } else {
             System.out.println("Rin:' Sei entrato nella stanza : " + this.nomeStanza + " . ");
             if (this.portaNord != null) {
-                System.out.print("a nord " + this.portaNord.descriviPorta() + ";  ");
-                System.out.println("");
+                System.out.println("a nord " + this.portaNord.descriviPorta() + ";  ");
             }
             if (this.portaSud != null) {
-                System.out.print("a sud " + this.portaSud.descriviPorta() + "; ");
-                System.out.println("");
+                System.out.println("a sud " + this.portaSud.descriviPorta() + "; ");
             }
             if (this.portaEst != null) {
-                System.out.print("a est " + this.portaEst.descriviPorta() + "; ");
-                System.out.println("");
+                System.out.println("a est " + this.portaEst.descriviPorta() + "; ");
             }
             if (this.portaOvest != null) {
                 System.out.println("a ovest " + this.portaOvest.descriviPorta() + ".");
-                System.out.println("");
-
             }
             if (this.oggettiStanza.isEmpty()) {
                 System.out.print("Non c'è niente di interessante in questa stanza.");
@@ -212,18 +203,21 @@ public class Stanza implements Serializable{
                     System.out.println("E' prensente solo " + this.oggettiStanza.get(0).getNome());
                 }
             }
-            
-             if(this.npc != null){
-                if(this.npc.isVivo()){
-                    if(this.npc.isNeutrale()){
-                        System.out.println("Sembra esserci un prigioniero, potremmo provare a parlarci");
+
+            if (this.npc != null) {
+                if (this.npc.isVivo()) {
+                    if (this.npc.isNeutrale()) {
+                        System.out.print(" Sembra esserci un prigioniero, potremmo provare a parlarci");
+                    } else {
+                        Mob mob = (Mob) this.getNpc();
+                        if (mob.isCorrotto()) {
+                            System.out.print("C'e' la guardia che abbiamo corrotto precedentemente, andiamocene potrebbe cambiare idea");
+                        } else {
+                            System.out.print("Oh no! C'e' una guardia, se non possiamo affrontarlo ci conviene fare l'indispensabile in questa stanza e andarcene!");
+                        }
                     }
-                    else{
-                        System.out.println("Oh no! C'e' una guardia, se non possosiamo affrontarlo ci conviene fare l'indispensabile in questa stanza e andarcene!");
-                    }
-                }
-                else{
-                    System.out.println("C'e' un cadavere in questa stanza, potrebbe avere qualcosa di utile");
+                } else {
+                    System.out.print("C'e' un cadavere in questa stanza, potrebbe avere qualcosa di utile");
                 }
             }
 

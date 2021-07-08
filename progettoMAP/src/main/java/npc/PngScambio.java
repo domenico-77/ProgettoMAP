@@ -80,7 +80,7 @@ public class PngScambio extends Npc {
                         this.interagisci(giocatore);
                     }
                 } else {
-                    System.out.println(this.nome + ": 'Quando avrai " + this.oggettoRichiesto + " torna da me, io saro' sempre qui");
+                    System.out.println(this.nome + ": 'Quando avrai " + this.oggettoRichiesto.getNome() + " torna da me, io saro' sempre qui");
                 }
             }
         }

@@ -56,22 +56,15 @@ public class Deserializzazione {
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         String nome;
         if (l.isEmpty()) {
-            if (Utilita.chiediConferma("Non ci sono partite già avviate, vuoi iniziarne una nuova?", "Inserisci il nome", "Ritorna al menù di gioco")) {
-
-                do {
-                    nome = scanner.nextLine();
-                    if (nome.isEmpty()) {
-                        System.out.println("Nome inserito non valido, reinserirne un altro");
-                    }
-                } while (nome.isEmpty());
-                gioco = new Gioco(nome);
-                gioco.inizializza();
-            }
+            System.out.println("Non ci sono partite salvate, se vuoi giocare creane una nuova");
 
         } else {
+            System.out.println("NOME DELLE PARTITE SALVATE");
             Deserializzazione.visualizzaPartite(l);
             Boolean risposta = false;
             do {
+                System.out.println("Inserire il nome della partita che si vuole continuare");
+                if(scanner.hasNextLine()){
                 nome = scanner.nextLine();
                 if (nome.isEmpty()) {
                     System.out.println("Nome inserito non valido, reinserirne un altro");
@@ -88,7 +81,7 @@ public class Deserializzazione {
                         risposta = false;
                     }
                     if (gioco == null) {
-                        if (Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco")) {
+                        if (Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "Riprova con un nome diverso", "Ritorna al menù di gioco")) {
                             risposta = true;
 
                         } else {
@@ -96,6 +89,7 @@ public class Deserializzazione {
                         }
                     }
 
+                }
                 }
             } while (risposta);
         }
