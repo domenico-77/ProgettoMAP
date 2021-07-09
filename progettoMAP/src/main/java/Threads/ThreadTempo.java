@@ -24,6 +24,7 @@ public class ThreadTempo {
             ThreadTempo.secondi = 0;
             ThreadTempo.minuti = 0;
             ThreadTempo.ore = 0;
+            attivo = true;
             while (attivo) {
                 try {
                     if (secondi == MAX_SEC) {

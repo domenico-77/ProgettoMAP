@@ -58,15 +58,18 @@ public class Gioco extends DescrizioneGioco {
     private static final Oggetto OGGETTO_MALIGNO = new OggettoMaligno("del veleno", Utilita.generaSetAlias(), 30);
     private static final Oggetto SPADA = new Spada("la spada", Utilita.generaSetAlias("spada", "lama", "arma bianca", "daga", "katana", "ferro"));
     private static final Oggetto AFFILATORE = new Affilatore("l'affilatore", Utilita.generaSetAlias("affilatoio", "cote", "mola", "affilatrice", "affilatore"));
-    static final int MAX_SEC = 60;
-    static final int MAX_MIN = 60;
 
     private int secondi = 0;
     private int minuti = 0;
     private int ore = 0;
 
-    public Gioco(String nomeGiocatore) {
-        super(nomeGiocatore);
+
+    static final int MAX_SEC = 60;
+    static final int MAX_MIN = 60;
+
+    public Gioco(String nomeGiocatore, int id) {
+        super(nomeGiocatore, id);
+
     }
 
     @Override

@@ -29,7 +29,6 @@ import tipi.Giocatore;
 public abstract class DescrizioneGioco implements Serializable {
 
     protected final List<Stanza> stanze = new ArrayList<>();
-    protected static int numPartite;
     protected int id;
     protected Giocatore giocatore = new Giocatore(new ArrayList());
     protected Stanza stanzaCorrente;
@@ -38,8 +37,13 @@ public abstract class DescrizioneGioco implements Serializable {
     protected boolean finita = false;
     protected boolean sospesa = false;
 
-    public DescrizioneGioco(String nomeGiocatore) {
+    public int getId() {
+        return id;
+    }
+
+    public DescrizioneGioco(String nomeGiocatore, int id) {
         this.nomeGiocatore = nomeGiocatore;
+        this.id = id;
     }
 
     public String getNomeGiocatore() {

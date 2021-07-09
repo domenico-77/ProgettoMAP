@@ -5,7 +5,7 @@
  */
 package salvataggio;
 
-import com.mycompany.progettomap.giochi.Gioco;
+import DataBase.Db;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import logicaGioco.DescrizioneGioco;
-import tipi.Giocatore;
 import tipi.Utilita;
 
 /**
@@ -43,7 +42,7 @@ public class Deserializzazione {
             return null;
 
         } catch (IOException e) {
-            System.err.println("Caught IOException: " + e.getMessage());
+            List<DescrizioneGioco> l2 = new ArrayList();
 
         }
 
@@ -54,8 +53,9 @@ public class Deserializzazione {
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         DescrizioneGioco gioco = null;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        String nome;
+        String nome = "";
         if (l.isEmpty()) {
+
             System.out.println("Non ci sono partite salvate, se vuoi giocare creane una nuova");
 
         } else {
@@ -81,12 +81,7 @@ public class Deserializzazione {
                         risposta = false;
                     }
                     if (gioco == null) {
-                        if (Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "Riprova con un nome diverso", "Ritorna al menù di gioco")) {
-                            risposta = true;
-
-                        } else {
-                            risposta = false;
-                        }
+                       risposta = Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco");
                     }
 
                 }

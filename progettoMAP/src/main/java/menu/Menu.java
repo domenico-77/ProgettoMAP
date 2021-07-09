@@ -5,7 +5,7 @@
  */
 package menu;
 
-import Threads.ThreadGioco;
+import DataBase.Db;
 import Threads.ThreadTempo;
 import com.mycompany.progettomap.giochi.Gioco;
 import java.io.FileNotFoundException;
@@ -21,40 +21,6 @@ import tipi.Utilita;
  * @author domen
  */
 public class Menu {
-
-    /*public static void MenuInizio() throws FileNotFoundException {
-        boolean isExiting = false;
-        String answer;
-        Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        do {
-            System.out.println("-------------------------------- Menu Principale "
-                    + "--------------------------------");
-            System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
-            if (scanner.hasNextLine()) {
-                answer = scanner.nextLine();
-                answer = answer.replaceAll("\\s+", "");
-                switch (answer.toLowerCase()) {
-                    case "help":
-                        Help.stampaHelpMenuInizio();
-                        break;
-                    case "gioca":
-                        Menu.menuDiGioco();
-                        break;
-                    case "esci":
-                        isExiting = Utilita.chiediConferma("Si vuole davvero uscire?",
-                                "Alla prossima partita!", "Non si è usciti dal gioco.");
-                        break;
-
-                    default:
-                        System.out.println("Comando inserito non valido.");
-                        System.out.println("Per sapere quali comandi sono validi digitare help.");
-                        break;
-                }
-            }
-        } while (!isExiting);
-
-        scanner.close();
-    }*/
 
     public static void menuDiGioco() throws FileNotFoundException {
         boolean isExiting = false;
@@ -87,6 +53,12 @@ public class Menu {
                         }
                         break;
 
+                    case "database":
+                        Db db = Db.getDb();
+                        db.Visualizza();
+                        db.chiudiConnessione();
+                        break;
+
                     case "cancella":
                         Deserializzazione.cancellaPartita();
                         break;
@@ -109,6 +81,7 @@ public class Menu {
 
     public static DescrizioneGioco creaPartita() {
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        Db db = Db.getDb();
         DescrizioneGioco partita;
         boolean isExiting = false;
         String answer = "";
@@ -132,7 +105,9 @@ public class Menu {
                 }
             }
         } while (isExiting);
-        partita = new Gioco(answer);
+        partita = new Gioco(answer, db.Inserisci(answer, 0, false, true));
+        db.chiudiConnessione();
+
         return partita;
     }
 
