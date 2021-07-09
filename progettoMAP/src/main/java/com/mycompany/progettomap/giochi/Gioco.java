@@ -9,6 +9,7 @@ package com.mycompany.progettomap.giochi;
  *
  * @author Acer
  */
+import DataBase.Db;
 import com.mycompany.progettomap.parser.Parser;
 import logicaGioco.DescrizioneGioco;
 import com.mycompany.progettomap.parser.ParserOutput;
@@ -62,7 +63,6 @@ public class Gioco extends DescrizioneGioco {
     private int secondi = 0;
     private int minuti = 0;
     private int ore = 0;
-
 
     static final int MAX_SEC = 60;
     static final int MAX_MIN = 60;
@@ -195,7 +195,7 @@ public class Gioco extends DescrizioneGioco {
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false));
         this.stanze.add(st1);
         //stanza 15
-        st3 = new Stanza("stanza guardie", true, null, null, null, null, Utilita.creaListaOggetti(), new Mob("Domenico", this.creaGrimaldello(),false));
+        st3 = new Stanza("stanza guardie", true, null, null, null, null, Utilita.creaListaOggetti(), new Mob("Domenico", this.creaGrimaldello(), false));
         st2.setPortaNord(new Porta(TipoPorta.normale, st3, false));
         st3.setPortaSud(new Porta(TipoPorta.normale, st2, false));
         this.stanze.add(st2);
@@ -383,13 +383,12 @@ public class Gioco extends DescrizioneGioco {
                             out.println("Rin: 'Non puoi accendere niente, apparte una candela che non abbiamo'");
                         }
                     } else if (this.giocatore.getInventario().contieneOggetto(Gioco.CANDELA)) {
-                            if (Utilita.chiediConferma("Rin: 'Intendevi candela, vuoi accenderla?'", "Rin: 'Proviamo ad accenderla'", "Rin: 'Ricordati che non puoi accendere altri oggetti, che non siano candela'")) {
-                                this.giocatore.getInventario().usaOggetto(Gioco.CANDELA, giocatore, stanzaCorrente);
-                            }
-                        } else {
-                            out.println("Rin: 'Non puoi accendere niente, apparte una candela che non abbiamo'");
+                        if (Utilita.chiediConferma("Rin: 'Intendevi candela, vuoi accenderla?'", "Rin: 'Proviamo ad accenderla'", "Rin: 'Ricordati che non puoi accendere altri oggetti, che non siano candela'")) {
+                            this.giocatore.getInventario().usaOggetto(Gioco.CANDELA, giocatore, stanzaCorrente);
                         }
-                    
+                    } else {
+                        out.println("Rin: 'Non puoi accendere niente, apparte una candela che non abbiamo'");
+                    }
 
                 } else {
                     out.println("Rin: 'non ho capito cosa fare'");
@@ -478,6 +477,7 @@ public class Gioco extends DescrizioneGioco {
                         if (Utilita.chiediConferma("Vuoi salvare la partita prima di uscire?", "Salvataggio in corso...", "Uscita dalla partita senza salvataggio")) {
                             try {
                                 salvataggio.Serializzazione.scriviFile(this);
+                                System.out.println("Uscita in corso...");
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -714,7 +714,6 @@ public class Gioco extends DescrizioneGioco {
         } else if (this.giocatore.getVitaCorrente() <= 0) {
             System.out.println("I nostri eroi non sono riusciti a fuggire dalla prigione");
             System.out.println("Hai perso!");
-            Deserializzazione.cancellaPartitaFinita(this);
         }
     }
 

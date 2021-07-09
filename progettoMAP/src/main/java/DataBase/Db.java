@@ -44,7 +44,7 @@ public class Db {
         return Db.db;
     }
 
-    public int Inserisci(String nome, int punteggio, boolean giocoTerminato, boolean vivo) {
+    public int inserisci(String nome, int punteggio, boolean giocoTerminato, boolean vivo) {
         int id = 0;
 
         try {
@@ -92,7 +92,7 @@ public class Db {
         }
     }
 
-    public void Visualizza() {
+    public void visualizza() {
         try {
             Statement stm = this.connessione.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY id");

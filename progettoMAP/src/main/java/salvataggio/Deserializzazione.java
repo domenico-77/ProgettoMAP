@@ -64,27 +64,27 @@ public class Deserializzazione {
             Boolean risposta = false;
             do {
                 System.out.println("Inserire il nome della partita che si vuole continuare");
-                if(scanner.hasNextLine()){
-                nome = scanner.nextLine();
-                if (nome.isEmpty()) {
-                    System.out.println("Nome inserito non valido, reinserirne un altro");
-                    risposta = true;
-                } else {
-                    int i = -1;
-                    for (DescrizioneGioco g : l) {
-                        if (g.getNomeGiocatore().equals(nome)) {
-                            i = l.indexOf(g);
+                if (scanner.hasNextLine()) {
+                    nome = scanner.nextLine();
+                    if (nome.isEmpty()) {
+                        System.out.println("Nome inserito non valido, reinserirne un altro");
+                        risposta = true;
+                    } else {
+                        int i = -1;
+                        for (DescrizioneGioco g : l) {
+                            if (g.getNomeGiocatore().equals(nome)) {
+                                i = l.indexOf(g);
+                            }
                         }
-                    }
-                    if (i != -1) {
-                        gioco = l.get(i);
-                        risposta = false;
-                    }
-                    if (gioco == null) {
-                       risposta = Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco");
-                    }
+                        if (i != -1) {
+                            gioco = l.get(i);
+                            risposta = false;
+                        }
+                        if (gioco == null) {
+                            risposta = Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco");
+                        }
 
-                }
+                    }
                 }
             } while (risposta);
         }
@@ -124,6 +124,9 @@ public class Deserializzazione {
                         }
                         if (i != -1) {
                             if (Utilita.chiediConferma("Sei sicuro di voler cancellare la pertita " + l.get(i).getNomeGiocatore(), "Cancellazione effettuata", "Annullata la cancellazione della partita " + l.get(i).getNomeGiocatore())) {
+                               Db db = Db.getDb();
+                               db.Cancella(i, nome);
+                               db.chiudiConnessione();
                                 l.remove(i);
                                 Serializzazione.scriviFileLista(l);
                             }
@@ -142,7 +145,7 @@ public class Deserializzazione {
         }
     }
 
-    public static void cancellaPartitaFinita(DescrizioneGioco partitaFinita) throws FileNotFoundException{
+    public static void cancellaPartitaFinita(DescrizioneGioco partitaFinita) throws FileNotFoundException {
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         if (!l.isEmpty()) {
             int i = -1;
@@ -151,14 +154,12 @@ public class Deserializzazione {
                     i = l.indexOf(g);
                 }
             }
-            if(i != -1){
+            if (i != -1) {
+               Db db = Db.getDb();
                 l.remove(i);
                 Serializzazione.scriviFileLista(l);
-                //aggiornamento database
-            }
-            else{
-                //salvataggio nel database
-            }
+                db.aggiorna(partitaFinita.getId(), partitaFinita.getNomeGiocatore(), partitaFinita.getGiocatore().getPunteggio(), partitaFinita.isFinita(), (partitaFinita.getGiocatore().getVitaCorrente() > 0));
+            } 
         }
     }
 }
