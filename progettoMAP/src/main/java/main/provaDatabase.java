@@ -19,10 +19,10 @@ public class provaDatabase {
     public static void main(String[] args) {
         // TODO code application logic here
         Db db = Db.getDb();
-        db.Visualizza();
+        db.visualizza();
        /* int i = db.Inserisci("anna", 0, true, true);
         System.out.println(i);*/
-        db.Visualizza();
+        db.visualizza();
 
     }
 

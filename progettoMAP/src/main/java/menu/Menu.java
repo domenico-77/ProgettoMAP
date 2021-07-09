@@ -12,8 +12,11 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logicaGioco.DescrizioneGioco;
 import salvataggio.Deserializzazione;
+import salvataggio.Serializzazione;
 import tipi.Utilita;
 
 /**
@@ -55,7 +58,7 @@ public class Menu {
 
                     case "database":
                         Db db = Db.getDb();
-                        db.Visualizza();
+                        db.visualizza();
                         db.chiudiConnessione();
                         break;
 
@@ -105,9 +108,13 @@ public class Menu {
                 }
             }
         } while (isExiting);
-        partita = new Gioco(answer, db.Inserisci(answer, 0, false, true));
+        partita = new Gioco(answer, db.inserisci(answer, 0, false, true));
         db.chiudiConnessione();
-
+        try {
+            Serializzazione.scriviFile(partita);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return partita;
     }
 
