@@ -5,6 +5,8 @@
  */
 package npc;
 
+import java.util.ArrayList;
+import java.util.List;
 import oggetti.Oggetto;
 import tipi.Giocatore;
 import tipi.Utilita;
@@ -18,6 +20,9 @@ public class Mob extends Npc{
     private final static int DANNO = 50;
     private final static int DISTANZA = 3;
     private final static boolean NEUTRALE = false;
+    private final static String[] ALIAS_MOB = {"soldato","nemico","guardia","avversario"};
+    
+    
     private boolean corrotto = false;
     private boolean corrompibile;
     private int vita = VITA_MAX;
@@ -61,40 +66,72 @@ public class Mob extends Npc{
                 }
                 else{
                     if(this.corrompibile){
-                        System.out.println(this.nome + ": 'Se mi dai " + this.nome + "potrei non averti visto passare di qui'");
+                        System.out.println(this.nome + ": 'Se mi dai " + this.oggetto.getNome() + " potrei non averti visto passare di qui'");
                         if(giocatore.getInventario().contieneOggetto(this.oggetto)){
-                            if(Utilita.chiediConferma("Rin: 'Abbiamo l'oggetto" + this.oggetto.getNome() + "vogliamo darglielo?'", "Rin: 'Perfetto un problema in meno!'", this.nome + ": 'Hai sprecato la tua occasione di scappare, ora ne subirai le conseguenze'")){
+                            if(Utilita.chiediConferma("Rin: 'Abbiamo l'oggetto richiesto, vogliamo darglielo?'", "Rin: 'Perfetto un problema in meno!'", this.nome + ": 'Hai sprecato la tua occasione di scappare, ora ne subirai le conseguenze'")){
                                 this.corrotto = true;
                                 giocatore.getInventario().rimuoviOggetto(this.oggetto);
                                 this.interagisci(giocatore);
                             }
                             else{
                                 this.corrompibile = false;
-                                this.interagisci(giocatore);
                             }
+                        }
+                        else{
+                            System.out.println("Rin: 'non abbiamo questo oggetto, ci conviene scappare!'");
+                            this.corrompibile = false;
                         }
                     }
                     else{
                         if(this.distanza == 0){
-                            System.out.println(this.nome + "'Prendi questo, MALEDETTO!!!'");
+                            System.out.println(this.nome + ": 'Prendi questo, MALEDETTO!!!'");
                             giocatore.decrementaVita(this.danno);
                             this.distanza = Mob.DISTANZA;
                             if(giocatore.getVitaCorrente() == 0){
                                 System.out.println(this.nome + "'La prossima volta attento a quello che fai, non puoi metterti contro l'imperatore!'");
                             }
                             else{
-                                System.out.println("Rin : 'Oh no! Ti ha colpito, non potremo resistere ancora per molto, dobbiamo sconfiggerlo il prima possibile altrimenti ci converrebbe scappare...finchè possiamo! ");
+                                System.out.println("Rin: 'Oh no! Ti ha colpito, non potremo resistere ancora per molto, dobbiamo sconfiggerlo il prima possibile altrimenti ci converrebbe scappare...finchè possiamo! ");
                             }
                         }
                         else{
                             this.distanza --;
-                            System.out.println(this.nome + ": 'Sto arrivando'");
-                            System.out.println("Rin: 'Decidiamo in fretta cosa fare con lui, prima che ci faccia del male, ora e' distante " + this.distanza + "passi da noi'");
+                            System.out.println(this.nome + ": 'Sto arrivando, non posso tollerare che un prigioniero cammini per la prigione'");
+                            if(this.distanza == 0){
+                                System.out.println("Rin: 'Oh no e' troppo vicino, ci colpira' se non facciamo qualcosa'");
+                            }
+                            else{
+                            System.out.println("Rin: 'Decidiamo in fretta cosa fare con lui, prima che ci faccia del male, ora e' distante " + this.distanza + " passi da noi'");
+                            }
                         }
                     }
                 }
             }
         }
     }
+
+    @Override
+    public List<String> getAliasNome() {
+         List<String> aliasNome = new ArrayList();
+        for(String a : Npc.alias){
+            aliasNome.add(a);
+        }
+        
+         for(String a : Mob.ALIAS_MOB){
+            aliasNome.add(a);
+        }
+        if(!this.sconosciuto){
+            aliasNome.add(this.nome.toLowerCase());
+        }
+        else{
+            aliasNome.add("prigioniero");
+        }
+        return aliasNome;
+    }
+
+    public boolean isCorrotto() {
+        return corrotto;
+    }
+    
     
 }

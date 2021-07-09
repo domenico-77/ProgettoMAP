@@ -12,6 +12,5 @@ package tipi.stanze;
 public enum TipoPorta {
     oro,
     argento,
-    normale,
-    tunnel
+    normale
 }

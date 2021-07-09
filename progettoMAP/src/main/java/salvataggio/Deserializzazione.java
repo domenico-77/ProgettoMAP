@@ -6,7 +6,6 @@
 package salvataggio;
 
 import DataBase.Db;
-import com.mycompany.progettomap.giochi.Gioco;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import logicaGioco.DescrizioneGioco;
-import tipi.Giocatore;
 import tipi.Utilita;
 
 /**
@@ -52,36 +50,21 @@ public class Deserializzazione {
     }
 
     public static DescrizioneGioco caricamento() {
-        Db db = Db.getDb();
-        boolean esci = false;
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         DescrizioneGioco gioco = null;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         String nome = "";
         if (l.isEmpty()) {
-            if (Utilita.chiediConferma("Non ci sono partite già avviate, vuoi iniziarne una nuova?", "Inserisci il nome", "Ritorna al menù di gioco")) {
 
-                do {
-                    if (scanner.hasNextLine()) {
-                        nome = scanner.nextLine();
-                        if (nome.isEmpty()) {
-                            System.out.println("Nome inserito non valido, reinserirne un altro");
-                            esci = true;
-                        }
-                        else{
-                            esci = false;
-                        }
-                    }
-                } while (esci);
-                gioco = new Gioco(nome, db.Inserisci(nome, 0, false, true));
-                gioco.inizializza();
-                db.chiudiConnessione();
-            }
+            System.out.println("Non ci sono partite salvate, se vuoi giocare creane una nuova");
 
         } else {
+            System.out.println("NOME DELLE PARTITE SALVATE");
             Deserializzazione.visualizzaPartite(l);
             Boolean risposta = false;
             do {
+                System.out.println("Inserire il nome della partita che si vuole continuare");
+                if(scanner.hasNextLine()){
                 nome = scanner.nextLine();
                 if (nome.isEmpty()) {
                     System.out.println("Nome inserito non valido, reinserirne un altro");
@@ -101,6 +84,7 @@ public class Deserializzazione {
                        risposta = Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco");
                     }
 
+                }
                 }
             } while (risposta);
         }
@@ -155,6 +139,26 @@ public class Deserializzazione {
                 }
             } while (risposta);
 
+        }
+    }
+
+    public static void cancellaPartitaFinita(DescrizioneGioco partitaFinita) throws FileNotFoundException{
+        List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        if (!l.isEmpty()) {
+            int i = -1;
+            for (DescrizioneGioco g : l) {
+                if (g.getNomeGiocatore().equals(partitaFinita.getNomeGiocatore())) {
+                    i = l.indexOf(g);
+                }
+            }
+            if(i != -1){
+                l.remove(i);
+                Serializzazione.scriviFileLista(l);
+                //aggiornamento database
+            }
+            else{
+                //salvataggio nel database
+            }
         }
     }
 }

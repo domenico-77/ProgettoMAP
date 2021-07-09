@@ -43,7 +43,7 @@ public class Menu {
                     case "inizia":
                         gioco = Menu.creaPartita();
                         ThreadTempo.Time();
-                        gioco.gioca();
+                        gioco.iniziaPartita();
                         break;
                     case "continua":
                         gioco = Deserializzazione.caricamento();
