@@ -88,19 +88,9 @@ public class Gioco extends DescrizioneGioco {
 
         Comando aprire = new Comando("aprire", TipoComando.aprire, Utilita.generaSetAlias("apri", "open", "aprire"));
 
-        Comando chiudere = new Comando("chiudere", TipoComando.chiudere, Utilita.generaSetAlias("chiudi", "close", "chiudere"));
-
-        Comando spingere = new Comando("spingere", TipoComando.spingere, Utilita.generaSetAlias("spingi", "premi", "push", "attiva", "spingere"));
-
-        Comando tirare = new Comando("tirare", TipoComando.tirare, Utilita.generaSetAlias("tirare", "pull", "tirare"));
-
         Comando camminare_verso = new Comando("camminare_verso", TipoComando.camminare_verso, Utilita.generaSetAlias("vai", "andare", "andiamo", "vado"));
 
         Comando raccogliere = new Comando("raccogliere", TipoComando.raccogliere, Utilita.generaSetAlias("raccogli", "afferra", "prendi", "afferrare", "prendere", "raccogliere"));
-
-        Comando parlare_a = new Comando("parlare_a", TipoComando.parlare_a, Utilita.generaSetAlias("parla", "parlagli", "parlale", "chiedi", "domanda", "interagisci", "parlare_a"));
-
-        Comando dare = new Comando("dare", TipoComando.dare, Utilita.generaSetAlias("dai", "dagli", "dalle", "dona", "dare"));
 
         Comando usare = new Comando("usare", TipoComando.usare, Utilita.generaSetAlias("usa", "utilizza", "utilizzare", "usare"));
 
@@ -109,8 +99,6 @@ public class Gioco extends DescrizioneGioco {
         Comando osservare = new Comando("osservare", TipoComando.osservare, Utilita.generaSetAlias("osserva", "guarda", "guardare", "osservare"));
 
         Comando accendere = new Comando("accendere", TipoComando.accendere, Utilita.generaSetAlias("accendi", "accendere"));
-
-        Comando spegnere = new Comando("spegnere", TipoComando.spegnere, Utilita.generaSetAlias("spegni", "spegnere"));
 
         Comando torna_indietro = new Comando("torna_indietro", TipoComando.torna_indietro, Utilita.generaSetAlias("indietreggia", "torna", "indietro"));
 
@@ -134,13 +122,13 @@ public class Gioco extends DescrizioneGioco {
         //stanza 1
         st1 = new Stanza("cella di Manji", true, null, null, null, null, new ArrayList<>(), null);
         //stanza 2
-        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(this.creaCandela()), new Mob("Max", this.creaCibo(), true));
+        st2 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(this.creaCandela()), new Mob("Max", this.creaCibo(), false));
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false));
         st2.setPortaSud(new Porta(TipoPorta.normale, st1, false));
         this.stanze.add(st1);
         oggettoContenitore = new OggettoContenitore("uno scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(this.creaOggettoMaligno(), this.creaCibo()));
         //stanza 3
-        st3 = new Stanza("corridoio", false, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore), new Mob("Max", this.creaCandela(), true));
+        st3 = new Stanza("corridoio", false, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore), null);
         st2.setPortaNord(new Porta(TipoPorta.normale, st3, false));
         st3.setPortaSud(new Porta(TipoPorta.normale, st2, false));
         this.stanze.add(st2);
@@ -165,10 +153,10 @@ public class Gioco extends DescrizioneGioco {
         this.stanze.add(st2);
         this.stanze.add(st1);
         //stanza 8
-        st1 = new Stanza("stanza sicurezza", true, null, null, null, null, Utilita.creaListaOggetti(), null);
+        st1 = new Stanza("stanza sicurezza", true, null, null, null, null, Utilita.creaListaOggetti(), new Mob("Francesco", this.creaCibo(), true));
         st3.setPortaOvest(new Porta(TipoPorta.normale, st1, false));
         st1.setPortaEst(new Porta(TipoPorta.normale, st3, false));
-        oggettoContenitore = new OggettoContenitore("lo scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(OGGETTO_MALIGNO, CHIAVE_OGGETTO_CONTENITORE, CANDELA));
+        oggettoContenitore = new OggettoContenitore("lo scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(this.creaOggettoMaligno(), this.creaGrimaldello(), this.creaCandela()));
         //stanza 9
         st2 = new Stanza("cella 1", true, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore), new PngScambio("Killer bee", this.creaAffilatore(), Gioco.CIBO));
         st1.setPortaOvest(new Porta(TipoPorta.argento, st2, true));
@@ -195,7 +183,8 @@ public class Gioco extends DescrizioneGioco {
         st2.setPortaOvest(new Porta(TipoPorta.oro, st1, true));
         this.stanze.add(st1);
         //stanza 14
-        st1 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(this.creaOggettoMaligno()), null);
+        oggettoContenitore = new OggettoContenitore("lo scrigno", Utilita.generaSetAlias("tesoro", "cofanetto", "cassetta", "scatola", "astuccio", "bauletto", "portagioie", "forziere", "scrigno"), Utilita.creaListaOggetti(this.creaSpada(), this.creaCibo()));
+        st1 = new Stanza("corridoio", true, null, null, null, null, Utilita.creaListaOggetti(oggettoContenitore), null);
         st3.setPortaNord(new Porta(TipoPorta.normale, st1, false));
         st1.setPortaSud(new Porta(TipoPorta.normale, st3, false));
         this.stanze.add(st3);
@@ -203,12 +192,12 @@ public class Gioco extends DescrizioneGioco {
         st1.setPortaNord(new Porta(TipoPorta.normale, st2, false));
         this.stanze.add(st1);
         //stanza 15
-        st3 = new Stanza("stanza guardie", true, null, null, null, null, Utilita.creaListaOggetti(), null);
+        st3 = new Stanza("stanza guardie", true, null, null, null, null, Utilita.creaListaOggetti(), new Mob("Domenico", this.creaGrimaldello(),false));
         st2.setPortaNord(new Porta(TipoPorta.normale, st3, false));
         st3.setPortaSud(new Porta(TipoPorta.normale, st2, false));
         this.stanze.add(st2);
         //stanza 16
-        st1 = new Stanza("tesoreria", false, null, null, null, null, Utilita.creaListaOggetti(this.creaTotem()), new PngIndovinello("Kise", this.creaTotem(), "Ho mari senza acqua, ho coste senza sabbia, villaggi senza persone e montagne senza terra, cosa sono?", "un deserto", "la luna", "una mappa", "c"));
+        st1 = new Stanza("tesoreria", false, null, null, null, null, Utilita.creaListaOggetti(), new PngIndovinello("Kise", this.creaTotem(), "Ho mari senza acqua, ho coste senza sabbia, villaggi senza persone e montagne senza terra, cosa sono?", "un deserto", "la luna", "una mappa", "c"));
         st3.setPortaNord(new Porta(TipoPorta.argento, st1, true));
         st1.setPortaSud(new Porta(TipoPorta.argento, st3, true));
         this.stanze.add(st3);
@@ -218,12 +207,12 @@ public class Gioco extends DescrizioneGioco {
         st2.setPortaOvest(new Porta(TipoPorta.normale, st1, false));
         this.stanze.add(st1);
         //stanza 18
-        st3 = new Stanza("segreteria della prigione", true, null, null, null, null, Utilita.creaListaOggetti(this.creaSpada(), this.creaCibo()), null);
+        st3 = new Stanza("segreteria della prigione", true, null, null, null, null, Utilita.creaListaOggetti(this.creaSpada(), this.creaCibo()), new Mob("Filippo", null, false));
         st2.setPortaEst(new Porta(TipoPorta.normale, st3, false));
         st3.setPortaOvest(new Porta(TipoPorta.normale, st2, false));
         this.stanze.add(st2);
         //stanza 19
-        st1 = new Stanza("entrata della prigione", true, null, null, null, null, Utilita.creaListaOggetti(), null);
+        st1 = new Stanza("entrata della prigione", true, null, null, null, null, Utilita.creaListaOggetti(), new Mob("Pierpaolo", null, false));
         st3.setPortaNord(new Porta(TipoPorta.normale, st1, false));
         st1.setPortaSud(new Porta(TipoPorta.normale, st3, false));
         this.stanze.add(st3);

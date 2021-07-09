@@ -187,11 +187,11 @@ public class Stanza implements Serializable {
                     int i = 1;
                     int size = this.oggettiStanza.size();
                     for (Oggetto o : this.oggettiStanza) {
-                        if (i != size - 2) {
+                        if (i < size - 2) {
                             System.out.print(o.getNome() + ", ");
                             i++;
                         } else {
-                            if (i == size - 1) {
+                            if (i == size - 2) {
                                 System.out.print(o.getNome() + " e ");
                             } else {
                                 System.out.print(o.getNome());
@@ -200,7 +200,7 @@ public class Stanza implements Serializable {
 
                     }
                 } else {
-                    System.out.println("E' prensente solo " + this.oggettiStanza.get(0).getNome());
+                    System.out.print("E' prensente solo " + this.oggettiStanza.get(0).getNome());
                 }
             }
 
