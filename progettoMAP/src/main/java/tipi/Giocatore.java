@@ -5,8 +5,6 @@
  */
 package tipi;
 
-import oggetti.OggettoContenitore;
-import oggetti.Oggetto;
 import com.mycompany.progettomap.parser.ParserOutput;
 import java.io.Serializable;
 import java.util.List;

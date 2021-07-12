@@ -53,7 +53,7 @@ public class Deserializzazione {
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         DescrizioneGioco gioco = null;
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        String nome = "";
+        String nome;
         if (l.isEmpty()) {
 
             System.out.println("Non ci sono partite salvate, se vuoi giocare creane una nuova");

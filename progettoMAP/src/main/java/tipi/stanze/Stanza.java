@@ -6,7 +6,6 @@
 package tipi.stanze;
 
 import java.io.Serializable;
-import tipi.stanze.Porta;
 import oggetti.Oggetto;
 import java.util.List;
 import npc.Mob;

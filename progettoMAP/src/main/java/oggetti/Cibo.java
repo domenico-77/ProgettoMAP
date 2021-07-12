@@ -5,9 +5,7 @@
  */
 package oggetti;
 
-import java.util.List;
 import java.util.Set;
-import tipi.Comando;
 import tipi.Giocatore;
 import tipi.stanze.Stanza;
 

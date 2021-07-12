@@ -6,12 +6,10 @@
 package salvataggio;
 
 import DataBase.Db;
-import com.mycompany.progettomap.giochi.Gioco;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 import logicaGioco.DescrizioneGioco;
 
@@ -26,7 +24,6 @@ public class Serializzazione {
             List<DescrizioneGioco> l = Deserializzazione.letturaFile();
             FileOutputStream fileOut = new FileOutputStream("./risorse/FileSalvataggio.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            DescrizioneGioco gioco = null;
             int i = -1;
             Db db = Db.getDb();
             for (DescrizioneGioco g : l) {

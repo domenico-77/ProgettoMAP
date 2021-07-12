@@ -13,7 +13,6 @@ import com.mycompany.progettomap.parser.ParserOutput;
 import java.io.FileNotFoundException;
 import java.util.List;
 import tipi.stanze.Stanza;
-import tipi.Comando;
 import java.io.PrintStream;
 import java.io.Serializable;
 
@@ -70,8 +69,6 @@ public abstract class DescrizioneGioco implements Serializable {
         this.sospesa = sospesa;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -96,8 +93,6 @@ public abstract class DescrizioneGioco implements Serializable {
         }
         return true;
     }
-    
-    
 
     public Stanza getStanzaCorrente() {
         return stanzaCorrente;
@@ -112,10 +107,6 @@ public abstract class DescrizioneGioco implements Serializable {
     }
 
     public abstract void inizializza();
-
-    public abstract void nextMove(ParserOutput p, PrintStream out);
-
-    public abstract void stampaStanze();
 
     public Stack<Stanza> getPercorsoStanze() {
         return PercorsoStanze;
@@ -133,10 +124,10 @@ public abstract class DescrizioneGioco implements Serializable {
         this.giocatore = giocatore;
     }
 
-    public abstract void iniziaPartita()throws FileNotFoundException;
+    public abstract void iniziaPartita() throws FileNotFoundException;
 
     public abstract void continua() throws FileNotFoundException;
-    
 
+    public abstract void nextMove(ParserOutput p, PrintStream out);
 
 }

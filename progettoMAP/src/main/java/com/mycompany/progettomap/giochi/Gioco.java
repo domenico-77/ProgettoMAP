@@ -9,7 +9,7 @@ package com.mycompany.progettomap.giochi;
  *
  * @author Acer
  */
-import DataBase.Db;
+
 import com.mycompany.progettomap.parser.Parser;
 import logicaGioco.DescrizioneGioco;
 import com.mycompany.progettomap.parser.ParserOutput;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import npc.PngIndovinello;
 import npc.PngScambio;
 import java.util.Scanner;
-import npc.Npc;
 import oggetti.Affilatore;
 import oggetti.Candela;
 import oggetti.ChiaveOggettoContenitore;
@@ -36,7 +35,7 @@ import Threads.ThreadTempo;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static menu.Help.stampaHelpPartita;
+import menu.Help;
 import npc.Mob;
 import salvataggio.Deserializzazione;
 import tipi.Giocatore;
@@ -228,7 +227,7 @@ public class Gioco extends DescrizioneGioco {
 
         this.stanzaCorrente = this.stanze.get(0);
 
-        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo, interagire, salva, fine, salute, uccidere, affilare));
+        this.giocatore.aggiornaMosse(Utilita.generaListaComandi(nord, sud, ovest, est, inventario, osservare, raccogliere, torna_indietro, usare, aprire, accendere, mangiare, camminare_verso, tempo, interagire, salva, fine, salute, uccidere, affilare, help));
     }
 
     @Override
@@ -458,6 +457,7 @@ public class Gioco extends DescrizioneGioco {
             } else if (p.getComando().getTipo() == TipoComando.salva) {
                 if (p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
                     try {
+                        this.calcolaTempo();
                         salvataggio.Serializzazione.scriviFile(this);
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
@@ -476,6 +476,7 @@ public class Gioco extends DescrizioneGioco {
                         out.println("");
                         if (Utilita.chiediConferma("Vuoi salvare la partita prima di uscire?", "Salvataggio in corso...", "Uscita dalla partita senza salvataggio")) {
                             try {
+                                this.calcolaTempo();
                                 salvataggio.Serializzazione.scriviFile(this);
                                 System.out.println("Uscita in corso...");
                             } catch (ClassNotFoundException ex) {
@@ -531,7 +532,13 @@ public class Gioco extends DescrizioneGioco {
                 } else {
                     System.out.println("Rin: 'Non puoi uccidere delle cose'");
                 }
-            } else {
+            } if(p.getComando().getTipo() == TipoComando.help){
+                if(p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false){
+                    Help.stampaHelpPartita();
+                }
+            }
+            
+            else {
                 out.println("Rin: 'non ho capito cosa fare'");
             }
 
@@ -560,12 +567,6 @@ public class Gioco extends DescrizioneGioco {
         ThreadTempo.reset();
     }
 
-    @Override
-    public void stampaStanze() {
-        for (Stanza s : this.stanze) {
-            s.DescriviStanza();
-        }
-    }
 
     @Override
     public void iniziaPartita() throws FileNotFoundException {

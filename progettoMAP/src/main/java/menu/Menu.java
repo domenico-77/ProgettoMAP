@@ -86,7 +86,7 @@ public class Menu {
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         Db db = Db.getDb();
         DescrizioneGioco partita;
-        boolean isExiting = false;
+        boolean isExiting;
         String answer = "";
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         do {

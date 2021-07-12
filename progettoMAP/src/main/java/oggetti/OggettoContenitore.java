@@ -6,15 +6,12 @@
 package oggetti;
 
 import java.io.Serializable;
-import oggetti.Oggetto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
 import tipi.Utilita;
-import tipi.stanze.TipoPorta;
 import tipi.stanze.Stanza;
 
 /**

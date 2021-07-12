@@ -25,8 +25,8 @@ public class Mob extends Npc{
     
     private boolean corrotto = false;
     private boolean corrompibile;
-    private int vita = VITA_MAX;
-    private int danno = DANNO;
+    private final int vita = VITA_MAX;
+    private final int danno = DANNO;
     private int distanza = DISTANZA;
     
 
