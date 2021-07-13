@@ -6,6 +6,7 @@
 package swing;
 
 import DataBase.Db;
+import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -22,6 +23,7 @@ private mainSwing ms;
     public menuInizio(mainSwing ms) {
         initComponents();
         this.ms = ms;
+        this.setBackground(Color.black);
     }
 
     /**

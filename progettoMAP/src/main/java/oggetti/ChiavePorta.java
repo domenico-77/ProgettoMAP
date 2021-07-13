@@ -6,6 +6,7 @@
 package oggetti;
 
 import java.util.Set;
+import javax.swing.JTextArea;
 import tipi.Giocatore;
 import tipi.stanze.TipoPorta;
 import tipi.stanze.Porta;
@@ -105,5 +106,64 @@ public class ChiavePorta extends Oggetto {
         return TIPO_OGGETTO2;
     }
 
-    
+    @Override
+    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+        Porta porta;
+        if (stanza.getPortaNord() != null) {
+            porta = stanza.getPortaNord();
+            if (porta.getTipo() == this.materiale) {
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                porta.setChiusa(false);
+                out.setText("Rin: 'hai aperto la porta " + porta.getTipo() + "'");
+                porta.getStanza().getPortaSud().setChiusa(false);
+            }
+        }
+        if (stanza.getPortaSud() != null) {
+            porta = stanza.getPortaSud();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                out.setText("Rin: 'hai aperto la porta " + porta.getTipo() + "'");
+
+                porta.getStanza().getPortaNord().setChiusa(false);
+            }
+        }
+
+        if (stanza.getPortaOvest() != null) {
+            porta = stanza.getPortaOvest();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                out.setText("Rin: 'hai aperto la porta " + porta.getTipo() + "'");
+
+                porta.getStanza().getPortaEst().setChiusa(false);
+            }
+        }
+        if (stanza.getPortaEst() != null) {
+            porta = stanza.getPortaEst();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                out.setText("Rin : 'hai aperto la porta " + porta.getTipo() + "'");
+
+                porta.getStanza().getPortaOvest().setChiusa(false);
+            }
+        }
+    }
+
+    @Override
+    public void descrizioneOggetto(JTextArea out) {
+        out.setText("Rin: ' E' una chiave ");
+        switch (this.materiale) {
+            case oro:
+                out.append("d'oro");
+                break;
+            case argento:
+                out.append("d'argento");
+                break;
+        }
+
+        out.append(", potrebbe servirici per aprire delle porte'");
+    }
+
 }

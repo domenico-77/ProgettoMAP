@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JTextArea;
 import tipi.Giocatore;
 import tipi.Inventario;
 import tipi.Utilita;
@@ -67,7 +68,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
         Inventario inventario = giocatore.getInventario();
         if (this.aperto) {
             if (this.listaOggetti != null) {
-                for(Oggetto o : this.listaOggetti) {
+                for (Oggetto o : this.listaOggetti) {
                     if (o.prendibile) {
                         System.out.println("Rin: 'Hai raccolto " + o.nome + "'");
                         inventario.aggiungiOggetto(o);
@@ -125,6 +126,51 @@ public class OggettoContenitore extends Oggetto implements Serializable {
 
     public boolean isAperto() {
         return aperto;
+    }
+
+    @Override
+    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+        Inventario inventario = giocatore.getInventario();
+        if (this.aperto) {
+            if (this.listaOggetti != null) {
+                for (Oggetto o : this.listaOggetti) {
+                    if (o.prendibile) {
+                        out.append("Rin: 'Hai raccolto " + o.nome + "'");
+                        inventario.aggiungiOggetto(o);
+                    } else {
+                        o.usa(giocatore, stanza, out);
+                    }
+                }
+                this.listaOggetti = null;
+                giocatore.setInventario(inventario);
+                giocatore.incrementaPunteggio(OggettoContenitore.PUNTEGGIO);
+            } else {
+                out.setText("Rin: 'Non c'è nessun oggetto all'interno'");
+            }
+        } else {
+            Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("Grimaldello", null);
+            if (giocatore.getInventario().contieneOggetto(chiaveOggettoContenitore)) {
+                if (Utilita.chiediConferma("Rin: 'Lo scrigno e' chiuso, abbiamo un grimaldello, vogliamo usarlo per aprire lo scrigno?'", "Rin: 'Perfetto, vediamo cosa c'e' dentro'", "Rin: 'Nel caso cambi idea, possiamo tornare piu' tardi'")) {
+                    giocatore.getInventario().usaOggetto(chiaveOggettoContenitore, giocatore, stanza);
+                    this.usa(giocatore, stanza);
+                }
+            } else {
+                out.setText("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");
+            }
+        }
+    }
+
+    @Override
+    public void descrizioneOggetto(JTextArea out) {
+        if (this.aperto) {
+            if (this.listaOggetti.isEmpty()) {
+                out.setText("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
+            } else {
+                out.setText("Rin: 'Lo scrigno è aperto, prendiamo quello che c'è dentro'");
+            }
+        } else {
+            out.setText("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
+        }
     }
 
 }

@@ -7,6 +7,7 @@ package oggetti;
 
 import java.util.List;
 import java.util.Set;
+import javax.swing.JTextArea;
 import tipi.Giocatore;
 import tipi.stanze.Stanza;
 
@@ -15,43 +16,39 @@ import tipi.stanze.Stanza;
  * @author mtubi
  */
 public class ChiaveOggettoContenitore extends Oggetto {
+
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = 1;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.chiaveOggettoContenitore;
     private final static int PUNTEGGIO = 50;
-    
+
     public ChiaveOggettoContenitore(String nome, Set<String> alias) {
         super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
     }
 
-    
-
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
-        if(this.usabilita > 0){
+        if (this.usabilita > 0) {
             List<Oggetto> l = stanza.getOggetiStanza();
             Oggetto contenitore = new OggettoContenitore("Contenitore", null, null);
-            if(l.contains(contenitore)){
+            if (l.contains(contenitore)) {
                 int i = l.indexOf(contenitore);
                 OggettoContenitore contenitoreO = (OggettoContenitore) l.get(i);
-                if(!contenitoreO.isAperto()){
+                if (!contenitoreO.isAperto()) {
                     contenitoreO.setAperto(true);
                     giocatore.incrementaPunteggio(ChiaveOggettoContenitore.PUNTEGGIO);
                     this.usabilita--;
                     contenitore = contenitoreO;
                     l.set(i, contenitore);
                     stanza.setOggetiStanza(l);
-                    System.out.println("Rin: 'Hai aperto "+contenitore.getNome()+"'");
-                }
-                else{
+                    System.out.println("Rin: 'Hai aperto " + contenitore.getNome() + "'");
+                } else {
                     System.out.println("Rin: 'E' già aperto'");
                 }
-            }
-            else{
+            } else {
                 System.out.println("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire");
             }
-        }
-        else{
+        } else {
             System.out.println("Non puoi usare questo oggetto");
         }
     }
@@ -72,6 +69,38 @@ public class ChiaveOggettoContenitore extends Oggetto {
     public static TipoOggetto getTIPO_OGGETTO() {
         return TIPO_OGGETTO;
     }
-    
-    
+
+    @Override
+    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+        if (this.usabilita > 0) {
+            List<Oggetto> l = stanza.getOggetiStanza();
+            Oggetto contenitore = new OggettoContenitore("Contenitore", null, null);
+            if (l.contains(contenitore)) {
+                int i = l.indexOf(contenitore);
+                OggettoContenitore contenitoreO = (OggettoContenitore) l.get(i);
+                if (!contenitoreO.isAperto()) {
+                    contenitoreO.setAperto(true);
+                    giocatore.incrementaPunteggio(ChiaveOggettoContenitore.PUNTEGGIO);
+                    this.usabilita--;
+                    contenitore = contenitoreO;
+                    l.set(i, contenitore);
+                    stanza.setOggetiStanza(l);
+                    out.setText("Rin: 'Hai aperto " + contenitore.getNome() + "'");
+                } else {
+                    out.setText("Rin: 'E' già aperto'");
+                }
+            } else {
+                out.setText("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire");
+            }
+        } else {
+            out.setText("Non puoi usare questo oggetto");
+        }
+    }
+
+    @Override
+    public void descrizioneOggetto(JTextArea out) {
+        out.setText("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno, puo' essre utilizzata  per aprire un solo scrigno");
+
+    }
+
 }

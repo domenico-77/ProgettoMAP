@@ -5,23 +5,31 @@
  */
 package swing;
 
+import com.mycompany.progettomap.giochi.Gioco;
+import com.mycompany.progettomap.parser.Parser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import logicaGioco.DescrizioneGioco;
+import tipi.Utilita;
 
 /**
  *
  * @author domen
  */
 public class giocoGui extends JPanel {
+
     private DescrizioneGioco partita = null;
-private mainSwing ms;
+    private mainSwing ms;
+    private Parser parser = new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
+
     /**
      * Creates new form giocoGui
      */
     public giocoGui(mainSwing ms) {
         initComponents();
         this.ms = ms;
+        this.visualizzazioneTesto.setEditable(false);
     }
 
     /**
@@ -33,55 +41,175 @@ private mainSwing ms;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        label = new javax.swing.JLabel();
         esci = new javax.swing.JButton();
+        comando = new javax.swing.JTextField();
+        manji = new javax.swing.JLabel();
+        nord = new javax.swing.JButton();
+        sud = new javax.swing.JButton();
+        ovest = new javax.swing.JButton();
+        est = new javax.swing.JButton();
+        invia = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        visualizzazioneTesto = new javax.swing.JTextArea();
 
-        label.setText("jLabel1");
-
-        esci.setText("jButton1");
+        esci.setText("esci");
         esci.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 esciActionPerformed(evt);
             }
         });
 
+        manji.setText("Manji:");
+
+        nord.setText("Nord");
+        nord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nordActionPerformed(evt);
+            }
+        });
+
+        sud.setText("Sud");
+        sud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sudActionPerformed(evt);
+            }
+        });
+
+        ovest.setText("Ovest");
+        ovest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ovestActionPerformed(evt);
+            }
+        });
+
+        est.setText("Est");
+        est.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estActionPerformed(evt);
+            }
+        });
+
+        invia.setText("invia");
+        invia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inviaActionPerformed(evt);
+            }
+        });
+
+        visualizzazioneTesto.setColumns(20);
+        visualizzazioneTesto.setRows(5);
+        jScrollPane1.setViewportView(visualizzazioneTesto);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(202, Short.MAX_VALUE)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(esci, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(label)
-                        .addGap(157, 157, 157))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(esci)
-                        .addGap(69, 69, 69))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(manji)
+                                .addGap(18, 18, 18)
+                                .addComponent(comando, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(nord)
+                                .addGap(27, 27, 27)
+                                .addComponent(sud)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ovest)
+                                .addGap(39, 39, 39)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(invia)
+                            .addComponent(est))
+                        .addGap(4, 4, 4)))
+                .addContainerGap())
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(label)
-                .addGap(51, 51, 51)
                 .addComponent(esci)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nord)
+                    .addComponent(sud)
+                    .addComponent(ovest)
+                    .addComponent(est))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comando, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manji)
+                    .addComponent(invia))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void esciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esciActionPerformed
+
         this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
         this.ms.getFrame().validate();
     }//GEN-LAST:event_esciActionPerformed
+
+    private void inviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inviaActionPerformed
+        this.visualizzazioneTesto.setText("");
+        String comandoTesto = this.comando.getText();
+        this.partita.nextMove(parser.parse(comandoTesto, this.partita.getGiocatore().getListaMosse(), this.partita.getStanzaCorrente().getOggetiStanza(), this.partita.getGiocatore().getInventario().getInventario(), this.partita.getStanzaCorrente()), this.visualizzazioneTesto);
+        if (this.partita.isFinita()) {
+
+        }
+        this.comando.setText("");
+
+    }//GEN-LAST:event_inviaActionPerformed
+
+    private void nordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nordActionPerformed
+        this.visualizzazioneTesto.setText("");
+        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaNord(), this.visualizzazioneTesto);
+        this.comando.setText("");
+    }//GEN-LAST:event_nordActionPerformed
+
+    private void sudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sudActionPerformed
+        this.visualizzazioneTesto.setText("");
+        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaSud(), this.visualizzazioneTesto);
+        this.comando.setText("");
+    }//GEN-LAST:event_sudActionPerformed
+
+    private void ovestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ovestActionPerformed
+        this.visualizzazioneTesto.setText("");
+        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaOvest(), this.visualizzazioneTesto);
+        this.comando.setText("");
+    }//GEN-LAST:event_ovestActionPerformed
+
+    private void estActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estActionPerformed
+        this.visualizzazioneTesto.setText("");
+        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaEst(), this.visualizzazioneTesto);
+        this.comando.setText("");
+    }//GEN-LAST:event_estActionPerformed
 
     public void setPartita(DescrizioneGioco partita) {
         this.partita = partita;
     }
 
+    public JTextArea getVisualizzazioneTesto() {
+        return visualizzazioneTesto;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField comando;
     private javax.swing.JButton esci;
-    private javax.swing.JLabel label;
+    private javax.swing.JButton est;
+    private javax.swing.JButton invia;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel manji;
+    private javax.swing.JButton nord;
+    private javax.swing.JButton ovest;
+    private javax.swing.JButton sud;
+    private javax.swing.JTextArea visualizzazioneTesto;
     // End of variables declaration//GEN-END:variables
 }

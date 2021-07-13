@@ -7,6 +7,7 @@ package oggetti;
 
 import java.io.Serializable;
 import java.util.Set;
+import javax.swing.JTextArea;
 import tipi.Giocatore;
 import tipi.stanze.Stanza;
 
@@ -77,6 +78,48 @@ public class Spada extends Oggetto implements Serializable {
 
     public static TipoOggetto getTIPO_OGGETTO() {
         return TIPO_OGGETTO;
+    }
+
+    @Override
+    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+        String nome;
+        if (usabilita > 0) {
+            if (stanza.getNpc() != null) {
+                if (stanza.getNpc().isVivo()) {
+                    stanza.getNpc().setVivo(false);
+                    this.usabilita --;
+                    giocatore.incrementaPunteggio(Spada.PUNTEGGIO);
+                    if(stanza.getNpc().isSconosciuto()){
+                        nome = "Sconosciuto";
+                    }
+                    else{
+                        nome = stanza.getNpc().getNome();
+                    }
+                    out.setText(nome + ": 'Oh no maledetto, mi hai colpito alle spalle!'");
+                    if (this.usabilita == 0) {
+                        out.setText("Rin: 'Non hai affilato bene la spada, ora si è rotta, speriamo di trovarne un altra");
+                    } 
+                }
+                else{
+                    out.setText("Rin: 'La persona e' stata gia' uccisa, non serve a niente infierire sul suo corpo");
+                }
+            } else {
+                out.setText("Rin: 'Non c'e' nessuno in questa stanza'");
+            }
+        } else {
+            out.setText("Rin: 'Non puoi usare questo oggetto'");
+        }
+    }
+
+    @Override
+    public void descrizioneOggetto(JTextArea out) {
+         out.setText("Rin: 'E' " + this.nome + " ci servira' nel caso in cui incontriamo dei soldati, puoi usarla per " + this.usabilita + " volte");
+        if (this.usabilita < 3) {
+            out.append("/n");
+            out.append(" sarebbe il caso di trovare un affilatore, per aumentare l'usabilita prima che si rompa'");
+        } else {
+            System.out.println("'");
+        }
     }
 
 }
