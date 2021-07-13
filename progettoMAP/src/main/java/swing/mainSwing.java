@@ -30,6 +30,7 @@ public class mainSwing {
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setContentPane(this.menuInizio);
                 frame.setPreferredSize(new Dimension(500, 400));
+                frame.setBounds(100, 100, 600, 300);
                // frame.pack();
                 frame.setVisible(true);
                 

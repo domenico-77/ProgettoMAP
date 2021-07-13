@@ -16,6 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 /**
@@ -118,6 +120,8 @@ public class Utilita {
 
         return vuole;
     }
+    
+  
 
     public static boolean cercaParola(String nome, String... alias) {
         boolean contiene = false;

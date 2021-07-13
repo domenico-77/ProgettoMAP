@@ -7,6 +7,7 @@ package swing;
 
 import DataBase.Db;
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -15,7 +16,8 @@ import javax.swing.JPanel;
  * @author domen
  */
 public class menuInizio extends JPanel {
-private mainSwing ms;
+
+    private mainSwing ms;
 
     /**
      * Creates new form menuInizio
@@ -23,7 +25,11 @@ private mainSwing ms;
     public menuInizio(mainSwing ms) {
         initComponents();
         this.ms = ms;
+        this.setBounds(100, 100, 600, 300);
         this.setBackground(Color.black);
+        Titolo.setForeground(Color.white);
+        Titolo.setFont(new Font("Times New Roman", Font.PLAIN, 25));
+
     }
 
     /**
@@ -37,6 +43,7 @@ private mainSwing ms;
 
         inizia = new javax.swing.JButton();
         DataBase = new javax.swing.JButton();
+        Titolo = new javax.swing.JLabel();
 
         inizia.setText("gioca");
         inizia.addActionListener(new java.awt.event.ActionListener() {
@@ -52,32 +59,39 @@ private mainSwing ms;
             }
         });
 
+        Titolo.setText("                             LA FUGA DI MANJI");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(inizia)
-                .addContainerGap(193, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(DataBase)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Titolo, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(inizia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DataBase)))
                 .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(inizia)
-                .addGap(54, 54, 54)
-                .addComponent(DataBase)
+                .addGap(69, 69, 69)
+                .addComponent(Titolo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DataBase)
+                    .addComponent(inizia))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniziaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniziaActionPerformed
-     this.ms.getCreaPartita().getNomePartita().setText("");
+        this.ms.getCreaPartita().getNomePartita().setText("");
         this.ms.getFrame().setContentPane(this.ms.getCreaPartita());
         this.ms.getFrame().validate();
     }//GEN-LAST:event_iniziaActionPerformed
@@ -92,6 +106,7 @@ private mainSwing ms;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DataBase;
+    private javax.swing.JLabel Titolo;
     private javax.swing.JButton inizia;
     // End of variables declaration//GEN-END:variables
 }

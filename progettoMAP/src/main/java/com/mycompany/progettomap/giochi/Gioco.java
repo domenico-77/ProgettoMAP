@@ -900,19 +900,9 @@ public class Gioco extends DescrizioneGioco {
                             } else {
                                 out.setText("Rin: 'Non hai una candela da accendere'" + "\n");
                             }
-                        } else if (this.giocatore.getInventario().contieneOggetto(Gioco.CANDELA)) {
-                            if (Utilita.chiediConferma("Rin: 'Intendevi candela, vuoi accenderla?'", "Rin: 'Proviamo ad accenderla'", "Rin: 'Ricordati che non puoi accendere altri oggetti, che non siano candela'" + "\n")) {
-                                this.giocatore.getInventario().usaOggetto(Gioco.CANDELA, giocatore, stanzaCorrente);
-                            }
                         } else {
-                            out.setText("Rin: 'Non puoi accendere niente, apparte una candela che non abbiamo'" + "\n");
-                        }
-                    } else if (this.giocatore.getInventario().contieneOggetto(Gioco.CANDELA)) {
-                        if (Utilita.chiediConferma("Rin: 'Intendevi candela, vuoi accenderla?'", "Rin: 'Proviamo ad accenderla'", "Rin: 'Ricordati che non puoi accendere altri oggetti, che non siano candela'" + "\n")) {
-                            this.giocatore.getInventario().usaOggetto(Gioco.CANDELA, giocatore, stanzaCorrente);
-                        }
-                    } else {
-                        out.setText("Rin: 'Non puoi accendere niente, apparte una candela che non abbiamo'" + "\n");
+                       
+                        out.setText("Rin: 'Non puoi accendere niente, apparte una candela'" + "\n");
                     }
 
                 } else {
@@ -927,20 +917,13 @@ public class Gioco extends DescrizioneGioco {
                             } else {
                                 out.setText("Rin: 'Non abbiamo del cibo, moriremo di fame !?'" + "\n");
                             }
-                        } else if (this.giocatore.getInventario().contieneOggetto(Gioco.CIBO)) {
-                            if (Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?'", "Rin: 'Mangiare fa sempre bene'", "Rin: 'Ricordati che non puoi mangiare oggetti che non sono cibo'" + "\n")) {
-                                this.giocatore.getInventario().usaOggetto(Gioco.CIBO, giocatore, stanzaCorrente);
-                            }
-                        } else {
-                            out.setText("Rin: 'Non puoi mangiare niente'" + "\n");
+                        }
+                        else{
+                            out.setText("Rin: 'Non puoi mangiarlo'");
                         }
                     } else {
-                        if (this.giocatore.getInventario().contieneOggetto(Gioco.CIBO)) {
-                            if (Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?'", "Rin: 'Mangiare fa sempre bene'", "Rin: 'Ricordati che non puoi mangiare oggetti che non sono cibo'" + "\n")) {
-                                this.giocatore.getInventario().usaOggetto(Gioco.CIBO, giocatore, stanzaCorrente);
-                            }
-                        } else {
-                            out.setText("Rin: 'Non abbiamo del cibo, moriremo di fame !?'" + "\n");
+                        
+                            out.setText("Rin: 'Non ho capito cosa mangiare'" + "\n");
                         }
                     }
                 } else if (p.getOggettoInv() == null && p.getPorta() == null && p.isNpc()) {
@@ -951,12 +934,8 @@ public class Gioco extends DescrizioneGioco {
                             } else {
                                 out.setText("Rin: 'Non abbiamo del cibo, moriremo di fame !?'" + "\n");
                             }
-                        } else if (this.stanzaCorrente.getOggetiStanza().contains(Gioco.CIBO)) {
-                            if (Utilita.chiediConferma("Rin: 'Intendevi pane, vuoi mangiarlo?'", "Rin: 'Mangiare fa sempre bene'", "Rin: 'Ricordati che non puoi mangiare oggetti che non sono cibo'")) {
-                                this.stanzaCorrente.getOggetiStanza().get(this.stanzaCorrente.getOggetiStanza().indexOf(Gioco.CIBO));
-                            }
-                        } else {
-                            out.setText("Rin: 'Non puoi mangiare niente'" + "\n");
+                        } else  {
+                            out.setText("Rin: 'Non puoi mangiarlo'" + "\n");
                         }
                     }
                 } else {
@@ -994,13 +973,11 @@ public class Gioco extends DescrizioneGioco {
             } else if (p.getComando().getTipo() == TipoComando.fine) {
                 if (p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
 
-                    if (Utilita.chiediConferma("Sei sicuro di voler uscure?", "Uscita in corso...", "Rirpesa gioco")) {
                         this.sospesa = true;
                         ThreadTempo.setAttivo(false);
                         out.setText("Manji: 'Rin io mi riposo un po', quando mi sveglio riprendiamo'" + "\n");
                         out.setText("");
                         out.setText("");
-                        if (Utilita.chiediConferma("Vuoi salvare la partita prima di uscire?", "Salvataggio in corso...", "Uscita dalla partita senza salvataggio")) {
                             try {
                                 this.calcolaTempo();
                                 salvataggio.Serializzazione.scriviFile(this);
@@ -1008,8 +985,8 @@ public class Gioco extends DescrizioneGioco {
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        }
-                    }
+                        
+                    
                 } else {
                     out.setText("Rin: 'Non ho capito cosa devo fare'" + "\n");
                 }
@@ -1023,13 +1000,6 @@ public class Gioco extends DescrizioneGioco {
                         }
                     } else {
                         out.setText("Rin: 'Non puoi affilare " + p.getOggettoInv().getNome());
-                        if (this.getGiocatore().getInventario().contieneOggetto(Gioco.SPADA) && this.getGiocatore().getInventario().contieneOggetto(Gioco.AFFILATORE)) {
-                            if (Utilita.chiediConferma("Rin: 'Intendevi la spada, ne abbiamo una vuoi affilarla?'", "Rin: 'E' buona cosa mantenere le proprie armi in uno stato ottimale'", "Rin: 'Se cambi idea, ricorda che puoi sempre farlo, ma attenzione che se non curi con attenzione la tua spada puo' rompersi'")) {
-                                this.giocatore.getInventario().usaOggetto(Gioco.AFFILATORE, this.giocatore, this.stanzaCorrente);
-                            }
-                        } else {
-                            out.setText("Rin: 'Pur volendo non possiamo affilare un bel niente'");
-                        }
                     }
                 } else {
                     out.setText("Rin: 'Non ho capito cosa vuoi affilare'" + "\n");
@@ -1076,17 +1046,15 @@ public class Gioco extends DescrizioneGioco {
                 porta.setChiusa(false);
             } else if (porta.getTipo() == TipoPorta.argento) {
                 if (this.getGiocatore().getInventario().contieneOggetto(Gioco.CHIAVE)) {
-                    if (Utilita.chiediConferma("Fortunatamente abbiamo l'oggetto necessario per aprirla, vuoi usarlo?'", "Rin: 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin: 'Va bene vorrà dire che l' apriremo in un altro momento'")) {
                         this.giocatore.getInventario().usaOggetto(Gioco.CHIAVE, giocatore, stanzaCorrente);
-                    }
+                    
                 } else {
                     out.setText("Rin: 'Non possiamo aprire questa porta, ci servirebbe un determinato oggetto per aprirlo'" + "\n");
                 }
             } else if (porta.getTipo() == TipoPorta.oro) {
                 if (this.getGiocatore().getInventario().contieneOggetto(Gioco.TOTEM)) {
-                    if (Utilita.chiediConferma("Fortunatamente abbiamo l'oggetto necessario per aprirla, vuoi usarlo?'", "Rin: 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin: 'Va bene vorrà dire che l' apriremo in un altro momento'")) {
                         this.giocatore.getInventario().usaOggetto(Gioco.TOTEM, giocatore, stanzaCorrente);
-                    }
+                    
                 } else {
                     out.setText("Rin: 'Non possiamo aprire questa porta, ci servirebbe un determinato oggetto per aprirlo'" + "\n");
                 }
@@ -1107,11 +1075,11 @@ public class Gioco extends DescrizioneGioco {
                     out.setText(porta.descriviPorta() + "." + "\n");
 
                     if (this.getGiocatore().getInventario().contieneOggetto(Gioco.CHIAVE)) {
-                        if (Utilita.chiediConferma("Fortunatamente ne abbiamo una, vuoi usarla ?'", "Rin: 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin: 'Va bene vorrà dire che l' apriremo in un altro momento'")) {
+                        out.setText("Fortunatamente abbiamo una chiave e possiamo aprire la porta'");
                             this.giocatore.getInventario().usaOggetto(Gioco.CHIAVE, giocatore, stanzaCorrente);
                             this.cambiaStanza(porta, out);
 
-                        }
+                        
                     } else {
                         out.setText("al momento non abbiamo la chiave, se vogliamo scoprire cosa si nasconde dietro questa porta dovremo andare in giro a cercarla'" + "\n");
                     }
@@ -1120,12 +1088,12 @@ public class Gioco extends DescrizioneGioco {
                     out.setText(porta.descriviPorta() + "." + "\n");
 
                     if (this.getGiocatore().getInventario().contieneOggetto(Gioco.TOTEM)) {
-                        if (Utilita.chiediConferma("Fortunatamente ne abbiamo una, vuoi usarla ?'", "Rin: 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin : 'Va bene vorrà dire che l' apriremo in un altro momento'")) {
+                        out.setText("Fortunatamente abbiamo un totem e possiamo aprire la porta'");
                             this.giocatore.getInventario().usaOggetto(Gioco.TOTEM, giocatore, stanzaCorrente);
 
                             this.cambiaStanza(porta, out);
 
-                        }
+                        
                     } else {
                         out.setText("al momento non abbiamo il totem, se vogliamo scoprire cosa si nasconde dietro questa porta dovremo andare in giro a cercarlo'" + "\n");
                     }

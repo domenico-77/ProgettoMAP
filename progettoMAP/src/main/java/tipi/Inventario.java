@@ -10,6 +10,7 @@ import tipi.stanze.Stanza;
 import oggetti.Oggetto;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -52,6 +53,10 @@ public class Inventario implements Serializable {
                 i++;
             }
         }
+    }
+    
+    public void visualizzaInventario(JTextArea out){
+        
     }
     
     public boolean contieneOggetto(Oggetto o){
