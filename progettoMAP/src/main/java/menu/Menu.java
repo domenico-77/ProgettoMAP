@@ -5,15 +5,18 @@
  */
 package menu;
 
-import Threads.ThreadGioco;
+import DataBase.Db;
 import Threads.ThreadTempo;
 import com.mycompany.progettomap.giochi.Gioco;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logicaGioco.DescrizioneGioco;
 import salvataggio.Deserializzazione;
+import salvataggio.Serializzazione;
 import tipi.Utilita;
 
 /**
@@ -21,40 +24,6 @@ import tipi.Utilita;
  * @author domen
  */
 public class Menu {
-
-    /*public static void MenuInizio() throws FileNotFoundException {
-        boolean isExiting = false;
-        String answer;
-        Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        do {
-            System.out.println("-------------------------------- Menu Principale "
-                    + "--------------------------------");
-            System.out.println("Digitare un comando valido... (digita 'help' per visualizzare i comandi)");
-            if (scanner.hasNextLine()) {
-                answer = scanner.nextLine();
-                answer = answer.replaceAll("\\s+", "");
-                switch (answer.toLowerCase()) {
-                    case "help":
-                        Help.stampaHelpMenuInizio();
-                        break;
-                    case "gioca":
-                        Menu.menuDiGioco();
-                        break;
-                    case "esci":
-                        isExiting = Utilita.chiediConferma("Si vuole davvero uscire?",
-                                "Alla prossima partita!", "Non si è usciti dal gioco.");
-                        break;
-
-                    default:
-                        System.out.println("Comando inserito non valido.");
-                        System.out.println("Per sapere quali comandi sono validi digitare help.");
-                        break;
-                }
-            }
-        } while (!isExiting);
-
-        scanner.close();
-    }*/
 
     public static void menuDiGioco() throws FileNotFoundException {
         boolean isExiting = false;
@@ -77,7 +46,7 @@ public class Menu {
                     case "inizia":
                         gioco = Menu.creaPartita();
                         ThreadTempo.Time();
-                        gioco.gioca();
+                        gioco.iniziaPartita();
                         break;
                     case "continua":
                         gioco = Deserializzazione.caricamento();
@@ -85,6 +54,12 @@ public class Menu {
                             ThreadTempo.Time();
                             gioco.continua();
                         }
+                        break;
+
+                    case "database":
+                        Db db = Db.getDb();
+                        db.visualizza();
+                        db.chiudiConnessione();
                         break;
 
                     case "cancella":
@@ -109,8 +84,9 @@ public class Menu {
 
     public static DescrizioneGioco creaPartita() {
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        Db db = Db.getDb();
         DescrizioneGioco partita;
-        boolean isExiting = false;
+        boolean isExiting;
         String answer = "";
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
         do {
@@ -132,7 +108,13 @@ public class Menu {
                 }
             }
         } while (isExiting);
-        partita = new Gioco(answer);
+        partita = new Gioco(answer, db.inserisci(answer, 0, false, true));
+        db.chiudiConnessione();
+        try {
+            Serializzazione.scriviFile(partita);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return partita;
     }
 

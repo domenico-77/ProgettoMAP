@@ -7,7 +7,6 @@ package oggetti;
 
 import java.util.List;
 import java.util.Set;
-import tipi.Comando;
 import tipi.Giocatore;
 import tipi.stanze.Stanza;
 
@@ -20,6 +19,7 @@ public class ChiaveOggettoContenitore extends Oggetto {
     private final static int DURABILITA = 1;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.chiaveOggettoContenitore;
     private final static int PUNTEGGIO = 50;
+    
     public ChiaveOggettoContenitore(String nome, Set<String> alias) {
         super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
     }

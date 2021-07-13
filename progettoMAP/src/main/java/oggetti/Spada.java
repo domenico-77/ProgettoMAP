@@ -6,9 +6,7 @@
 package oggetti;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
-import tipi.Comando;
 import tipi.Giocatore;
 import tipi.stanze.Stanza;
 
@@ -34,6 +32,7 @@ public class Spada extends Oggetto implements Serializable {
             if (stanza.getNpc() != null) {
                 if (stanza.getNpc().isVivo()) {
                     stanza.getNpc().setVivo(false);
+                    this.usabilita --;
                     giocatore.incrementaPunteggio(Spada.PUNTEGGIO);
                     if(stanza.getNpc().isSconosciuto()){
                         nome = "Sconosciuto";
@@ -44,7 +43,7 @@ public class Spada extends Oggetto implements Serializable {
                     System.out.println(nome + ": 'Oh no maledetto, mi hai colpito alle spalle!'");
                     if (this.usabilita == 0) {
                         System.out.println("Rin: 'Non hai affilato bene la spada, ora si è rotta, speriamo di trovarne un altra");
-                    }
+                    } 
                 }
                 else{
                     System.out.println("Rin: 'La persona e' stata gia' uccisa, non serve a niente infierire sul suo corpo");
@@ -59,9 +58,10 @@ public class Spada extends Oggetto implements Serializable {
 
     @Override
     public void descrizioneOggetto() {
-        System.out.print("Rin: 'E' " + this.nome + "ci servira' nel caso in cui incontriamo dei soldati, puoi usarla per " + this.usabilita + "volte, ");
+        System.out.print("Rin: 'E' " + this.nome + " ci servira' nel caso in cui incontriamo dei soldati, puoi usarla per " + this.usabilita + " volte");
         if (this.usabilita < 3) {
-            System.out.println("sarebbe il caso di troavre un affilatore, per aumentare l'uabilita prima che si rompa'");
+            System.out.println("");
+            System.out.println(", sarebbe il caso di trovare un affilatore, per aumentare l'usabilita prima che si rompa'");
         } else {
             System.out.println("'");
         }

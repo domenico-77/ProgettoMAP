@@ -5,6 +5,8 @@
  */
 package npc;
 
+import java.util.ArrayList;
+import java.util.List;
 import oggetti.Oggetto;
 import tipi.Giocatore;
 import tipi.Utilita;
@@ -19,6 +21,7 @@ public class PngScambio extends Npc {
     private static final boolean ACCONTENTATO = false;
     private static final int PUNTEGGIO_MORTO = 30;
     private static final int PUNTEGGIO_ACCONTENTATO = 60;
+    private static final String[] ALIAS_SCAMBIO = {"mercante","prigioniero","contrabbandiere"};
 
     private boolean accontentato;
     private final Oggetto oggettoRichiesto;
@@ -77,9 +80,28 @@ public class PngScambio extends Npc {
                         this.interagisci(giocatore);
                     }
                 } else {
-                    System.out.println(this.nome + ": 'Quando avrai " + this.oggettoRichiesto + " torna da me, io saro' sempre qui");
+                    System.out.println(this.nome + ": 'Quando avrai " + this.oggettoRichiesto.getNome() + " torna da me, io saro' sempre qui");
                 }
             }
         }
+    }
+
+    @Override
+    public List<String> getAliasNome() {
+         List<String> aliasNome = new ArrayList();
+        for(String a : Npc.alias){
+            aliasNome.add(a);
+        }
+        
+         for(String a : PngScambio.ALIAS_SCAMBIO){
+            aliasNome.add(a);
+        }
+        if(!this.sconosciuto){
+            aliasNome.add(this.nome.toLowerCase());
+        }
+        else{
+            aliasNome.add("prigioniero");
+        }
+        return aliasNome;
     }
 }

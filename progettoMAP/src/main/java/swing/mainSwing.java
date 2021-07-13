@@ -16,22 +16,27 @@ import javax.swing.JPanel;
  */
 public class mainSwing {
     private JPanel menuInizio;
-    private JPanel giocoGui;
+    private giocoGui giocoGui;
     private JFrame frame = new JFrame();
+    private visualizzaDataBase visualizzazioneDataBase;
+    private creaPartita creaPartita;
     
     
     public mainSwing(){
         giocoGui = new giocoGui(this);
         menuInizio = new menuInizio(this);
+        visualizzazioneDataBase = new visualizzaDataBase(this);
+        creaPartita = new creaPartita(this);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setContentPane(this.menuInizio);
                 frame.setPreferredSize(new Dimension(500, 400));
                // frame.pack();
                 frame.setVisible(true);
+                
         
     }
 
-    public JPanel getGiocoGui() {
+    public giocoGui getGiocoGui() {
         return giocoGui;
     }
 
@@ -54,6 +59,14 @@ public class mainSwing {
 
     public JFrame getFrame() {
         return frame;
+    }
+
+    public visualizzaDataBase getVisualizzazioneDataBase() {
+        return visualizzazioneDataBase;
+    }
+
+    public creaPartita getCreaPartita() {
+        return creaPartita;
     }
     
     

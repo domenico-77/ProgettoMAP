@@ -8,7 +8,6 @@ package com.mycompany.progettomap.parser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import npc.Npc;
 import tipi.Comando;
 import oggetti.Oggetto;
 import tipi.TipoComando;
@@ -22,7 +21,7 @@ import tipi.stanze.Stanza;
  */
 public class Parser {
 
-    private Set<String> paroleProibite;
+    private final Set<String> paroleProibite;
 
     public Parser(Set<String> paroleProibite) {
         this.paroleProibite = paroleProibite;
@@ -110,18 +109,12 @@ public class Parser {
         return comando;
     }
 
-    public void stampaParole(List<String> paroleComando) {
-        for (String parola : paroleComando) {
-            System.out.println(parola);
-        }
-    }
-
     public List<String> pulisciStringa(String comando) {
         String[] appoggio = comando.split("\\s+");
         List<String> paroleComando = new ArrayList();
-        for (int i = 0; i < appoggio.length; i++) {
-            if (!paroleProibite.contains(appoggio[i])) {
-                paroleComando.add(appoggio[i]);
+        for (String appoggio1 : appoggio) {
+            if (!paroleProibite.contains(appoggio1)) {
+                paroleComando.add(appoggio1);
             }
         }
         return paroleComando;

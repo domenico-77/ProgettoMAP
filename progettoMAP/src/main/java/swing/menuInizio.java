@@ -5,6 +5,7 @@
  */
 package swing;
 
+import DataBase.Db;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -33,11 +34,19 @@ private mainSwing ms;
     private void initComponents() {
 
         inizia = new javax.swing.JButton();
+        DataBase = new javax.swing.JButton();
 
-        inizia.setText("jButton1");
+        inizia.setText("gioca");
         inizia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniziaActionPerformed(evt);
+            }
+        });
+
+        DataBase.setText("DataBase");
+        DataBase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DataBaseActionPerformed(evt);
             }
         });
 
@@ -48,24 +57,39 @@ private mainSwing ms;
             .addGroup(layout.createSequentialGroup()
                 .addGap(144, 144, 144)
                 .addComponent(inizia)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(DataBase)
+                .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(91, 91, 91)
                 .addComponent(inizia)
-                .addContainerGap(184, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addComponent(DataBase)
+                .addContainerGap(105, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniziaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniziaActionPerformed
-     this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
+     this.ms.getCreaPartita().getNomePartita().setText("");
+        this.ms.getFrame().setContentPane(this.ms.getCreaPartita());
         this.ms.getFrame().validate();
     }//GEN-LAST:event_iniziaActionPerformed
 
+    private void DataBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DataBaseActionPerformed
+        Db db = Db.getDb();
+        db.visualizzaSwing(this.ms.getVisualizzazioneDataBase().getVisualizzaDb());
+        this.ms.getFrame().setContentPane(this.ms.getVisualizzazioneDataBase());
+        this.ms.getFrame().validate();
+    }//GEN-LAST:event_DataBaseActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DataBase;
     private javax.swing.JButton inizia;
     // End of variables declaration//GEN-END:variables
 }

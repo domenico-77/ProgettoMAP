@@ -6,10 +6,8 @@
 package oggetti;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import tipi.Comando;
 import tipi.Giocatore;
 import tipi.stanze.Stanza;
 

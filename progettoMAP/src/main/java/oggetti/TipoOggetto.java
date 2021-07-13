@@ -10,7 +10,7 @@ package oggetti;
  * @author mtubi
  */
 public enum TipoOggetto {
-    chiavePorta,
+    chiave,
     chiaveOggettoContenitore,
     oggettoContenitore,
     affilatore,
@@ -18,4 +18,6 @@ public enum TipoOggetto {
     cibo,
     spada,
     oggettoMaligno,
+    totem
+    
 }

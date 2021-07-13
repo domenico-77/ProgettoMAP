@@ -10,9 +10,9 @@
 package logicaGioco;
 
 import com.mycompany.progettomap.parser.ParserOutput;
+import java.io.FileNotFoundException;
 import java.util.List;
 import tipi.stanze.Stanza;
-import tipi.Comando;
 import java.io.PrintStream;
 import java.io.Serializable;
 
@@ -28,7 +28,6 @@ import tipi.Giocatore;
 public abstract class DescrizioneGioco implements Serializable {
 
     protected final List<Stanza> stanze = new ArrayList<>();
-    protected static int numPartite;
     protected int id;
     protected Giocatore giocatore = new Giocatore(new ArrayList());
     protected Stanza stanzaCorrente;
@@ -37,8 +36,13 @@ public abstract class DescrizioneGioco implements Serializable {
     protected boolean finita = false;
     protected boolean sospesa = false;
 
-    public DescrizioneGioco(String nomeGiocatore) {
+    public int getId() {
+        return id;
+    }
+
+    public DescrizioneGioco(String nomeGiocatore, int id) {
         this.nomeGiocatore = nomeGiocatore;
+        this.id = id;
     }
 
     public String getNomeGiocatore() {
@@ -65,8 +69,6 @@ public abstract class DescrizioneGioco implements Serializable {
         this.sospesa = sospesa;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -91,8 +93,6 @@ public abstract class DescrizioneGioco implements Serializable {
         }
         return true;
     }
-    
-    
 
     public Stanza getStanzaCorrente() {
         return stanzaCorrente;
@@ -107,10 +107,6 @@ public abstract class DescrizioneGioco implements Serializable {
     }
 
     public abstract void inizializza();
-
-    public abstract void nextMove(ParserOutput p, PrintStream out);
-
-    public abstract void stampaStanze();
 
     public Stack<Stanza> getPercorsoStanze() {
         return PercorsoStanze;
@@ -128,10 +124,10 @@ public abstract class DescrizioneGioco implements Serializable {
         this.giocatore = giocatore;
     }
 
-    public abstract void gioca();
+    public abstract void iniziaPartita() throws FileNotFoundException;
 
-    public abstract void continua();
-    
+    public abstract void continua() throws FileNotFoundException;
 
+    public abstract void nextMove(ParserOutput p, PrintStream out);
 
 }

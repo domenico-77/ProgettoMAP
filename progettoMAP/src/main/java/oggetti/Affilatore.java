@@ -7,7 +7,6 @@ package oggetti;
 
 import java.util.List;
 import java.util.Set;
-import tipi.Comando;
 import tipi.Giocatore;
 import tipi.Inventario;
 import tipi.stanze.Stanza;
@@ -44,6 +43,9 @@ public class Affilatore extends Oggetto{
                     giocatore.incrementaPunteggio(Affilatore.PUNTEGGIO);
                     System.out.println("Rin: 'Ora che abbiamo affilato la spada, possiamo buttare l'affilatore'");
                 }
+            }
+            else{
+                System.out.println("Rin: 'Non abbiamo una spada da affilare, dobbiamo prima trovarla");
             }
         }
         else{
