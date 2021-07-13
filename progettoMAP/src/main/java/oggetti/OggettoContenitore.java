@@ -150,10 +150,9 @@ public class OggettoContenitore extends Oggetto implements Serializable {
         } else {
             Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("Grimaldello", null);
             if (giocatore.getInventario().contieneOggetto(chiaveOggettoContenitore)) {
-                if (Utilita.chiediConferma("Rin: 'Lo scrigno e' chiuso, abbiamo un grimaldello, vogliamo usarlo per aprire lo scrigno?'", "Rin: 'Perfetto, vediamo cosa c'e' dentro'", "Rin: 'Nel caso cambi idea, possiamo tornare piu' tardi'")) {
                     giocatore.getInventario().usaOggetto(chiaveOggettoContenitore, giocatore, stanza);
-                    this.usa(giocatore, stanza);
-                }
+                    this.usa(giocatore, stanza, out);
+                
             } else {
                 out.setText("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");
             }

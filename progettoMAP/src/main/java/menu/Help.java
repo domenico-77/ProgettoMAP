@@ -5,6 +5,8 @@
  */
 package menu;
 
+import javax.swing.JTextArea;
+
 /**
  *
  * @author domen
@@ -48,5 +50,25 @@ public class Help {
         System.out.println("");
         System.out.println("Per salvare basterà digitare il comando 'salva'");
         System.out.println("+------------------ FINE HELP ------------------+");
+    }
+    
+    public static void stampaHelpPartita(JTextArea out){
+        out.append("\n");
+        out.append("+------------------ HELP ------------------+");
+        out.append("In questa avventura potrai digitare diversi comandi per interagire con l'ambiente di gioco:\n");
+        out.append("\n");
+        out.append("- 'osserva' per chiedere a Rin di descriverti la stanza\n");
+        out.append("- 'osserva' + il nome di un oggetto, per chiedere a Rin di descrivere l'oggetto \n");
+        out.append("\n");
+        out.append("- nord, 'sud', 'est' e 'ovest' per spostarti da una stanza all'altra\n");
+        out.append("N.B.\n");
+        out.append("Non sempre sarà possibile andare in qualsiasi direzione...attento alle porte chiuse...e sopratutto ai muri!!!\n");
+        out.append("\n");
+        out.append("'prendi' + il nome dell'oggeto da raccogliere, per metterlo nel tuo inventario \n");
+        out.append("\n");
+        out.append("Ci sono altri comandi tutti da scoprire, quando hai un oggetto pensa a cosa potresti farci\n");
+        out.append("\n");
+        out.append("Per salvare basterà digitare il comando 'salva'\n");
+        out.append("+------------------ FINE HELP ------------------+\n");
     }
 }

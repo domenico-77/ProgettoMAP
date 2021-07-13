@@ -56,7 +56,16 @@ public class Inventario implements Serializable {
     }
     
     public void visualizzaInventario(JTextArea out){
-        
+        if (this.inventario.isEmpty()) {
+            out.setText("Rin: 'Abbiamo le tasche vuote, potremmo trovare degli oggetti utili per la prigione");
+        } else {
+            out.setText("Rin: 'Questi sono gli oggetti a disposizione:\n");
+            int i = 1;
+            for (Oggetto o : inventario) {
+                out.append(i + ". "+ o.getNome()+ "\n");
+                i++;
+            }
+        }
     }
     
     public boolean contieneOggetto(Oggetto o){
@@ -76,4 +85,19 @@ public class Inventario implements Serializable {
             System.out.println("Rin :' Al momento non disponiamo dell'oggetto : "+o.getNome() + "'");
         }
     }
+    
+    public void usaOggetto(Oggetto o, Giocatore giocatore, Stanza stanza, JTextArea out){
+        if(contieneOggetto(o)){
+            Oggetto oggetto = this.inventario.get(this.inventario.indexOf(o));
+            if(oggetto.getUsabilita() > 0){
+                oggetto.usa(giocatore, stanza, out);
+                if(oggetto.getUsabilita() == 0){
+                    this.inventario.remove(oggetto);
+                }
+            }
+        } else {
+            out.append("Rin :' Al momento non disponiamo dell'oggetto : "+o.getNome() + "'");
+        }
+    }
+    
 }
