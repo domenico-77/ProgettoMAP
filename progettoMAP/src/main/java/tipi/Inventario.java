@@ -86,11 +86,11 @@ public class Inventario implements Serializable {
         }
     }
     
-    public void usaOggetto(Oggetto o, Giocatore giocatore, Stanza stanza, JTextArea out){
+    public void usaOggettoSwing(Oggetto o, Giocatore giocatore, Stanza stanza, JTextArea out){
         if(contieneOggetto(o)){
             Oggetto oggetto = this.inventario.get(this.inventario.indexOf(o));
             if(oggetto.getUsabilita() > 0){
-                oggetto.usa(giocatore, stanza, out);
+                oggetto.usaSwing(giocatore, stanza, out);
                 if(oggetto.getUsabilita() == 0){
                     this.inventario.remove(oggetto);
                 }

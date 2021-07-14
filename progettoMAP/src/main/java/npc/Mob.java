@@ -7,6 +7,8 @@ package npc;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import oggetti.Oggetto;
 import tipi.Giocatore;
 import tipi.Utilita;
@@ -131,6 +133,11 @@ public class Mob extends Npc{
 
     public boolean isCorrotto() {
         return corrotto;
+    }
+
+    @Override
+    public void interagisci(Giocatore giocatore, JTextArea out, JFrame frame) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

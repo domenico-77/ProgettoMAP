@@ -81,7 +81,7 @@ public class Spada extends Oggetto implements Serializable {
     }
 
     @Override
-    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
         String nome;
         if (usabilita > 0) {
             if (stanza.getNpc() != null) {

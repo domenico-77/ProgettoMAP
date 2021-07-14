@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import oggetti.Oggetto;
 import tipi.Giocatore;
 import tipi.Utilita;
@@ -162,6 +164,11 @@ public class PngIndovinello extends Npc implements Serializable {
             aliasNome.add("prigioniero");
         }
         return aliasNome;
+    }
+
+    @Override
+    public void interagisci(Giocatore giocatore, JTextArea out, JFrame frame) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

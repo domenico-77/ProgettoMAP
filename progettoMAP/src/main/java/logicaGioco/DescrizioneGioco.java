@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Stack;
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import tipi.Giocatore;
 import tipi.stanze.Porta;
@@ -132,7 +133,7 @@ public abstract class DescrizioneGioco implements Serializable {
 
     public abstract void nextMove(ParserOutput p, PrintStream out);
     
-    public abstract void nextMove(ParserOutput p, JTextArea out);
+    public abstract void nextMove(ParserOutput p, JTextArea out, JFrame frame);
     
     public abstract void spostamento(Porta porta, JTextArea out);
     

@@ -104,7 +104,7 @@ public abstract class Oggetto implements Serializable {
    
     
     public abstract void usa(Giocatore giocatore, Stanza stanza);
-    public abstract void usa(Giocatore giocatore, Stanza stanza, JTextArea out);
+    public abstract void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out);
     
     public void prendi(Giocatore giocatore){
         if(this.prendibile){

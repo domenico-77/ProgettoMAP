@@ -107,7 +107,7 @@ public class ChiavePorta extends Oggetto {
     }
 
     @Override
-    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
         Porta porta;
         if (stanza.getPortaNord() != null) {
             porta = stanza.getPortaNord();

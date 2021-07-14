@@ -6,9 +6,9 @@
 package npc;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import oggetti.Oggetto;
 import tipi.Giocatore;
 
@@ -73,5 +73,5 @@ public abstract class Npc implements Serializable{
     public abstract List<String> getAliasNome();
     
     public abstract void interagisci(Giocatore giocatore);
-    public abstract void interagisci(Giocatore giocatore, JTextAraea out);
+    public abstract void interagisci(Giocatore giocatore, JTextArea out, JFrame frame);
 }

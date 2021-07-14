@@ -59,7 +59,7 @@ public class Candela extends Oggetto {
     }
 
     @Override
-    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
         if (!stanza.isIlluminata()) {
             //fare il controllo se la candela è nell inventario
             stanza.setIlluminata(true);

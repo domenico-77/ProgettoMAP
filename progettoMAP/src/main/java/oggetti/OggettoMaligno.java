@@ -57,7 +57,7 @@ public class OggettoMaligno extends Oggetto implements Serializable {
     }
 
     @Override
-    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
         if (this.usabilita > 0) {
             giocatore.decrementaVita(this.danno);
             giocatore.incrementaPunteggio(OggettoMaligno.PUNTEGGIO);

@@ -129,7 +129,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
     }
 
     @Override
-    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
         Inventario inventario = giocatore.getInventario();
         if (this.aperto) {
             if (this.listaOggetti != null) {
@@ -138,7 +138,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
                         out.append("Rin: 'Hai raccolto " + o.nome + "'");
                         inventario.aggiungiOggetto(o);
                     } else {
-                        o.usa(giocatore, stanza, out);
+                        o.usaSwing(giocatore, stanza, out);
                     }
                 }
                 this.listaOggetti = null;
@@ -151,7 +151,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
             Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("Grimaldello", null);
             if (giocatore.getInventario().contieneOggetto(chiaveOggettoContenitore)) {
                     giocatore.getInventario().usaOggetto(chiaveOggettoContenitore, giocatore, stanza);
-                    this.usa(giocatore, stanza, out);
+                    this.usaSwing(giocatore, stanza, out);
                 
             } else {
                 out.setText("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");

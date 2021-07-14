@@ -159,7 +159,7 @@ public class giocoGui extends JPanel {
     private void inviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inviaActionPerformed
         this.visualizzazioneTesto.setText("");
         String comandoTesto = this.comando.getText();
-        this.partita.nextMove(parser.parse(comandoTesto, this.partita.getGiocatore().getListaMosse(), this.partita.getStanzaCorrente().getOggetiStanza(), this.partita.getGiocatore().getInventario().getInventario(), this.partita.getStanzaCorrente()), this.visualizzazioneTesto);
+        this.partita.nextMove(parser.parse(comandoTesto, this.partita.getGiocatore().getListaMosse(), this.partita.getStanzaCorrente().getOggetiStanza(), this.partita.getGiocatore().getInventario().getInventario(), this.partita.getStanzaCorrente()), this.visualizzazioneTesto, ms.getFrame());
         if (this.partita.isFinita()) {
 
         }

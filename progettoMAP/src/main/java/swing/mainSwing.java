@@ -15,26 +15,25 @@ import javax.swing.JPanel;
  * @author domen
  */
 public class mainSwing {
+
     private JPanel menuInizio;
     private giocoGui giocoGui;
     private JFrame frame = new JFrame();
     private visualizzaDataBase visualizzazioneDataBase;
     private creaPartita creaPartita;
-    
-    
-    public mainSwing(){
+
+    public mainSwing() {
         giocoGui = new giocoGui(this);
         menuInizio = new menuInizio(this);
         visualizzazioneDataBase = new visualizzaDataBase(this);
         creaPartita = new creaPartita(this);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setContentPane(this.menuInizio);
-                frame.setPreferredSize(new Dimension(500, 400));
-                frame.setBounds(100, 100, 600, 300);
-               // frame.pack();
-                frame.setVisible(true);
-                
-        
+        frame.setContentPane(this.menuInizio);
+        frame.setPreferredSize(new Dimension(500, 400));
+        frame.setBounds(100, 100, 600, 300);
+        // frame.pack();
+        frame.setVisible(true);
+
     }
 
     public giocoGui getGiocoGui() {
@@ -44,13 +43,10 @@ public class mainSwing {
     public JPanel getMenuInizio() {
         return menuInizio;
     }
-    
-    public static void main(String args[])
-    {
-        EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+
+    public static void main(String args[]) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 mainSwing ms = new mainSwing();
                 ms.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 ms.getFrame().pack();
@@ -69,6 +65,5 @@ public class mainSwing {
     public creaPartita getCreaPartita() {
         return creaPartita;
     }
-    
-    
+
 }

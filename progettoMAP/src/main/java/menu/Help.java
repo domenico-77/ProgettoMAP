@@ -52,7 +52,7 @@ public class Help {
         System.out.println("+------------------ FINE HELP ------------------+");
     }
     
-    public static void stampaHelpPartita(JTextArea out){
+    public static void stampaHelpPartitaSwing(JTextArea out){
         out.append("\n");
         out.append("+------------------ HELP ------------------+");
         out.append("In questa avventura potrai digitare diversi comandi per interagire con l'ambiente di gioco:\n");

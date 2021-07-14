@@ -74,7 +74,7 @@ public class Affilatore extends Oggetto {
     }
 
     @Override
-    public void usa(Giocatore giocatore, Stanza stanza, JTextArea out) {
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
         if (this.usabilita > 0) {
             Inventario inventario = giocatore.getInventario();
             Oggetto oggetto = new Spada("Spada", null);
