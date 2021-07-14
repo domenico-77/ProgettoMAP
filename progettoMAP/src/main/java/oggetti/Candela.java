@@ -65,12 +65,12 @@ public class Candela extends Oggetto {
             stanza.setIlluminata(true);
             giocatore.incrementaPunteggio(Candela.PUNTEGGIO);
             this.usabilita--;
-            out.setText("Rin: 'Hai illuminato la stanza'");
+            out.append("Rin: 'Hai illuminato la stanza'\n");
             if (this.usabilita == 0) {
-                out.setText("Rin: 'L'oggetto " + this.nome + "ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+                out.append("Rin: 'L'oggetto " + this.nome + "ha finito i suoi utilizzi, non puoi usare più questo oggetto'\n");
             }
         } else {
-            out.setText("Rin: 'La stanza è già illuminata non serve accendere una candela'");
+            out.append("Rin: 'La stanza è già illuminata non serve accendere una candela'\n");
         }
     }
 

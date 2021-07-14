@@ -8,6 +8,7 @@ package swing;
 import DataBase.Db;
 import Threads.ThreadTempo;
 import com.mycompany.progettomap.giochi.Gioco;
+import com.sun.glass.events.KeyEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +46,12 @@ public class creaPartita extends javax.swing.JPanel {
         nomePartita = new javax.swing.JTextField();
         confermaNome = new javax.swing.JButton();
         indietro = new javax.swing.JButton();
+
+        nomePartita.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nomePartitaKeyPressed(evt);
+            }
+        });
 
         confermaNome.setText("conferma");
         confermaNome.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +99,7 @@ public class creaPartita extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void indietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indietroActionPerformed
+        this.nomePartita.setText("");
         this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
         this.ms.getFrame().validate();
     }//GEN-LAST:event_indietroActionPerformed
@@ -100,7 +108,7 @@ public class creaPartita extends javax.swing.JPanel {
         return nomePartita;
     }
 
-    
+
     private void confermaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confermaNomeActionPerformed
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         Db db = Db.getDb();
@@ -108,6 +116,7 @@ public class creaPartita extends javax.swing.JPanel {
         String nome = this.nomePartita.getText();
         if (nome.isEmpty()) {
             JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
+            this.nomePartita.setText("");
         } else {
             for (DescrizioneGioco g : l) {
                 if (g.getNomeGiocatore().equals(nome)) {
@@ -116,6 +125,7 @@ public class creaPartita extends javax.swing.JPanel {
             }
             if (isExiting) {
                 JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
+                this.nomePartita.setText("");
             } else {
                 DescrizioneGioco partita = new Gioco(nome, db.inserisci(nome, 0, false, true));
                 partita.inizializza();
@@ -124,27 +134,28 @@ public class creaPartita extends javax.swing.JPanel {
                     Serializzazione.scriviFile(partita);
                     this.ms.getGiocoGui().setPartita(partita);
                     this.ms.getGiocoGui().getVisualizzazioneTesto().setText("C’era una volta un samurai di nome Manji, egli era un samurai fedelissimo al suo credo e nella via della spada." + "\n"
-                + "Per molti anni ha lavorato per un padrone credendo che quello che faceva per lui fosse giusto," + "\n"
-                + "un giorno leggendo dei documenti scoprì che molte delle persone che aveva ucciso erano dei semplici cittadini." + "\n"
-                + "Il suo padrone era una persona molto avida che per arricchirsi aumentò di molto le tasse e chiunque rifiutasse di pagarle veniva assassinato da Manji." + "\n"
-                + "Dopo la sconvolgente scoperta, Manji in creca di redenzione dalle sue azioni decide di ribellarsi al suo padrone " + "\n"
-                + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare ad ucciderlo.\n"
-                + "Manji uccise più di 100 sottoposti, ma in una battaglia venne sconfitto e catturato." + "\n"
-                + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva continuamente torturato. " + "\n"
-                + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare le sue abilità da samurai.\n"
-                + "La sua cella confinava con la cella di una ragazza di nome Rin, lei era una donna alle servitù del padrone." + "\n"
-                + "I soldati spesso lasciavano la cella di Rin aperta " + "\n"
-                + "in quanto credevano che essendo una donna non fosse capace di creare problemi in quanto non in grado di combattere. \n"
-                + "Manji era un samurai molto astuto , infatti," + "\n"
-                + "riuscì a capire che la cella era spesso lasciata aperta grazie ai discorsi delle guardie e ai mancati click delle mandate della serratura." + "\n"
-                + "Grazie alla sua astuzia riuscì a fare un accordo con Rin, " + "\n"
-                + "egli chiese di aiutarlo ad evadere facendogli da guida diventando il suo unico modo di vedere l’esterno," + "\n"
-                + "in cambio promise di riuscire a portarli entrambi fuori da quella prigione.\n"
-                + "Rin accetta l’ accordo e il giorno dopo al ritorno in cella riesce ad ammaliare una delle guardie rubandogli la chiave della cella di Manji." + "\n"
-                + "La notte stessa durante il cambio delle guardie riesce ad aprire la sua cella e da qui inizia la grande fuga dalla prigione.");
+                            + "Per molti anni ha lavorato per un padrone credendo che quello che faceva per lui fosse giusto," + "\n"
+                            + "un giorno leggendo dei documenti scoprì che molte delle persone che aveva ucciso erano dei semplici cittadini." + "\n"
+                            + "Il suo padrone era una persona molto avida che per arricchirsi aumentò di molto le tasse e chiunque rifiutasse di pagarle veniva assassinato da Manji." + "\n"
+                            + "Dopo la sconvolgente scoperta, Manji in creca di redenzione dalle sue azioni decide di ribellarsi al suo padrone " + "\n"
+                            + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare ad ucciderlo.\n"
+                            + "Manji uccise più di 100 sottoposti, ma in una battaglia venne sconfitto e catturato." + "\n"
+                            + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva continuamente torturato. " + "\n"
+                            + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare le sue abilità da samurai.\n"
+                            + "La sua cella confinava con la cella di una ragazza di nome Rin, lei era una donna alle servitù del padrone." + "\n"
+                            + "I soldati spesso lasciavano la cella di Rin aperta " + "\n"
+                            + "in quanto credevano che essendo una donna non fosse capace di creare problemi in quanto non in grado di combattere. \n"
+                            + "Manji era un samurai molto astuto , infatti," + "\n"
+                            + "riuscì a capire che la cella era spesso lasciata aperta grazie ai discorsi delle guardie e ai mancati click delle mandate della serratura." + "\n"
+                            + "Grazie alla sua astuzia riuscì a fare un accordo con Rin, " + "\n"
+                            + "egli chiese di aiutarlo ad evadere facendogli da guida diventando il suo unico modo di vedere l’esterno," + "\n"
+                            + "in cambio promise di riuscire a portarli entrambi fuori da quella prigione.\n"
+                            + "Rin accetta l’ accordo e il giorno dopo al ritorno in cella riesce ad ammaliare una delle guardie rubandogli la chiave della cella di Manji." + "\n"
+                            + "La notte stessa durante il cambio delle guardie riesce ad aprire la sua cella e da qui inizia la grande fuga dalla prigione.");
                     ThreadTempo.Time();
-                     this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
-                     this.ms.getFrame().validate();
+                    this.nomePartita.setText("");
+                    this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
+                    this.ms.getFrame().validate();
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -153,6 +164,62 @@ public class creaPartita extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_confermaNomeActionPerformed
+
+    private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+            Db db = Db.getDb();
+            boolean isExiting = false;
+            String nome = this.nomePartita.getText();
+            if (nome.isEmpty()) {
+                JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
+                this.nomePartita.setText("");
+            } else {
+                for (DescrizioneGioco g : l) {
+                    if (g.getNomeGiocatore().equals(nome)) {
+                        isExiting = true;
+                    }
+                }
+                if (isExiting) {
+                    JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
+                    this.nomePartita.setText("");
+                } else {
+                    DescrizioneGioco partita = new Gioco(nome, db.inserisci(nome, 0, false, true));
+                    partita.inizializza();
+                    db.chiudiConnessione();
+                    try {
+                        Serializzazione.scriviFile(partita);
+                        this.ms.getGiocoGui().setPartita(partita);
+                        this.ms.getGiocoGui().getVisualizzazioneTesto().setText("C’era una volta un samurai di nome Manji, egli era un samurai fedelissimo al suo credo e nella via della spada." + "\n"
+                                + "Per molti anni ha lavorato per un padrone credendo che quello che faceva per lui fosse giusto," + "\n"
+                                + "un giorno leggendo dei documenti scoprì che molte delle persone che aveva ucciso erano dei semplici cittadini." + "\n"
+                                + "Il suo padrone era una persona molto avida che per arricchirsi aumentò di molto le tasse e chiunque rifiutasse di pagarle veniva assassinato da Manji." + "\n"
+                                + "Dopo la sconvolgente scoperta, Manji in creca di redenzione dalle sue azioni decide di ribellarsi al suo padrone " + "\n"
+                                + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare ad ucciderlo.\n"
+                                + "Manji uccise più di 100 sottoposti, ma in una battaglia venne sconfitto e catturato." + "\n"
+                                + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva continuamente torturato. " + "\n"
+                                + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare le sue abilità da samurai.\n"
+                                + "La sua cella confinava con la cella di una ragazza di nome Rin, lei era una donna alle servitù del padrone." + "\n"
+                                + "I soldati spesso lasciavano la cella di Rin aperta " + "\n"
+                                + "in quanto credevano che essendo una donna non fosse capace di creare problemi in quanto non in grado di combattere. \n"
+                                + "Manji era un samurai molto astuto , infatti," + "\n"
+                                + "riuscì a capire che la cella era spesso lasciata aperta grazie ai discorsi delle guardie e ai mancati click delle mandate della serratura." + "\n"
+                                + "Grazie alla sua astuzia riuscì a fare un accordo con Rin, " + "\n"
+                                + "egli chiese di aiutarlo ad evadere facendogli da guida diventando il suo unico modo di vedere l’esterno," + "\n"
+                                + "in cambio promise di riuscire a portarli entrambi fuori da quella prigione.\n"
+                                + "Rin accetta l’ accordo e il giorno dopo al ritorno in cella riesce ad ammaliare una delle guardie rubandogli la chiave della cella di Manji." + "\n"
+                                + "La notte stessa durante il cambio delle guardie riesce ad aprire la sua cella e da qui inizia la grande fuga dalla prigione.");
+                        ThreadTempo.Time();
+                        this.nomePartita.setText("");
+                        this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
+                        this.ms.getFrame().validate();
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_nomePartitaKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

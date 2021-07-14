@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import oggetti.Oggetto;
 import tipi.Giocatore;
@@ -168,7 +169,103 @@ public class PngIndovinello extends Npc implements Serializable {
 
     @Override
     public void interagisci(Giocatore giocatore, JTextArea out, JFrame frame) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!this.vivo) {
+            String nomeNpc;
+            if (this.sconosciuto) {
+                nomeNpc = "Sconosciuto";
+            } else {
+                nomeNpc = this.nome;
+            }
+            if (Utilita.chiediConfermaSwing("Rin: '" + nomeNpc + " e' morto, vuoi controllare il corpo? potrebbe avere qualcosa di utile!'", "Rin: 'Va bene, controlliamo il suo corpo'", "Rin: 'Andiamocene prima che il suo corpo inizi a puzzare!'",out,frame)) {
+                if (this.oggetto != null) {
+                    out.append("Hai raccolto: " + this.oggetto.getNome() + "\n");
+                    giocatore.getInventario().aggiungiOggetto(this.oggetto);
+                    giocatore.incrementaPunteggio(PngIndovinello.PUNTEGGIO_MORTO);
+                    this.oggetto = null;
+                } else {
+                    out.append("Rin: 'Il cadavere non ha niente di interessante, possiamo andare'\n");
+                }
+            }
+        } else {
+            if (accontentato) {
+                if (this.oggetto != null) {
+                    out.append(this.nome + ": 'Tieni questo è quello che posso darti, per aiutarti nella tua fuga'\n");
+                    giocatore.getInventario().aggiungiOggetto(this.oggetto);
+                    giocatore.incrementaPunteggio(PngIndovinello.PUNTEGGIO_ACCONTENTATO);
+                    out.append("Hai ottenuto: " + this.oggetto.getNome()+"\n");
+                    this.oggetto = null;
+                } else {
+                    out.append(this.nome + ": 'Ti ho gia' dato tutto cio' che era in mio possesso, cos'altro vuoi ahahahahah'\n");
+                }
+            } else {
+                if (this.sconosciuto) {
+                    out.append("Sconosciuto: 'Ciao ho sentito parlare molto di te, se mi dai una mano ricambierò il favore'\n");
+                    if (Utilita.chiediConfermaSwing("Rin: 'Vuoi sentire la proposta dello sconosciuto?'", "Rin: 'Vediamo cosa hai da offrire'", "Sconosciuto: 'Nel caso cambi idea io sono sempre qui'",out, frame)) {
+                        this.sconosciuto = false;
+                        out.append(this.nome + ": 'Piacere il mio nome e' " + this.nome + "'\n");
+                        this.interagisci(giocatore, out, frame);
+                    }
+                } else {
+                    String risposta;
+                    out.append(this.nome + ": 'Ora ti faro' un indovinello, se mi darai una risposta giusta, ti premiero'!'");
+                    out.append(this.nome + ": " + this.indovinello);
+                    out.append(this.nome + ": le risposte sono: ");
+                    out.append("a." + this.rispostaA);
+                    out.append("b." + this.rispostaB);
+                    out.append("c." + this.rispostaC);
+                        risposta = JOptionPane.showInputDialog(frame, "digitare 'a' o 'b' o 'c'.", null);
+                        risposta = risposta.toLowerCase();
+                        switch (risposta) {
+                            case RISPOSTA_A:
+                                if (risposta.equals(this.rispostaEsatta)) {
+                                    this.accontentato = true;
+                                    out.append(this.nome + ": 'Complimenti la risposta e' giusta!' \n");
+                                    this.interagisci(giocatore, out, frame);
+                                } else {
+                                    out.append(this.nome + ": 'La risposta e' errata!'\n");
+                                    if (Utilita.chiediConfermaSwing(this.nome + ": 'Vuoi riprovare?'", this.nome + ": 'Sara' la volta buona, ahahahahah'", this.nome + ": 'Nel caso cambi idea io sono sempre qui'", out, frame)) {
+                                        this.interagisci(giocatore, out, frame);
+                                    }
+                                }
+                                break;
+
+                            case RISPOSTA_B:
+                                if (risposta.equals(this.rispostaEsatta)) {
+                                    this.accontentato = true;
+                                    out.append(this.nome + ": 'Complimenti la risposta e' giusta!'\n");
+                                    this.interagisci(giocatore, out, frame);
+                                } else {
+                                    out.append(this.nome + ": 'La risposta e' errata!'\n");
+                                    if (Utilita.chiediConfermaSwing(this.nome + ": 'Vuoi riprovare?'", this.nome + ": 'Sara' la volta buona, ahahahahah'", this.nome + ": 'Nel caso cambi idea io sono sempre qui'", out, frame)) {
+                                        this.interagisci(giocatore, out, frame);
+                                    }
+                                }
+                                break;
+
+                            case RISPOSTA_C:
+                                if (risposta.equals(this.rispostaEsatta)) {
+                                    this.accontentato = true;
+                                    out.append(this.nome + ": 'Complimenti la risposta e' giusta!'\n");
+                                    this.interagisci(giocatore, out, frame);
+                                } else {
+                                    out.append(this.nome + ": 'La risposta e' errata!'\n");
+                                    if (Utilita.chiediConfermaSwing(this.nome + ": 'Vuoi riprovare?'", this.nome + ": 'Sara' la volta buona, ahahahahah'", this.nome + ": 'Nel caso cambi idea io sono sempre qui'", out, frame)) {
+                                        this.interagisci(giocatore, out, frame);
+                                    }
+                                }
+                                break;
+                            default:
+                                out.append(this.nome + ": 'La risposta data non e' valida!\n");
+                                if (Utilita.chiediConfermaSwing(this.nome + ": 'Vuoi riprovare?'", this.nome + ": 'Sara' la volta buona, ahahahahah'", this.nome + ": 'Nel caso cambi idea io sono sempre qui'", out, frame)) {
+                                        this.interagisci(giocatore, out, frame);
+                                    }
+                            break;
+                        }
+                    
+
+                }
+            }
+        }
     }
 
 }

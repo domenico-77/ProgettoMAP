@@ -21,8 +21,10 @@ public class mainSwing {
     private JFrame frame = new JFrame();
     private visualizzaDataBase visualizzazioneDataBase;
     private creaPartita creaPartita;
+    private ContinuaPartita continuaPartita;
 
     public mainSwing() {
+        continuaPartita = new ContinuaPartita(this);
         giocoGui = new giocoGui(this);
         menuInizio = new menuInizio(this);
         visualizzazioneDataBase = new visualizzaDataBase(this);
@@ -66,4 +68,9 @@ public class mainSwing {
         return creaPartita;
     }
 
+    public ContinuaPartita getContinuaPartita() {
+        return continuaPartita;
+    }
+
+    
 }

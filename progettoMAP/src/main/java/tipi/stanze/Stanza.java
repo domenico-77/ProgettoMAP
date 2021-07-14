@@ -289,7 +289,7 @@ public class Stanza implements Serializable {
                 }
             }
 
-            System.out.println("'");
+            out.append("'\n");
         }
     }
 }

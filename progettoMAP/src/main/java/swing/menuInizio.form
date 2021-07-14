@@ -25,6 +25,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="inizia" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="continuaPartita" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="DataBase" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -42,6 +44,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="DataBase" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="inizia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="continuaPartita" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="105" max="32767" attributes="0"/>
           </Group>
@@ -69,6 +72,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="                             LA FUGA DI MANJI"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="continuaPartita">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Continua"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="continuaPartitaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import salvataggio.Deserializzazione;
 
 /**
  *
@@ -44,6 +45,7 @@ public class menuInizio extends JPanel {
         inizia = new javax.swing.JButton();
         DataBase = new javax.swing.JButton();
         Titolo = new javax.swing.JLabel();
+        continuaPartita = new javax.swing.JButton();
 
         inizia.setText("gioca");
         inizia.addActionListener(new java.awt.event.ActionListener() {
@@ -61,6 +63,13 @@ public class menuInizio extends JPanel {
 
         Titolo.setText("                             LA FUGA DI MANJI");
 
+        continuaPartita.setText("Continua");
+        continuaPartita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                continuaPartitaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,6 +82,8 @@ public class menuInizio extends JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(inizia)
+                        .addGap(48, 48, 48)
+                        .addComponent(continuaPartita)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(DataBase)))
                 .addGap(52, 52, 52))
@@ -85,7 +96,8 @@ public class menuInizio extends JPanel {
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DataBase)
-                    .addComponent(inizia))
+                    .addComponent(inizia)
+                    .addComponent(continuaPartita))
                 .addContainerGap(105, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -103,10 +115,18 @@ public class menuInizio extends JPanel {
         this.ms.getFrame().validate();
     }//GEN-LAST:event_DataBaseActionPerformed
 
+    private void continuaPartitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continuaPartitaActionPerformed
+        this.ms.getContinuaPartita().setPartiteSalvate(Deserializzazione.letturaFile());
+        Deserializzazione.visualizzaPartiteSwing(this.ms.getContinuaPartita().getPartiteSalvate(), this.ms.getContinuaPartita().getVisualizzaPartiteSalvate());
+        this.ms.getFrame().setContentPane(this.ms.getContinuaPartita());
+        this.ms.getFrame().validate();
+    }//GEN-LAST:event_continuaPartitaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DataBase;
     private javax.swing.JLabel Titolo;
+    private javax.swing.JButton continuaPartita;
     private javax.swing.JButton inizia;
     // End of variables declaration//GEN-END:variables
 }

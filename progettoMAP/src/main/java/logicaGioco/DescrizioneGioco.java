@@ -135,7 +135,7 @@ public abstract class DescrizioneGioco implements Serializable {
     
     public abstract void nextMove(ParserOutput p, JTextArea out, JFrame frame);
     
-    public abstract void spostamento(Porta porta, JTextArea out);
+    public abstract void spostamento(Porta porta, JTextArea out, JFrame frame);
     
     public abstract void spostamento(Porta porta, PrintStream out);
 

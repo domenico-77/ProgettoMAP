@@ -46,7 +46,7 @@ public class ChiaveOggettoContenitore extends Oggetto {
                     System.out.println("Rin: 'E' già aperto'");
                 }
             } else {
-                System.out.println("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire");
+                System.out.println("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire'");
             }
         } else {
             System.out.println("Non puoi usare questo oggetto");
@@ -55,7 +55,7 @@ public class ChiaveOggettoContenitore extends Oggetto {
 
     @Override
     public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno, puo' essre utilizzata  per aprire un solo scrigno");
+        System.out.println("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno, puo' essre utilizzata  per aprire un solo scrigno'");
     }
 
     public static boolean isPRENDIBILE() {
@@ -85,21 +85,21 @@ public class ChiaveOggettoContenitore extends Oggetto {
                     contenitore = contenitoreO;
                     l.set(i, contenitore);
                     stanza.setOggetiStanza(l);
-                    out.setText("Rin: 'Hai aperto " + contenitore.getNome() + "'");
+                    out.append("Rin: 'Hai aperto " + contenitore.getNome() + "'\n");
                 } else {
-                    out.setText("Rin: 'E' già aperto'");
+                    out.append("Rin: 'E' già aperto'\n");
                 }
             } else {
-                out.setText("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire");
+                out.append("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire'\n");
             }
         } else {
-            out.setText("Non puoi usare questo oggetto");
+            out.append("Non puoi usare questo oggetto");
         }
     }
 
     @Override
     public void descrizioneOggetto(JTextArea out) {
-        out.setText("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno, puo' essre utilizzata  per aprire un solo scrigno");
+        out.setText("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno, puo' essre utilizzata  per aprire un solo scrigno'\n");
 
     }
 

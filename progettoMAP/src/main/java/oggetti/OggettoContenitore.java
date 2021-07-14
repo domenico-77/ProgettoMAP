@@ -135,7 +135,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
             if (this.listaOggetti != null) {
                 for (Oggetto o : this.listaOggetti) {
                     if (o.prendibile) {
-                        out.append("Rin: 'Hai raccolto " + o.nome + "'");
+                        out.append("Rin: 'Hai raccolto " + o.nome + "'\n");
                         inventario.aggiungiOggetto(o);
                     } else {
                         o.usaSwing(giocatore, stanza, out);
@@ -145,7 +145,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
                 giocatore.setInventario(inventario);
                 giocatore.incrementaPunteggio(OggettoContenitore.PUNTEGGIO);
             } else {
-                out.setText("Rin: 'Non c'è nessun oggetto all'interno'");
+                out.append("Rin: 'Non c'è nessun oggetto all'interno'\n");
             }
         } else {
             Oggetto chiaveOggettoContenitore = new ChiaveOggettoContenitore("Grimaldello", null);
@@ -154,7 +154,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
                     this.usaSwing(giocatore, stanza, out);
                 
             } else {
-                out.setText("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'");
+                out.append("Rin: 'Lo scrigno è chiuso, forse dovremmo aprirlo con una chiave'\n");
             }
         }
     }

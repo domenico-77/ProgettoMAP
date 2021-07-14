@@ -16,6 +16,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JTextArea;
 import logicaGioco.DescrizioneGioco;
 import tipi.Utilita;
 
@@ -96,6 +97,12 @@ public class Deserializzazione {
     public static void visualizzaPartite(List<DescrizioneGioco> l) {
         l.forEach(d -> {
             System.out.println(d.getNomeGiocatore());
+        });
+    }
+    
+    public static void visualizzaPartiteSwing(List<DescrizioneGioco> l, JTextArea out){
+         l.forEach(d -> {
+            out.append(d.getNomeGiocatore() + "\n");
         });
     }
 

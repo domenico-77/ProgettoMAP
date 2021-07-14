@@ -61,15 +61,15 @@ public class OggettoMaligno extends Oggetto implements Serializable {
         if (this.usabilita > 0) {
             giocatore.decrementaVita(this.danno);
             giocatore.incrementaPunteggio(OggettoMaligno.PUNTEGGIO);
-            out.setText("Rin: 'Oh no un veleno ti ha inferto dei danni'");
+            out.append("Rin: 'Oh no un veleno ti ha inferto dei danni'\n");
         } else {
-            out.setText("Non puoi usare questo oggetto");
+            out.append("Non puoi usare questo oggetto\n");
         }
     }
 
     @Override
     public void descrizioneOggetto(JTextArea out) {
-        out.setText("Rin: 'Potrebbe essere pericoloso, meglio stare alla larga'");
+        out.setText("Rin: 'Potrebbe essere pericoloso, meglio stare alla larga'\n");
 
     }
 

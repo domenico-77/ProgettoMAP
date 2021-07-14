@@ -82,7 +82,7 @@ public class PngScambio extends Npc {
                         this.interagisci(giocatore);
                     }
                 } else {
-                    System.out.println(this.nome + ": 'Quando avrai " + this.oggettoRichiesto.getNome() + " torna da me, io saro' sempre qui");
+                    System.out.println(this.nome + ": 'Quando avrai " + this.oggettoRichiesto.getNome() + " torna da me, io saro' sempre qui'");
                 }
             }
         }
@@ -129,33 +129,33 @@ public class PngScambio extends Npc {
             }
         } else if (this.accontentato) {
             if (this.oggetto != null) {
-                System.out.println(this.nome + ": 'Tieni questo è quello che posso darti, per aiutarti nella tua fuga'");
+                out.append(this.nome + ": 'Tieni questo è quello che posso darti, per aiutarti nella tua fuga'\n");
                 giocatore.getInventario().aggiungiOggetto(this.oggetto);
-                System.out.println("Hai ottenuto: " + this.oggetto.getNome());
+                out.append("Hai ottenuto: " + this.oggetto.getNome() + "\n");
                 giocatore.incrementaPunteggio(PngScambio.PUNTEGGIO_ACCONTENTATO);
                 this.oggetto = null;
             } else {
-                System.out.println(this.nome + ": 'Ti ho gia' dato tutto cio' che era in mio possesso, cos'altro vuoi ahahahahah'");
+                out.append(this.nome + ": 'Ti ho gia' dato tutto cio' che era in mio possesso, cos'altro vuoi ahahahahah'\n");
             }
         } else {
             if (this.sconosciuto) {
-                System.out.println("Sconosciuto: 'Ciao ho sentito parlare molto di te, se mi dai una mano ricambiero' il favore'");
-                if (Utilita.chiediConferma("Rin: 'Vuoi sentire la proposta dello sconosciuto?'", "Rin: 'Vediamo cosa hai da offrire'", "Sconosciuto: 'Nel caso cambi idea io sono sempre qui'")) {
+                out.append("Sconosciuto: 'Ciao ho sentito parlare molto di te, se mi dai una mano ricambiero' il favore'\n");
+                if (Utilita.chiediConfermaSwing("Rin: 'Vuoi sentire la proposta dello sconosciuto?'", "Rin: 'Vediamo cosa hai da offrire'", "Sconosciuto: 'Nel caso cambi idea io sono sempre qui'", out, frame)) {
                     this.sconosciuto = false;
-                    System.out.println(this.nome + ": 'Piacere il mio nome e' " + this.nome + "'");
-                    this.interagisci(giocatore);
+                    out.append(this.nome + ": 'Piacere il mio nome e' " + this.nome + "'\n");
+                    this.interagisci(giocatore, out, frame);
                 }
             } else {
-                System.out.println(this.nome + ": 'Se mi porti " + this.oggettoRichiesto.getNome() + " in cambio ti daro' un altra cosa'");
+                out.append(this.nome + ": 'Se mi porti " + this.oggettoRichiesto.getNome() + " in cambio ti daro' un altra cosa'\n");
                 if (giocatore.getInventario().contieneOggetto(this.oggettoRichiesto)) {
-                    if (Utilita.chiediConferma("Rin: 'Abbiamo questo oggetto, vuoi darglielo?'", "Rin: 'Ecco l'oggetto promesso, ora mantieni la tua promessa'", this.nome + ": 'Nel caso cambi idea io sono sempre qui'")) {
+                    if (Utilita.chiediConfermaSwing("Rin: 'Abbiamo questo oggetto, vuoi darglielo?'", "Rin: 'Ecco l'oggetto promesso, ora mantieni la tua promessa'", this.nome + ": 'Nel caso cambi idea io sono sempre qui'", out, frame)) {
                         giocatore.getInventario().rimuoviOggetto(this.oggettoRichiesto);
                         this.accontentato = true;
-                        System.out.println(this.nome + ": 'Era proprio quello che mi serviva!'");
-                        this.interagisci(giocatore);
+                        out.append(this.nome + ": 'Era proprio quello che mi serviva!'\n");
+                        this.interagisci(giocatore, out, frame);
                     }
                 } else {
-                    System.out.println(this.nome + ": 'Quando avrai " + this.oggettoRichiesto.getNome() + " torna da me, io saro' sempre qui");
+                    out.append(this.nome + ": 'Quando avrai " + this.oggettoRichiesto.getNome() + " torna da me, io saro' sempre qui' \n");
                 }
             }
         }

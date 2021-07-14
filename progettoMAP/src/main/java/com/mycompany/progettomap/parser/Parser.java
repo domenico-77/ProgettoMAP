@@ -75,7 +75,8 @@ public class Parser {
                                 if (Utilita.cercaParola(paroleComando.get(1), stanza.getNpc().getAliasNome())) {
                                     comando = new ParserOutput(azioni.get(intAzione), true);
                                 }
-                            } else if (Utilita.cercaParola(paroleComando.get(1), "n", "nord", "sopra", "su", "sù")) {
+                            } else
+                                if (Utilita.cercaParola(paroleComando.get(1), "n", "nord", "sopra", "su", "sù")) {
                                 if (azioni.get(intAzione).getTipo() == TipoComando.camminare_verso) {
                                     comando = new ParserOutput(azioni.get(Utilita.cercaAzioni("nord", azioni)));
                                 }
@@ -91,7 +92,15 @@ public class Parser {
                                 if (azioni.get(intAzione).getTipo() == TipoComando.camminare_verso) {
                                     comando = new ParserOutput(azioni.get(Utilita.cercaAzioni("ovest", azioni)));
                                 }
-                            } else {
+                            } else if(paroleComando.get(1).equals("indietro")){
+                                if(azioni.get(intAzione).getTipo() == TipoComando.camminare_verso){
+                                comando = new ParserOutput(azioni.get(Utilita.cercaAzioni("indietro", azioni)));
+                                }
+                            }
+                            else if(azioni.get(intAzione).getTipo() == TipoComando.camminare_verso){
+                                comando = null;
+                            }
+                            else {
 
                                 comando = (new ParserOutput(azioni.get(intAzione)));
                             }

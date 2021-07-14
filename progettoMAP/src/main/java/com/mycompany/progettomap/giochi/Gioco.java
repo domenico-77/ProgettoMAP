@@ -35,7 +35,6 @@ import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import menu.Help;
 import npc.Mob;
@@ -714,6 +713,7 @@ public class Gioco extends DescrizioneGioco {
         } else if (this.giocatore.getVitaCorrente() <= 0) {
             System.out.println("I nostri eroi non sono riusciti a fuggire dalla prigione");
             System.out.println("Hai perso!");
+            Deserializzazione.cancellaPartitaFinita(this);
         }
     }
 
@@ -758,14 +758,14 @@ public class Gioco extends DescrizioneGioco {
     public void nextMove(ParserOutput p, JTextArea out, JFrame frame) {
         if (p != null) {
             if ((p.getComando().getTipo() == TipoComando.nord && p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false)) {
-                this.spostamento(this.stanzaCorrente.getPortaNord(), out);
+                this.spostamento(this.stanzaCorrente.getPortaNord(), out, frame);
                 this.controllaFine();
             } else if ((p.getComando().getTipo() == TipoComando.sud && p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false)) {
-                this.spostamento(this.stanzaCorrente.getPortaSud(), out);
+                this.spostamento(this.stanzaCorrente.getPortaSud(), out, frame);
             } else if ((p.getComando().getTipo() == TipoComando.est && p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false)) {
-                this.spostamento(this.stanzaCorrente.getPortaEst(), out);
+                this.spostamento(this.stanzaCorrente.getPortaEst(), out, frame);
             } else if ((p.getComando().getTipo() == TipoComando.ovest && p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false)) {
-                this.spostamento(this.stanzaCorrente.getPortaOvest(), out);
+                this.spostamento(this.stanzaCorrente.getPortaOvest(), out, frame);
             } else if ((p.getComando().getTipo() == TipoComando.torna_indietro && p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false)) {
                 if (!this.PercorsoStanze.empty()) {
                     this.setStanzaCorrente(this.PercorsoStanze.pop());
@@ -906,8 +906,7 @@ public class Gioco extends DescrizioneGioco {
                     } else {
                         out.append("Rin: 'non ho capito cosa fare'" + "\n");
                     }
-                }
-                else{
+                } else {
                     out.append("Rin: 'Non ho capito cosa mangiare'\n");
                 }
             } else if (p.getComando().getTipo() == TipoComando.mangiare) {
@@ -945,13 +944,13 @@ public class Gioco extends DescrizioneGioco {
                 if (p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null) {
                     if (p.isNpc() == true && this.stanzaCorrente.getNpc() != null) {
                         if (this.stanzaCorrente.getNpc().isNeutrale()) {
-                            this.stanzaCorrente.getNpc().interagisci(giocatore);
+                            this.stanzaCorrente.getNpc().interagisci(giocatore, out, frame);
                         } else {
                             Mob mob = (Mob) this.stanzaCorrente.getNpc();
                             if (!mob.isVivo() || mob.isCorrotto()) {
-                                this.stanzaCorrente.getNpc().interagisci(giocatore);
+                                this.stanzaCorrente.getNpc().interagisci(giocatore, out, frame);
                             } else {
-                                System.out.println("Rin: 'Sarebbe meglio andare, se non possiamo combatterlo'" + "\n");
+                                out.append("Rin: 'Sarebbe meglio andare, se non possiamo combatterlo'" + "\n");
                             }
 
                         }
@@ -964,6 +963,7 @@ public class Gioco extends DescrizioneGioco {
                     try {
                         this.calcolaTempo();
                         salvataggio.Serializzazione.scriviFile(this);
+                        out.append("Rin: 'Partita salvata'\n");
                     } catch (ClassNotFoundException ex) {
                         Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -972,20 +972,22 @@ public class Gioco extends DescrizioneGioco {
                 }
             } else if (p.getComando().getTipo() == TipoComando.fine) {
                 if (p.getOggetto() == null && p.getOggettoInv() == null && p.getPorta() == null && p.isNpc() == false) {
-
-                    this.sospesa = true;
-                    ThreadTempo.setAttivo(false);
-                    out.append("Manji: 'Rin io mi riposo un po', quando mi sveglio riprendiamo'" + "\n");
-                    out.append("");
-                    out.append("");
-                    try {
-                        this.calcolaTempo();
-                        salvataggio.Serializzazione.scriviFile(this);
-                        out.append("Uscita in corso...");
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
+                    if (Utilita.chiediConfermaSwing("Sei sicuro di voler uscire", "Uscita in corso...", "Ripresa in corso", out, frame)) {
+                        this.sospesa = true;
+                        ThreadTempo.setAttivo(false);
+                        out.append("Manji: 'Rin io mi riposo un po', quando mi sveglio riprendiamo'" + "\n");
+                        out.append("");
+                        out.append("");
+                        if (Utilita.chiediConfermaSwing("Vuoi salvare prima di uscire?", "Salvataggio in corso...", "Partita non salvata", out, frame)) {
+                            try {
+                                this.calcolaTempo();
+                                salvataggio.Serializzazione.scriviFile(this);
+                                out.append("Uscita in corso...");
+                            } catch (ClassNotFoundException ex) {
+                                Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
                     }
-
                 } else {
                     out.append("Rin: 'Non ho capito cosa devo fare'" + "\n");
                 }
@@ -995,7 +997,7 @@ public class Gioco extends DescrizioneGioco {
                         if (this.giocatore.getInventario().contieneOggetto(Gioco.AFFILATORE)) {
                             this.giocatore.getInventario().usaOggettoSwing(Gioco.AFFILATORE, this.giocatore, this.stanzaCorrente, out);
                         } else {
-                            out.append("Rin: 'Non abbiamo un affilatore per la spda, dobbiamo prima trovarlo'" + "\n");
+                            out.append("Rin: 'Non abbiamo un affilatore per la spada, dobbiamo prima trovarlo'" + "\n");
                         }
                     } else {
                         out.append("Rin: 'Non puoi affilare " + p.getOggettoInv().getNome());
@@ -1064,7 +1066,7 @@ public class Gioco extends DescrizioneGioco {
     }
 
     @Override
-    public void spostamento(Porta porta, JTextArea out) {
+    public void spostamento(Porta porta, JTextArea out, JFrame frame) {
         if (this.stanzaCorrente.isIlluminata()) {
             if (porta != null) {
                 if (porta.getTipo() == TipoPorta.normale || !porta.isChiusa()) {
@@ -1075,7 +1077,7 @@ public class Gioco extends DescrizioneGioco {
 
                     if (this.getGiocatore().getInventario().contieneOggetto(Gioco.CHIAVE)) {
 
-                        if (Utilita.chiediConferma("Fortunatamente ne abbiamo una, vuoi usarla ?'", "Rin: 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin: 'Va bene vorrà dire che l' apriremo in un altro momento'")) {
+                        if (Utilita.chiediConfermaSwing("Fortunatamente ne abbiamo una, vuoi usarla ?'", "Rin: 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin: 'Va bene vorrà dire che l' apriremo in un altro momento'", out, frame)) {
                             this.giocatore.getInventario().usaOggetto(Gioco.CHIAVE, giocatore, stanzaCorrente);
                             this.cambiaStanza(porta, out);
 
@@ -1088,7 +1090,7 @@ public class Gioco extends DescrizioneGioco {
                     out.append(porta.descriviPorta() + "." + "\n");
 
                     if (this.getGiocatore().getInventario().contieneOggetto(Gioco.TOTEM)) {
-                        if (Utilita.chiediConferma("Fortunatamente ne abbiamo una, vuoi usarla ?'", "Rin: 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin : 'Va bene vorrà dire che l' apriremo in un altro momento'")) {
+                        if (Utilita.chiediConfermaSwing("Fortunatamente ne abbiamo una, vuoi usarla ?'", "Rin: 'Perfetto andiamo a scoprire cosa ci aspetta dietro questa porta'", "Rin : 'Va bene vorrà dire che l' apriremo in un altro momento'", out, frame)) {
                             this.giocatore.getInventario().usaOggetto(Gioco.TOTEM, giocatore, stanzaCorrente);
 
                             this.cambiaStanza(porta, out);

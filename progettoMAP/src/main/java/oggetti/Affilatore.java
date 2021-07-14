@@ -37,7 +37,7 @@ public class Affilatore extends Oggetto {
                 List<Oggetto> l = inventario.getInventario();
                 int i = l.indexOf(oggetto);
                 if (l.get(i).getUsabilita() == USABILITA_SPADA) {
-                    System.out.println("Rin: 'L'affilatura di questa spada è al massimo non puoi affilarla");
+                    System.out.println("Rin: 'L'affilatura di questa spada è al massimo non puoi affilarla'");
                 } else {
                     l.get(i).setUsabilita(l.get(i).usabilita + 1);
                     this.usabilita--;
@@ -45,7 +45,7 @@ public class Affilatore extends Oggetto {
                     System.out.println("Rin: 'Ora che abbiamo affilato la spada, possiamo buttare l'affilatore'");
                 }
             } else {
-                System.out.println("Rin: 'Non abbiamo una spada da affilare, dobbiamo prima trovarla");
+                System.out.println("Rin: 'Non abbiamo una spada da affilare, dobbiamo prima trovarla'");
             }
         } else {
             System.out.println("Non puoi usare questo oggetto");
@@ -82,18 +82,18 @@ public class Affilatore extends Oggetto {
                 List<Oggetto> l = inventario.getInventario();
                 int i = l.indexOf(oggetto);
                 if (l.get(i).getUsabilita() == USABILITA_SPADA) {
-                    out.setText("Rin: 'L'affilatura di questa spada è al massimo non puoi affilarla");
+                    out.append("Rin: 'L'affilatura di questa spada è al massimo non puoi affilarla'\n");
                 } else {
                     l.get(i).setUsabilita(l.get(i).usabilita + 1);
                     this.usabilita--;
                     giocatore.incrementaPunteggio(Affilatore.PUNTEGGIO);
-                    out.setText("Rin: 'Ora che abbiamo affilato la spada, possiamo buttare l'affilatore'");
+                    out.append("Rin: 'Ora che abbiamo affilato la spada, possiamo buttare l'affilatore'\n");
                 }
             } else {
-                out.setText("Rin: 'Non abbiamo una spada da affilare, dobbiamo prima trovarla");
+                out.append("Rin: 'Non abbiamo una spada da affilare, dobbiamo prima trovarla' \n");
             }
         } else {
-            out.setText("Non puoi usare questo oggetto");
+            out.append("Non puoi usare questo oggetto");
         }
     }
 

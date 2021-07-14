@@ -43,11 +43,11 @@ public class Spada extends Oggetto implements Serializable {
                     }
                     System.out.println(nome + ": 'Oh no maledetto, mi hai colpito alle spalle!'");
                     if (this.usabilita == 0) {
-                        System.out.println("Rin: 'Non hai affilato bene la spada, ora si è rotta, speriamo di trovarne un altra");
+                        System.out.println("Rin: 'Non hai affilato bene la spada, ora si è rotta, speriamo di trovarne un altra'");
                     } 
                 }
                 else{
-                    System.out.println("Rin: 'La persona e' stata gia' uccisa, non serve a niente infierire sul suo corpo");
+                    System.out.println("Rin: 'La persona e' stata gia' uccisa, non serve a niente infierire sul suo corpo'\n");
                 }
             } else {
                 System.out.println("Rin: 'Non c'e' nessuno in questa stanza'");
@@ -95,30 +95,30 @@ public class Spada extends Oggetto implements Serializable {
                     else{
                         nome = stanza.getNpc().getNome();
                     }
-                    out.setText(nome + ": 'Oh no maledetto, mi hai colpito alle spalle!'");
+                    out.append(nome + ": 'Oh no maledetto, mi hai colpito alle spalle!'\n");
                     if (this.usabilita == 0) {
-                        out.setText("Rin: 'Non hai affilato bene la spada, ora si è rotta, speriamo di trovarne un altra");
+                        out.append("Rin: 'Non hai affilato bene la spada, ora si è rotta, speriamo di trovarne un altra'\n");
                     } 
                 }
                 else{
-                    out.setText("Rin: 'La persona e' stata gia' uccisa, non serve a niente infierire sul suo corpo");
+                    out.append("Rin: 'La persona e' stata gia' uccisa, non serve a niente infierire sul suo corpo'\n");
                 }
             } else {
-                out.setText("Rin: 'Non c'e' nessuno in questa stanza'");
+                out.append("Rin: 'Non c'e' nessuno in questa stanza'\n");
             }
         } else {
-            out.setText("Rin: 'Non puoi usare questo oggetto'");
+            out.setText("Rin: 'Non puoi usare questo oggetto'\n");
         }
     }
 
     @Override
     public void descrizioneOggetto(JTextArea out) {
-         out.setText("Rin: 'E' " + this.nome + " ci servira' nel caso in cui incontriamo dei soldati, puoi usarla per " + this.usabilita + " volte");
+         out.append("Rin: 'E' " + this.nome + " ci servira' nel caso in cui incontriamo dei soldati, puoi usarla per " + this.usabilita + " volte");
         if (this.usabilita < 3) {
             out.append("/n");
             out.append(" sarebbe il caso di trovare un affilatore, per aumentare l'usabilita prima che si rompa'");
         } else {
-            System.out.println("'");
+            out.append("'\n");
         }
     }
 

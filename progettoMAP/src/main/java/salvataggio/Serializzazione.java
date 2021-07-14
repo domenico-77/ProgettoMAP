@@ -43,7 +43,6 @@ public class Serializzazione {
             out.writeObject(l);
             out.close();
             fileOut.close();
-            System.out.println("Dati serializzati salvati in FileSalvataggio.ser");
         } catch (IOException i) {
             i.printStackTrace();
         }
