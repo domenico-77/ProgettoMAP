@@ -17,13 +17,13 @@ import javax.swing.JPanel;
  */
 public class MainSwing {
 
-    private JPanel menuInizio;
-    private GiocoGui giocoGui;
-    private JFrame frame = new JFrame();
-    private VisualizzaDataBase visualizzazioneDataBase;
-    private CreaPartita creaPartita;
-    private CancellaPartita cancellaPartita;
-    private ContinuaPartita continuaPartita;
+    private final JPanel menuInizio;
+    private final GiocoGui giocoGui;
+    private final JFrame frame = new JFrame();
+    private final VisualizzaDataBase visualizzazioneDataBase;
+    private final CreaPartita creaPartita;
+    private final CancellaPartita cancellaPartita;
+    private final ContinuaPartita continuaPartita;
 
     public MainSwing() {
         cancellaPartita = new CancellaPartita(this);
