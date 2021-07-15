@@ -67,6 +67,7 @@ public class Porta implements Serializable{
         
         return descrizione;
     }
+    
 
     public static String[] getAlias() {
         return alias;

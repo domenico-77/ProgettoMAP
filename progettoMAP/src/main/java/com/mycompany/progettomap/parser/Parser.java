@@ -52,21 +52,33 @@ public class Parser {
                         comando = (new ParserOutput(azioni.get(intAzione), null, inventario.get(intOggettoInv)));
                     } else if (intAzione > -1 && intOggetto == -1 && intOggettoInv == -1) {
                         if (Utilita.cercaParola(paroleComando.get(1), Porta.getAlias()) && paroleComando.size() >= 3) {
-                            if (Utilita.cercaParola(paroleComando.get(2), "n", "nord", "sopra", "su", "sù")) {
+                            if (Utilita.cercaParola(paroleComando.get(2),  "nord", "sopra", "su", "sù")) {
                                 if (stanza.getPortaNord() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaNord());
                                 }
-                            } else if (Utilita.cercaParola(paroleComando.get(2), "sud", "s", "giu", "sotto", "giù")) {
+                                else{
+                                    comando = new ParserOutput(azioni.get(intAzione));
+                                }
+                            } else if (Utilita.cercaParola(paroleComando.get(2), "sud", "giu", "sotto", "giù")) {
                                 if (stanza.getPortaSud() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaSud());
                                 }
-                            } else if (Utilita.cercaParola(paroleComando.get(2), "e", "destrra", "est")) {
+                                else{
+                                    comando = new ParserOutput(azioni.get(intAzione));
+                                }
+                            } else if (Utilita.cercaParola(paroleComando.get(2), "destra", "est")) {
                                 if (stanza.getPortaEst() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaEst());
                                 }
-                            } else if (Utilita.cercaParola(paroleComando.get(2), "o", "sinistra", "ovest")) {
+                                else{
+                                    comando = new ParserOutput(azioni.get(intAzione));
+                                }
+                            } else if (Utilita.cercaParola(paroleComando.get(2),  "sinistra", "ovest")) {
                                 if (stanza.getPortaOvest() != null) {
                                     comando = new ParserOutput(azioni.get(intAzione), stanza.getPortaOvest());
+                                }
+                                else{
+                                    comando = new ParserOutput(azioni.get(intAzione));
                                 }
                             }
 

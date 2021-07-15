@@ -24,9 +24,10 @@ public class ContinuaPartita extends javax.swing.JPanel {
     /**
      * Creates new form ContinuaPartita
      */
-    public ContinuaPartita(mainSwing ms) {
+    public ContinuaPartita(MainSwing ms) {
         this.ms = ms;
         initComponents();
+        this.visualizzaPartiteSalvate.setEditable(false);
     }
 
     /**
@@ -147,10 +148,11 @@ public class ContinuaPartita extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
-    private mainSwing ms;
+    private MainSwing ms;
     private List<DescrizioneGioco> partiteSalvate = new ArrayList();
     private void invioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invioActionPerformed
         String np = this.nomePartita.getText();
+        np = np.toLowerCase();
         int pos = -1;
         if (np.isEmpty()) {
             JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -180,6 +182,7 @@ public class ContinuaPartita extends javax.swing.JPanel {
     private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String np = this.nomePartita.getText();
+            np.toLowerCase();
             int pos = -1;
             if (np.isEmpty()) {
                 JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -195,6 +198,7 @@ public class ContinuaPartita extends javax.swing.JPanel {
                     this.nomePartita.setText("");
                 } else {
                     DescrizioneGioco partita = partiteSalvate.get(pos);
+                    partita.setSospesa(false);
                     this.ms.getGiocoGui().setPartita(partita);
                     this.ms.getGiocoGui().getVisualizzazioneTesto().setText("Rin: 'Ben tornato, ora ci troviamo nel " + partita.getStanzaCorrente().getNomeStanza() + "'");
                     this.ms.getGiocoGui().getComando().setText("");

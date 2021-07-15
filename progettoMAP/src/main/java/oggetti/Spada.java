@@ -115,8 +115,7 @@ public class Spada extends Oggetto implements Serializable {
     public void descrizioneOggetto(JTextArea out) {
          out.append("Rin: 'E' " + this.nome + " ci servira' nel caso in cui incontriamo dei soldati, puoi usarla per " + this.usabilita + " volte");
         if (this.usabilita < 3) {
-            out.append("/n");
-            out.append(" sarebbe il caso di trovare un affilatore, per aumentare l'usabilita prima che si rompa'");
+            out.append(" \n sarebbe il caso di trovare un affilatore, per aumentare l'usabilita prima che si rompa'");
         } else {
             out.append("'\n");
         }

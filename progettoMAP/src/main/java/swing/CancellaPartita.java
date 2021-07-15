@@ -30,12 +30,13 @@ public class CancellaPartita extends javax.swing.JPanel {
     /**
      * Creates new form CancellaPartita
      */
-    public CancellaPartita(mainSwing ms) {
+    public CancellaPartita(MainSwing ms) {
         initComponents();
         this.ms = ms;
+        this.visualizzaPartite.setEditable(false);
     }
 
-    private mainSwing ms;
+    private MainSwing ms;
     private List<DescrizioneGioco> partiteSalvate = new ArrayList();
 
     /**

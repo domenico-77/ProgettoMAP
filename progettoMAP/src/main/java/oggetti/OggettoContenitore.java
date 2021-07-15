@@ -98,7 +98,7 @@ public class OggettoContenitore extends Oggetto implements Serializable {
     @Override
     public void descrizioneOggetto() {
         if (this.aperto) {
-            if (this.listaOggetti.isEmpty()) {
+            if (this.listaOggetti == null) {
                 System.out.println("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
             } else {
                 System.out.println("Rin: 'Lo scrigno è aperto, prendiamo quello che c'è dentro'");
@@ -162,13 +162,13 @@ public class OggettoContenitore extends Oggetto implements Serializable {
     @Override
     public void descrizioneOggetto(JTextArea out) {
         if (this.aperto) {
-            if (this.listaOggetti.isEmpty()) {
-                out.setText("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
+            if (this.listaOggetti == null) {
+                out.append("Rin: 'E' uno scrigno vuoto, abbiamo preso tutto'");
             } else {
-                out.setText("Rin: 'Lo scrigno è aperto, prendiamo quello che c'è dentro'");
+                out.append("Rin: 'Lo scrigno è aperto, prendiamo quello che c'è dentro'");
             }
         } else {
-            out.setText("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
+            out.append("Rin: 'E' uno scrigno, potrebbe contenere oggetti interessanti, se abbiamo una chiave potremmo aprirlo'");
         }
     }
 

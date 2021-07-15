@@ -147,13 +147,14 @@ public class Utilita {
     
     public static boolean chiediConfermaSwing(final String richiesta, final String casoAffermativo, final String casoNegativo, JTextArea out, JFrame frame){
         boolean vuole = false;
-        out.setText(richiesta + "\n");
+        out.append(richiesta + "\n");
         boolean error;
         String answer;
 
         do {
             answer = JOptionPane.showInputDialog(frame, "digitare 'si' o 'no'.", null);
             error = false;
+            if(answer != null){
                 answer = answer.replaceAll(" +", "");
                 switch (answer.toLowerCase()) {
                     case "si":
@@ -170,6 +171,10 @@ public class Utilita {
                         error = true;
                         break;
                 }
+            }
+            else{
+                out.setText("Digitare una risposta valida...\n");
+            }
             
         } while (error);
 

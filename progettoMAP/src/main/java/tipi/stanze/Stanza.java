@@ -228,9 +228,9 @@ public class Stanza implements Serializable {
     public void DescriviStanza(JTextArea out) {
         if (!this.illuminata) {
             if (this.npc != null) {
-                out.setText("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
+                out.setText("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'\n");
             } else {
-                out.setText("Rin:'Non riesco a vedere nulla e ci sono dei rumori sospetti potrebbe esserci qualcuno, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
+                out.setText("Rin:'Non riesco a vedere nulla e ci sono dei rumori sospetti potrebbe esserci qualcuno,\n sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'\n");
             }
 
         } else {
@@ -262,7 +262,7 @@ public class Stanza implements Serializable {
                             if (i == size - 2) {
                                 out.append(o.getNome() + " e ");
                             } else {
-                                out.append(o.getNome());
+                                out.append(" " + o.getNome());
                             }
                         }
 
@@ -275,17 +275,17 @@ public class Stanza implements Serializable {
             if (this.npc != null) {
                 if (this.npc.isVivo()) {
                     if (this.npc.isNeutrale()) {
-                        out.append(" Sembra esserci un prigioniero, potremmo provare a parlarci");
+                        out.append(" \nSembra esserci un prigioniero, potremmo provare a parlarci");
                     } else {
                         Mob mob = (Mob) this.getNpc();
                         if (mob.isCorrotto()) {
-                            out.append("C'e' la guardia che abbiamo corrotto precedentemente, andiamocene potrebbe cambiare idea");
+                            out.append("\nC'e' la guardia che abbiamo corrotto precedentemente, andiamocene potrebbe cambiare idea");
                         } else {
-                            out.append("Oh no! C'e' una guardia, se non possiamo affrontarlo ci conviene fare l'indispensabile in questa stanza e andarcene!");
+                            out.append("\nOh no! C'e' una guardia, se non possiamo affrontarlo ci conviene fare l'indispensabile in questa stanza e andarcene!");
                         }
                     }
                 } else {
-                    out.append("C'e' un cadavere in questa stanza, potrebbe avere qualcosa di utile");
+                    out.append("\nC'e' un cadavere in questa stanza, potrebbe avere qualcosa di utile");
                 }
             }
 

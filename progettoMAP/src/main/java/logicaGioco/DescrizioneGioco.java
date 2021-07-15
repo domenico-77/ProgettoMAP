@@ -138,5 +138,6 @@ public abstract class DescrizioneGioco implements Serializable {
     public abstract void spostamento(Porta porta, JTextArea out, JFrame frame);
     
     public abstract void spostamento(Porta porta, PrintStream out);
+     public abstract void controllaFineSwing(JTextArea out);
 
 }

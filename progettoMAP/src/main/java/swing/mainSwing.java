@@ -15,23 +15,23 @@ import javax.swing.JPanel;
  *
  * @author domen
  */
-public class mainSwing {
+public class MainSwing {
 
     private JPanel menuInizio;
-    private giocoGui giocoGui;
+    private GiocoGui giocoGui;
     private JFrame frame = new JFrame();
-    private visualizzaDataBase visualizzazioneDataBase;
-    private creaPartita creaPartita;
+    private VisualizzaDataBase visualizzazioneDataBase;
+    private CreaPartita creaPartita;
     private CancellaPartita cancellaPartita;
     private ContinuaPartita continuaPartita;
 
-    public mainSwing() {
+    public MainSwing() {
         cancellaPartita = new CancellaPartita(this);
         this.continuaPartita = new ContinuaPartita(this);
-        giocoGui = new giocoGui(this);
-        menuInizio = new menuInizio(this);
-        visualizzazioneDataBase = new visualizzaDataBase(this);
-        creaPartita = new creaPartita(this);
+        giocoGui = new GiocoGui(this);
+        menuInizio = new MenuInizio(this);
+        visualizzazioneDataBase = new VisualizzaDataBase(this);
+        creaPartita = new CreaPartita(this);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(this.menuInizio);
         frame.setPreferredSize(new Dimension(970, 700));
@@ -42,7 +42,7 @@ public class mainSwing {
 
     }
 
-    public giocoGui getGiocoGui() {
+    public GiocoGui getGiocoGui() {
         return giocoGui;
     }
 
@@ -54,7 +54,7 @@ public class mainSwing {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ThreadMusica.Music();
-                mainSwing ms = new mainSwing();
+                MainSwing ms = new MainSwing();
                 ms.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 ms.getFrame().pack();
             }
@@ -65,11 +65,11 @@ public class mainSwing {
         return frame;
     }
 
-    public visualizzaDataBase getVisualizzazioneDataBase() {
+    public VisualizzaDataBase getVisualizzazioneDataBase() {
         return visualizzazioneDataBase;
     }
 
-    public creaPartita getCreaPartita() {
+    public CreaPartita getCreaPartita() {
         return creaPartita;
     }
 

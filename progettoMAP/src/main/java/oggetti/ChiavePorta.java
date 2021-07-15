@@ -123,7 +123,7 @@ public class ChiavePorta extends Oggetto {
             if (porta.getTipo() == this.materiale) {
                 porta.setChiusa(false);
                 giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-                out.setText("Rin: 'hai aperto la porta " + porta.getTipo() + "'\n");
+                out.append("Rin: 'hai aperto la porta " + porta.getTipo() + "'\n");
 
                 porta.getStanza().getPortaNord().setChiusa(false);
             }

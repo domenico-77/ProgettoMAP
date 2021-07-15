@@ -191,7 +191,7 @@ public class Mob extends Npc{
                                 out.append(this.nome + "'La prossima volta attento a quello che fai, non puoi metterti contro l'imperatore!'\n");
                             }
                             else{
-                                out.append("Rin: 'Oh no! Ti ha colpito, non potremo resistere ancora per molto, dobbiamo sconfiggerlo il prima possibile altrimenti ci converrebbe scappare...finchè possiamo!' \n");
+                                out.append("Rin: 'Oh no! Ti ha colpito, non potremo resistere ancora per molto,  \n dobbiamo sconfiggerlo il prima possibile altrimenti ci converrebbe scappare...finchè possiamo!' \n");
                             }
                         }
                         else{

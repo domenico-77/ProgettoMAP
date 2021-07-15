@@ -18,14 +18,14 @@ import salvataggio.Deserializzazione;
  *
  * @author domen
  */
-public class menuInizio extends JPanel {
+public class MenuInizio extends JPanel {
 
-    private mainSwing ms;
+    private MainSwing ms;
 
     /**
      * Creates new form menuInizio
      */
-    public menuInizio(mainSwing ms) {
+    public MenuInizio(MainSwing ms) {
         initComponents();
         this.ms = ms;
         this.setBounds(100, 100, 600, 300);
