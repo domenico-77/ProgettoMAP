@@ -100,7 +100,9 @@ public class Deserializzazione {
         });
     }
     
-    public static void visualizzaPartiteSwing(List<DescrizioneGioco> l, JTextArea out){
+    public static void visualizzaPartiteSwing( JTextArea out){
+        List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        out.setText("");
          l.forEach(d -> {
             out.append(d.getNomeGiocatore() + "\n");
         });

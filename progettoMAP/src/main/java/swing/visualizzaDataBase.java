@@ -5,6 +5,7 @@
  */
 package swing;
 
+import Threads.ThreadMusica;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
@@ -36,8 +37,14 @@ public class visualizzaDataBase extends javax.swing.JPanel {
         indietro = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         visualizzaDb = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        muta = new javax.swing.JButton();
+        smuta = new javax.swing.JButton();
 
-        indietro.setText("jButton1");
+        setBackground(new java.awt.Color(0, 0, 0));
+
+        indietro.setBackground(new java.awt.Color(255, 0, 0));
+        indietro.setText("ESCI");
         indietro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 indietroActionPerformed(evt);
@@ -45,31 +52,64 @@ public class visualizzaDataBase extends javax.swing.JPanel {
         });
 
         visualizzaDb.setColumns(20);
+        visualizzaDb.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         visualizzaDb.setRows(5);
         jScrollPane1.setViewportView(visualizzaDb);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("CLASSIFICA DEI GIOCATORI :");
+
+        muta.setBackground(new java.awt.Color(255, 204, 102));
+        muta.setText("muta");
+        muta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mutaActionPerformed(evt);
+            }
+        });
+
+        smuta.setBackground(new java.awt.Color(255, 255, 102));
+        smuta.setText("smuta");
+        smuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smutaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(253, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
+                .addComponent(muta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(smuta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 649, Short.MAX_VALUE)
+                .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(indietro)
-                        .addGap(51, 51, 51))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(274, 274, 274))))
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(indietro)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(muta)
+                    .addComponent(smuta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -77,6 +117,14 @@ public class visualizzaDataBase extends javax.swing.JPanel {
         this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
         this.ms.getFrame().validate();
     }//GEN-LAST:event_indietroActionPerformed
+
+    private void smutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smutaActionPerformed
+        ThreadMusica.setVolumeOn();
+    }//GEN-LAST:event_smutaActionPerformed
+
+    private void mutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutaActionPerformed
+        ThreadMusica.setVolumeOff();
+    }//GEN-LAST:event_mutaActionPerformed
 
     public JTextArea getVisualizzaDb() {
         return visualizzaDb;
@@ -86,7 +134,10 @@ public class visualizzaDataBase extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton indietro;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton muta;
+    private javax.swing.JButton smuta;
     private javax.swing.JTextArea visualizzaDb;
     // End of variables declaration//GEN-END:variables
 }

@@ -97,7 +97,7 @@ public class Db {
     public void visualizza() {
         try {
             Statement stm = this.connessione.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY id");
+            ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY punteggio DESC");
             if (rs.next() == false) {
                 System.out.println("non ci sono partite");
             } else {
@@ -146,7 +146,7 @@ public class Db {
         
         try {
             Statement stm = this.connessione.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY id");
+            ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY punteggio DESC");
             if (rs.next() == false) {
                 stringa = "non ci sono partite";
             } else {

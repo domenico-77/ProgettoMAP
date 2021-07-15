@@ -6,6 +6,7 @@
 package swing;
 
 import DataBase.Db;
+import Threads.ThreadMusica;
 import Threads.ThreadTempo;
 import com.mycompany.progettomap.giochi.Gioco;
 import com.sun.glass.events.KeyEvent;
@@ -46,24 +47,54 @@ public class creaPartita extends javax.swing.JPanel {
         nomePartita = new javax.swing.JTextField();
         confermaNome = new javax.swing.JButton();
         indietro = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        muta = new javax.swing.JButton();
+        smuta = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 0, 0));
+
+        nomePartita.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         nomePartita.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nomePartitaKeyPressed(evt);
             }
         });
 
-        confermaNome.setText("conferma");
+        confermaNome.setBackground(new java.awt.Color(153, 255, 153));
+        confermaNome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        confermaNome.setText("CONFERMA");
         confermaNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confermaNomeActionPerformed(evt);
             }
         });
 
-        indietro.setText("indietro");
+        indietro.setBackground(new java.awt.Color(204, 0, 0));
+        indietro.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        indietro.setText("INDIETRO");
         indietro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 indietroActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Inserire il nome della nuova partita...\n");
+
+        muta.setBackground(new java.awt.Color(255, 204, 102));
+        muta.setText("muta");
+        muta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mutaActionPerformed(evt);
+            }
+        });
+
+        smuta.setBackground(new java.awt.Color(255, 255, 102));
+        smuta.setText("smuta");
+        smuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smutaActionPerformed(evt);
             }
         });
 
@@ -72,29 +103,40 @@ public class creaPartita extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(nomePartita, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(confermaNome)
-                        .addGap(148, 148, 148))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(indietro)
-                        .addGap(156, 156, 156))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nomePartita, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(confermaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(muta)
+                        .addGap(18, 18, 18)
+                        .addComponent(smuta)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(indietro)
-                .addGap(47, 47, 47)
-                .addComponent(nomePartita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(confermaNome)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addGap(252, 252, 252)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(confermaNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(nomePartita, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(muta)
+                    .addComponent(smuta))
+                .addGap(32, 32, 32))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -136,25 +178,27 @@ public class creaPartita extends javax.swing.JPanel {
                     this.ms.getGiocoGui().getVisualizzazioneTesto().setText("C’era una volta un samurai di nome Manji, egli era un samurai fedelissimo al suo credo e nella via della spada." + "\n"
                             + "Per molti anni ha lavorato per un padrone credendo che quello che faceva per lui fosse giusto," + "\n"
                             + "un giorno leggendo dei documenti scoprì che molte delle persone che aveva ucciso erano dei semplici cittadini." + "\n"
-                            + "Il suo padrone era una persona molto avida che per arricchirsi aumentò di molto le tasse e chiunque rifiutasse di pagarle veniva assassinato da Manji." + "\n"
-                            + "Dopo la sconvolgente scoperta, Manji in creca di redenzione dalle sue azioni decide di ribellarsi al suo padrone " + "\n"
-                            + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare ad ucciderlo.\n"
+                            + "Il suo padrone era una persona molto avida che per arricchirsi aumentò di molto le tasse" + "\n"
+                            + "e chiunque rifiutasse di pagarle veniva assassinato da Manji." + "\n"
+                            + "Dopo la sconvolgente scoperta, Manji in cerca di redenzione dalle sue azioni decide di ribellarsi al suo padrone " + "\n"
+                            + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare \n ad ucciderlo.\n"
                             + "Manji uccise più di 100 sottoposti, ma in una battaglia venne sconfitto e catturato." + "\n"
-                            + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva continuamente torturato. " + "\n"
-                            + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare le sue abilità da samurai.\n"
+                            + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva \n continuamente torturato. " + "\n"
+                            + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare \n le sue abilità da samurai.\n"
                             + "La sua cella confinava con la cella di una ragazza di nome Rin, lei era una donna alle servitù del padrone." + "\n"
                             + "I soldati spesso lasciavano la cella di Rin aperta " + "\n"
                             + "in quanto credevano che essendo una donna non fosse capace di creare problemi in quanto non in grado di combattere. \n"
                             + "Manji era un samurai molto astuto , infatti," + "\n"
-                            + "riuscì a capire che la cella era spesso lasciata aperta grazie ai discorsi delle guardie e ai mancati click delle mandate della serratura." + "\n"
+                            + "riuscì a capire che la cella era spesso lasciata aperta grazie ai discorsi delle guardie e ai mancati click delle \n mandate della serratura." + "\n"
                             + "Grazie alla sua astuzia riuscì a fare un accordo con Rin, " + "\n"
                             + "egli chiese di aiutarlo ad evadere facendogli da guida diventando il suo unico modo di vedere l’esterno," + "\n"
                             + "in cambio promise di riuscire a portarli entrambi fuori da quella prigione.\n"
-                            + "Rin accetta l’ accordo e il giorno dopo al ritorno in cella riesce ad ammaliare una delle guardie rubandogli la chiave della cella di Manji." + "\n"
-                            + "La notte stessa durante il cambio delle guardie riesce ad aprire la sua cella e da qui inizia la grande fuga dalla prigione.");
+                            + "Rin accetta l’ accordo e il giorno dopo al ritorno in cella riesce ad ammaliare una delle guardie rubandogli \n la chiave della cella di Manji." + "\n"
+                            + "La notte stessa durante il cambio delle guardie riesce ad aprire la sua cella e da qui inizia \n 'LA GRANDE FUGA DALLA PRIGIONE'");
                     ThreadTempo.Time();
                     this.nomePartita.setText("");
                     this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
+                    this.ms.getGiocoGui().getComando().setText("");
                     this.ms.getFrame().validate();
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,24 +235,25 @@ public class creaPartita extends javax.swing.JPanel {
                         Serializzazione.scriviFile(partita);
                         this.ms.getGiocoGui().setPartita(partita);
                         this.ms.getGiocoGui().getVisualizzazioneTesto().setText("C’era una volta un samurai di nome Manji, egli era un samurai fedelissimo al suo credo e nella via della spada." + "\n"
-                                + "Per molti anni ha lavorato per un padrone credendo che quello che faceva per lui fosse giusto," + "\n"
-                                + "un giorno leggendo dei documenti scoprì che molte delle persone che aveva ucciso erano dei semplici cittadini." + "\n"
-                                + "Il suo padrone era una persona molto avida che per arricchirsi aumentò di molto le tasse e chiunque rifiutasse di pagarle veniva assassinato da Manji." + "\n"
-                                + "Dopo la sconvolgente scoperta, Manji in creca di redenzione dalle sue azioni decide di ribellarsi al suo padrone " + "\n"
-                                + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare ad ucciderlo.\n"
-                                + "Manji uccise più di 100 sottoposti, ma in una battaglia venne sconfitto e catturato." + "\n"
-                                + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva continuamente torturato. " + "\n"
-                                + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare le sue abilità da samurai.\n"
-                                + "La sua cella confinava con la cella di una ragazza di nome Rin, lei era una donna alle servitù del padrone." + "\n"
-                                + "I soldati spesso lasciavano la cella di Rin aperta " + "\n"
-                                + "in quanto credevano che essendo una donna non fosse capace di creare problemi in quanto non in grado di combattere. \n"
-                                + "Manji era un samurai molto astuto , infatti," + "\n"
-                                + "riuscì a capire che la cella era spesso lasciata aperta grazie ai discorsi delle guardie e ai mancati click delle mandate della serratura." + "\n"
-                                + "Grazie alla sua astuzia riuscì a fare un accordo con Rin, " + "\n"
-                                + "egli chiese di aiutarlo ad evadere facendogli da guida diventando il suo unico modo di vedere l’esterno," + "\n"
-                                + "in cambio promise di riuscire a portarli entrambi fuori da quella prigione.\n"
-                                + "Rin accetta l’ accordo e il giorno dopo al ritorno in cella riesce ad ammaliare una delle guardie rubandogli la chiave della cella di Manji." + "\n"
-                                + "La notte stessa durante il cambio delle guardie riesce ad aprire la sua cella e da qui inizia la grande fuga dalla prigione.");
+                            + "Per molti anni ha lavorato per un padrone credendo che quello che faceva per lui fosse giusto," + "\n"
+                            + "un giorno leggendo dei documenti scoprì che molte delle persone che aveva ucciso erano dei semplici cittadini." + "\n"
+                            + "Il suo padrone era una persona molto avida che per arricchirsi aumentò di molto le tasse" + "\n"
+                            + "e chiunque rifiutasse di pagarle veniva assassinato da Manji." + "\n"
+                            + "Dopo la sconvolgente scoperta, Manji in cerca di redenzione dalle sue azioni decide di ribellarsi al suo padrone " + "\n"
+                            + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare \n ad ucciderlo.\n"
+                            + "Manji uccise più di 100 sottoposti, ma in una battaglia venne sconfitto e catturato." + "\n"
+                            + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva \n continuamente torturato. " + "\n"
+                            + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare \n le sue abilità da samurai.\n"
+                            + "La sua cella confinava con la cella di una ragazza di nome Rin, lei era una donna alle servitù del padrone." + "\n"
+                            + "I soldati spesso lasciavano la cella di Rin aperta " + "\n"
+                            + "in quanto credevano che essendo una donna non fosse capace di creare problemi in quanto non in grado di combattere. \n"
+                            + "Manji era un samurai molto astuto , infatti," + "\n"
+                            + "riuscì a capire che la cella era spesso lasciata aperta grazie ai discorsi delle guardie e ai mancati click delle \n mandate della serratura." + "\n"
+                            + "Grazie alla sua astuzia riuscì a fare un accordo con Rin, " + "\n"
+                            + "egli chiese di aiutarlo ad evadere facendogli da guida diventando il suo unico modo di vedere l’esterno," + "\n"
+                            + "in cambio promise di riuscire a portarli entrambi fuori da quella prigione.\n"
+                            + "Rin accetta l’ accordo e il giorno dopo al ritorno in cella riesce ad ammaliare una delle guardie rubandogli \n la chiave della cella di Manji." + "\n"
+                            + "La notte stessa durante il cambio delle guardie riesce ad aprire la sua cella e da qui inizia \n 'LA GRANDE FUGA DALLA PRIGIONE'");
                         ThreadTempo.Time();
                         this.nomePartita.setText("");
                         this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
@@ -221,10 +266,21 @@ public class creaPartita extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_nomePartitaKeyPressed
 
+    private void mutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutaActionPerformed
+        ThreadMusica.setVolumeOn();
+    }//GEN-LAST:event_mutaActionPerformed
+
+    private void smutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smutaActionPerformed
+       ThreadMusica.setVolumeOn();
+    }//GEN-LAST:event_smutaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confermaNome;
     private javax.swing.JButton indietro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton muta;
     private javax.swing.JTextField nomePartita;
+    private javax.swing.JButton smuta;
     // End of variables declaration//GEN-END:variables
 }

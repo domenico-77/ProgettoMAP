@@ -5,11 +5,14 @@
  */
 package swing;
 
+import Threads.ThreadMusica;
 import Threads.ThreadTempo;
 import com.sun.glass.events.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import logicaGioco.DescrizioneGioco;
 
 /**
@@ -40,8 +43,14 @@ public class ContinuaPartita extends javax.swing.JPanel {
         nomePartita = new javax.swing.JTextField();
         invio = new javax.swing.JButton();
         esci = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        muta = new javax.swing.JButton();
+        smuta = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(0, 0, 0));
 
         visualizzaPartiteSalvate.setColumns(20);
+        visualizzaPartiteSalvate.setFont(new java.awt.Font("Monospaced", 0, 16)); // NOI18N
         visualizzaPartiteSalvate.setRows(5);
         jScrollPane1.setViewportView(visualizzaPartiteSalvate);
 
@@ -51,17 +60,42 @@ public class ContinuaPartita extends javax.swing.JPanel {
             }
         });
 
-        invio.setText("Invio");
+        invio.setBackground(new java.awt.Color(102, 255, 102));
+        invio.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        invio.setText("INVIO");
         invio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 invioActionPerformed(evt);
             }
         });
 
-        esci.setText("Esci");
+        esci.setBackground(new java.awt.Color(255, 51, 51));
+        esci.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        esci.setText("ESCI");
         esci.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 esciActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Inserire il nome della partita da continuare:\n");
+
+        muta.setBackground(new java.awt.Color(255, 204, 102));
+        muta.setText("muta");
+        muta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mutaActionPerformed(evt);
+            }
+        });
+
+        smuta.setBackground(new java.awt.Color(255, 255, 102));
+        smuta.setText("smuta");
+        smuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smutaActionPerformed(evt);
             }
         });
 
@@ -70,35 +104,51 @@ public class ContinuaPartita extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(nomePartita)
+                .addContainerGap()
+                .addComponent(muta)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(invio)))
-                .addContainerGap(128, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(esci)
-                .addGap(24, 24, 24))
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nomePartita, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(invio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(194, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(smuta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(esci, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(nomePartita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(invio)
-                .addGap(18, 18, 18)
-                .addComponent(esci)
-                .addContainerGap(45, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(muta)
+                            .addComponent(smuta)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nomePartita, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(invio, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addComponent(esci, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
     private mainSwing ms;
-    private List<DescrizioneGioco> partiteSalvate;
+    private List<DescrizioneGioco> partiteSalvate = new ArrayList();
     private void invioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invioActionPerformed
         String np = this.nomePartita.getText();
         int pos = -1;
@@ -147,6 +197,7 @@ public class ContinuaPartita extends javax.swing.JPanel {
                     DescrizioneGioco partita = partiteSalvate.get(pos);
                     this.ms.getGiocoGui().setPartita(partita);
                     this.ms.getGiocoGui().getVisualizzazioneTesto().setText("Rin: 'Ben tornato, ora ci troviamo nel " + partita.getStanzaCorrente().getNomeStanza() + "'");
+                    this.ms.getGiocoGui().getComando().setText("");
                     ThreadTempo.Time();
                     this.nomePartita.setText("");
                     this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
@@ -170,18 +221,33 @@ public class ContinuaPartita extends javax.swing.JPanel {
         return visualizzaPartiteSalvate;
     }
 
+    public JTextField getNomePartita() {
+        return nomePartita;
+    }
+
     
     private void esciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esciActionPerformed
         this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
         this.ms.getFrame().validate();
     }//GEN-LAST:event_esciActionPerformed
 
+    private void smutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smutaActionPerformed
+         ThreadMusica.setVolumeOn();
+    }//GEN-LAST:event_smutaActionPerformed
+
+    private void mutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutaActionPerformed
+        ThreadMusica.setVolumeOff();
+    }//GEN-LAST:event_mutaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton esci;
     private javax.swing.JButton invio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton muta;
     private javax.swing.JTextField nomePartita;
+    private javax.swing.JButton smuta;
     private javax.swing.JTextArea visualizzaPartiteSalvate;
     // End of variables declaration//GEN-END:variables
 }

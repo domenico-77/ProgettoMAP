@@ -147,7 +147,7 @@ public class Utilita {
     
     public static boolean chiediConfermaSwing(final String richiesta, final String casoAffermativo, final String casoNegativo, JTextArea out, JFrame frame){
         boolean vuole = false;
-        out.append(richiesta + "\n");
+        out.setText(richiesta + "\n");
         boolean error;
         String answer;
 
