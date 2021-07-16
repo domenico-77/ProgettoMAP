@@ -13,7 +13,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import logicaGioco.DescrizioneGioco;
+import gioco.DescrizioneGioco;
 
 /**
  *
@@ -146,10 +146,21 @@ public class ContinuaPartita extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
-    private mainSwing ms;
+    private final mainSwing ms;
     private List<DescrizioneGioco> partiteSalvate = new ArrayList();
+    
     private void invioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invioActionPerformed
-        String np = this.nomePartita.getText();
+       this.continua();
+    }//GEN-LAST:event_invioActionPerformed
+
+    private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+          this.continua();
+        }
+    }//GEN-LAST:event_nomePartitaKeyPressed
+
+    public void continua(){
+           String np = this.nomePartita.getText();
         np = np.toLowerCase();
         int pos = -1;
         if (np.isEmpty()) {
@@ -175,40 +186,7 @@ public class ContinuaPartita extends javax.swing.JPanel {
                 this.ms.getFrame().validate();
             }
         }
-    }//GEN-LAST:event_invioActionPerformed
-
-    private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String np = this.nomePartita.getText();
-            np = np.toLowerCase();
-            int pos = -1;
-            if (np.isEmpty()) {
-                JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
-                this.nomePartita.setText("");
-            } else {
-                for (DescrizioneGioco dg : partiteSalvate) {
-                    if (dg.getNomeGiocatore().equals(np)) {
-                        pos = partiteSalvate.indexOf(dg);
-                    }
-                }
-                if (pos == -1) {
-                    JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
-                    this.nomePartita.setText("");
-                } else {
-                    DescrizioneGioco partita = partiteSalvate.get(pos);
-                    partita.setSospesa(false);
-                    this.ms.getGiocoGui().setPartita(partita);
-                    this.ms.getGiocoGui().getVisualizzazioneTesto().setText("Rin: 'Ben tornato, ora ci troviamo nel " + partita.getStanzaCorrente().getNomeStanza() + "'");
-                    this.ms.getGiocoGui().getComando().setText("");
-                    ThreadTempo.Time();
-                    this.nomePartita.setText("");
-                    this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
-                    this.ms.getFrame().validate();
-                }
-            }
-        }
-    }//GEN-LAST:event_nomePartitaKeyPressed
-
+    }
     public void setPartiteSalvate(List<DescrizioneGioco> partiteSalvate) {
         this.partiteSalvate = partiteSalvate;
     }

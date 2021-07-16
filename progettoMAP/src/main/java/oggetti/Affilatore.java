@@ -8,9 +8,9 @@ package oggetti;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JTextArea;
-import tipi.Giocatore;
-import tipi.Inventario;
-import tipi.stanze.Stanza;
+import giocatore.Giocatore;
+import giocatore.Inventario;
+import stanze.Stanza;
 
 /**
  *
@@ -28,34 +28,9 @@ public class Affilatore extends Oggetto {
         super(nome, alias, PRENDIBILE, USABILITA, TIPO_OGGETTO);
     }
 
-    @Override
-    public void usa(Giocatore giocatore, Stanza stanza) {
-        if (this.usabilita > 0) {
-            Inventario inventario = giocatore.getInventario();
-            Oggetto oggetto = new Spada("Spada", null);
-            if (inventario.contieneOggetto(oggetto)) {
-                List<Oggetto> l = inventario.getInventario();
-                int i = l.indexOf(oggetto);
-                if (l.get(i).getUsabilita() == USABILITA_SPADA) {
-                    System.out.println("Rin: 'L'affilatura di questa spada è al massimo non puoi affilarla'");
-                } else {
-                    l.get(i).setUsabilita(l.get(i).usabilita + 1);
-                    this.usabilita--;
-                    giocatore.incrementaPunteggio(Affilatore.PUNTEGGIO);
-                    System.out.println("Rin: 'Ora che abbiamo affilato la spada, possiamo buttare l'affilatore'");
-                }
-            } else {
-                System.out.println("Rin: 'Non abbiamo una spada da affilare, dobbiamo prima trovarla'");
-            }
-        } else {
-            System.out.println("Non puoi usare questo oggetto");
-        }
-    }
+ 
 
-    @Override
-    public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' un affilatore per lame, puo' servire nel caso in cui la lama di una spada perde usabiita, puo' essre usata una sola volta'");
-    }
+   
 
     public static int getUSABILITA() {
         return USABILITA;

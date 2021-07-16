@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.progettomap.parser;
+package parser;
 
-import tipi.Comando;
+import comandi.Comando;
 import oggetti.Oggetto;
-import tipi.stanze.Porta;
+import stanze.Porta;
 
 
 /**

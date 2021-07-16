@@ -8,9 +8,7 @@ package swing;
 import DataBase.Db;
 import Threads.ThreadMusica;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import salvataggio.Deserializzazione;
 
@@ -20,7 +18,7 @@ import salvataggio.Deserializzazione;
  */
 public class menuInizio extends JPanel {
 
-    private mainSwing ms;
+    private final mainSwing ms;
 
     /**
      * Creates new form menuInizio

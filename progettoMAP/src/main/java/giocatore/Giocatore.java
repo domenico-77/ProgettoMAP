@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipi;
+package giocatore;
 
-import com.mycompany.progettomap.parser.ParserOutput;
+import parser.ParserOutput;
 import java.io.Serializable;
 import java.util.List;
+import comandi.Comando;
 
 /**
  *
