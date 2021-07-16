@@ -23,14 +23,14 @@ import salvataggio.Serializzazione;
  *
  * @author domen
  */
-public class CreaPartita extends javax.swing.JPanel {
+public class creaPartita extends javax.swing.JPanel {
 
     private MainSwing ms;
 
     /**
      * Creates new form creaPartita
      */
-    public CreaPartita(MainSwing ms) {
+    public creaPartita(MainSwing ms) {
         initComponents();
         this.ms = ms;
     }

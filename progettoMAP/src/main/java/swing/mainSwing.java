@@ -18,20 +18,20 @@ import javax.swing.JPanel;
 public class MainSwing {
 
     private final JPanel menuInizio;
-    private final GiocoGui giocoGui;
+    private final giocoGui giocoGui;
     private final JFrame frame = new JFrame();
-    private final VisualizzaDataBase visualizzazioneDataBase;
-    private final CreaPartita creaPartita;
+    private final visualizzaDataBase visualizzazioneDataBase;
+    private final creaPartita creaPartita;
     private final CancellaPartita cancellaPartita;
     private final ContinuaPartita continuaPartita;
 
     public MainSwing() {
         cancellaPartita = new CancellaPartita(this);
         this.continuaPartita = new ContinuaPartita(this);
-        giocoGui = new GiocoGui(this);
-        menuInizio = new MenuInizio(this);
-        visualizzazioneDataBase = new VisualizzaDataBase(this);
-        creaPartita = new CreaPartita(this);
+        giocoGui = new giocoGui(this);
+        menuInizio = new menuInizio(this);
+        visualizzazioneDataBase = new visualizzaDataBase(this);
+        creaPartita = new creaPartita(this);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(this.menuInizio);
         frame.setPreferredSize(new Dimension(970, 700));
@@ -42,7 +42,7 @@ public class MainSwing {
 
     }
 
-    public GiocoGui getGiocoGui() {
+    public giocoGui getGiocoGui() {
         return giocoGui;
     }
 
@@ -65,11 +65,11 @@ public class MainSwing {
         return frame;
     }
 
-    public VisualizzaDataBase getVisualizzazioneDataBase() {
+    public visualizzaDataBase getVisualizzazioneDataBase() {
         return visualizzazioneDataBase;
     }
 
-    public CreaPartita getCreaPartita() {
+    public creaPartita getCreaPartita() {
         return creaPartita;
     }
 

@@ -27,7 +27,7 @@ import tipi.Utilita;
  *
  * @author domen
  */
-public class GiocoGui extends JPanel {
+public class giocoGui extends JPanel {
 
     private DescrizioneGioco partita = null;
     private MainSwing ms;
@@ -36,7 +36,7 @@ public class GiocoGui extends JPanel {
     /**
      * Creates new form giocoGui
      */
-    public GiocoGui(MainSwing ms) {
+    public giocoGui(MainSwing ms) {
         initComponents();
         this.ms = ms;
         this.visualizzazioneTesto.setEditable(false);
@@ -227,7 +227,7 @@ public class GiocoGui extends JPanel {
                     this.partita.setSospesa(true);
                     Serializzazione.scriviFile(this.partita);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             this.visualizzazioneTesto.setText("");
@@ -252,7 +252,7 @@ public class GiocoGui extends JPanel {
             try {
                 Deserializzazione.cancellaPartitaFinita(this.partita);
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
             this.ms.getFrame().validate();
@@ -261,7 +261,7 @@ public class GiocoGui extends JPanel {
             try {
                 Deserializzazione.cancellaPartitaFinita(this.partita);
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
             this.ms.getFrame().validate();
@@ -276,7 +276,7 @@ public class GiocoGui extends JPanel {
                             try {
                                 Deserializzazione.cancellaPartitaFinita(this.partita);
                             } catch (FileNotFoundException ex) {
-                                Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
                             this.ms.getFrame().validate();
@@ -299,7 +299,7 @@ public class GiocoGui extends JPanel {
             try {
                 Deserializzazione.cancellaPartitaFinita(this.partita);
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
             this.ms.getFrame().validate();
@@ -315,7 +315,7 @@ public class GiocoGui extends JPanel {
                             try {
                                 Deserializzazione.cancellaPartitaFinita(this.partita);
                             } catch (FileNotFoundException ex) {
-                                Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
                             this.ms.getFrame().validate();
@@ -341,7 +341,7 @@ public class GiocoGui extends JPanel {
                             try {
                                 Deserializzazione.cancellaPartitaFinita(this.partita);
                             } catch (FileNotFoundException ex) {
-                                Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
                             this.ms.getFrame().validate();
@@ -366,7 +366,7 @@ public class GiocoGui extends JPanel {
                             try {
                                 Deserializzazione.cancellaPartitaFinita(this.partita);
                             } catch (FileNotFoundException ex) {
-                                Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
                             this.ms.getFrame().validate();
@@ -391,7 +391,7 @@ public class GiocoGui extends JPanel {
                             try {
                                 Deserializzazione.cancellaPartitaFinita(this.partita);
                             } catch (FileNotFoundException ex) {
-                                Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
                             this.ms.getFrame().validate();
@@ -418,7 +418,7 @@ public class GiocoGui extends JPanel {
                 try {
                     Deserializzazione.cancellaPartitaFinita(this.partita);
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
                 this.ms.getFrame().validate();
@@ -427,7 +427,7 @@ public class GiocoGui extends JPanel {
                 try {
                     Deserializzazione.cancellaPartitaFinita(this.partita);
                 } catch (FileNotFoundException ex) {
-                    Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
                 this.ms.getFrame().validate();
@@ -442,7 +442,7 @@ public class GiocoGui extends JPanel {
                                 try {
                                     Deserializzazione.cancellaPartitaFinita(this.partita);
                                 } catch (FileNotFoundException ex) {
-                                    Logger.getLogger(GiocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                                 this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
                                 this.ms.getFrame().validate();
