@@ -150,14 +150,7 @@ public class Stanza implements Serializable {
         }
     }
 
-    /*
-    public void prendiOggetto(Oggetto o, Giocatore giocatore){
-        if(this.oggettiStanza.contains(o)){
-            giocatore.getInventario().aggiungiOgetto(this.oggettiStanza.get(this.oggettiStanza.indexOf(o)));
-            this.rimuoviOggetto(o);
-        }
-    }
-     */
+
     
 
     public void DescriviStanza(JTextArea out) {

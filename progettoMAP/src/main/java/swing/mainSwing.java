@@ -32,7 +32,6 @@ public class mainSwing {
         menuInizio = new menuInizio(this);
         visualizzazioneDataBase = new visualizzaDataBase(this);
         creaPartita = new creaPartita(this);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(this.menuInizio);
         frame.setPreferredSize(new Dimension(970, 700));
         frame.setBounds(100, 100, 600, 300);
