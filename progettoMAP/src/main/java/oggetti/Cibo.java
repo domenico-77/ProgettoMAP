@@ -6,6 +6,7 @@
 package oggetti;
 
 import java.util.Set;
+import javax.swing.JTextArea;
 import tipi.Giocatore;
 import tipi.stanze.Stanza;
 
@@ -45,9 +46,8 @@ public class Cibo extends Oggetto {
                 if (this.usabilita == 0) {
                     System.out.println("Rin: 'L'oggetto " + this.nome + " ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
                 }
-            }
-            else if (giocatore.getVitaCorrente() == Giocatore.getVITA_INIZIO()){
-                System.out.println("Rin: 'Sei al pieno delle tue forze, risparmia "+ this.nome+" per comabattimenti futuri");
+            } else if (giocatore.getVitaCorrente() == Giocatore.getVITA_INIZIO()) {
+                System.out.println("Rin: 'Sei al pieno delle tue forze, risparmia " + this.nome + " per comabattimenti futuri");
             }
         } else {
             System.out.println("Rin : 'Non puoi usare questo oggetto poichè ha finito le usabilità'");
@@ -69,6 +69,31 @@ public class Cibo extends Oggetto {
 
     public static TipoOggetto getTIPO_OGGETTO() {
         return TIPO_OGGETTO;
+    }
+
+    @Override
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
+        if (this.usabilita > 0) {
+            if (giocatore.getVitaCorrente() < Giocatore.getVITA_INIZIO()) {
+                giocatore.incrementaVita(this.rigenerazione);
+                giocatore.incrementaPunteggio(Cibo.PUNTEGGIO);
+                out.setText("Rin: 'Hai recuperato della vita'");
+                this.usabilita--;
+                if (this.usabilita == 0) {
+                    out.setText("Rin: 'L'oggetto " + this.nome + " ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+                }
+            } else if (giocatore.getVitaCorrente() == Giocatore.getVITA_INIZIO()) {
+                out.setText("Rin: 'Sei al pieno delle tue forze, risparmia " + this.nome + " per comabattimenti futuri");
+            }
+        } else {
+            out.setText("Rin : 'Non puoi usare questo oggetto poichè ha finito le usabilità'");
+        }
+    }
+
+    @Override
+    public void descrizioneOggetto(JTextArea out) {
+        out.setText("Rin: 'E' " + this.nome + " potrebbe servirci per curare le nostre ferite, hai ancora " + this.usabilita + " utlizzi");
+
     }
 
 }

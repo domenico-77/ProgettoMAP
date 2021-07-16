@@ -6,6 +6,7 @@
 package oggetti;
 
 import java.util.Set;
+import javax.swing.JTextArea;
 import tipi.Giocatore;
 import tipi.stanze.Stanza;
 
@@ -14,6 +15,7 @@ import tipi.stanze.Stanza;
  * @author mtubi
  */
 public class Candela extends Oggetto {
+
     private final static boolean PRENDIBILE = true;
     private final static int DURABILITA = 3;
     private final static TipoOggetto TIPO_OGGETTO = TipoOggetto.candela;
@@ -25,24 +27,23 @@ public class Candela extends Oggetto {
 
     @Override
     public void usa(Giocatore giocatore, Stanza stanza) {
-        if(!stanza.isIlluminata()){
+        if (!stanza.isIlluminata()) {
             //fare il controllo se la candela è nell inventario
             stanza.setIlluminata(true);
             giocatore.incrementaPunteggio(Candela.PUNTEGGIO);
             this.usabilita--;
             System.out.println("Rin: 'Hai illuminato la stanza'");
-            if(this.usabilita == 0){
-                System.out.println("Rin: 'L'oggetto "+this.nome+"ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
+            if (this.usabilita == 0) {
+                System.out.println("Rin: 'L'oggetto " + this.nome + "ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
             }
-        }
-        else{
+        } else {
             System.out.println("Rin: 'La stanza è già illuminata non serve accendere una candela'");
         }
     }
 
     @Override
     public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' una candela, potrebbe servirci per illuminare luoghi buii, ha ancora "+this.usabilita+" di utilizzi");
+        System.out.println("Rin: 'E' una candela, potrebbe servirci per illuminare luoghi buii, ha ancora " + this.usabilita + " di utilizzi");
     }
 
     public static boolean isPRENDIBILE() {
@@ -56,6 +57,27 @@ public class Candela extends Oggetto {
     public static TipoOggetto getTIPO_OGGETTO() {
         return TIPO_OGGETTO;
     }
-    
-    
+
+    @Override
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
+        if (!stanza.isIlluminata()) {
+            //fare il controllo se la candela è nell inventario
+            stanza.setIlluminata(true);
+            giocatore.incrementaPunteggio(Candela.PUNTEGGIO);
+            this.usabilita--;
+            out.append("Rin: 'Hai illuminato la stanza'\n");
+            if (this.usabilita == 0) {
+                out.append("Rin: 'L'oggetto " + this.nome + "ha finito i suoi utilizzi, non puoi usare più questo oggetto'\n");
+            }
+        } else {
+            out.append("Rin: 'La stanza è già illuminata non serve accendere una candela'\n");
+        }
+    }
+
+    @Override
+    public void descrizioneOggetto(JTextArea out) {
+        out.setText("Rin: 'E' una candela, potrebbe servirci per illuminare luoghi buii, ha ancora " + this.usabilita + " di utilizzi");
+
+    }
+
 }

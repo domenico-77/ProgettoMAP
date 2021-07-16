@@ -31,15 +31,18 @@ public class Serializzazione {
                     i = l.indexOf(g);
                 }
             }
- 
+            if(i == -1){
+                l.add(partita);
+            }
+            else{
                 l.set(i, partita);
+            }
             
             db.aggiorna(partita.getId(), partita.getNomeGiocatore(), partita.getGiocatore().getPunteggio(), partita.isFinita(),(partita.getGiocatore().getVitaCorrente() > 0));
             db.chiudiConnessione();
             out.writeObject(l);
             out.close();
             fileOut.close();
-            System.out.println("Dati serializzati salvati in FileSalvataggio.ser");
         } catch (IOException i) {
             i.printStackTrace();
         }

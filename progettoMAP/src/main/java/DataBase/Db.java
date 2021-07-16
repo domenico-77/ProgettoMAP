@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -95,7 +97,7 @@ public class Db {
     public void visualizza() {
         try {
             Statement stm = this.connessione.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY id");
+            ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY punteggio DESC");
             if (rs.next() == false) {
                 System.out.println("non ci sono partite");
             } else {
@@ -137,5 +139,29 @@ public class Db {
         } catch (SQLException ex) {
             System.err.println(ex.getSQLState() + ": " + ex.getMessage());
         }
+    }
+
+    public void visualizzaSwing(JTextArea spazioTesto) {
+        String stringa = "";
+        
+        try {
+            Statement stm = this.connessione.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY punteggio DESC");
+            if (rs.next() == false) {
+                stringa = "non ci sono partite";
+            } else {
+                do {
+                    stringa = stringa + ("IDPARTITA: " + rs.getInt(1) + " NOMEGIOCATORE: " + rs.getString(2) + " DATASALVATAGGIO: " + rs.getDate(3) + " PUNTEGGIO: " + rs.getInt(4) + " GIOCOTERMINATO: " + rs.getBoolean(5) + "  VIVO: " + rs.getBoolean(6) + "\n \n");
+                } while (rs.next());
+            }
+            rs.close();
+            stm.close();
+            spazioTesto.setText(stringa);
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getSQLState() + ": " + ex.getMessage());
+
+        }
+
     }
 }

@@ -16,6 +16,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JTextArea;
 import logicaGioco.DescrizioneGioco;
 import tipi.Utilita;
 
@@ -94,9 +95,28 @@ public class Deserializzazione {
     }
 
     public static void visualizzaPartite(List<DescrizioneGioco> l) {
+        
+        if(!l.isEmpty()){
         l.forEach(d -> {
             System.out.println(d.getNomeGiocatore());
         });
+    }
+        else{
+            System.out.println("Non ci sono partite salvate");
+        }
+    }
+    
+    public static void visualizzaPartiteSwing( JTextArea out){
+        List<DescrizioneGioco> l = Deserializzazione.letturaFile();
+        if(!l.isEmpty()){
+        out.setText("");
+         l.forEach(d -> {
+            out.append(d.getNomeGiocatore() + "\n");
+        });
+        }
+        else{
+            out.append("Non ci sono partite salvate");
+        }
     }
 
     public static void cancellaPartita() throws FileNotFoundException {

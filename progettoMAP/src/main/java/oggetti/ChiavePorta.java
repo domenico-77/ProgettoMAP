@@ -6,6 +6,7 @@
 package oggetti;
 
 import java.util.Set;
+import javax.swing.JTextArea;
 import tipi.Giocatore;
 import tipi.stanze.TipoPorta;
 import tipi.stanze.Porta;
@@ -76,13 +77,13 @@ public class ChiavePorta extends Oggetto {
 
     @Override
     public void descrizioneOggetto() {
-        System.out.print("Rin: ' E' una chiave ");
+        System.out.print("Rin: ' E'  ");
         switch (this.materiale) {
             case oro:
-                System.out.print("d'oro");
+                System.out.print("un totem");
                 break;
             case argento:
-                System.out.print("d'argento");
+                System.out.print("un chiave");
                 break;
         }
 
@@ -105,5 +106,64 @@ public class ChiavePorta extends Oggetto {
         return TIPO_OGGETTO2;
     }
 
-    
+    @Override
+    public void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out) {
+        Porta porta;
+        if (stanza.getPortaNord() != null) {
+            porta = stanza.getPortaNord();
+            if (porta.getTipo() == this.materiale) {
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                porta.setChiusa(false);
+                out.append("Rin: 'hai aperto la porta " + porta.getTipo() + "'\n");
+                porta.getStanza().getPortaSud().setChiusa(false);
+            }
+        }
+        if (stanza.getPortaSud() != null) {
+            porta = stanza.getPortaSud();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                out.append("Rin: 'hai aperto la porta " + porta.getTipo() + "'\n");
+
+                porta.getStanza().getPortaNord().setChiusa(false);
+            }
+        }
+
+        if (stanza.getPortaOvest() != null) {
+            porta = stanza.getPortaOvest();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                out.append("Rin: 'hai aperto la porta " + porta.getTipo() + "'\n");
+
+                porta.getStanza().getPortaEst().setChiusa(false);
+            }
+        }
+        if (stanza.getPortaEst() != null) {
+            porta = stanza.getPortaEst();
+            if (porta.getTipo() == this.materiale) {
+                porta.setChiusa(false);
+                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
+                out.append("Rin : 'hai aperto la porta " + porta.getTipo() + "'\n");
+
+                porta.getStanza().getPortaOvest().setChiusa(false);
+            }
+        }
+    }
+
+    @Override
+    public void descrizioneOggetto(JTextArea out) {
+        out.append("Rin: ' E'  ");
+        switch (this.materiale) {
+            case oro:
+                out.append("un totem");
+                break;
+            case argento:
+                out.append("una chiave");
+                break;
+        }
+
+        out.append(", potrebbe servirici per aprire delle porte'\n");
+    }
+
 }

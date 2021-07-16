@@ -16,6 +16,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 /**
@@ -118,6 +122,8 @@ public class Utilita {
 
         return vuole;
     }
+    
+  
 
     public static boolean cercaParola(String nome, String... alias) {
         boolean contiene = false;
@@ -139,4 +145,40 @@ public class Utilita {
         return contiene;
     }
     
+    public static boolean chiediConfermaSwing(final String richiesta, final String casoAffermativo, final String casoNegativo, JTextArea out, JFrame frame){
+        boolean vuole = false;
+        out.append(richiesta + "\n");
+        boolean error;
+        String answer;
+
+        do {
+            answer = JOptionPane.showInputDialog(frame, "digitare 'si' o 'no'.", null);
+            error = false;
+            if(answer != null){
+                answer = answer.replaceAll(" +", "");
+                switch (answer.toLowerCase()) {
+                    case "si":
+                    case "sÃ¬":
+                        out.append(casoAffermativo + "\n");
+                        vuole = true;
+                        break;
+                    case "no":
+                        out.append(casoNegativo + "\n");
+                        vuole = false;
+                        break;
+                    default:
+                        out.append("Digitare una risposta valida... \n");
+                        error = true;
+                        break;
+                }
+            }
+            else{
+                out.setText("Digitare una risposta valida...\n");
+            }
+            
+        } while (error);
+
+        return vuole;
+    }
+        
 }
