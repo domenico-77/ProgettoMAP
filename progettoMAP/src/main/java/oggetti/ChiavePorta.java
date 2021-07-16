@@ -30,65 +30,9 @@ public class ChiavePorta extends Oggetto {
         this.materiale = materiale;
     }
 
-    @Override
-    public void usa(Giocatore giocatore, Stanza stanza) {
-        Porta porta;
-        if (stanza.getPortaNord() != null) {
-            porta = stanza.getPortaNord();
-            if (porta.getTipo() == this.materiale) {
-                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-                porta.setChiusa(false);
-                System.out.println("Rin: 'hai aperto la porta " + porta.getTipo() + "'");
-                porta.getStanza().getPortaSud().setChiusa(false);
-            }
-        }
-        if (stanza.getPortaSud() != null) {
-            porta = stanza.getPortaSud();
-            if (porta.getTipo() == this.materiale) {
-                porta.setChiusa(false);
-                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-                System.out.println("Rin: 'hai aperto la porta " + porta.getTipo() + "'");
+    
 
-                porta.getStanza().getPortaNord().setChiusa(false);
-            }
-        }
-
-        if (stanza.getPortaOvest() != null) {
-            porta = stanza.getPortaOvest();
-            if (porta.getTipo() == this.materiale) {
-                porta.setChiusa(false);
-                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-                System.out.println("Rin: 'hai aperto la porta " + porta.getTipo() + "'");
-
-                porta.getStanza().getPortaEst().setChiusa(false);
-            }
-        }
-        if (stanza.getPortaEst() != null) {
-            porta = stanza.getPortaEst();
-            if (porta.getTipo() == this.materiale) {
-                porta.setChiusa(false);
-                giocatore.incrementaPunteggio(ChiavePorta.PUNTEGGIO);
-                System.out.println("Rin : 'hai aperto la porta " + porta.getTipo() + "'");
-
-                porta.getStanza().getPortaOvest().setChiusa(false);
-            }
-        }
-    }
-
-    @Override
-    public void descrizioneOggetto() {
-        System.out.print("Rin: ' E'  ");
-        switch (this.materiale) {
-            case oro:
-                System.out.print("un totem");
-                break;
-            case argento:
-                System.out.print("un chiave");
-                break;
-        }
-
-        System.out.println(", potrebbe servirici per aprire delle porte'");
-    }
+  
 
     public static boolean isPRENDIBILE() {
         return PRENDIBILE;

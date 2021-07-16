@@ -157,73 +157,7 @@ public class Stanza implements Serializable {
         }
     }
      */
-    public void DescriviStanza() {
-        if (!this.illuminata) {
-            if (this.npc != null) {
-                System.out.println("Rin:'Non riesco a vedere nulla, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
-            } else {
-                System.out.println("Rin:'Non riesco a vedere nulla e ci sono dei rumori sospetti potrebbe esserci qualcuno, sarebbe meglio illuminare la stanza prima di fare qualcosa o indietreggiare'");
-            }
-
-        } else {
-            System.out.println("Rin:' Sei entrato nella stanza : " + this.nomeStanza + " . ");
-            if (this.portaNord != null) {
-                System.out.println("a nord " + this.portaNord.descriviPorta() + ";  ");
-            }
-            if (this.portaSud != null) {
-                System.out.println("a sud " + this.portaSud.descriviPorta() + "; ");
-            }
-            if (this.portaEst != null) {
-                System.out.println("a est " + this.portaEst.descriviPorta() + "; ");
-            }
-            if (this.portaOvest != null) {
-                System.out.println("a ovest " + this.portaOvest.descriviPorta() + ".");
-            }
-            if (this.oggettiStanza.isEmpty()) {
-                System.out.print("Non c'è niente di interessante in questa stanza.");
-            } else {
-                if (this.oggettiStanza.size() >= 2) {
-                    System.out.print("Sono presenti diversi oggetti sparsi nella stanza: ");
-                    int i = 1;
-                    int size = this.oggettiStanza.size();
-                    for (Oggetto o : this.oggettiStanza) {
-                        if (i < size - 2) {
-                            System.out.print(o.getNome() + ", ");
-                            i++;
-                        } else {
-                            if (i == size - 2) {
-                                System.out.print(o.getNome() + " e ");
-                            } else {
-                                System.out.print(o.getNome());
-                            }
-                        }
-
-                    }
-                } else {
-                    System.out.print("E' prensente solo " + this.oggettiStanza.get(0).getNome());
-                }
-            }
-
-            if (this.npc != null) {
-                if (this.npc.isVivo()) {
-                    if (this.npc.isNeutrale()) {
-                        System.out.print(" Sembra esserci un prigioniero, potremmo provare a parlarci");
-                    } else {
-                        Mob mob = (Mob) this.getNpc();
-                        if (mob.isCorrotto()) {
-                            System.out.print("C'e' la guardia che abbiamo corrotto precedentemente, andiamocene potrebbe cambiare idea");
-                        } else {
-                            System.out.print("Oh no! C'e' una guardia, se non possiamo affrontarlo ci conviene fare l'indispensabile in questa stanza e andarcene!");
-                        }
-                    }
-                } else {
-                    System.out.print("C'e' un cadavere in questa stanza, potrebbe avere qualcosa di utile");
-                }
-            }
-
-            System.out.println("'");
-        }
-    }
+    
 
     public void DescriviStanza(JTextArea out) {
         if (!this.illuminata) {

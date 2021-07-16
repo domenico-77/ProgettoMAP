@@ -26,37 +26,9 @@ public class ChiaveOggettoContenitore extends Oggetto {
         super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
     }
 
-    @Override
-    public void usa(Giocatore giocatore, Stanza stanza) {
-        if (this.usabilita > 0) {
-            List<Oggetto> l = stanza.getOggetiStanza();
-            Oggetto contenitore = new OggettoContenitore("Contenitore", null, null);
-            if (l.contains(contenitore)) {
-                int i = l.indexOf(contenitore);
-                OggettoContenitore contenitoreO = (OggettoContenitore) l.get(i);
-                if (!contenitoreO.isAperto()) {
-                    contenitoreO.setAperto(true);
-                    giocatore.incrementaPunteggio(ChiaveOggettoContenitore.PUNTEGGIO);
-                    this.usabilita--;
-                    contenitore = contenitoreO;
-                    l.set(i, contenitore);
-                    stanza.setOggetiStanza(l);
-                    System.out.println("Rin: 'Hai aperto " + contenitore.getNome() + "'");
-                } else {
-                    System.out.println("Rin: 'E' già aperto'");
-                }
-            } else {
-                System.out.println("Rin: 'Non puoi usare questo oggetto in questa stanza, non è presente uno scrigno da aprire'");
-            }
-        } else {
-            System.out.println("Non puoi usare questo oggetto");
-        }
-    }
+   
 
-    @Override
-    public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' una chiave, potrebbe servirci per aprire uno scrigno, puo' essre utilizzata  per aprire un solo scrigno'");
-    }
+    
 
     public static boolean isPRENDIBILE() {
         return PRENDIBILE;

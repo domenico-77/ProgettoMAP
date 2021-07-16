@@ -6,13 +6,11 @@
 package swing;
 
 import Threads.ThreadMusica;
-import com.mycompany.progettomap.giochi.Gioco;
 import com.mycompany.progettomap.parser.Parser;
 import com.sun.glass.events.KeyEvent;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -30,8 +28,8 @@ import tipi.Utilita;
 public class giocoGui extends JPanel {
 
     private DescrizioneGioco partita = null;
-    private mainSwing ms;
-    private Parser parser = new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
+    private final mainSwing ms;
+    private final Parser parser = new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
 
     /**
      * Creates new form giocoGui
@@ -230,6 +228,65 @@ public class giocoGui extends JPanel {
     }//GEN-LAST:event_esciActionPerformed
 
     private void inviaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inviaActionPerformed
+        this.esegui();
+    }//GEN-LAST:event_inviaActionPerformed
+
+
+    private void nordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nordActionPerformed
+        this.visualizzazioneTesto.setText("");
+        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaNord(), this.visualizzazioneTesto, ms.getFrame());
+        this.partita.controllaFineSwing(visualizzazioneTesto);
+        if (this.partita.isFinita()) {
+            JOptionPane.showMessageDialog(this.ms.getFrame(), "Finalmente i nostri eroi sono riusciti ad uscire dalla prigione\n"
+                    + "una volta fuori, decisero di andare lontano dal villaggio e vivere in campagna insieme\n", "Complimenti hai completato il gioco", JOptionPane.INFORMATION_MESSAGE);
+
+            try {
+                Deserializzazione.cancellaPartitaFinita(this.partita);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
+            this.ms.getFrame().validate();
+        }
+        else if (this.partita.getStanzaCorrente().isIlluminata()) {
+            this.interagisciNpc();
+        }
+        
+    }//GEN-LAST:event_nordActionPerformed
+
+    private void sudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sudActionPerformed
+        this.visualizzazioneTesto.setText("");
+        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaSud(), this.visualizzazioneTesto, ms.getFrame());
+        if (this.partita.getStanzaCorrente().isIlluminata()) {
+           this.interagisciNpc();
+        }
+    }//GEN-LAST:event_sudActionPerformed
+
+    private void ovestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ovestActionPerformed
+        this.visualizzazioneTesto.setText("");
+        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaOvest(), this.visualizzazioneTesto, ms.getFrame());
+        if (this.partita.getStanzaCorrente().isIlluminata()) {
+           this.interagisciNpc();
+        }
+    }//GEN-LAST:event_ovestActionPerformed
+
+    private void estActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estActionPerformed
+        this.visualizzazioneTesto.setText("");
+        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaEst(), this.visualizzazioneTesto, ms.getFrame());
+        if (this.partita.getStanzaCorrente().isIlluminata()) {
+            if (this.partita.getStanzaCorrente().getNpc() != null) {
+                this.interagisciNpc();
+            }
+        }
+    }//GEN-LAST:event_estActionPerformed
+
+    private void comandoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comandoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.esegui();
+        }
+    }//GEN-LAST:event_comandoKeyPressed
+
+    public void esegui(){
         this.visualizzazioneTesto.setText("");
         String comandoTesto = this.comando.getText();
         this.partita.nextMove(parser.parse(comandoTesto, this.partita.getGiocatore().getListaMosse(), this.partita.getStanzaCorrente().getOggetiStanza(), this.partita.getGiocatore().getInventario().getInventario(), this.partita.getStanzaCorrente()), this.visualizzazioneTesto, ms.getFrame());
@@ -258,194 +315,9 @@ public class giocoGui extends JPanel {
             this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
             this.ms.getFrame().validate();
         } else if (this.partita.getStanzaCorrente().isIlluminata()) {
-            if (this.partita.getStanzaCorrente().getNpc() != null) {
-                if (!this.partita.getStanzaCorrente().getNpc().isNeutrale()) {
-                    Mob mob = (Mob) this.partita.getStanzaCorrente().getNpc();
-                    if (mob.isVivo() && !mob.isCorrotto()) {
-                        mob.interagisci(this.partita.getGiocatore(), this.visualizzazioneTesto, this.ms.getFrame());
-                        if (this.partita.getGiocatore().getVitaCorrente() <= 0) {
-                            JOptionPane.showMessageDialog(this.ms.getFrame(), "I nostri eroi non sono riusciti a fuggire dalla prigione", "Hai perso!", JOptionPane.INFORMATION_MESSAGE);
-                            try {
-                                Deserializzazione.cancellaPartitaFinita(this.partita);
-                            } catch (FileNotFoundException ex) {
-                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                            this.ms.getFrame().validate();
-                        }
-                    }
-                }
-            }
+          this.interagisciNpc();
         }
-    }//GEN-LAST:event_inviaActionPerformed
-
-
-    private void nordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nordActionPerformed
-        this.visualizzazioneTesto.setText("");
-        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaNord(), this.visualizzazioneTesto, ms.getFrame());
-        this.partita.controllaFineSwing(visualizzazioneTesto);
-        if (this.partita.isFinita()) {
-            JOptionPane.showMessageDialog(this.ms.getFrame(), "Finalmente i nostri eroi sono riusciti ad uscire dalla prigione\n"
-                    + "una volta fuori, decisero di andare lontano dal villaggio e vivere in campagna insieme\n", "Complimenti hai completato il gioco", JOptionPane.INFORMATION_MESSAGE);
-
-            try {
-                Deserializzazione.cancellaPartitaFinita(this.partita);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-            this.ms.getFrame().validate();
-        }
-        else if (this.partita.getStanzaCorrente().isIlluminata()) {
-            if (this.partita.getStanzaCorrente().getNpc() != null) {
-                if (!this.partita.getStanzaCorrente().getNpc().isNeutrale()) {
-                    Mob mob = (Mob) this.partita.getStanzaCorrente().getNpc();
-                    if (mob.isVivo() && !mob.isCorrotto()) {
-                        mob.interagisci(this.partita.getGiocatore(), this.visualizzazioneTesto, this.ms.getFrame());
-                        if (this.partita.getGiocatore().getVitaCorrente() <= 0) {
-                            JOptionPane.showMessageDialog(this.ms.getFrame(), "I nostri eroi non sono riusciti a fuggire dalla prigione", "Hai perso!", JOptionPane.INFORMATION_MESSAGE);
-                            try {
-                                Deserializzazione.cancellaPartitaFinita(this.partita);
-                            } catch (FileNotFoundException ex) {
-                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                            this.ms.getFrame().validate();
-                        }
-                    }
-                }
-            }
-        }
-        
-    }//GEN-LAST:event_nordActionPerformed
-
-    private void sudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sudActionPerformed
-        this.visualizzazioneTesto.setText("");
-        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaSud(), this.visualizzazioneTesto, ms.getFrame());
-        if (this.partita.getStanzaCorrente().isIlluminata()) {
-            if (this.partita.getStanzaCorrente().getNpc() != null) {
-                if (!this.partita.getStanzaCorrente().getNpc().isNeutrale()) {
-                    Mob mob = (Mob) this.partita.getStanzaCorrente().getNpc();
-                    if (mob.isVivo() && !mob.isCorrotto()) {
-                        mob.interagisci(this.partita.getGiocatore(), this.visualizzazioneTesto, this.ms.getFrame());
-                        if (this.partita.getGiocatore().getVitaCorrente() <= 0) {
-                            JOptionPane.showMessageDialog(this.ms.getFrame(), "I nostri eroi non sono riusciti a fuggire dalla prigione", "Hai perso!", JOptionPane.INFORMATION_MESSAGE);
-                            try {
-                                Deserializzazione.cancellaPartitaFinita(this.partita);
-                            } catch (FileNotFoundException ex) {
-                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                            this.ms.getFrame().validate();
-                        }
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_sudActionPerformed
-
-    private void ovestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ovestActionPerformed
-        this.visualizzazioneTesto.setText("");
-        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaOvest(), this.visualizzazioneTesto, ms.getFrame());
-        if (this.partita.getStanzaCorrente().isIlluminata()) {
-            if (this.partita.getStanzaCorrente().getNpc() != null) {
-                if (!this.partita.getStanzaCorrente().getNpc().isNeutrale()) {
-                    Mob mob = (Mob) this.partita.getStanzaCorrente().getNpc();
-                    if (mob.isVivo() && !mob.isCorrotto()) {
-                        mob.interagisci(this.partita.getGiocatore(), this.visualizzazioneTesto, this.ms.getFrame());
-                        if (this.partita.getGiocatore().getVitaCorrente() <= 0) {
-                            JOptionPane.showMessageDialog(this.ms.getFrame(), "I nostri eroi non sono riusciti a fuggire dalla prigione", "Hai perso!", JOptionPane.INFORMATION_MESSAGE);
-                            try {
-                                Deserializzazione.cancellaPartitaFinita(this.partita);
-                            } catch (FileNotFoundException ex) {
-                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                            this.ms.getFrame().validate();
-                        }
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_ovestActionPerformed
-
-    private void estActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estActionPerformed
-        this.visualizzazioneTesto.setText("");
-        this.partita.spostamento(this.partita.getStanzaCorrente().getPortaEst(), this.visualizzazioneTesto, ms.getFrame());
-        if (this.partita.getStanzaCorrente().isIlluminata()) {
-            if (this.partita.getStanzaCorrente().getNpc() != null) {
-                if (!this.partita.getStanzaCorrente().getNpc().isNeutrale()) {
-                    Mob mob = (Mob) this.partita.getStanzaCorrente().getNpc();
-                    if (mob.isVivo() && !mob.isCorrotto()) {
-                        mob.interagisci(this.partita.getGiocatore(), this.visualizzazioneTesto, this.ms.getFrame());
-                        if (this.partita.getGiocatore().getVitaCorrente() <= 0) {
-                            JOptionPane.showMessageDialog(this.ms.getFrame(), "I nostri eroi non sono riusciti a fuggire dalla prigione", "Hai perso!", JOptionPane.INFORMATION_MESSAGE);
-                            try {
-                                Deserializzazione.cancellaPartitaFinita(this.partita);
-                            } catch (FileNotFoundException ex) {
-                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                            this.ms.getFrame().validate();
-                        }
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_estActionPerformed
-
-    private void comandoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_comandoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            this.visualizzazioneTesto.setText("");
-            String comandoTesto = this.comando.getText();
-            this.partita.nextMove(parser.parse(comandoTesto, this.partita.getGiocatore().getListaMosse(), this.partita.getStanzaCorrente().getOggetiStanza(), this.partita.getGiocatore().getInventario().getInventario(), this.partita.getStanzaCorrente()), this.visualizzazioneTesto, ms.getFrame());
-            this.comando.setText("");
-            if (this.partita.isSospesa()) {
-                this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                this.ms.getFrame().validate();
-            } else if (this.partita.isFinita()) {
-                JOptionPane.showMessageDialog(this.ms.getFrame(), "Finalmente i nostri eroi sono riusciti ad uscire dalla prigione\n"
-                        + "una volta fuori, decisero di andare lontano dal villaggio e vivere in campagna insieme\n", "Complimenti hai completato il gioco", JOptionPane.INFORMATION_MESSAGE);
-
-                try {
-                    Deserializzazione.cancellaPartitaFinita(this.partita);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                this.ms.getFrame().validate();
-            } else if (this.partita.getGiocatore().getVitaCorrente() <= 0) {
-                JOptionPane.showMessageDialog(this.ms.getFrame(), "I nostri eroi non sono riusciti a fuggire dalla prigione", "Hai perso!", JOptionPane.INFORMATION_MESSAGE);
-                try {
-                    Deserializzazione.cancellaPartitaFinita(this.partita);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                this.ms.getFrame().validate();
-            } else if (this.partita.getStanzaCorrente().isIlluminata()) {
-                if (this.partita.getStanzaCorrente().getNpc() != null) {
-                    if (!this.partita.getStanzaCorrente().getNpc().isNeutrale()) {
-                        Mob mob = (Mob) this.partita.getStanzaCorrente().getNpc();
-                        if (mob.isVivo() && !mob.isCorrotto()) {
-                            mob.interagisci(this.partita.getGiocatore(), this.visualizzazioneTesto, this.ms.getFrame());
-                            if (this.partita.getGiocatore().getVitaCorrente() <= 0) {
-                                JOptionPane.showMessageDialog(this.ms.getFrame(), "I nostri eroi non sono riusciti a fuggire dalla prigione", "Hai perso!", JOptionPane.INFORMATION_MESSAGE);
-                                try {
-                                    Deserializzazione.cancellaPartitaFinita(this.partita);
-                                } catch (FileNotFoundException ex) {
-                                    Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                                this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
-                                this.ms.getFrame().validate();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_comandoKeyPressed
-
+    }
     private void mutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutaActionPerformed
          ThreadMusica.setVolumeOff();
     }//GEN-LAST:event_mutaActionPerformed
@@ -466,7 +338,26 @@ public class giocoGui extends JPanel {
         return comando;
     }
     
-
+    public void interagisciNpc(){
+        if (this.partita.getStanzaCorrente().getNpc() != null) {
+                if (!this.partita.getStanzaCorrente().getNpc().isNeutrale()) {
+                    Mob mob = (Mob) this.partita.getStanzaCorrente().getNpc();
+                    if (mob.isVivo() && !mob.isCorrotto()) {
+                        mob.interagisci(this.partita.getGiocatore(), this.visualizzazioneTesto, this.ms.getFrame());
+                        if (this.partita.getGiocatore().getVitaCorrente() <= 0) {
+                            JOptionPane.showMessageDialog(this.ms.getFrame(), "I nostri eroi non sono riusciti a fuggire dalla prigione", "Hai perso!", JOptionPane.INFORMATION_MESSAGE);
+                            try {
+                                Deserializzazione.cancellaPartitaFinita(this.partita);
+                            } catch (FileNotFoundException ex) {
+                                Logger.getLogger(giocoGui.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
+                            this.ms.getFrame().validate();
+                        }
+                    }
+                }
+            }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField comando;

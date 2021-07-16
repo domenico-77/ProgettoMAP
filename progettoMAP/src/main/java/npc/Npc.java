@@ -72,6 +72,6 @@ public abstract class Npc implements Serializable{
     
     public abstract List<String> getAliasNome();
     
-    public abstract void interagisci(Giocatore giocatore);
+    
     public abstract void interagisci(Giocatore giocatore, JTextArea out, JFrame frame);
 }

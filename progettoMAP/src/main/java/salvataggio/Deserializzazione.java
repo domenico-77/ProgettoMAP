@@ -11,14 +11,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import javax.swing.JTextArea;
 import logicaGioco.DescrizioneGioco;
-import tipi.Utilita;
 
 /**
  *
@@ -50,61 +47,9 @@ public class Deserializzazione {
         return l;
     }
 
-    public static DescrizioneGioco caricamento() {
-        List<DescrizioneGioco> l = Deserializzazione.letturaFile();
-        DescrizioneGioco gioco = null;
-        Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        String nome;
-        if (l.isEmpty()) {
+   
 
-            System.out.println("Non ci sono partite salvate, se vuoi giocare creane una nuova");
-
-        } else {
-            System.out.println("NOME DELLE PARTITE SALVATE");
-            Deserializzazione.visualizzaPartite(l);
-            Boolean risposta = false;
-            do {
-                System.out.println("Inserire il nome della partita che si vuole continuare");
-                if (scanner.hasNextLine()) {
-                    nome = scanner.nextLine();
-                    if (nome.isEmpty()) {
-                        System.out.println("Nome inserito non valido, reinserirne un altro");
-                        risposta = true;
-                    } else {
-                        int i = -1;
-                        for (DescrizioneGioco g : l) {
-                            if (g.getNomeGiocatore().equals(nome)) {
-                                i = l.indexOf(g);
-                            }
-                        }
-                        if (i != -1) {
-                            gioco = l.get(i);
-                            risposta = false;
-                        }
-                        if (gioco == null) {
-                            risposta = Utilita.chiediConferma("Partita non trovata, vuoi riprovare?", "inserire nome partita da continuare", "Ritorna al menù di gioco");
-                        }
-
-                    }
-                }
-            } while (risposta);
-        }
-
-        return gioco;
-
-    }
-
-    public static void visualizzaPartite(List<DescrizioneGioco> l) {
-        
-        if(!l.isEmpty()){
-        l.forEach(d -> {
-            System.out.println(d.getNomeGiocatore());
-        });
-    }
-        else{
-            System.out.println("Non ci sono partite salvate");
-        }
-    }
+   
     
     public static void visualizzaPartiteSwing( JTextArea out){
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
@@ -119,51 +64,7 @@ public class Deserializzazione {
         }
     }
 
-    public static void cancellaPartita() throws FileNotFoundException {
-        List<DescrizioneGioco> l = Deserializzazione.letturaFile();
-        if (l.isEmpty()) {
-            System.out.println("Non ci sono partite salvate");
-        } else {
-            Scanner scanner = new Scanner(new InputStreamReader(System.in));
-            String nome;
-            Deserializzazione.visualizzaPartite(l);
-            boolean risposta = false;
-            do {
-                if (scanner.hasNextLine()) {
-                    nome = scanner.nextLine();
-                    if (nome.isEmpty()) {
-                        if (Utilita.chiediConferma("Nome inserito non valido, vuoi riprovare?", "inserisci il nome della partita che vuoi cancellare fra le partite elencate", "ritorno al menu di gioco")) {
-                            risposta = true;
-                        }
-                    } else {
-                        int i = -1;
-                        for (DescrizioneGioco g : l) {
-                            if (g.getNomeGiocatore().equals(nome)) {
-                                i = l.indexOf(g);
-                            }
-                        }
-                        if (i != -1) {
-                            if (Utilita.chiediConferma("Sei sicuro di voler cancellare la pertita " + l.get(i).getNomeGiocatore(), "Cancellazione effettuata", "Annullata la cancellazione della partita " + l.get(i).getNomeGiocatore())) {
-                               Db db = Db.getDb();
-                               db.Cancella(i, nome);
-                               db.chiudiConnessione();
-                                l.remove(i);
-                                Serializzazione.scriviFileLista(l);
-                            }
-                            risposta = false;
-                        } else {
-                            if (Utilita.chiediConferma("Partita non trovate, vuoi  riprovare?", "inserisci il nome della partita che vuoi cancellare fra le partite elencate", "ritorno al menu di gioco")) {
-                                risposta = true;
-                            } else {
-                                risposta = false;
-                            }
-                        }
-                    }
-                }
-            } while (risposta);
-
-        }
-    }
+    
 
     public static void cancellaPartitaFinita(DescrizioneGioco partitaFinita) throws FileNotFoundException {
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();

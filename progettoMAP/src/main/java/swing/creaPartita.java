@@ -25,7 +25,7 @@ import salvataggio.Serializzazione;
  */
 public class creaPartita extends javax.swing.JPanel {
 
-    private mainSwing ms;
+    private final mainSwing ms;
 
     /**
      * Creates new form creaPartita
@@ -152,6 +152,16 @@ public class creaPartita extends javax.swing.JPanel {
 
 
     private void confermaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confermaNomeActionPerformed
+       this.inizia();
+    }//GEN-LAST:event_confermaNomeActionPerformed
+
+    private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.inizia();
+        }      
+    }//GEN-LAST:event_nomePartitaKeyPressed
+
+    public void inizia(){
         List<DescrizioneGioco> l = Deserializzazione.letturaFile();
         Db db = Db.getDb();
         boolean isExiting = false;
@@ -207,69 +217,8 @@ public class creaPartita extends javax.swing.JPanel {
                 }
             }
         }
-
-
-    }//GEN-LAST:event_confermaNomeActionPerformed
-
-    private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            List<DescrizioneGioco> l = Deserializzazione.letturaFile();
-            Db db = Db.getDb();
-            boolean isExiting = false;
-            String nome = this.nomePartita.getText();
-            nome = nome.toLowerCase();
-
-            if (nome.isEmpty()) {
-                JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
-                this.nomePartita.setText("");
-            } else {
-                for (DescrizioneGioco g : l) {
-                    if (g.getNomeGiocatore().equals(nome)) {
-                        isExiting = true;
-                    }
-                }
-                if (isExiting) {
-                    JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
-                    this.nomePartita.setText("");
-                } else {
-                    DescrizioneGioco partita = new Gioco(nome, db.inserisci(nome, 0, false, true));
-                    partita.inizializza();
-                    db.chiudiConnessione();
-                    try {
-                        Serializzazione.scriviFile(partita);
-                        this.ms.getGiocoGui().setPartita(partita);
-                        this.ms.getGiocoGui().getVisualizzazioneTesto().setText("C’era una volta un samurai di nome Manji, egli era un samurai fedelissimo al suo credo e nella via della spada." + "\n"
-                                + "Per molti anni ha lavorato per un padrone credendo che quello che faceva per lui fosse giusto," + "\n"
-                                + "un giorno leggendo dei documenti scoprì che molte delle persone che aveva ucciso erano dei semplici cittadini." + "\n"
-                                + "Il suo padrone era una persona molto avida che per arricchirsi aumentò di molto le tasse" + "\n"
-                                + "e chiunque rifiutasse di pagarle veniva assassinato da Manji." + "\n"
-                                + "Dopo la sconvolgente scoperta, Manji in cerca di redenzione dalle sue azioni decide di ribellarsi al suo padrone " + "\n"
-                                + "cercando di liberare il territorio controllato da esso uccidendo quanti più samurai possibili in modo da arrivare \n ad ucciderlo.\n"
-                                + "Manji uccise più di 100 sottoposti, ma in una battaglia venne sconfitto e catturato." + "\n"
-                                + "Il padrone per vendetta decise di non ucciderlo ma di tenerlo in prigione nei sotteranei più profondi dove veniva \n continuamente torturato. " + "\n"
-                                + "Per evitare che Manji scappasse, il suo vecchio padrone gli cavò entrambi gli occhi così da impedirgli di usare \n le sue abilità da samurai.\n"
-                                + "La sua cella confinava con la cella di una ragazza di nome Rin, lei era una donna alle servitù del padrone." + "\n"
-                                + "I soldati spesso lasciavano la cella di Rin aperta " + "\n"
-                                + "in quanto credevano che essendo una donna non fosse capace di creare problemi in quanto non in grado di combattere. \n"
-                                + "Manji era un samurai molto astuto , infatti," + "\n"
-                                + "riuscì a capire che la cella era spesso lasciata aperta grazie ai discorsi delle guardie e ai mancati click delle \n mandate della serratura." + "\n"
-                                + "Grazie alla sua astuzia riuscì a fare un accordo con Rin, " + "\n"
-                                + "egli chiese di aiutarlo ad evadere facendogli da guida diventando il suo unico modo di vedere l’esterno," + "\n"
-                                + "in cambio promise di riuscire a portarli entrambi fuori da quella prigione.\n"
-                                + "Rin accetta l’ accordo e il giorno dopo al ritorno in cella riesce ad ammaliare una delle guardie rubandogli \n la chiave della cella di Manji." + "\n"
-                                + "La notte stessa durante il cambio delle guardie riesce ad aprire la sua cella e da qui inizia \n 'LA GRANDE FUGA DALLA PRIGIONE'");
-                        ThreadTempo.Time();
-                        this.nomePartita.setText("");
-                        this.ms.getFrame().setContentPane(this.ms.getGiocoGui());
-                        this.ms.getFrame().validate();
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Gioco.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_nomePartitaKeyPressed
-
+    }
+    
     private void mutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutaActionPerformed
         ThreadMusica.setVolumeOff();
     }//GEN-LAST:event_mutaActionPerformed

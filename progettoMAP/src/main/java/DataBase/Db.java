@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 /**
@@ -94,27 +93,7 @@ public class Db {
         }
     }
 
-    public void visualizza() {
-        try {
-            Statement stm = this.connessione.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM Dati ORDER BY punteggio DESC");
-            if (rs.next() == false) {
-                System.out.println("non ci sono partite");
-            } else {
-
-                System.out.println("IDPARTITA        NOMEGIOCATORE        DATASALVATAGGIO        PUNTEGGIO       GIOCOTERMINATO       VIVO    ");
-                do {
-                    System.out.println("   " + rs.getInt(1) + "                 " + rs.getString(2) + "               " + rs.getDate(3) + "               " + rs.getInt(4) + "               " + rs.getBoolean(5) + "                  " + rs.getBoolean(6));
-                } while (rs.next());
-            }
-            rs.close();
-            stm.close();
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getSQLState() + ": " + ex.getMessage());
-
-        }
-    }
+    
 
     public void chiudiConnessione() {
         try {

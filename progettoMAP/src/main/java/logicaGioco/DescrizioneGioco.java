@@ -10,10 +10,8 @@
 package logicaGioco;
 
 import com.mycompany.progettomap.parser.ParserOutput;
-import java.io.FileNotFoundException;
 import java.util.List;
 import tipi.stanze.Stanza;
-import java.io.PrintStream;
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -127,17 +125,15 @@ public abstract class DescrizioneGioco implements Serializable {
         this.giocatore = giocatore;
     }
 
-    public abstract void iniziaPartita() throws FileNotFoundException;
+    
 
-    public abstract void continua() throws FileNotFoundException;
-
-    public abstract void nextMove(ParserOutput p, PrintStream out);
+   
     
     public abstract void nextMove(ParserOutput p, JTextArea out, JFrame frame);
     
     public abstract void spostamento(Porta porta, JTextArea out, JFrame frame);
     
-    public abstract void spostamento(Porta porta, PrintStream out);
+    
      public abstract void controllaFineSwing(JTextArea out);
 
 }

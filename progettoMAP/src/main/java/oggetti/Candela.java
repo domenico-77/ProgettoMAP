@@ -25,26 +25,9 @@ public class Candela extends Oggetto {
         super(nome, alias, PRENDIBILE, DURABILITA, TIPO_OGGETTO);
     }
 
-    @Override
-    public void usa(Giocatore giocatore, Stanza stanza) {
-        if (!stanza.isIlluminata()) {
-            //fare il controllo se la candela è nell inventario
-            stanza.setIlluminata(true);
-            giocatore.incrementaPunteggio(Candela.PUNTEGGIO);
-            this.usabilita--;
-            System.out.println("Rin: 'Hai illuminato la stanza'");
-            if (this.usabilita == 0) {
-                System.out.println("Rin: 'L'oggetto " + this.nome + "ha finito i suoi utilizzi, non puoi usare più questo oggetto'");
-            }
-        } else {
-            System.out.println("Rin: 'La stanza è già illuminata non serve accendere una candela'");
-        }
-    }
+    
 
-    @Override
-    public void descrizioneOggetto() {
-        System.out.println("Rin: 'E' una candela, potrebbe servirci per illuminare luoghi buii, ha ancora " + this.usabilita + " di utilizzi");
-    }
+    
 
     public static boolean isPRENDIBILE() {
         return PRENDIBILE;

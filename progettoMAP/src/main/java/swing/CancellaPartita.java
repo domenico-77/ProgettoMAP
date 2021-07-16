@@ -7,7 +7,6 @@ package swing;
 
 import DataBase.Db;
 import Threads.ThreadMusica;
-import Threads.ThreadTempo;
 import com.sun.glass.events.KeyEvent;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import javax.swing.JTextField;
 import logicaGioco.DescrizioneGioco;
 import salvataggio.Deserializzazione;
 import salvataggio.Serializzazione;
-import tipi.Utilita;
 
 /**
  *
@@ -37,7 +35,7 @@ public class CancellaPartita extends javax.swing.JPanel {
         this.visualizzaPartite.setEditable(false);
     }
 
-    private mainSwing ms;
+    private final mainSwing ms;
     private List<DescrizioneGioco> partiteSalvate = new ArrayList();
 
     /**
@@ -154,7 +152,17 @@ public class CancellaPartita extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
-        String np = this.nomePartita.getText();
+        this.cancellaPartita();
+    }//GEN-LAST:event_cancellaActionPerformed
+
+    private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.cancellaPartita();
+        }
+    }//GEN-LAST:event_nomePartitaKeyPressed
+
+    public void cancellaPartita() {
+       String np = this.nomePartita.getText();
         np = np.toLowerCase();
         int pos = -1;
         if (np.isEmpty()) {
@@ -176,18 +184,23 @@ public class CancellaPartita extends javax.swing.JPanel {
                 do {
                     rispostaCorretta = false;
                     risposta = JOptionPane.showInputDialog(this.ms.getFrame(), "Sei sicuro di voler cancellare la partita digitare 'si' o 'no'.", null);
-                    risposta = risposta.toLowerCase();
-                    switch (risposta) {
-                        case "si":
-                        case "sÃ¬":
-                            rispostaCorretta = true;
-                            break;
-                        case "no":
-                            rispostaCorretta = true;
-                            break;
-                        default:
-                            rispostaCorretta = false;
+                    if (risposta != null) {
+                        risposta = risposta.toLowerCase();
+                        switch (risposta) {
+                            case "si":
+                            case "sÃ¬":
+                                rispostaCorretta = false;
+                                break;
+                            case "no":
+                                rispostaCorretta = false;
+                                break;
+                            default:
+                                rispostaCorretta = true;
 
+                        }
+                    }
+                    else{
+                        rispostaCorretta = true;
                     }
                 } while (rispostaCorretta);
                 if (risposta.equals("si") || risposta.equals("sÃ¬")) {
@@ -197,69 +210,15 @@ public class CancellaPartita extends javax.swing.JPanel {
                     this.partiteSalvate.remove(pos);
                     try {
                         Serializzazione.scriviFileLista(this.partiteSalvate);
-                    } catch (FileNotFoundException ex) {
-                        Logger.getLogger(CancellaPartita.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_cancellaActionPerformed
-
-    private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            String np = this.nomePartita.getText();
-            np = np.toLowerCase();
-        int pos = -1;
-        if (np.isEmpty()) {
-            JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
-            this.nomePartita.setText("");
-        } else {
-            for (DescrizioneGioco dg : partiteSalvate) {
-                if (dg.getNomeGiocatore().equals(np)) {
-                    pos = partiteSalvate.indexOf(dg);
-                }
-            }
-            if (pos == -1) {
-                JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
-                this.nomePartita.setText("");
-            } else {
-                boolean rispostaCorretta = false;
-                DescrizioneGioco partita = partiteSalvate.get(pos);
-                String risposta = "";
-                do {
-                    rispostaCorretta = false;
-                    risposta = JOptionPane.showInputDialog(this.ms.getFrame(), "Sei sicuro di voler cancellare la partita digitare 'si' o 'no'.", null);
-                    risposta = risposta.toLowerCase();
-                    switch (risposta) {
-                        case "si":
-                        case "sÃ¬":
-                            rispostaCorretta = true;
-                            break;
-                        case "no":
-                            rispostaCorretta = true;
-                            break;
-                        default:
-                            rispostaCorretta = false;
-
-                    }
-                } while (!rispostaCorretta);
-                if (risposta.equals("si") || risposta.equals("sÃ¬")) {
-                    Db db = Db.getDb();
-                    db.Cancella(partita.getId(),partita.getNomeGiocatore());    
-                    db.chiudiConnessione();
-                    this.partiteSalvate.remove(pos);
-                    this.nomePartita.setText("");
-                    try {
-                        Serializzazione.scriviFileLista(this.partiteSalvate);
                         Deserializzazione.visualizzaPartiteSwing(visualizzaPartite);
+                        this.nomePartita.setText("");
                     } catch (FileNotFoundException ex) {
                         Logger.getLogger(CancellaPartita.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
         }
-        }
-    }//GEN-LAST:event_nomePartitaKeyPressed
+    }
 
     private void indietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_indietroActionPerformed
         this.ms.getFrame().setContentPane(this.ms.getMenuInizio());
@@ -286,12 +245,10 @@ public class CancellaPartita extends javax.swing.JPanel {
         return nomePartita;
     }
 
-    
     public List<DescrizioneGioco> getPartiteSalvate() {
         return partiteSalvate;
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancella;
