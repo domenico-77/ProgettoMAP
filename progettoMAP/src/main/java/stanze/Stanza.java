@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipi.stanze;
+package stanze;
 
+import stanze.Porta;
 import java.io.Serializable;
 import oggetti.Oggetto;
 import java.util.List;

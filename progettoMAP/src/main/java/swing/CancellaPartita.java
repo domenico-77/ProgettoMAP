@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import logicaGioco.DescrizioneGioco;
+import gioco.DescrizioneGioco;
 import salvataggio.Deserializzazione;
 import salvataggio.Serializzazione;
 

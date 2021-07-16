@@ -8,14 +8,14 @@ package swing;
 import DataBase.Db;
 import Threads.ThreadMusica;
 import Threads.ThreadTempo;
-import com.mycompany.progettomap.giochi.Gioco;
+import gioco.Gioco;
 import com.sun.glass.events.KeyEvent;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import logicaGioco.DescrizioneGioco;
+import gioco.DescrizioneGioco;
 import salvataggio.Deserializzazione;
 import salvataggio.Serializzazione;
 

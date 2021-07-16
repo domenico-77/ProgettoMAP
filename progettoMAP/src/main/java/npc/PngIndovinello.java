@@ -12,8 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import oggetti.Oggetto;
-import tipi.Giocatore;
-import tipi.Utilita;
+import giocatore.Giocatore;
+import utilita.Utilita;
 
 /**
  *
@@ -111,8 +111,8 @@ public class PngIndovinello extends Npc implements Serializable {
                     out.append("b." + this.rispostaB + "\n");
                     out.append("c." + this.rispostaC + "\n");
                     risposta = JOptionPane.showInputDialog(frame, "digitare 'a' o 'b' o 'c'.", null);
-                    risposta = risposta.toLowerCase();
                     if (risposta != null) {
+                        risposta = risposta.toLowerCase();
                         switch (risposta) {
                             case RISPOSTA_A:
                                 if (risposta.equals(this.rispostaEsatta)) {

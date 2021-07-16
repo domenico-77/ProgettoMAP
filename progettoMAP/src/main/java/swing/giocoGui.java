@@ -6,7 +6,7 @@
 package swing;
 
 import Threads.ThreadMusica;
-import com.mycompany.progettomap.parser.Parser;
+import parser.Parser;
 import com.sun.glass.events.KeyEvent;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import logicaGioco.DescrizioneGioco;
+import gioco.DescrizioneGioco;
 import npc.Mob;
 import salvataggio.Deserializzazione;
 import salvataggio.Serializzazione;
-import tipi.Utilita;
+import utilita.Utilita;
 
 /**
  *

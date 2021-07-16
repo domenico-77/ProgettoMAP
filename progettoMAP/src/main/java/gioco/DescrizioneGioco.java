@@ -7,11 +7,11 @@
  *
  * @author Acer
  */
-package logicaGioco;
+package gioco;
 
-import com.mycompany.progettomap.parser.ParserOutput;
+import parser.ParserOutput;
 import java.util.List;
-import tipi.stanze.Stanza;
+import stanze.Stanza;
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ import java.util.Objects;
 import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
-import tipi.Giocatore;
-import tipi.stanze.Porta;
+import giocatore.Giocatore;
+import stanze.Porta;
 
 /**
  *

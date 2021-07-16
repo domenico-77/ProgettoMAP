@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipi;
+package giocatore;
 
+import giocatore.Giocatore;
 import java.io.Serializable;
-import tipi.stanze.Stanza;
+import stanze.Stanza;
 import oggetti.Oggetto;
 import java.util.ArrayList;
 import java.util.List;

@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.progettomap.giochi;
+package gioco;
 
 /**
  *
  * @author Acer
  */
-import logicaGioco.DescrizioneGioco;
-import com.mycompany.progettomap.parser.ParserOutput;
-import tipi.Comando;
-import tipi.stanze.Stanza;
-import tipi.TipoComando;
+import parser.ParserOutput;
+import comandi.Comando;
+import stanze.Stanza;
+import comandi.TipoComando;
 import java.util.ArrayList;
 import npc.PngIndovinello;
 import npc.PngScambio;
@@ -32,12 +31,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
-import menu.Help;
 import npc.Mob;
-import tipi.Giocatore;
-import tipi.stanze.Porta;
-import tipi.stanze.TipoPorta;
-import tipi.Utilita;
+import giocatore.Giocatore;
+import stanze.Porta;
+import stanze.TipoPorta;
+import utilita.Utilita;
 
 /**
  *
@@ -141,7 +139,7 @@ public class Gioco extends DescrizioneGioco {
         st2.setPortaSud(new Porta(TipoPorta.normale, st3, false));
         this.stanze.add(st3);
         //stanza 6
-        st1 = new Stanza("tesoreria", true, null, null, null, null, Utilita.creaListaOggetti(), new PngIndovinello("Alphonse", this.creaChiave(), "Spesso racconto una storia, ma non chiedo alcun soldo. Ti intrattengo tutta la notte, ma ahime', non ti ricorderai di me. Cosa sono?", "un sogno", "un libro", "una musica", "a"));
+        st1 = new Stanza("tesoreria", true, null, null, null, null, Utilita.creaListaOggetti(), new PngIndovinello("Alphonse", this.creaChiave(), "Spesso racconto una storia, ma non chiedo alcun soldo. \n Ti intrattengo tutta la notte, ma ahime', non ti ricorderai di me. \n Cosa sono?", "un sogno", "un libro", "una musica", "a"));
         st2.setPortaEst(new Porta(TipoPorta.normale, st1, false));
         st1.setPortaOvest(new Porta(TipoPorta.normale, st2, false));
         //stanza 7
@@ -166,7 +164,7 @@ public class Gioco extends DescrizioneGioco {
         st1.setPortaSud(new Porta(TipoPorta.oro, st2, true));
         this.stanze.add(st2);
         //stanza 11
-        st2 = new Stanza("cella 3", true, null, null, null, null, Utilita.creaListaOggetti(this.creaCibo()), new PngIndovinello("Roy Mustung", this.creaGrimaldello(), "Raramente mi toccano, ma spesso mi frenano. Se hai arguzia, mi userai bene, cosa sono?", "intelligenza", "la lingua", "una spada", "b"));
+        st2 = new Stanza("cella 3", true, null, null, null, null, Utilita.creaListaOggetti(this.creaCibo()), new PngIndovinello("Roy Mustung", this.creaGrimaldello(), "Raramente mi toccano, ma spesso mi frenano. \n Se hai arguzia, mi userai bene, \n cosa sono?", "intelligenza", "la lingua", "una spada", "b"));
         st1.setPortaNord(new Porta(TipoPorta.oro, st2, true));
         st2.setPortaSud(new Porta(TipoPorta.oro, st1, true));
         this.stanze.add(st1);
@@ -195,7 +193,7 @@ public class Gioco extends DescrizioneGioco {
         st3.setPortaSud(new Porta(TipoPorta.normale, st2, false));
         this.stanze.add(st2);
         //stanza 16
-        st1 = new Stanza("tesoreria", false, null, null, null, null, Utilita.creaListaOggetti(), new PngIndovinello("Kise", this.creaTotem(), "Ho mari senza acqua, ho coste senza sabbia, villaggi senza persone e montagne senza terra, cosa sono?", "un deserto", "la luna", "una mappa", "c"));
+        st1 = new Stanza("tesoreria", false, null, null, null, null, Utilita.creaListaOggetti(), new PngIndovinello("Kise", this.creaTotem(), "Ho mari senza acqua, ho coste senza sabbia, \n villaggi senza persone e montagne senza terra,\n cosa sono?", "un deserto", "la luna", "una mappa", "c"));
         st3.setPortaNord(new Porta(TipoPorta.argento, st1, true));
         st1.setPortaSud(new Porta(TipoPorta.argento, st3, true));
         this.stanze.add(st3);

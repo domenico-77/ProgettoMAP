@@ -8,9 +8,9 @@ package oggetti;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JTextArea;
-import tipi.Giocatore;
-import tipi.Inventario;
-import tipi.stanze.Stanza;
+import giocatore.Giocatore;
+import giocatore.Inventario;
+import stanze.Stanza;
 
 /**
  *

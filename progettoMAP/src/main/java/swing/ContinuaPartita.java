@@ -13,7 +13,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import logicaGioco.DescrizioneGioco;
+import gioco.DescrizioneGioco;
 
 /**
  *

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipi;
+package utilita;
 
 import oggetti.Oggetto;
 import java.io.BufferedReader;
@@ -17,6 +17,7 @@ import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import comandi.Comando;
 
 
 /**

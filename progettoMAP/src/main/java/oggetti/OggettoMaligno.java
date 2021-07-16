@@ -8,8 +8,8 @@ package oggetti;
 import java.io.Serializable;
 import java.util.Set;
 import javax.swing.JTextArea;
-import tipi.Giocatore;
-import tipi.stanze.Stanza;
+import giocatore.Giocatore;
+import stanze.Stanza;
 
 /**
  *
