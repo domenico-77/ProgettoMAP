@@ -126,7 +126,7 @@ public class menuInizio extends JPanel {
         });
 
         muta.setBackground(new java.awt.Color(255, 204, 102));
-        muta.setText("muta");
+        muta.setText("MUTE");
         muta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mutaActionPerformed(evt);
@@ -134,7 +134,7 @@ public class menuInizio extends JPanel {
         });
 
         smuta.setBackground(new java.awt.Color(255, 255, 102));
-        smuta.setText("smuta");
+        smuta.setText("UNMUTE");
         smuta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smutaActionPerformed(evt);
@@ -180,10 +180,10 @@ public class menuInizio extends JPanel {
                 .addComponent(DataBase)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(esci)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(muta)
-                    .addComponent(smuta))
+                    .addComponent(muta, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(smuta, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents

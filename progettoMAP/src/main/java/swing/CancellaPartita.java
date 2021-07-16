@@ -6,6 +6,7 @@
 package swing;
 
 import DataBase.Db;
+import Threads.ThreadMusica;
 import Threads.ThreadTempo;
 import com.sun.glass.events.KeyEvent;
 import java.io.FileNotFoundException;
@@ -54,6 +55,8 @@ public class CancellaPartita extends javax.swing.JPanel {
         indietro = new javax.swing.JButton();
         nomePartita = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        muta = new javax.swing.JButton();
+        smuta = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
 
@@ -88,6 +91,22 @@ public class CancellaPartita extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("INSERIRE LA PARTITA DA CANCELLARE :");
 
+        muta.setBackground(new java.awt.Color(255, 204, 51));
+        muta.setText("MUTE\n");
+        muta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mutaActionPerformed(evt);
+            }
+        });
+
+        smuta.setBackground(new java.awt.Color(255, 255, 51));
+        smuta.setText("UNMUTE");
+        smuta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smutaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,21 +114,24 @@ public class CancellaPartita extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(110, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nomePartita, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(cancella, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(155, 155, 155))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))))
+                                .addComponent(nomePartita, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(cancella, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(155, 155, 155))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(muta)
+                .addGap(18, 18, 18)
+                .addComponent(smuta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,13 +145,17 @@ public class CancellaPartita extends javax.swing.JPanel {
                     .addComponent(cancella, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(nomePartita, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
                 .addGap(76, 76, 76)
-                .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(muta, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(indietro, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(smuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancellaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancellaActionPerformed
         String np = this.nomePartita.getText();
+        np = np.toLowerCase();
         int pos = -1;
         if (np.isEmpty()) {
             JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -182,6 +208,7 @@ public class CancellaPartita extends javax.swing.JPanel {
     private void nomePartitaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomePartitaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
             String np = this.nomePartita.getText();
+            np = np.toLowerCase();
         int pos = -1;
         if (np.isEmpty()) {
             JOptionPane.showMessageDialog(this.ms.getFrame(), "Nome non valido", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -239,6 +266,14 @@ public class CancellaPartita extends javax.swing.JPanel {
         this.ms.getFrame().validate();
     }//GEN-LAST:event_indietroActionPerformed
 
+    private void mutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mutaActionPerformed
+        ThreadMusica.setVolumeOff();
+    }//GEN-LAST:event_mutaActionPerformed
+
+    private void smutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smutaActionPerformed
+        ThreadMusica.setVolumeOn();
+    }//GEN-LAST:event_smutaActionPerformed
+
     public void setPartiteSalvate(List<DescrizioneGioco> partiteSalvate) {
         this.partiteSalvate = partiteSalvate;
     }
@@ -263,7 +298,9 @@ public class CancellaPartita extends javax.swing.JPanel {
     private javax.swing.JButton indietro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton muta;
     private javax.swing.JTextField nomePartita;
+    private javax.swing.JButton smuta;
     private javax.swing.JTextArea visualizzaPartite;
     // End of variables declaration//GEN-END:variables
 }

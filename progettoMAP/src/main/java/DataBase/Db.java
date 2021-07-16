@@ -150,10 +150,8 @@ public class Db {
             if (rs.next() == false) {
                 stringa = "non ci sono partite";
             } else {
-
-                stringa = "IDPARTITA        NOMEGIOCATORE        DATASALVATAGGIO        PUNTEGGIO       GIOCOTERMINATO       VIVO     \n";
                 do {
-                    stringa = stringa + ("   " + rs.getInt(1) + "                 " + rs.getString(2) + "               " + rs.getDate(3) + "               " + rs.getInt(4) + "               " + rs.getBoolean(5) + "                  " + rs.getBoolean(6) + "\n");
+                    stringa = stringa + ("IDPARTITA: " + rs.getInt(1) + " NOMEGIOCATORE: " + rs.getString(2) + " DATASALVATAGGIO: " + rs.getDate(3) + " PUNTEGGIO: " + rs.getInt(4) + " GIOCOTERMINATO: " + rs.getBoolean(5) + "  VIVO: " + rs.getBoolean(6) + "\n \n");
                 } while (rs.next());
             }
             rs.close();

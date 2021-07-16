@@ -53,22 +53,21 @@ public class Help {
     }
     
     public static void stampaHelpPartitaSwing(JTextArea out){
-        out.append("\n");
-        out.append("+------------------ HELP ------------------+");
+        out.append("+------------------ HELP ------------------+\n");
         out.append("In questa avventura potrai digitare diversi comandi per interagire con l'ambiente di gioco:\n");
-        out.append("\n");
         out.append("- 'osserva' per chiedere a Rin di descriverti la stanza\n");
         out.append("- 'osserva' + il nome di un oggetto, per chiedere a Rin di descrivere l'oggetto \n");
-        out.append("\n");
         out.append("- nord, 'sud', 'est' e 'ovest' per spostarti da una stanza all'altra\n");
         out.append("N.B.\n");
         out.append("Non sempre sarà possibile andare in qualsiasi direzione...attento alle porte chiuse...e sopratutto ai muri!!!\n");
-        out.append("\n");
         out.append("'prendi' + il nome dell'oggeto da raccogliere, per metterlo nel tuo inventario \n");
-        out.append("\n");
         out.append("Ci sono altri comandi tutti da scoprire, quando hai un oggetto pensa a cosa potresti farci\n");
-        out.append("\n");
         out.append("Per salvare basterà digitare il comando 'salva'\n");
+        out.append("Ci sono anche dei bottoni utili per facilitare il gioco \n");
+        out.append("- I bottoni 'nord', 'sud', 'ovest' e 'est' servono per eseguire i comandi di spostamento, senza scriverli ogni volta \n");
+        out.append("- I bottoni 'muta' e 'smuta', servono per togliere il volume di gioco e mettere il volume di gioco \n");
+        out.append("- Il bottone 'esci' serve per uscire dalla partita e tornare al menu principale \n");
+        out.append("- Il bottone 'invia' serve per confermare un comando scritto nella casella di testo \n");
         out.append("+------------------ FINE HELP ------------------+\n");
     }
 }

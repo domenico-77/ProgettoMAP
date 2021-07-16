@@ -61,7 +61,7 @@ public class visualizzaDataBase extends javax.swing.JPanel {
         jLabel1.setText("CLASSIFICA DEI GIOCATORI :");
 
         muta.setBackground(new java.awt.Color(255, 204, 102));
-        muta.setText("muta");
+        muta.setText("MUTE");
         muta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mutaActionPerformed(evt);
@@ -69,7 +69,7 @@ public class visualizzaDataBase extends javax.swing.JPanel {
         });
 
         smuta.setBackground(new java.awt.Color(255, 255, 102));
-        smuta.setText("smuta");
+        smuta.setText("UNMUTE");
         smuta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smutaActionPerformed(evt);
@@ -85,7 +85,7 @@ public class visualizzaDataBase extends javax.swing.JPanel {
                 .addComponent(muta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(smuta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 649, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 631, Short.MAX_VALUE)
                 .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
@@ -103,8 +103,8 @@ public class visualizzaDataBase extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(indietro, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(muta)
-                    .addComponent(smuta))
+                    .addComponent(muta, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(smuta, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

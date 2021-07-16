@@ -58,14 +58,14 @@
                   <Component id="confermaNome" max="32767" attributes="0"/>
                   <Component id="nomePartita" pref="64" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="192" max="32767" attributes="0"/>
+              <EmptySpace pref="178" max="32767" attributes="0"/>
               <Component id="indietro" min="-2" pref="62" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="muta" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="smuta" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="smuta" pref="58" max="32767" attributes="0"/>
+                  <Component id="muta" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -125,7 +125,7 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="cc" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="muta"/>
+        <Property name="text" type="java.lang.String" value="MUTE"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mutaActionPerformed"/>
@@ -136,7 +136,7 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="66" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="smuta"/>
+        <Property name="text" type="java.lang.String" value="UNMUTE"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smutaActionPerformed"/>
