@@ -25,12 +25,12 @@ import salvataggio.Serializzazione;
  */
 public class creaPartita extends javax.swing.JPanel {
 
-    private MainSwing ms;
+    private mainSwing ms;
 
     /**
      * Creates new form creaPartita
      */
-    public creaPartita(MainSwing ms) {
+    public creaPartita(mainSwing ms) {
         initComponents();
         this.ms = ms;
     }

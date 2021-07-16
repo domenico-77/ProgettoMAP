@@ -14,11 +14,11 @@ import javax.swing.JTextArea;
  * @author domen
  */
 public class visualizzaDataBase extends javax.swing.JPanel {
-    private MainSwing ms;
+    private mainSwing ms;
     /**
      * Creates new form visualizzaDataBase
      */
-    public visualizzaDataBase(MainSwing ms) {
+    public visualizzaDataBase(mainSwing ms) {
         
         initComponents();
         this.ms = ms;

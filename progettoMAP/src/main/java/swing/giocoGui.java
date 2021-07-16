@@ -30,13 +30,13 @@ import tipi.Utilita;
 public class giocoGui extends JPanel {
 
     private DescrizioneGioco partita = null;
-    private MainSwing ms;
+    private mainSwing ms;
     private Parser parser = new Parser(Utilita.caricaFileSet("./risorse/articoli.txt"));
 
     /**
      * Creates new form giocoGui
      */
-    public giocoGui(MainSwing ms) {
+    public giocoGui(mainSwing ms) {
         initComponents();
         this.ms = ms;
         this.visualizzazioneTesto.setEditable(false);

@@ -24,7 +24,7 @@ public class ContinuaPartita extends javax.swing.JPanel {
     /**
      * Creates new form ContinuaPartita
      */
-    public ContinuaPartita(MainSwing ms) {
+    public ContinuaPartita(mainSwing ms) {
         this.ms = ms;
         initComponents();
         this.visualizzaPartiteSalvate.setEditable(false);
@@ -148,7 +148,7 @@ public class ContinuaPartita extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
-    private MainSwing ms;
+    private mainSwing ms;
     private List<DescrizioneGioco> partiteSalvate = new ArrayList();
     private void invioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invioActionPerformed
         String np = this.nomePartita.getText();

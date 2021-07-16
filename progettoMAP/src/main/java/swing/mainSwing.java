@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  *
  * @author domen
  */
-public class MainSwing {
+public class mainSwing {
 
     private final JPanel menuInizio;
     private final giocoGui giocoGui;
@@ -25,7 +25,7 @@ public class MainSwing {
     private final CancellaPartita cancellaPartita;
     private final ContinuaPartita continuaPartita;
 
-    public MainSwing() {
+    public mainSwing() {
         cancellaPartita = new CancellaPartita(this);
         this.continuaPartita = new ContinuaPartita(this);
         giocoGui = new giocoGui(this);
@@ -54,7 +54,7 @@ public class MainSwing {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ThreadMusica.Music();
-                MainSwing ms = new MainSwing();
+                mainSwing ms = new mainSwing();
                 ms.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 ms.getFrame().pack();
             }

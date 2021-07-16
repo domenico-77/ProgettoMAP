@@ -20,12 +20,12 @@ import salvataggio.Deserializzazione;
  */
 public class menuInizio extends JPanel {
 
-    private MainSwing ms;
+    private mainSwing ms;
 
     /**
      * Creates new form menuInizio
      */
-    public menuInizio(MainSwing ms) {
+    public menuInizio(mainSwing ms) {
         initComponents();
         this.ms = ms;
         this.setBounds(100, 100, 600, 300);
