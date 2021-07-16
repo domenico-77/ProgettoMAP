@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipi;
+package giocatore;
 
+import giocatore.Giocatore;
 import java.io.Serializable;
-import tipi.stanze.Stanza;
+import stanze.Stanza;
 import oggetti.Oggetto;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,18 +43,7 @@ public class Inventario implements Serializable {
        }
     }
     
-    public void visualizzaInventario() {
-        if (this.inventario.isEmpty()) {
-            System.out.println("Rin: 'Abbiamo le tasche vuote, potremmo trovare degli oggetti utili per la prigione");
-        } else {
-            System.out.println("Rin: 'Questi sono gli oggetti a disposizione:");
-            int i = 1;
-            for (Oggetto o : inventario) {
-                System.out.println(i + ". "+ o.getNome());
-                i++;
-            }
-        }
-    }
+   
     
     public void visualizzaInventario(JTextArea out){
         if (this.inventario.isEmpty()) {
@@ -72,19 +62,7 @@ public class Inventario implements Serializable {
         return (inventario.contains(o));
     }
     
-    public void usaOggetto(Oggetto o, Giocatore giocatore, Stanza stanza){
-        if(contieneOggetto(o)){
-            Oggetto oggetto = this.inventario.get(this.inventario.indexOf(o));
-            if(oggetto.getUsabilita() > 0){
-                oggetto.usa(giocatore, stanza);
-                if(oggetto.getUsabilita() == 0){
-                    this.inventario.remove(oggetto);
-                }
-            }
-        } else {
-            System.out.println("Rin :' Al momento non disponiamo dell'oggetto : "+o.getNome() + "'");
-        }
-    }
+    
     
     public void usaOggettoSwing(Oggetto o, Giocatore giocatore, Stanza stanza, JTextArea out){
         if(contieneOggetto(o)){

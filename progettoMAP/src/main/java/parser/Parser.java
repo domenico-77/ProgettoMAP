@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.progettomap.parser;
+package parser;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import tipi.Comando;
+import comandi.Comando;
 import oggetti.Oggetto;
-import tipi.TipoComando;
-import tipi.Utilita;
-import tipi.stanze.Porta;
-import tipi.stanze.Stanza;
+import comandi.TipoComando;
+import utilita.Utilita;
+import stanze.Porta;
+import stanze.Stanza;
 
 /**
  *

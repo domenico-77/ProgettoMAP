@@ -3,23 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tipi;
+package utilita;
 
 import oggetti.Oggetto;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import comandi.Comando;
 
 
 /**
@@ -90,38 +88,7 @@ public class Utilita {
 
     }
 
-    public static boolean chiediConferma(final String richiesta, final String casoAffermativo, final String casoNegativo) {
-        boolean vuole = false;
-        Scanner scanner = new Scanner(new InputStreamReader(System.in));
-        System.out.println(richiesta);
-        boolean error;
-        String answer;
-
-        do {
-            error = false;
-            System.out.println("digitare 'si' o 'no'.");
-            if (scanner.hasNextLine()) {
-                answer = scanner.nextLine();
-                answer = answer.replaceAll(" +", "");
-                switch (answer.toLowerCase()) {
-                    case "si":
-                    case "sÃ¬":
-                        System.out.println(casoAffermativo);
-                        vuole = true;
-                        break;
-                    case "no":
-                        System.out.println(casoNegativo);
-                        break;
-                    default:
-                        System.out.println("Digitare una risposta valida...");
-                        error = true;
-                        break;
-                }
-            }
-        } while (error);
-
-        return vuole;
-    }
+    
     
   
 

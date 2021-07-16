@@ -8,8 +8,8 @@ package oggetti;
 import java.io.Serializable;
 import java.util.Set;
 import javax.swing.JTextArea;
-import tipi.Giocatore;
-import tipi.stanze.Stanza;
+import giocatore.Giocatore;
+import stanze.Stanza;
 
 /**
  *
@@ -28,21 +28,7 @@ public class OggettoMaligno extends Oggetto implements Serializable {
         this.danno = danno;
     }
 
-    @Override
-    public void usa(Giocatore giocatore, Stanza stanza) {
-        if (this.usabilita > 0) {
-            giocatore.decrementaVita(this.danno);
-            giocatore.incrementaPunteggio(OggettoMaligno.PUNTEGGIO);
-            System.out.println("Rin: 'Oh no un veleno ti ha inferto dei danni'");
-        } else {
-            System.out.println("Non puoi usare questo oggetto");
-        }
-    }
-
-    @Override
-    public void descrizioneOggetto() {
-        System.out.println("Rin: 'Potrebbe essere pericoloso, meglio stare alla larga'");
-    }
+    
 
     public static boolean isPRENDIBILE() {
         return PRENDIBILE;

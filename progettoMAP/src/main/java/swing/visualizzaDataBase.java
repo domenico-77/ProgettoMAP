@@ -6,7 +6,6 @@
 package swing;
 
 import Threads.ThreadMusica;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 /**
@@ -14,7 +13,7 @@ import javax.swing.JTextArea;
  * @author domen
  */
 public class visualizzaDataBase extends javax.swing.JPanel {
-    private mainSwing ms;
+    private final mainSwing ms;
     /**
      * Creates new form visualizzaDataBase
      */

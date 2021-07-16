@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 import javax.swing.JTextArea;
-import tipi.Giocatore;
-import tipi.stanze.Stanza;
+import giocatore.Giocatore;
+import stanze.Stanza;
 
 /**
  *
@@ -103,7 +103,6 @@ public abstract class Oggetto implements Serializable {
 
    
     
-    public abstract void usa(Giocatore giocatore, Stanza stanza);
     public abstract void usaSwing(Giocatore giocatore, Stanza stanza, JTextArea out);
     
     public void prendi(Giocatore giocatore){
@@ -115,6 +114,5 @@ public abstract class Oggetto implements Serializable {
         }
     }
     
-    public abstract void descrizioneOggetto();
     public abstract void descrizioneOggetto(JTextArea out);
 }

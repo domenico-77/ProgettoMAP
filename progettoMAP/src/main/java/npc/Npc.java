@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import oggetti.Oggetto;
-import tipi.Giocatore;
+import giocatore.Giocatore;
 
 /**
  *
@@ -72,6 +72,6 @@ public abstract class Npc implements Serializable{
     
     public abstract List<String> getAliasNome();
     
-    public abstract void interagisci(Giocatore giocatore);
+    
     public abstract void interagisci(Giocatore giocatore, JTextArea out, JFrame frame);
 }
